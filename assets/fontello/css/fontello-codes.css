@@ -1,0 +1,6 @@
+
+.icon-home:before { content: '\e800'; } /* '' */
+.icon-adult:before { content: '\e801'; } /* '' */
+.icon-th-large:before { content: '\e802'; } /* '' */
+.icon-cancel:before { content: '\e803'; } /* '' */
+.icon-tasks:before { content: '\f0ae'; } /* '' */
