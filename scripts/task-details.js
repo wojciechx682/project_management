@@ -32,38 +32,6 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-$("div.task-title a").on("click", function(e) {
-    e.preventDefault();
-    let onclickAttribute = $(this).attr("onclick");
-    let taskId = onclickAttribute.match(/toggleTaskDetails\((\d+)\)/)[1];
-    let data = $(this);
-    //let result = document.querySelector('div#window');
-    //let categoryName = DOMPurify.sanitize(data[0][0].value);
-
-    let mainContainer = document.getElementById("main-container");
-    if (mainContainer) {
-        mainContainer.classList.toggle("bright");
-        mainContainer.classList.toggle("unreachable");
-    }
-
-    $.ajax({
-        type: "GET",
-        url: "getTaskDetails.php",
-        data: { taskId: taskId },  // 👈 Przekazujemy taskId jako obiekt
-        timeout: 2000
-    }).done(function(data) {
-
-        $("div#task-details-window").html(data);
-
-        //console.log(result);
-
-    }).fail(function(data) { // (xhr, status, error)
-
-    }).always(function() {
-
-    });
-});
-
 document.querySelectorAll("div.task-title a").forEach(link => {
     link.addEventListener("click", function (e) {
         e.preventDefault();
@@ -97,8 +65,42 @@ document.querySelectorAll("div.task-title a").forEach(link => {
     });
 });
 
-/*function removeOrder(orderId) {
+/*$("div.task-title a").on("click", function(e) {
+    e.preventDefault();
+    let onclickAttribute = $(this).attr("onclick");
+    let taskId = onclickAttribute.match(/toggleTaskDetails\((\d+)\)/)[1];
+    //let data = $(this);
+    //let result = document.querySelector('div#window');
+    //let categoryName = DOMPurify.sanitize(data[0][0].value);
 
+    let mainContainer = document.getElementById("main-container");
+    if (mainContainer) {
+        mainContainer.classList.toggle("bright");
+        mainContainer.classList.toggle("unreachable");
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "getTaskDetails.php",
+        data: { taskId: taskId },  // 👈 Przekazujemy taskId jako obiekt
+        timeout: 2000
+    }).done(function(data) {
+
+        $("div#task-details-window").html(data);
+
+        //console.log(result);
+
+    }).fail(function(data) { // (xhr, status, error)
+
+    }).always(function() {
+
+    });
+});*/
+
+
+
+/*function removeOrder(orderId) {
+z
     let removeBox = document.querySelector(".update-status");
     let input = removeBox.querySelector('form.remove-order > input[type="hidden"][name="order-id"]');
     input.value = orderId;

@@ -93,6 +93,7 @@
             if ($connection->connect_errno) {
 
                 throw new Exception(mysqli_connect_errno()); // failed to connect to DB;
+                //throw new Exception($connection->error); // failed to connect to DB;
 
             } else {
 

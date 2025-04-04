@@ -81,13 +81,14 @@ form#login-form input[type="submit"] {
     width: 310px;
 }
 
-span#remind-password {
+span#remind-password, span#register {
     display: block;
     margin-top: 15px;
     text-align: center;
 }
 
-span#remind-password a{
+span#remind-password a,
+span#register a {
     color: #383838;
 }
 
