@@ -9,7 +9,6 @@
 <body>
     <div id="login">
         <form id="login-form" method="post" action="login.php">
-
             <span class="login-row">
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" required>
@@ -31,7 +30,6 @@
                     unset($_SESSION["invalid_credentials"]);
                 }
             ?>
-
         </form>
     </div>
 </body>

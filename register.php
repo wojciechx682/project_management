@@ -8,30 +8,42 @@
 
 <body>
     <div id="login">
-        <form id="login-form" method="post" action="login.php">
-
-            <span class="login-row">
+        <form id="register-form" method="post" action="register-user.php">
+            <span class="register-row">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </span>
+            <span class="register-row">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </span>
+            <span class="register-row">
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" required>
             </span>
-            <span class="login-row">
+            <span class="register-row">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required autocomplete="off">
             </span>
-            <input type="submit" value="Log in">
-            <span id="remind-password">
+            <span class="register-row">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required autocomplete="off">
+            </span>
+            <span class="register-row">
+                <label for="role">Role</label>
+                <select id="role" name="role" required>
+                    <option value="team_member">Team Member</option>
+                    <option value="project_manager">Project Manager</option>
+                    <option value="administrator">Administrator</option>
+                </select>
+            </span>
+            <input type="submit" value="Register">
+            <!--<span id="remind-password">
                 <a href="#">Remind password</a>
+            </span>-->
+            <span id="log-in">
+                <a href="index.php">Log in</a>
             </span>
-            <span id="register">
-                <a href="register.php">Register</a>
-            </span>
-            <?php
-                if (isset($_SESSION["invalid_credentials"])) {
-                    echo $_SESSION["invalid_credentials"];
-                    unset($_SESSION["invalid_credentials"]);
-                }
-            ?>
-
         </form>
     </div>
 </body>
