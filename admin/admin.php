@@ -14,6 +14,11 @@
 
 <body>
 
+<?php require "../view/admin/nav-admin.php"; ?>
+
+<?php require "../view/header.php"; ?>
+
+<?php require "../view/main.php"; ?>
 
 </body>
 </html>
