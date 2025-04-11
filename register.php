@@ -44,6 +44,12 @@
             <span id="log-in">
                 <a href="index.php">Log in</a>
             </span>
+            <?php
+                if (isset($_SESSION["register-error"])) {
+                    echo '<span class="error">' . $_SESSION["register-error"] . '</span>';
+                    unset($_SESSION["register-error"]);
+                }
+            ?>
         </form>
     </div>
 </body>

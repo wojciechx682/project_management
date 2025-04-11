@@ -1,4 +1,5 @@
 <?php
+
     function log_in($result) {
 
         unset($_SESSION["invalid_credentials"]);
@@ -70,7 +71,18 @@
         echo sprintf($taskDetails, $row["id"], $row["title"], $row["description"], $row["priority"], $row["status"], $row["due_date"], $row["name"], $row["first_name"], $row["last_name"], $row["created_at"], $row["updated_at"]);
     }
 
-    function query($query, $fun, $values) {
+    function registerVerifyEmail($result) {
+        $_SESSION["valid"] = false;
+        $_SESSION["register-error"] = "There is already an account assigned to this email address";
+    }
+
+    function register($connection) {
+        $_SESSION["register-successful"] = "The new account has been successfully created and is waiting for approval from the System Administrator";
+        return true;
+    }
+
+
+function query($query, $fun, $values) {
 
         // $query - SQL - "SELECT imie, nazwisko FROM klienci";
 
@@ -125,7 +137,7 @@
 
                             if ($fun) {
 
-                                $fun($connection); // jeśli wymagane jest pobranie id ostatnio wstawionego wiersza - wywołaj funkcję;
+                                return $fun($connection); // jeśli wymagane jest pobranie id ostatnio wstawionego wiersza - wywołaj funkcję;
 
                             } else {
 

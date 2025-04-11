@@ -140,6 +140,14 @@ span#log-in a
     text-align: center;
 }
 
+.success {
+    color: green;
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+}
+
 nav #nav {
     width: 300px;
     /*width: 30vw;*/
