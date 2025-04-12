@@ -31,7 +31,7 @@
             </h3>
         </a>
         <hr class="nav-hr">
-        <a href="#">
+        <a href="users.php">
             <h3>
                 <i class="icon-adult"></i>Users
             </h3>

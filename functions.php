@@ -8,7 +8,8 @@
 
         $password = $_POST["password"];
 
-        if (password_verify($password, $row["password"])) {
+        if (password_verify($password, $row["password"]) && $row["is_approved"]) {
+
             $_SESSION["logged-in"] = true;
             $_SESSION["id"] = $row["id"];
             $_SESSION["first_name"] = $row["first_name"];
@@ -34,10 +35,14 @@
                     break;
             }
 
-        } else {
-            $_SESSION["invalid_credentials"] = '<span class="error">Incorrect email or password</span>';
+        } elseif (!$row["is_approved"]) {
+            $_SESSION["invalid_credentials"] = '<span class="error">Your account is awaiting administrator approval</span>';
                 header('Location: index.php');
                     exit();
+        } else {
+            $_SESSION["invalid_credentials"] = '<span class="error">Incorrect email or password</span>';
+            header('Location: index.php');
+            exit();
         }
     }
 
@@ -82,7 +87,7 @@
     }
 
 
-function query($query, $fun, $values) {
+    function query($query, $fun, $values) {
 
         // $query - SQL - "SELECT imie, nazwisko FROM klienci";
 

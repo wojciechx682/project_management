@@ -16,6 +16,19 @@
         $confirmPassword = $_POST["confirm-password"];
         $role = $_POST["role"];
 
+        switch ($role) {
+            case "team_member":
+                $role = "Team Member";
+                break;
+            case "project_manager":
+                $role = "Project Manager";
+                break;
+            case "administrator":
+                $role = "Administrator";
+                break;
+        }
+
+
         $_SESSION["valid"] = true; // validation flag;
 
         $maxStringLength = 255;
