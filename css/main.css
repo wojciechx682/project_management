@@ -290,7 +290,7 @@ header #header button.btn-link:hover {
 }
 
 
-div.project, div.project-details, div.task {
+div.project, div.project-details, div.task, div.users {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 0;
@@ -300,7 +300,7 @@ div.project, div.project-details, div.task {
     margin-top: 20px;
 }
 
-.project, div.project-details, div.task {
+.project, div.project-details, div.task, div.users {
     border: 1px ridge rgba(166, 166, 166, 0.38);
     border-radius: 15px;
     margin: 0px auto 40px auto;
@@ -308,7 +308,12 @@ div.project, div.project-details, div.task {
     text-align: left !important;
 }
 
-.project-id, .project-name, .project-desc,  .project-start-date, .project-end-date, .project-status, .team-name, .project-team, .project-action, .project-details-id-left, .project-details-name-left, .project-details-desc-left, .project-details-start-date-left, .project-details-end-date-left, .project-details-status-left, .project-details-created-at-left, .project-details-updated-at-left, .team-details-name-left, .project-details-id, .project-details-name, .project-details-desc, .project-details-start-date, .project-details-end-date, .project-details-status, .project-details-created-at, .project-details-updated-at, .team-details-name, .task-id, .task-title, .task-desc, .task-priority, .task-status, .task-due-date, .task-project-id, .task-assigned-user, .task-created-at, .task-updated-at
+div.users {
+    margin: 0px auto 0px auto;
+    border-radius: 0;
+}
+
+.project-id, .project-name, .project-desc,  .project-start-date, .project-end-date, .project-status, .team-name, .project-team, .project-action, .project-details-id-left, .project-details-name-left, .project-details-desc-left, .project-details-start-date-left, .project-details-end-date-left, .project-details-status-left, .project-details-created-at-left, .project-details-updated-at-left, .team-details-name-left, .project-details-id, .project-details-name, .project-details-desc, .project-details-start-date, .project-details-end-date, .project-details-status, .project-details-created-at, .project-details-updated-at, .team-details-name, .task-id, .task-title, .task-desc, .task-priority, .task-status, .task-due-date, .task-project-id, .task-assigned-user, .task-created-at, .task-updated-at, .user-id, .user-first-name, .user-last-name, .user-email, .user-role, .user-created-at, .user-updated-at, .user-is-approved
 {
     /* border: 1px dashed black; */
     /* border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
@@ -330,15 +335,27 @@ div.project, div.project-details, div.task {
     background-color: #f2f2f2;
 }
 
-div.project-content {
+.user-first-name {
+    width: 10%;
+}
+
+.user-role {
+    width: 10%;
+}
+
+.user-email {
+    width: 17.88%;
+}
+
+div.project-content, div.users-content {
     margin: 0;
     padding: 0;
     border-radius: 0;
 }
 
-
 div.project-content:last-of-type,
-div.task-content:last-of-type {
+div.task-content:last-of-type,
+div.users-content:last-of-type {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -349,15 +366,13 @@ div.task-content:last-of-type {
 
 }
 
-.project-id {
+.project-id, .user-id {
     width: 5%;
 }
 
 .project-desc {
     width: 30.6%;
 }
-
-
 
 .project-content .project-id,
 .project-content .project-name,
@@ -384,7 +399,7 @@ div.task-content:last-of-type {
     width: 10.64%;
 }
 
-div.order-action-button {
+/*div.order-action-button {
     position: relative;
     top: -3px;
     border: 1px ridge rgba(166, 166, 166, 0.38);
@@ -393,13 +408,13 @@ div.order-action-button {
     padding: 3px 3px 4px 10px;
     margin: 0 auto 0 auto;
     user-select: none;
-}
+}*/
 
-div.order-action-button:hover {
+/*div.order-action-button:hover {
     border: 1px ridge rgba(210, 210, 210, 0.38);
     user-select: none;
     cursor: pointer;
-}
+}*/
 
 div.order-options-container {
     /*border: 1px solid red;*/

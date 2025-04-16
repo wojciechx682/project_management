@@ -18,7 +18,7 @@
 
 <?php require "../view/header.php"; ?>
 
-
+<?php require "../view/admin/users.php"; ?>
 
 </body>
 </html>

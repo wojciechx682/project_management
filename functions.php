@@ -86,6 +86,14 @@
         return true;
     }
 
+    function getPendingUsers($result) {
+        require "../view/admin/users-header.php"; // table header;
+        $users = file_get_contents("../template/users.php");
+        while ($row = $result->fetch_assoc()) {
+            echo sprintf($users, $row["id"], $row["first_name"], $row["last_name"], $row["email"], $row["role"], $row["created_at"], $row["is_approved"]);
+        }
+    }
+
 
     function query($query, $fun, $values) {
 
