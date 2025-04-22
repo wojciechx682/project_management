@@ -10,8 +10,14 @@
     <!--<div class="user-updated-at"></div>-->
     <div class="user-is-approved">%s</div>
     <div class="user-action">
-        <div class="order-action-button" id="order-action-button" onclick="showOptions(this.id)">
+        <div class="user-action-button"">
             Manage <i class="icon-down-open"></i>
+        </div>
+        <div class="user-options-container">
+            <div class="user-action-options hidden">
+                <div class="user-option" onclick="showConfirmationModal(%s)">Accept</div>
+                <div class="user-option" onclick="showConfirmationModal(%s)">Reject</div>
+            </div>
         </div>
     </div>
 </div>

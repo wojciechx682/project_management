@@ -23,5 +23,5 @@
     <div class="user-is-approved">
         <span class="header-option">Is approved</span>
     </div>
-    <div class="project-action">Manage</div>
+    <div class="user-action">Manage</div>
 </div>

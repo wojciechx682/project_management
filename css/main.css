@@ -313,7 +313,7 @@ div.users {
     border-radius: 0;
 }
 
-.project-id, .project-name, .project-desc,  .project-start-date, .project-end-date, .project-status, .team-name, .project-team, .project-action, .project-details-id-left, .project-details-name-left, .project-details-desc-left, .project-details-start-date-left, .project-details-end-date-left, .project-details-status-left, .project-details-created-at-left, .project-details-updated-at-left, .team-details-name-left, .project-details-id, .project-details-name, .project-details-desc, .project-details-start-date, .project-details-end-date, .project-details-status, .project-details-created-at, .project-details-updated-at, .team-details-name, .task-id, .task-title, .task-desc, .task-priority, .task-status, .task-due-date, .task-project-id, .task-assigned-user, .task-created-at, .task-updated-at, .user-id, .user-first-name, .user-last-name, .user-email, .user-role, .user-created-at, .user-updated-at, .user-is-approved
+.project-id, .project-name, .project-desc,  .project-start-date, .project-end-date, .project-status, .team-name, .project-team, .project-action, .project-details-id-left, .project-details-name-left, .project-details-desc-left, .project-details-start-date-left, .project-details-end-date-left, .project-details-status-left, .project-details-created-at-left, .project-details-updated-at-left, .team-details-name-left, .project-details-id, .project-details-name, .project-details-desc, .project-details-start-date, .project-details-end-date, .project-details-status, .project-details-created-at, .project-details-updated-at, .team-details-name, .task-id, .task-title, .task-desc, .task-priority, .task-status, .task-due-date, .task-project-id, .task-assigned-user, .task-created-at, .task-updated-at, .user-id, .user-first-name, .user-last-name, .user-email, .user-role, .user-created-at, .user-updated-at, .user-is-approved, .user-action
 {
     /* border: 1px dashed black; */
     /* border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
@@ -621,9 +621,40 @@ div.task-updated-at {
     box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
 }
 
+.accept-user {
+    /*height: 310px;*/
+    height: 200px;
+    width: 750px;
+    background-color: #31344d;
+    /*position: fixed;
+    top: 25em;
+    left: 45em;*/
+    position: absolute;
+    top: 50%;
+    /*left: 60%;*/
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 90;
+    border-radius: 5px;
+    -webkit-box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
+    -moz-box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
+    box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
+}
+
 #update-status > h2, .update-status > h2,
 #add-comment > h2
 {
+    margin-left: 20px;
+    margin-top: 25px;
+    color: #FAFAFFFF;
+    /*border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
+    font-size: 1.2rem;
+    width: 690px;
+    display: inline-block;
+    user-select: none;
+}
+
+.accept-user > h2 {
     margin-left: 20px;
     margin-top: 25px;
     color: #FAFAFFFF;
@@ -644,14 +675,35 @@ div.task-updated-at {
     /*max-width: 255px;*/
 }
 
-div.delivery-date {
+.accept-user hr {
+    background-color: rgba(166, 166, 166, 0.7);
+    border: none;
+    height: 1px;
+    margin: 5px 15px 5px 15px;
+    /*max-width: 255px;*/
+}
+
+div.delivery-date, .accept-user-container {
     /*display: none;*/
     color: #fafaff;
     /*border: 1px ridge darkblue;*/
-    padding: 6px 20px 20px 29px;
+    padding: 6px 20px 20px 15px;
     min-height: 90px;
     z-index: 1000;
     clear: both;
+}
+
+form.accept-user-form {
+    width: 150px;
+    float: left;
+}
+
+.btn-link-static {
+    width: 125px !important;
+    padding: 10px 21px !important;
+    font-size: 85% !important;
+    display: block;
+    margin-top: 15px;
 }
 
 form.remove-order span.info,
@@ -659,7 +711,6 @@ form.add-order-comment span.info
 {
     margin-top: 10px;
 }
-
 
 span.info {
     display: inline-block;
@@ -776,4 +827,63 @@ div#projects {
     height: 220px;
     border-radius: 8px;
     padding: 10px;
+}
+
+div.user-action-button:hover {
+    /*border: 1px ridge rgba(210, 210, 210, 0.38);*/
+    user-select: none;
+    cursor: pointer;
+}
+
+div.user-action-button {
+    position: relative;
+    top: -3px;
+    border: 1px ridge rgba(166, 166, 166, 0.38);
+    border-radius: 3px;
+    width: 120px;
+    padding: 3px 3px 4px 10px;
+    margin: 0 auto 0 auto;
+    user-select: none;
+}
+
+div.user-options-container {
+    /*border: 1px solid red;*/
+    width: 120px;
+    height: 55px;
+    text-align: center !important;
+    margin: 0 auto;
+    /*padding-left: 2px;*/
+    background-color: #f2f2f2;
+}
+
+div.user-action-options {
+    z-index: 100;
+    position: absolute;
+    /*top: 20px;*/
+    margin: 0 auto 0 auto;
+    border: 1px ridge rgba(166, 166, 166, 0.38);
+    /*margin-left: auto;*/
+    text-align: center !important;
+    /*display: none;*/
+    background-color: #f2f2f2;
+    /*padding: 0 20px 0 20px;*/ /* (!) */
+    width: 120px;
+
+    border-radius: 3px;
+}
+
+div.user-option {
+    border-bottom: 1px ridge rgba(210, 210, 210, 0.38);
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 2px;
+}
+
+div.user-option:hover {
+    cursor: pointer;
+    background-color: rgba(210, 210, 210, 0.38)
+}
+
+.hidden {
+    display: none;
 }
