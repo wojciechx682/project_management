@@ -634,7 +634,7 @@ div.task-updated-at {
     /*left: 60%;*/
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 90;
+    z-index: 100;
     border-radius: 5px;
     -webkit-box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
     -moz-box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);

@@ -1,6 +1,9 @@
 
 document.querySelectorAll(".user-action-button").forEach(button => {
     button.addEventListener("click", () => {
+
+        console.log("toggleUserOptions.js");
+
         const userContent = button.closest(".users-content");
         const options = userContent.querySelector(".user-action-options");
         const icon = button.querySelector("i");

@@ -30,5 +30,7 @@
 
 <script src="../scripts/admin/showModalBox.js"></script>
 
+<script src="../scripts/admin/submitUserForm.js"></script> <!-- AJAX -->
+
 </body>
 </html>
