@@ -733,7 +733,7 @@ div.project-details:nth-of-type(9) {
     outline: none;
 }
 
-#add-project .project-details input.team-details-name {
+#add-project .project-details select.team-details-name {
     border: none;
     outline: none;
     font-family: inherit;
@@ -741,7 +741,7 @@ div.project-details:nth-of-type(9) {
 }
 
 /* Po focusie również brak ramki */
-#add-project .project-details input.team-details-name:focus {
+#add-project .project-details select.team-details-name:focus {
     border: none;
     outline: none;
 }
@@ -770,6 +770,17 @@ div.project-details:nth-of-type(9) {
     outline: none;
 }
 
+.btn-submit-project {
+    position: relative;
+    left: 10px;
+}
+
+/*.btn-cancel-project {
+    float: right;
+    position: relative;
+    top: -57px;
+    left: -5px;
+}*/
 
 .update-status .project-details-desc-left,
 .update-status .project-details-desc,

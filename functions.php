@@ -90,10 +90,15 @@
         require "../view/admin/users-header.php"; // table header;
         $users = file_get_contents("../template/pendingUsers.php");
 
-
         while ($row = $result->fetch_assoc()) {
             $isApproved = "Pending"; // <- Zawsze "Pending", bo zapytanie wybiera tylko is_approved = 0
             echo sprintf($users, $row["id"], $row["first_name"], $row["last_name"], $row["email"], $row["role"], $row["created_at"], $isApproved, $row["id"], $row["id"]);
+        }
+    }
+
+    function createTeamSelectList($result) {
+        while($row = $result->fetch_assoc()) {
+            echo '<option value="'.$row["name"].'">'.$row["name"].'</option>';
         }
     }
 
