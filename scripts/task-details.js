@@ -58,6 +58,7 @@ document.querySelectorAll("div.task-title a").forEach(link => {
             })
             .then(data => {
                 document.querySelector("div#task-details-window").innerHTML = data;
+                toggleTaskDetails(taskId);
             })
             .catch(error => {
                 console.error("Wystąpił błąd:", error);

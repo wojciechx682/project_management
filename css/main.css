@@ -237,6 +237,18 @@ nav hr, #main hr {
 #main hr {
     /*position: relative !important;
     left: -15px !important;*/
+    width: 100%;
+}
+
+
+.add-project-button {
+    position: relative !important;
+    top: -23px !important;
+}
+
+.projects-hr {
+    position: relative;
+    top: -6px;
 }
 
 header #header button.btn-link {
@@ -313,7 +325,67 @@ div.users {
     border-radius: 0;
 }
 
-.project-id, .project-name, .project-desc,  .project-start-date, .project-end-date, .project-status, .team-name, .project-team, .project-action, .project-details-id-left, .project-details-name-left, .project-details-desc-left, .project-details-start-date-left, .project-details-end-date-left, .project-details-status-left, .project-details-created-at-left, .project-details-updated-at-left, .team-details-name-left, .project-details-id, .project-details-name, .project-details-desc, .project-details-start-date, .project-details-end-date, .project-details-status, .project-details-created-at, .project-details-updated-at, .team-details-name, .task-id, .task-title, .task-desc, .task-priority, .task-status, .task-due-date, .task-project-id, .task-assigned-user, .task-created-at, .task-updated-at, .user-id, .user-first-name, .user-last-name, .user-email, .user-role, .user-created-at, .user-updated-at, .user-is-approved, .user-action
+.users:not(.users-content) {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.project-id,
+.project-name,
+.project-desc,
+.project-start-date,
+.project-end-date,
+.project-status,
+
+.team-name,
+.project-team,
+.project-action,
+
+.project-details-id-left,
+.project-details-name-left,
+.project-details-desc-left,
+    .project-details-priority-left,
+    .project-details-priority,
+.project-details-start-date-left,
+.project-details-end-date-left,
+    .project-details-status-left,
+.project-details-created-at-left,
+.project-details-updated-at-left,
+.team-details-name-left,
+
+.project-details-id,
+.project-details-name,
+.project-details-desc,
+.project-details-start-date,
+.project-details-end-date,
+.project-details-status,
+.project-details-created-at,
+.project-details-updated-at,
+
+.team-details-name,
+.task-id,
+.task-title,
+.task-desc,
+.task-priority,
+.task-status,
+.task-due-date,
+.task-project-id,
+.task-assigned-user,
+.task-created-at,
+.task-updated-at,
+
+.user-id,
+.user-first-name,
+.user-last-name,
+.user-email,
+.user-role,
+.user-created-at,
+.user-updated-at,
+.user-is-approved,
+.user-action,
+
+#add-project .assigned-user-left,
+#add-project .assigned-user
 {
     /* border: 1px dashed black; */
     /* border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
@@ -507,18 +579,27 @@ div.project-details {
     border-radius: 0;
 }
 
+div.project-details-button {
+    border: 0;
+}
+
 div.project-details:first-of-type {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
-.update-status div.project-details:first-of-type {
+.update-status div.project-details:first-of-type,
+#add-project div.project-details:first-of-type {
     border-radius: 0;
 }
 
 div.project-details:nth-of-type(9) {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+#add-project div.project-details:nth-of-type(9) {
+    border-radius: 0;
 }
 
 .update-status div.project-details:nth-of-type(9) {
@@ -540,15 +621,161 @@ div.project-details:nth-of-type(9) {
 .update-status .project-details-status,
 .update-status .project-details-created-at,
 .update-status .project-details-updated-at,
-.update-status .team-details-name {
+.update-status .team-details-name,
+#add-project .project-details-id,
+#add-project .project-details-name,
+#add-project .project-details-desc,
+#add-project .project-details-priority,
+#add-project .project-details-start-date,
+#add-project .project-details-end-date,
+#add-project .project-details-status,
+#add-project .project-details-created-at,
+#add-project .project-details-updated-at,
+#add-project .team-details-name,
+
+#add-project .assigned-user {
     width: 85%;
     text-align: left;
     padding-left: 10px;
     border-right: 0;
 }
 
+#add-project .project-details-id,
+#add-project .project-details-name,
+#add-project .project-details-desc,
+#add-project .project-details-priority,
+#add-project .project-details-start-date,
+#add-project .project-details-end-date,
+#add-project .project-details-status,
+#add-project .project-details-created-at,
+#add-project .project-details-updated-at,
+#add-project .team-details-name {
+    border: 0;
+}
+
+#add-project form label {
+    cursor: pointer;
+}
+
+#add-project .project-details input.project-details-name {
+    border: none;
+    outline: none;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details input.project-details-name:focus {
+    border: none;
+    outline: none;
+}
+
+#add-project .project-details textarea.project-details-desc {
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details textarea.project-details-desc:focus {
+    border: none;
+    outline: none;
+}
+
+#add-project .project-details select.project-details-priority {
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details select.project-details-priority:focus {
+    border: none;
+    outline: none;
+}
+
+
+#add-project .project-details select.project-details-status {
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details select.project-details-status:focus {
+    border: none;
+    outline: none;
+}
+
+#add-project .project-details input.project-details-start-date {
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details input.project-details-start-date:focus {
+    border: none;
+    outline: none;
+}
+
+#add-project .project-details input.project-details-end-date {
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details input.project-details-end-date:focus {
+    border: none;
+    outline: none;
+}
+
+#add-project .project-details input.team-details-name {
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details input.team-details-name:focus {
+    border: none;
+    outline: none;
+}
+
+#add-project .project-details input.assigned-user {
+    border: none;
+    outline: none;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details input.assigned-user:focus {
+    border: none;
+    outline: none;
+}
+
+#add-project .project-details input.project-details-created-at {
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details input.project-details-created-at:focus {
+    border: none;
+    outline: none;
+}
+
+
 .update-status .project-details-desc-left,
-.update-status .project-details-desc {
+.update-status .project-details-desc,
+#add-project .project-details-desc-left,
+#add-project .project-details-desc
+{
     height: 82px;
 }
 .project-details-id-left, .project-details-name-left, .project-details-desc-left, .project-details-start-date-left, .project-details-end-date-left, .project-details-status-left, .project-details-created-at-left, .project-details-updated-at-left, .team-details-name-left {
@@ -565,7 +792,19 @@ div.project-details:nth-of-type(9) {
 .update-status .project-details-status-left,
 .update-status .project-details-created-at-left,
 .update-status .project-details-updated-at-left,
-.update-status .team-details-name-left {
+.update-status .team-details-name-left,
+
+#add-project .project-details-id-left,
+#add-project .project-details-name-left,
+#add-project .project-details-desc-left,
+    #add-project .project-details-priority-left,
+#add-project .project-details-start-date-left,
+#add-project .project-details-end-date-left,
+#add-project .project-details-status-left,
+#add-project .project-details-created-at-left,
+#add-project .project-details-updated-at-left,
+#add-project .team-details-name-left,
+#add-project .assigned-user-left {
     /*text-align: right;
     padding-right: 10px;*/
     width: 15%;
@@ -601,7 +840,7 @@ div.task-updated-at {
 
 /* --------------------------------------------------------------- */
 
-#update-status, .update-status, #add-comment {
+#update-status, .update-status, #add-comment, #add-project {
     /*height: 310px;*/
     height: 750px;
     width: 750px;
@@ -642,7 +881,7 @@ div.task-updated-at {
 }
 
 #update-status > h2, .update-status > h2,
-#add-comment > h2
+#add-comment > h2, #add-project > h2
 {
     margin-left: 20px;
     margin-top: 25px;
@@ -666,7 +905,7 @@ div.task-updated-at {
 }
 
 #update-status hr, .update-status hr,
-#add-comment hr
+#add-comment hr, #add-project hr
 {
     background-color: rgba(166, 166, 166, 0.7);
     border: none;

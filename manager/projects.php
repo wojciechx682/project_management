@@ -14,11 +14,21 @@
 
 <body>
 
+<div id="main-container">
+
 <?php require "../view/nav.php"; ?>
 
 <?php require "../view/header.php"; ?>
 
 <?php require "../view/manager/projects.php"; ?>
+
+</div>
+
+<!--<div id="add-project-window"></div>-->
+
+<?php require "../template/add-project-window.php"; ?>
+
+<script src="../scripts/add-project.js"></script>
 
 </body>
 </html>

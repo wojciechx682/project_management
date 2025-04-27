@@ -1,5 +1,5 @@
 
-<div class="update-status hidden`">
+<div class="update-status hidden">
 
     <h2>Task Details</h2>
 
