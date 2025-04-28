@@ -98,10 +98,18 @@
 
     function createTeamSelectList($result) {
         while($row = $result->fetch_assoc()) {
-            echo '<option value="'.$row["name"].'">'.$row["name"].'</option>';
+            echo '<option value="'.$row["id"].'">'.$row["name"].'</option>';
         }
     }
 
+    function addNewProject($connection) {
+        return $connection->insert_id;
+    }
+
+    function getTeamName($result) {
+        $row = $result->fetch_assoc();
+        return $row["name"];
+    }
 
     function query($query, $fun, $values) {
 

@@ -39,10 +39,10 @@
         </div>
 
         <div class="project-details">
-            <label for="project-team-name" class="team-details-name-left">Team</label>
-            <select id="project-team-name" name="team_name" class="team-details-name" required>
+            <label for="project-team-id" class="team-details-name-left">Team</label>
+            <select id="project-team-id" name="team_id" class="team-details-name" required>
                 <?php
-                    query("SELECT team.name FROM team", "createTeamSelectList", "");
+                    query("SELECT team.id, team.name FROM team", "createTeamSelectList", "");
                 ?>
             </select>
         </div>
