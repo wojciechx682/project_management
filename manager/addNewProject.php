@@ -17,8 +17,8 @@
             isset($_POST["team_id"]) && !empty($_POST["team_id"])) {
 
             // Pobranie danych + Walidacja zmiennych
-            $title = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
-            $description = filter_var($_POST["description"], FILTER_SANITIZE_STRING);
+            $title = htmlspecialchars($_POST["title"]);
+            $description = htmlspecialchars($_POST["description"]);
             $status = $_POST["status"];
             $validStatuses = ["planned", "in_progress", "completed", "cancelled"];
             $startDate = $_POST["start_date"];
@@ -28,8 +28,8 @@
             $teamId = filter_var($_POST["team_id"], FILTER_VALIDATE_INT);
 
             if (
-                $title === false || $title !== $_POST["title"] || strlen($title) > 255 ||
-                $description === false || $description !== $_POST["description"] || strlen($description) > 1000 ||
+                $title !== $_POST["title"] || strlen($title) > 255 ||
+                $description !== $_POST["description"] || strlen($description) > 90 ||
                 !in_array($_POST["status"], $validStatuses) ||
                 !$startDateObj || !$endDateObj || $startDateObj->format('Y-m-d') !== $_POST["start_date"] || $endDateObj->format('Y-m-d') !== $_POST["end_date"] ||
                 $teamId === false || $teamId != $_POST["team_id"]
@@ -38,16 +38,37 @@
                     echo json_encode($response);
                         exit();
             } else {
-                $project = [$title, $description, $startDate, $endDate, $status, $teamId];
-                $insertSuccessful = query("INSERT INTO project (id, name, description, start_date, end_date, status, team_id, created_at, updated_at) 
-				                                               VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s', NOW(), NOW())", "addNewProject", $project);
-                if ($insertSuccessful) {
-                    $projectId = $insertSuccessful;
-                    // Zwracamy odpowiedź w formacie JSON
-                    //echo json_encode(["success" => true]);
 
+                switch ($status) {
+                    case "planned":
+                        $statusFormatted = "Planned";
+                        break;
+                    case "in_progress":
+                        $statusFormatted = "In Progress";
+                        break;
+                    case "completed":
+                        $statusFormatted = "Completed";
+                        break;
+                    case "cancelled":
+                        $statusFormatted = "Cancelled";
+                        break;
+                }
+
+                $project = [$title, $description, $startDate, $endDate, $statusFormatted, $teamId];
+                $insertSuccessful = query("INSERT INTO project (id, name, description, start_date, end_date, status, team_id, created_at, updated_at) VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s', NOW(), NOW())", "addNewProject", $project);
+
+                if ($insertSuccessful) {
+
+                    $projectId = $insertSuccessful;
                     $team_name = query("SELECT team.name FROM team where team.id='%s'", "getTeamName", $teamId);
 
+                    if(!$team_name) {
+                        $response["error"] = "An error occurred. Please try again";
+                            echo json_encode($response);
+                                exit();
+                    }
+
+                    // Zwracamy odpowiedź w formacie JSON
                     echo json_encode([
                         "success" => true,
                         "id" => $projectId,
@@ -55,7 +76,7 @@
                         "description" => $description,
                         "start_date" => $startDate,
                         "end_date" => $endDate,
-                        "status" => $status,
+                        "status" => $statusFormatted,
                         "team_name" => $team_name
                     ]);
                 } else {

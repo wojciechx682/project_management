@@ -68,7 +68,7 @@ document.getElementById("add-project-form").addEventListener("submit", function 
     // Walidacja danych
     const isValid = (
         cleanTitle === title && cleanTitle.length > 0 && cleanTitle.length <= 255 &&
-        cleanDescription === description && cleanDescription.length > 0 && cleanDescription.length <= 1000 &&
+        cleanDescription === description && cleanDescription.length > 0 && cleanDescription.length <= 90 &&
         cleanStatus === status && (["planned", "in_progress", "completed", "cancelled"].includes(cleanStatus)) &&
         cleanStartDate === startDate && cleanStartDate !== "" &&
         cleanEndDate === endDate && cleanEndDate !== "" &&
@@ -77,6 +77,7 @@ document.getElementById("add-project-form").addEventListener("submit", function 
 
     if (!isValid) {
         resultDiv.innerHTML = "<span class='error'>An error occurred. Please provide valid information</span>";
+        closeProjectWindow();
         return;
     }
 
@@ -114,7 +115,7 @@ document.getElementById("add-project-form").addEventListener("submit", function 
                         <div class="project-desc">${cleanDescription}</div>
                         <div class="project-start-date">${cleanStartDate}</div>
                         <div class="project-end-date">${cleanEndDate}</div>
-                        <div class="project-status">${cleanStatus}</div>
+                        <div class="project-status">${data.status}</div>
                         <div class="team-name">${data.team_name}</div>
                     </div>
                 `;
@@ -137,11 +138,13 @@ document.getElementById("add-project-form").addEventListener("submit", function 
 
             } else {
                 resultDiv.innerHTML = "<span class='error'>Failed to add project. Please try again</span>";
+                closeProjectWindow();
             }
         })
         .catch(error => {
             console.error("Error:", error);
             resultDiv.innerHTML = "<span class='error'>An error occurred. Please try again</span>";
+            closeProjectWindow();
         });
 });
 

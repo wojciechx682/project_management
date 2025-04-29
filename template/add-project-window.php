@@ -14,7 +14,7 @@
 
         <div class="project-details">
             <label for="project-description" class="project-details-desc-left">Description</label>
-            <textarea id="project-description" name="description" class="project-details-desc" required maxlength="1000"></textarea>
+            <textarea id="project-description" name="description" class="project-details-desc" required maxlength="90"></textarea>
         </div>
 
         <div class="project-details">
