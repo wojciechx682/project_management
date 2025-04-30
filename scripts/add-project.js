@@ -108,13 +108,13 @@ document.getElementById("add-project-form").addEventListener("submit", function 
                             <form action="project-details.php" method="post">
                                 <input type="hidden" name="project-id" value="${data.id}">
                                 <button class="submit-order-form" type="submit">
-                                    ${cleanTitle}
+                                    ${data.title}
                                 </button>
                             </form>
                         </div>
-                        <div class="project-desc">${cleanDescription}</div>
-                        <div class="project-start-date">${cleanStartDate}</div>
-                        <div class="project-end-date">${cleanEndDate}</div>
+                        <div class="project-desc">${data.description}</div>
+                        <div class="project-start-date">${data.start_date}</div>
+                        <div class="project-end-date">${data.end_date}</div>
                         <div class="project-status">${data.status}</div>
                         <div class="team-name">${data.team_name}</div>
                     </div>

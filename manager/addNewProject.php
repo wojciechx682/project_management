@@ -74,8 +74,8 @@
                         "id" => $projectId,
                         "title" => $title,
                         "description" => $description,
-                        "start_date" => $startDate,
-                        "end_date" => $endDate,
+                        "start_date" => DateTime::createFromFormat('Y-m-d', $startDate)->format('d-m-Y'),
+                        "end_date" => DateTime::createFromFormat('Y-m-d', $endDate)->format('d-m-Y'),
                         "status" => $statusFormatted,
                         "team_name" => $team_name
                     ]);

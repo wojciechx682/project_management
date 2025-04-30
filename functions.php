@@ -50,7 +50,9 @@
         require "../view/manager/project-header.php"; // table header;
         $project = file_get_contents("../template/project.php");
         while ($row = $result->fetch_assoc()) {
-            echo sprintf($project, $row["id"], $row["id"], $row["name"], $row["description"], $row["start_date"], $row["end_date"], $row["status"], $row["team_name"]);
+            $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
+            $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
+            echo sprintf($project, $row["id"], $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $row["team_name"]);
         }
     }
 
@@ -58,7 +60,9 @@
         //require "../view/manager/project-header.php"; // table header;
         $projectDetails = file_get_contents("../template/project-details.php");
         $row = $result->fetch_assoc();
-        echo sprintf($projectDetails, $row["id"], $row["name"], $row["description"], $row["start_date"], $row["end_date"], $row["status"], $row["created_at"], $row["updated_at"], $row["team_name"]);
+        $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
+        $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
+        echo sprintf($projectDetails, $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $row["created_at"], $row["updated_at"], $row["team_name"]);
     }
 
     function getTaskDetails($result) {
