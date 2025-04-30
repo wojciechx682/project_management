@@ -50,9 +50,7 @@
 
 <div id="task-details-window"></div>
 
-
 <script src="../scripts/task-details.js"></script>
-<!--<script src="../scripts/script.js"></script>-->
 
 </body>
 </html>

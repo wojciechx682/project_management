@@ -50,8 +50,10 @@
         require "../view/manager/project-header.php"; // table header;
         $project = file_get_contents("../template/project.php");
         while ($row = $result->fetch_assoc()) {
-            $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
-            $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
+            //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
+            //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
+            $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('j F Y');
+            $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('j F Y');
             echo sprintf($project, $row["id"], $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $row["team_name"]);
         }
     }
@@ -60,16 +62,23 @@
         //require "../view/manager/project-header.php"; // table header;
         $projectDetails = file_get_contents("../template/project-details.php");
         $row = $result->fetch_assoc();
-        $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
-        $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
-        echo sprintf($projectDetails, $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $row["created_at"], $row["updated_at"], $row["team_name"]);
+        //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
+        //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
+        $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('j F Y');
+        $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('j F Y');
+        $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
+        $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
+        echo sprintf($projectDetails, $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $createdAt, $updatedAt, $row["team_name"]);
     }
 
     function getTaskDetails($result) {
         require "../view/manager/task-header.php"; // table header;
         $taskDetails = file_get_contents("../template/task-details.php");
         while ($row = $result->fetch_assoc()) {
-            echo sprintf($taskDetails, $row["id"], $row["id"], $row["title"], $row["priority"], $row["status"], $row["due_date"], $row["first_name"], $row["last_name"], $row["created_at"], $row["updated_at"]);
+            $dueDate = DateTime::createFromFormat('Y-m-d', $row["due_date"])->format('j F Y');
+            $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
+            $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
+            echo sprintf($taskDetails, $row["id"], $row["id"], $row["title"], $row["priority"], $row["status"], $dueDate, $row["first_name"], $row["last_name"], $createdAt, $updatedAt);
         }
     }
 
@@ -77,7 +86,10 @@
         //require "task-details-window.php";
         $taskDetails = file_get_contents("../template/task-details-window.php");
         $row = $result->fetch_assoc();
-        echo sprintf($taskDetails, $row["id"], $row["title"], $row["description"], $row["priority"], $row["status"], $row["due_date"], $row["name"], $row["first_name"], $row["last_name"], $row["created_at"], $row["updated_at"]);
+        $dueDate = DateTime::createFromFormat('Y-m-d', $row["due_date"])->format('j F Y');
+        $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
+        $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
+        echo sprintf($taskDetails, $row["id"], $row["title"], $row["description"], $row["priority"], $row["status"], $dueDate, $row["name"], $row["first_name"], $row["last_name"], $createdAt, $updatedAt);
     }
 
     function registerVerifyEmail($result) {
