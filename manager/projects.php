@@ -24,8 +24,6 @@
 
 </div>
 
-<!--<div id="add-project-window"></div>-->
-
 <?php require "../template/add-project-window.php"; ?>
 
 <script src="../scripts/add-project.js"></script>

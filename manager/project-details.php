@@ -48,9 +48,13 @@
 
 </div>
 
+<?php require "../template/edit-project-window.php"; ?>
+
 <div id="task-details-window"></div>
 
 <script src="../scripts/task-details.js"></script>
+
+<script src="../scripts/edit-project.js"></script>
 
 </body>
 </html>

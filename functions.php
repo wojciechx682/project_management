@@ -127,6 +127,14 @@
         return $row["name"];
     }
 
+    function getProjectForEdit($result) {
+        return $result;
+    }
+
+    function updateProject($connection) {
+        return true; // lub bardziej złożona logika jeśli potrzebna
+    }
+
     function query($query, $fun, $values) {
 
         // $query - SQL - "SELECT imie, nazwisko FROM klienci";

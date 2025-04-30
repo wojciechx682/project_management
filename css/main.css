@@ -589,7 +589,9 @@ div.project-details:first-of-type {
 }
 
 .update-status div.project-details:first-of-type,
-#add-project div.project-details:first-of-type {
+#add-project div.project-details:first-of-type,
+#edit-project div.project-details:first-of-type
+{
     border-radius: 0;
 }
 
@@ -622,6 +624,7 @@ div.project-details:nth-of-type(9) {
 .update-status .project-details-created-at,
 .update-status .project-details-updated-at,
 .update-status .team-details-name,
+
 #add-project .project-details-id,
 #add-project .project-details-name,
 #add-project .project-details-desc,
@@ -632,6 +635,17 @@ div.project-details:nth-of-type(9) {
 #add-project .project-details-created-at,
 #add-project .project-details-updated-at,
 #add-project .team-details-name,
+
+#edit-project .project-details-id,
+#edit-project .project-details-name,
+#edit-project .project-details-desc,
+#edit-project .project-details-priority,
+#edit-project .project-details-start-date,
+#edit-project .project-details-end-date,
+#edit-project .project-details-status,
+#edit-project .project-details-created-at,
+#edit-project .project-details-updated-at,
+#edit-project .team-details-name,
 
 #add-project .assigned-user {
     width: 85%;
@@ -649,15 +663,30 @@ div.project-details:nth-of-type(9) {
 #add-project .project-details-status,
 #add-project .project-details-created-at,
 #add-project .project-details-updated-at,
-#add-project .team-details-name {
+#add-project .team-details-name,
+
+#edit-project .project-details-id,
+#edit-project .project-details-name,
+#edit-project .project-details-desc,
+#edit-project .project-details-priority,
+#edit-project .project-details-start-date,
+#edit-project .project-details-end-date,
+#edit-project .project-details-status,
+#edit-project .project-details-created-at,
+#edit-project .project-details-updated-at,
+#edit-project .team-details-name {
     border: 0;
 }
 
-#add-project form label {
+#add-project form label,
+#edit-project form label
+{
     cursor: pointer;
 }
 
-#add-project .project-details input.project-details-name {
+#add-project .project-details input.project-details-name,
+#edit-project .project-details input.project-details-name
+{
     border: none;
     outline: none;
     font-family: inherit;
@@ -665,12 +694,16 @@ div.project-details:nth-of-type(9) {
 }
 
 /* Po focusie również brak ramki */
-#add-project .project-details input.project-details-name:focus {
+#add-project .project-details input.project-details-name:focus,
+#edit-project .project-details input.project-details-name:focus
+{
     border: none;
     outline: none;
 }
 
-#add-project .project-details textarea.project-details-desc {
+#add-project .project-details textarea.project-details-desc,
+#edit-project .project-details textarea.project-details-desc
+{
     border: none;
     outline: none;
     resize: none;
@@ -679,26 +712,16 @@ div.project-details:nth-of-type(9) {
 }
 
 /* Po focusie również brak ramki */
-#add-project .project-details textarea.project-details-desc:focus {
+#add-project .project-details textarea.project-details-desc:focus,
+#edit-project .project-details textarea.project-details-desc:focus
+{
     border: none;
     outline: none;
 }
 
-#add-project .project-details select.project-details-priority {
-    border: none;
-    outline: none;
-    font-family: inherit;
-    font-size: inherit;
-}
-
-/* Po focusie również brak ramki */
-#add-project .project-details select.project-details-priority:focus {
-    border: none;
-    outline: none;
-}
-
-
-#add-project .project-details select.project-details-status {
+#add-project .project-details select.project-details-priority,
+#edit-project .project-details select.project-details-priority
+{
     border: none;
     outline: none;
     font-family: inherit;
@@ -706,25 +729,17 @@ div.project-details:nth-of-type(9) {
 }
 
 /* Po focusie również brak ramki */
-#add-project .project-details select.project-details-status:focus {
+#add-project .project-details select.project-details-priority:focus,
+#edit-project .project-details select.project-details-priority:focus
+{
     border: none;
     outline: none;
 }
 
-#add-project .project-details input.project-details-start-date {
-    border: none;
-    outline: none;
-    font-family: inherit;
-    font-size: inherit;
-}
 
-/* Po focusie również brak ramki */
-#add-project .project-details input.project-details-start-date:focus {
-    border: none;
-    outline: none;
-}
-
-#add-project .project-details input.project-details-end-date {
+#add-project .project-details select.project-details-status,
+#edit-project .project-details select.project-details-status
+{
     border: none;
     outline: none;
     font-family: inherit;
@@ -732,12 +747,16 @@ div.project-details:nth-of-type(9) {
 }
 
 /* Po focusie również brak ramki */
-#add-project .project-details input.project-details-end-date:focus {
+#add-project .project-details select.project-details-status:focus,
+#edit-project .project-details select.project-details-status:focus
+{
     border: none;
     outline: none;
 }
 
-#add-project .project-details select.team-details-name {
+#add-project .project-details input.project-details-start-date,
+#edit-project .project-details input.project-details-start-date
+{
     border: none;
     outline: none;
     font-family: inherit;
@@ -745,7 +764,43 @@ div.project-details:nth-of-type(9) {
 }
 
 /* Po focusie również brak ramki */
-#add-project .project-details select.team-details-name:focus {
+#add-project .project-details input.project-details-start-date:focus,
+#edit-project .project-details input.project-details-start-date:focus
+{
+    border: none;
+    outline: none;
+}
+
+#add-project .project-details input.project-details-end-date,
+#edit-project .project-details input.project-details-end-date
+{
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details input.project-details-end-date:focus,
+#edit-project .project-details input.project-details-end-date:focus
+{
+    border: none;
+    outline: none;
+}
+
+#add-project .project-details select.team-details-name,
+#edit-project .project-details select.team-details-name
+{
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Po focusie również brak ramki */
+#add-project .project-details select.team-details-name:focus,
+#edit-project .project-details select.team-details-name:focus
+{
     border: none;
     outline: none;
 }
@@ -789,7 +844,9 @@ div.project-details:nth-of-type(9) {
 .update-status .project-details-desc-left,
 .update-status .project-details-desc,
 #add-project .project-details-desc-left,
-#add-project .project-details-desc
+#add-project .project-details-desc,
+#edit-project .project-details-desc-left,
+#edit-project .project-details-desc
 {
     height: 82px;
 }
@@ -812,14 +869,26 @@ div.project-details:nth-of-type(9) {
 #add-project .project-details-id-left,
 #add-project .project-details-name-left,
 #add-project .project-details-desc-left,
-    #add-project .project-details-priority-left,
+#add-project .project-details-priority-left,
 #add-project .project-details-start-date-left,
 #add-project .project-details-end-date-left,
 #add-project .project-details-status-left,
 #add-project .project-details-created-at-left,
 #add-project .project-details-updated-at-left,
 #add-project .team-details-name-left,
-#add-project .assigned-user-left {
+#add-project .assigned-user-left,
+
+#edit-project .project-details-id-left,
+#edit-project .project-details-name-left,
+#edit-project .project-details-desc-left,
+#edit-project .project-details-priority-left,
+#edit-project .project-details-start-date-left,
+#edit-project .project-details-end-date-left,
+#edit-project .project-details-status-left,
+#edit-project .project-details-created-at-left,
+#edit-project .project-details-updated-at-left,
+#edit-project .team-details-name-left,
+#edit-project .assigned-user-left {
     /*text-align: right;
     padding-right: 10px;*/
     width: 15%;
@@ -855,7 +924,7 @@ div.task-updated-at {
 
 /* --------------------------------------------------------------- */
 
-#update-status, .update-status, #add-comment, #add-project {
+#update-status, .update-status, #add-comment, #add-project, #edit-project {
     /*height: 310px;*/
     height: 750px;
     width: 750px;
@@ -896,7 +965,8 @@ div.task-updated-at {
 }
 
 #update-status > h2, .update-status > h2,
-#add-comment > h2, #add-project > h2
+#add-comment > h2, #add-project > h2,
+#edit-project > h2
 {
     margin-left: 20px;
     margin-top: 25px;
@@ -920,7 +990,8 @@ div.task-updated-at {
 }
 
 #update-status hr, .update-status hr,
-#add-comment hr, #add-project hr
+#add-comment hr, #add-project hr,
+#edit-project hr
 {
     background-color: rgba(166, 166, 166, 0.7);
     border: none;
