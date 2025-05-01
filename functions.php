@@ -75,21 +75,38 @@
         require "../view/manager/task-header.php"; // table header;
         $taskDetails = file_get_contents("../template/task-details.php");
         while ($row = $result->fetch_assoc()) {
+            // Oczyszczanie danych
+            $id = htmlspecialchars($row["id"], ENT_QUOTES, "UTF-8");
+            $title = htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8");
+            $priority = htmlspecialchars($row["priority"], ENT_QUOTES, "UTF-8");
+            $status = htmlspecialchars($row["status"], ENT_QUOTES, "UTF-8");
+            $firstName = htmlspecialchars($row["first_name"], ENT_QUOTES, "UTF-8");
+            $lastName = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
+            // Formatowanie dat
             $dueDate = DateTime::createFromFormat('Y-m-d', $row["due_date"])->format('j F Y');
             $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
             $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
-            echo sprintf($taskDetails, $row["id"], $row["id"], $row["title"], $row["priority"], $row["status"], $dueDate, $row["first_name"], $row["last_name"], $createdAt, $updatedAt);
+            echo sprintf($taskDetails, $id, $id, $title, $priority, $status, $dueDate, $firstName, $lastName, $createdAt, $updatedAt);
         }
     }
 
     function getTasks($result) {
-        //require "task-details-window.php";
         $taskDetails = file_get_contents("../template/task-details-window.php");
         $row = $result->fetch_assoc();
+        // Oczyszczanie wszystkich danych przed wyświetleniem
+        $id = htmlspecialchars($row["id"], ENT_QUOTES, "UTF-8");
+        $title = htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8");
+        $description = htmlspecialchars($row["description"], ENT_QUOTES, "UTF-8");
+        $priority = htmlspecialchars($row["priority"], ENT_QUOTES, "UTF-8");
+        $status = htmlspecialchars($row["status"], ENT_QUOTES, "UTF-8");
+        $projectName = htmlspecialchars($row["name"], ENT_QUOTES, "UTF-8");
+        $firstName = htmlspecialchars($row["first_name"], ENT_QUOTES, "UTF-8");
+        $lastName = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
+        // Formatowanie dat (już po oczyszczaniu)
         $dueDate = DateTime::createFromFormat('Y-m-d', $row["due_date"])->format('j F Y');
         $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
         $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
-        echo sprintf($taskDetails, $row["id"], $row["title"], $row["description"], $row["priority"], $row["status"], $dueDate, $row["name"], $row["first_name"], $row["last_name"], $createdAt, $updatedAt);
+        echo sprintf($taskDetails, $id, $title, $description, $priority, $status, $dueDate, $projectName, $firstName, $lastName, $createdAt, $updatedAt);
     }
 
     function registerVerifyEmail($result) {

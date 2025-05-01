@@ -33,17 +33,26 @@ document.addEventListener("keydown", function(event) {
 });
 
 document.querySelectorAll("div.task-title a").forEach(link => {
+
     link.addEventListener("click", function (e) {
+
         e.preventDefault();
         let onclickAttribute = this.getAttribute("onclick");
         let taskIdMatch = onclickAttribute.match(/toggleTaskDetails\((\d+)\)/);
-        if (!taskIdMatch) return;
+
+        //if (!taskIdMatch) return;
+
+        // Walidacja ID zadania
+        if (!taskIdMatch || !/^\d+$/.test(taskIdMatch[1])) {
+            showError("Invalid task ID");
+            return;
+        }
 
         let taskId = taskIdMatch[1];
 
         let mainContainer = document.getElementById("main-container");
         if (mainContainer) {
-            mainContainer.classList.toggle("bright");
+            //mainContainer.classList.toggle("bright");
             mainContainer.classList.toggle("unreachable");
         }
 
@@ -52,19 +61,36 @@ document.querySelectorAll("div.task-title a").forEach(link => {
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error("Błąd sieci!");
+                    throw new Error("Network response was not ok");
                 }
                 return response.text();
             })
             .then(data => {
-                document.querySelector("div#task-details-window").innerHTML = data;
+                // Oczyszczanie HTML przed wstawieniem
+                const cleanHTML = DOMPurify.sanitize(data);
+                document.querySelector("div#task-details-window").innerHTML = cleanHTML;
                 toggleTaskDetails(taskId);
             })
             .catch(error => {
-                console.error("Wystąpił błąd:", error);
+                console.error("Error:", error);
+                showError("Failed to load task details. Please try again.");
+                if (mainContainer) {
+                    mainContainer.classList.remove("unreachable");
+                }
             });
     });
 });
+
+// Funkcja do wyświetlania błędów
+function showError(message) {
+    const resultDiv = document.getElementById("result");
+    if (resultDiv) {
+        resultDiv.innerHTML = `<span class="error">${DOMPurify.sanitize(message)}</span>`;
+        setTimeout(() => {
+            resultDiv.innerHTML = "";
+        }, 5000);
+    }
+}
 
 /*$("div.task-title a").on("click", function(e) {
     e.preventDefault();
