@@ -55,28 +55,85 @@ document.querySelectorAll("div.task-title a").forEach(link => {
             //mainContainer.classList.toggle("bright");
             mainContainer.classList.toggle("unreachable");
         }
+        //mainContainer.classList.add("unreachable");
 
-        fetch("getTaskDetails.php?taskId=" + encodeURIComponent(taskId), {
+        /*fetch("getTaskDetails.php?taskId=" + encodeURIComponent(taskId), {
             method: "GET",
+            headers: {
+                "Accept": "application/json, text/html" // Dodajemy obsługę JSON
+            }
+        })*/
+        fetch(`getTaskDetails.php?taskId=${encodeURIComponent(taskId)}`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json, text/html"
+            }
         })
-            .then(response => {
+            /*.then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
                 return response.text();
+            })*/
+                /*.then(response => {
+                    if (!response.ok) throw new Error("HTTP error");
+
+                    const contentType = response.headers.get("content-type");
+                    if (contentType.includes("application/json")) {
+                        return response.json().then(data => {
+                            if (data.error) throw data;
+                            return data;
+                        });
+                    }
+                    return response.text();
+                })*/
+            .then(response => {
+                if (!response.ok) throw new Error("Network response was not ok");
+
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    return response.json();
+                }
+                return response.text();
             })
-            .then(data => {
+            /*.then(data => {
                 // Oczyszczanie HTML przed wstawieniem
                 const cleanHTML = DOMPurify.sanitize(data);
                 document.querySelector("div#task-details-window").innerHTML = cleanHTML;
                 toggleTaskDetails(taskId);
+            })*/
+            .then(data => {
+                if (typeof data === "object") {
+                    // Obsługa JSON (błąd)
+                    throw new Error(data.error || "Unknown error");
+                } else {
+                    // Oczyszczanie i wstawianie HTML
+                    const cleanHTML = DOMPurify.sanitize(data);
+                    const taskDetailsWindow = document.getElementById("task-details-window");
+                    taskDetailsWindow.innerHTML = cleanHTML;
+                    taskDetailsWindow.classList.remove("hidden");
+
+                    // Dodaj obsługę zamknięcia okna
+                    const closeIcon = taskDetailsWindow.querySelector(".icon-cancel");
+                    if (closeIcon) {
+                        closeIcon.addEventListener("click", () => {
+                            taskDetailsWindow.classList.add("hidden");
+                            mainContainer.classList.remove("unreachable");
+                        });
+                    }
+                    toggleTaskDetails(taskId);
+                }
             })
-            .catch(error => {
+            /*.catch(error => {
                 console.error("Error:", error);
                 showError("Failed to load task details. Please try again.");
                 if (mainContainer) {
                     mainContainer.classList.remove("unreachable");
                 }
+            });*/
+            .catch(error => {
+                showError(error.message);
+                mainContainer.classList.remove("unreachable");
             });
     });
 });

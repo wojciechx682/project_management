@@ -152,6 +152,10 @@
         return true; // lub bardziej złożona logika jeśli potrzebna
     }
 
+    function verifyTaskExists($result) {
+        return true;
+    }
+
     function query($query, $fun, $values) {
 
         // $query - SQL - "SELECT imie, nazwisko FROM klienci";
@@ -196,10 +200,10 @@
                             //$fun($result);
                             return $fun($result);
 
-                        } //else {
-
+                        } else {
                             // nie zrwócono żadnych wierszy ! (SELECT)
-                        //}
+                            return null;
+                        }
 
                     } elseif ($result === true) { // (bool - true) - dla zapytań INSERT, UPDATE, DELETE ...
 
