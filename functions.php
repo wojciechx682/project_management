@@ -145,6 +145,14 @@
         return $connection->insert_id;
     }
 
+    function addNewTask($connection) {
+        return $connection->insert_id;
+    }
+
+    function getTaskInfo($result) {
+        return $result->fetch_assoc();
+    }
+
     function getTeamName($result) {
         $row = $result->fetch_assoc();
         return $row["name"];

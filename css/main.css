@@ -1330,3 +1330,7 @@ div.user-option:hover {
 #add-task .task-details-name-left {
     width: 15%;
 }
+
+#task-details .project-details-assigned-user-left {
+    width: 15% !important;
+}

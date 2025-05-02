@@ -30,7 +30,7 @@
             <label for="task-status" class="task-details-status-left project-details-status-left">Status</label>
             <select id="task-status" name="status" class="task-details-status project-details-status" required>
                 <option value="">Select status</option>
-                <option value="planned">Planned</option>
+                <option value="not_started">Not Started</option>
                 <option value="in_progress">In Progress</option>
                 <option value="completed">Completed</option>
                 <option value="cancelled">Cancelled</option>
