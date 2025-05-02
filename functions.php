@@ -135,6 +135,12 @@
         }
     }
 
+    function createUserSelectList($result) {
+        while($row = $result->fetch_assoc()) {
+            echo '<option value="'.$row["id"].'">'.$row["first_name"].' '.$row["last_name"].'</option>';
+        }
+    }
+
     function addNewProject($connection) {
         return $connection->insert_id;
     }

@@ -312,7 +312,7 @@ div.project, div.project-details, div.task, div.users {
     margin-top: 20px;
 }
 
-.project, div.project-details, div.task, div.users {
+.project, div.project-details, div.task, div.users, div.task-details {
     border: 1px ridge rgba(166, 166, 166, 0.38);
     border-radius: 15px;
     margin: 0px auto 40px auto;
@@ -348,7 +348,6 @@ div.users {
 .project-details-start-date-left,
 .project-details-end-date-left,
     .project-details-status-left,
-    .project-details-status-left,
     .project-details-due-date-left,
     .project-details-project-name-left,
 .project-details-created-at-left,
@@ -368,6 +367,20 @@ div.users {
 .project-details-created-at,
 .project-details-updated-at,
 .project-details-assigned-user,
+
+.task-details-name-left,
+.task-details-desc-left,
+.task-details-priority-left,
+.task-details-status-left,
+.task-details-due-date-left,
+.task-details-assigned-user-left,
+
+.task-details-name,
+.task-details-desc,
+.task-details-priority,
+.task-details-status,
+.task-details-due-date,
+.task-details-assigned-user,
 
 .team-details-name,
 .task-id,
@@ -581,12 +594,12 @@ i.icon-home, i.icon-th-large, i.icon-tasks, i.icon-adult {
     margin: 0;
 }
 
-div.project-details {
+div.project-details, div.task-details {
     margin: 0;
     border-radius: 0;
 }
 
-div.project-details-button {
+div.project-details-button, div.task-details-button {
     border: 0;
 }
 
@@ -598,7 +611,8 @@ div.project-details:first-of-type {
 .update-status div.project-details:first-of-type,
 #add-project div.project-details:first-of-type,
 #edit-project div.project-details:first-of-type,
-#task-details div.project-details:first-of-type
+#task-details div.project-details:first-of-type,
+#add-task div.task-details:first-of-type
 {
     border-radius: 0;
 }
@@ -675,7 +689,14 @@ div#task-details div.project-details:nth-of-type(9) {
 #task-details .project-details-created-at,
 #task-details .project-details-updated-at,
 #task-details .project-details-assigned-user,
-#task-details .team-details-name
+#task-details .team-details-name,
+
+#add-task .task-details-name,
+#add-task .task-details-desc,
+#add-task .task-details-priority,
+#add-task .task-details-status,
+#add-task .task-details-due-date,
+#add-task .task-details-assigned-user
 {
     width: 85%;
     text-align: left;
@@ -686,6 +707,7 @@ div#task-details div.project-details:nth-of-type(9) {
 #task-details .project-details-id {
     width: 85% !important;
 }
+
 #add-project .project-details-id,
 #add-project .project-details-name,
 #add-project .project-details-desc,
@@ -706,7 +728,15 @@ div#task-details div.project-details:nth-of-type(9) {
 #edit-project .project-details-status,
 #edit-project .project-details-created-at,
 #edit-project .project-details-updated-at,
-#edit-project .team-details-name {
+#edit-project .team-details-name,
+
+#add-task .task-details-name,
+#add-task .task-details-desc,
+#add-task .task-details-priority,
+#add-task .task-details-status,
+#add-task .task-details-due-date,
+#add-task .task-details-assigned-user
+{
     border: 0;
 }
 
@@ -717,7 +747,8 @@ div#task-details div.project-details:nth-of-type(9) {
 }
 
 #add-project .project-details input.project-details-name,
-#edit-project .project-details input.project-details-name
+#edit-project .project-details input.project-details-name,
+#add-task .task-details input.task-details-name
 {
     border: none;
     outline: none;
@@ -727,14 +758,16 @@ div#task-details div.project-details:nth-of-type(9) {
 
 /* Po focusie również brak ramki */
 #add-project .project-details input.project-details-name:focus,
-#edit-project .project-details input.project-details-name:focus
+#edit-project .project-details input.project-details-name:focus,
+#add-task .task-details input.task-details-name:focus
 {
     border: none;
     outline: none;
 }
 
 #add-project .project-details textarea.project-details-desc,
-#edit-project .project-details textarea.project-details-desc
+#edit-project .project-details textarea.project-details-desc,
+#add-task .task-details textarea.task-details-desc
 {
     border: none;
     outline: none;
@@ -745,14 +778,16 @@ div#task-details div.project-details:nth-of-type(9) {
 
 /* Po focusie również brak ramki */
 #add-project .project-details textarea.project-details-desc:focus,
-#edit-project .project-details textarea.project-details-desc:focus
+#edit-project .project-details textarea.project-details-desc:focus,
+#add-task .task-details textarea.task-details-desc:focus
 {
     border: none;
     outline: none;
 }
 
 #add-project .project-details select.project-details-priority,
-#edit-project .project-details select.project-details-priority
+#edit-project .project-details select.project-details-priority,
+#add-task .task-details select.task-details-priority
 {
     border: none;
     outline: none;
@@ -762,7 +797,8 @@ div#task-details div.project-details:nth-of-type(9) {
 
 /* Po focusie również brak ramki */
 #add-project .project-details select.project-details-priority:focus,
-#edit-project .project-details select.project-details-priority:focus
+#edit-project .project-details select.project-details-priority:focus,
+#add-task .task-details select.task-details-priority:focus
 {
     border: none;
     outline: none;
@@ -770,7 +806,8 @@ div#task-details div.project-details:nth-of-type(9) {
 
 
 #add-project .project-details select.project-details-status,
-#edit-project .project-details select.project-details-status
+#edit-project .project-details select.project-details-status,
+#add-task .task-details select.task-details-status
 {
     border: none;
     outline: none;
@@ -780,14 +817,30 @@ div#task-details div.project-details:nth-of-type(9) {
 
 /* Po focusie również brak ramki */
 #add-project .project-details select.project-details-status:focus,
-#edit-project .project-details select.project-details-status:focus
+#edit-project .project-details select.project-details-status:focus,
+#add-task .task-details select.task-details-status:focus
+{
+    border: none;
+    outline: none;
+}
+#add-task .task-details select.task-details-assigned-user
+{
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Po focusie również brak ramki */
+#add-task .task-details select.task-details-assigned-user:focus
 {
     border: none;
     outline: none;
 }
 
 #add-project .project-details input.project-details-start-date,
-#edit-project .project-details input.project-details-start-date
+#edit-project .project-details input.project-details-start-date,
+#add-task .task-details input.task-details-due-date
 {
     border: none;
     outline: none;
@@ -797,7 +850,7 @@ div#task-details div.project-details:nth-of-type(9) {
 
 /* Po focusie również brak ramki */
 #add-project .project-details input.project-details-start-date:focus,
-#edit-project .project-details input.project-details-start-date:focus
+#edit-project .project-details input.project-details-start-date:focus,#add-task .task-details input.task-details-due-date:focus
 {
     border: none;
     outline: none;
@@ -880,7 +933,9 @@ div#task-details div.project-details:nth-of-type(9) {
 #edit-project .project-details-desc-left,
 #edit-project .project-details-desc,
 #task-details .project-details-desc-left,
-#task-details .project-details-desc
+#task-details .project-details-desc,
+#add-task .task-details-desc-left,
+#add-task .task-details-desc
 {
     height: 82px;
 }
@@ -937,6 +992,13 @@ div#task-details div.project-details:nth-of-type(9) {
 #task-details .project-details-updated-at-left,
 #task-details .team-details-name-left,
 #task-details .project-details-assigned-user-left
+
+#add-task .task-details-name-left,
+#add-task .task-details-desc-left,
+#add-task .task-details-priority-left,
+#add-task .task-details-status-left,
+#add-task .task-details-due-date-left,
+#add-task .task-details-assigned-user-left
 {
     /*text-align: right;
     padding-right: 10px;*/
@@ -973,7 +1035,7 @@ div.task-updated-at {
 
 /* --------------------------------------------------------------- */
 
-#update-status, .update-status, #add-comment, #add-project, #edit-project, #task-details {
+#update-status, .update-status, #add-comment, #add-project, #edit-project, #task-details, #add-task {
     /*height: 310px;*/
     height: 750px;
     width: 750px;
@@ -1016,7 +1078,8 @@ div.task-updated-at {
 #update-status > h2, .update-status > h2,
 #add-comment > h2, #add-project > h2,
 #edit-project > h2,
-#task-details > h2
+#task-details > h2,
+#add-task > h2
 {
     margin-left: 20px;
     margin-top: 25px;
@@ -1041,7 +1104,8 @@ div.task-updated-at {
 
 #update-status hr, .update-status hr,
 #add-comment hr, #add-project hr,
-#edit-project hr, #task-details hr
+#edit-project hr, #task-details hr,
+#add-task hr
 {
     background-color: rgba(166, 166, 166, 0.7);
     border: none;
@@ -1261,4 +1325,8 @@ div.user-option:hover {
 
 .hidden {
     display: none;
+}
+
+#add-task .task-details-name-left {
+    width: 15%;
 }

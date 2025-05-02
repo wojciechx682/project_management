@@ -50,11 +50,15 @@
 
 <?php require "../template/edit-project-window.php"; ?>
 
+<?php require "../template/add-task-window.php"; ?>
+
 <div id="task-details-window"></div>
 
 <script src="../scripts/task-details.js"></script>
 
 <script src="../scripts/edit-project.js"></script>
+
+<script src="../scripts/add-task.js"></script>
 
 </body>
 </html>
