@@ -43,7 +43,6 @@
         <div class="project-details">
             <label for="edit-project-team-id" class="team-details-name-left">Team</label>
             <select id="edit-project-team-id" name="team_id" class="team-details-name" required>
-                <!--<option value="1">PM App Team</option>-->
                 <?php
                     query("SELECT team.id, team.name FROM team", "createTeamSelectList", "");
                 ?>

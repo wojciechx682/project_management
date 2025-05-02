@@ -1,9 +1,9 @@
 
-<div class="update-status hidden">
+<div id="task-details" class="hidden">
 
     <h2>Task Details</h2>
 
-    <i class="icon-cancel" onclick="closeRemoveBox()"></i><hr>
+    <i class="icon-cancel" onclick="closeTaskDetails()"></i><hr>
 
     <div class="project-details">
         <div class="project-details-id-left">ID</div>
@@ -18,34 +18,33 @@
         <div class="project-details-desc">%s</div>
     </div>
     <div class="project-details">
-        <div class="project-details-start-date-left">Priority</div>
-        <div class="project-details-start-date">%s</div>
+        <div class="project-details-priority-left">Priority</div>
+        <div class="project-details-priority">%s</div>
     </div>
     <div class="project-details">
-        <div class="project-details-end-date-left">Status</div>
-        <div class="project-details-end-date">%s</div>
-    </div>
-    <div class="project-details">
-        <div class="project-details-status-left">Due date</div>
+        <div class="project-details-status-left">Status</div>
         <div class="project-details-status">%s</div>
     </div>
     <div class="project-details">
-        <div class="project-details-created-at-left">Project name</div>
+        <div class="project-details-due-date-left">Due date</div>
+        <div class="project-details-due-date">%s</div>
+    </div>
+    <div class="project-details">
+        <div class="project-details-project-name-left">Project name</div>
+        <div class="project-details-project-name">%s</div>
+    </div>
+    <div class="project-details">
+        <div class="project-details-assigned-user-left">Assigned user</div>
+        <div class="project-details-assigned-user">%s %s</div>
+    </div>
+    <div class="project-details">
+        <div class="project-details-created-at-left">Created at</div>
         <div class="project-details-created-at">%s</div>
     </div>
     <div class="project-details">
-        <div class="project-details-updated-at-left">Assigned user</div>
-        <div class="project-details-updated-at">%s %s</div>
+        <div class="project-details-updated-at-left">Updated at</div>
+        <div class="project-details-updated-at">%s</div>
     </div>
-    <div class="project-details">
-        <div class="team-details-name-left">Created at</div>
-        <div class="team-details-name">%s</div>
-    </div>
-    <div class="project-details">
-        <div class="team-details-name-left">Updated at</div>
-        <div class="team-details-name">%s</div>
-    </div>
-
 </div>
 
 

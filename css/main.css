@@ -344,23 +344,30 @@ div.users {
 .project-details-id-left,
 .project-details-name-left,
 .project-details-desc-left,
-    .project-details-priority-left,
-    .project-details-priority,
+    .project-details-priority-left,    
 .project-details-start-date-left,
 .project-details-end-date-left,
     .project-details-status-left,
+    .project-details-status-left,
+    .project-details-due-date-left,
+    .project-details-project-name-left,
 .project-details-created-at-left,
 .project-details-updated-at-left,
+.project-details-assigned-user-left,
 .team-details-name-left,
 
 .project-details-id,
 .project-details-name,
 .project-details-desc,
 .project-details-start-date,
+.project-details-priority,
 .project-details-end-date,
 .project-details-status,
+.project-details-due-date,
+.project-details-project-name,
 .project-details-created-at,
 .project-details-updated-at,
+.project-details-assigned-user,
 
 .team-details-name,
 .task-id,
@@ -590,7 +597,8 @@ div.project-details:first-of-type {
 
 .update-status div.project-details:first-of-type,
 #add-project div.project-details:first-of-type,
-#edit-project div.project-details:first-of-type
+#edit-project div.project-details:first-of-type,
+#task-details div.project-details:first-of-type
 {
     border-radius: 0;
 }
@@ -600,6 +608,12 @@ div.project-details:nth-of-type(9) {
     border-bottom-right-radius: 5px;
 }
 
+div#task-details div.project-details:nth-of-type(9) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
 #add-project div.project-details:nth-of-type(9) {
     border-radius: 0;
 }
@@ -608,7 +622,7 @@ div.project-details:nth-of-type(9) {
     border-radius: 0;
 }
 
-.project-details-id, .project-details-name, .project-details-desc, .project-details-start-date, .project-details-end-date, .project-details-status, .project-details-created-at, .project-details-updated-at, .team-details-name {
+.project-details-id, .project-details-name, .project-details-desc, .project-details-start-date, .project-details-priority, .project-details-end-date, .project-details-status, .project-details-due-date, .project-details-created-at, .project-details-project-name, .project-details-updated-at, project-details-assigned-user, .team-details-name {
     width: 92%;
     text-align: left;
     padding-left: 10px;
@@ -647,13 +661,31 @@ div.project-details:nth-of-type(9) {
 #edit-project .project-details-updated-at,
 #edit-project .team-details-name,
 
-#add-project .assigned-user {
+#add-project .assigned-user
+
+#task-details .project-details-id,
+#task-details .project-details-name,
+#task-details .project-details-desc,
+#task-details .project-details-priority,
+#task-details .project-details-start-date,
+#task-details .project-details-end-date,
+#task-details .project-details-status,
+#task-details .project-details-due-date,
+#task-details .project-details-project-name,
+#task-details .project-details-created-at,
+#task-details .project-details-updated-at,
+#task-details .project-details-assigned-user,
+#task-details .team-details-name
+{
     width: 85%;
     text-align: left;
     padding-left: 10px;
     border-right: 0;
 }
 
+#task-details .project-details-id {
+    width: 85% !important;
+}
 #add-project .project-details-id,
 #add-project .project-details-name,
 #add-project .project-details-desc,
@@ -846,11 +878,13 @@ div.project-details:nth-of-type(9) {
 #add-project .project-details-desc-left,
 #add-project .project-details-desc,
 #edit-project .project-details-desc-left,
-#edit-project .project-details-desc
+#edit-project .project-details-desc,
+#task-details .project-details-desc-left,
+#task-details .project-details-desc
 {
     height: 82px;
 }
-.project-details-id-left, .project-details-name-left, .project-details-desc-left, .project-details-start-date-left, .project-details-end-date-left, .project-details-status-left, .project-details-created-at-left, .project-details-updated-at-left, .team-details-name-left {
+.project-details-id-left, .project-details-name-left, .project-details-desc-left, .project-details-start-date-left, project-details-priority-left, .project-details-end-date-left, .project-details-status-left, .project-details-due-date-left, .project-details-created-at-left, .project-details-project-name-left, .project-details-updated-at-left, project-details-assigned-user, .project-details-assigned-user-left, .team-details-name-left {
     /*text-align: right;
     padding-right: 10px;*/
     width: 8%;
@@ -888,7 +922,22 @@ div.project-details:nth-of-type(9) {
 #edit-project .project-details-created-at-left,
 #edit-project .project-details-updated-at-left,
 #edit-project .team-details-name-left,
-#edit-project .assigned-user-left {
+#edit-project .assigned-user-left,
+
+#task-details .project-details-id-left,
+#task-details .project-details-name-left,
+#task-details .project-details-desc-left,
+#task-details .project-details-priority-left,
+#task-details .project-details-start-date-left,
+#task-details .project-details-end-date-left,
+#task-details .project-details-status-left,
+#task-details .project-details-due-date-left,
+#task-details .project-details-project-name-left,
+#task-details .project-details-created-at-left,
+#task-details .project-details-updated-at-left,
+#task-details .team-details-name-left,
+#task-details .project-details-assigned-user-left
+{
     /*text-align: right;
     padding-right: 10px;*/
     width: 15%;
@@ -924,7 +973,7 @@ div.task-updated-at {
 
 /* --------------------------------------------------------------- */
 
-#update-status, .update-status, #add-comment, #add-project, #edit-project {
+#update-status, .update-status, #add-comment, #add-project, #edit-project, #task-details {
     /*height: 310px;*/
     height: 750px;
     width: 750px;
@@ -966,7 +1015,8 @@ div.task-updated-at {
 
 #update-status > h2, .update-status > h2,
 #add-comment > h2, #add-project > h2,
-#edit-project > h2
+#edit-project > h2,
+#task-details > h2
 {
     margin-left: 20px;
     margin-top: 25px;
@@ -991,7 +1041,7 @@ div.task-updated-at {
 
 #update-status hr, .update-status hr,
 #add-comment hr, #add-project hr,
-#edit-project hr
+#edit-project hr, #task-details hr
 {
     background-color: rgba(166, 166, 166, 0.7);
     border: none;

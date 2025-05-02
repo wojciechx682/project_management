@@ -1,33 +1,33 @@
-function toggleTaskDetails(orderId) {
+function toggleTaskDetails() {
     console.log("toggleTaskDetails function");
-    let removeBox = document.querySelector(".update-status");
-    if (!removeBox) return;
-    removeBox.classList.toggle("hidden");
+    let taskDetailsWindow = document.querySelector("#task-details");
+    if (!taskDetailsWindow) return;
+    taskDetailsWindow.classList.toggle("hidden");
     let icon = document.querySelector(".icon-cancel");
     if (icon) {
-        icon.addEventListener("click", closeRemoveBox);
+        icon.addEventListener("click", closeTaskDetails);
     }
 }
 
-function closeRemoveBox() {
-    console.log("closeRemoveBox function");
-    let removeBox = document.querySelector(".update-status");
+function closeTaskDetails() {
+    console.log("closeTaskDetails function");
+    let taskDetailsWindow = document.querySelector("#task-details");
     let mainContainer = document.getElementById("main-container");
-    if (removeBox) removeBox.classList.add("hidden");
+    if (taskDetailsWindow) taskDetailsWindow.classList.add("hidden");
     if (mainContainer) {
-        mainContainer.classList.remove("bright", "unreachable");
+        mainContainer.classList.remove("unreachable");
     }
 }
 
 document.addEventListener("keydown", function(event) {
-    let removeBox = document.querySelector(".update-status");
-    if (!removeBox || removeBox.classList.contains("hidden")) return;
+    let taskDetailsWindow = document.querySelector("#task-details");
+    if (!taskDetailsWindow || taskDetailsWindow.classList.contains("hidden")) return;
 
     if (event.key === "Escape") {
-        removeBox.classList.add("hidden");
+        taskDetailsWindow.classList.add("hidden");
         let mainContainer = document.getElementById("main-container");
         if (mainContainer) {
-            mainContainer.classList.remove("bright", "unreachable");
+            mainContainer.classList.remove("unreachable");
         }
     }
 });
@@ -37,104 +37,64 @@ document.querySelectorAll("div.task-title a").forEach(link => {
     link.addEventListener("click", function (e) {
 
         e.preventDefault();
+
         let onclickAttribute = this.getAttribute("onclick");
         let taskIdMatch = onclickAttribute.match(/toggleTaskDetails\((\d+)\)/);
-
-        //if (!taskIdMatch) return;
 
         // Walidacja ID zadania
         if (!taskIdMatch || !/^\d+$/.test(taskIdMatch[1])) {
             showError("Invalid task ID");
-            return;
+                return;
         }
 
         let taskId = taskIdMatch[1];
 
         let mainContainer = document.getElementById("main-container");
         if (mainContainer) {
-            //mainContainer.classList.toggle("bright");
             mainContainer.classList.toggle("unreachable");
         }
-        //mainContainer.classList.add("unreachable");
 
-        /*fetch("getTaskDetails.php?taskId=" + encodeURIComponent(taskId), {
-            method: "GET",
-            headers: {
-                "Accept": "application/json, text/html" // Dodajemy obsługę JSON
-            }
-        })*/
         fetch(`getTaskDetails.php?taskId=${encodeURIComponent(taskId)}`, {
             method: "GET",
             headers: {
                 "Accept": "application/json, text/html"
             }
         })
-            /*.then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.text();
-            })*/
-                /*.then(response => {
-                    if (!response.ok) throw new Error("HTTP error");
+        .then(response => {
+            if (!response.ok) throw new Error("Network response was not ok");
 
-                    const contentType = response.headers.get("content-type");
-                    if (contentType.includes("application/json")) {
-                        return response.json().then(data => {
-                            if (data.error) throw data;
-                            return data;
-                        });
-                    }
-                    return response.text();
-                })*/
-            .then(response => {
-                if (!response.ok) throw new Error("Network response was not ok");
-
-                const contentType = response.headers.get("content-type");
-                if (contentType && contentType.includes("application/json")) {
-                    return response.json();
-                }
-                return response.text();
-            })
-            /*.then(data => {
-                // Oczyszczanie HTML przed wstawieniem
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                return response.json();
+            }
+            return response.text();
+        })
+        .then(data => {
+            if (typeof data === "object") {
+                // Obsługa JSON (błąd)
+                throw new Error(data.error || "Unknown error");
+            } else {
+                // Oczyszczanie i wstawianie HTML
                 const cleanHTML = DOMPurify.sanitize(data);
-                document.querySelector("div#task-details-window").innerHTML = cleanHTML;
-                toggleTaskDetails(taskId);
-            })*/
-            .then(data => {
-                if (typeof data === "object") {
-                    // Obsługa JSON (błąd)
-                    throw new Error(data.error || "Unknown error");
-                } else {
-                    // Oczyszczanie i wstawianie HTML
-                    const cleanHTML = DOMPurify.sanitize(data);
-                    const taskDetailsWindow = document.getElementById("task-details-window");
-                    taskDetailsWindow.innerHTML = cleanHTML;
-                    taskDetailsWindow.classList.remove("hidden");
+                const taskDetailsWindow = document.getElementById("task-details-window");
+                taskDetailsWindow.innerHTML = cleanHTML;
+                taskDetailsWindow.classList.remove("hidden");
 
-                    // Dodaj obsługę zamknięcia okna
-                    const closeIcon = taskDetailsWindow.querySelector(".icon-cancel");
-                    if (closeIcon) {
-                        closeIcon.addEventListener("click", () => {
-                            taskDetailsWindow.classList.add("hidden");
-                            mainContainer.classList.remove("unreachable");
-                        });
-                    }
-                    toggleTaskDetails(taskId);
+                // Dodaj obsługę zamknięcia okna
+                const closeIcon = taskDetailsWindow.querySelector(".icon-cancel");
+                if (closeIcon) {
+                    closeIcon.addEventListener("click", () => {
+                        taskDetailsWindow.classList.add("hidden");
+                        mainContainer.classList.remove("unreachable");
+                    });
                 }
-            })
-            /*.catch(error => {
-                console.error("Error:", error);
-                showError("Failed to load task details. Please try again.");
-                if (mainContainer) {
-                    mainContainer.classList.remove("unreachable");
-                }
-            });*/
-            .catch(error => {
-                showError(error.message);
-                mainContainer.classList.remove("unreachable");
-            });
+                toggleTaskDetails();
+            }
+        })
+        .catch(error => {
+            showError(error.message);
+            mainContainer.classList.remove("unreachable");
+        });
     });
 });
 
@@ -197,10 +157,10 @@ z
 
     buttons = [icon, cancelBtn];
     buttons.forEach(function(button) {
-        button.addEventListener("click", closeRemoveBox);
+        button.addEventListener("click", closeTaskDetails);
     });
 
-    function closeRemoveBox() {
+    function closeTaskDetails() {
         mainContainer.classList.toggle("unreachable", false);
         let textarea = removeBox.querySelector("textarea");
         resetError(textarea);
