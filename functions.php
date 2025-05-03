@@ -4,7 +4,9 @@
 
         unset($_SESSION["invalid_credentials"]);
 
-        $row = $result->fetch_assoc();
+        //$row = $result->fetch_assoc();
+
+        $row = $result->fetch(PDO::FETCH_ASSOC);
 
         $password = $_POST["password"];
 
@@ -49,7 +51,8 @@
     function getAllProjects($result) {
         require "../view/manager/project-header.php"; // table header;
         $project = file_get_contents("../template/project.php");
-        while ($row = $result->fetch_assoc()) {
+        //while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
             //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
             $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('j F Y');
@@ -61,7 +64,8 @@
     function getProjectDetails($result) {
         //require "../view/manager/project-header.php"; // table header;
         $projectDetails = file_get_contents("../template/project-details.php");
-        $row = $result->fetch_assoc();
+        //$row = $result->fetch_assoc();
+        $row = $result->fetch(PDO::FETCH_ASSOC);
         //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
         //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
         $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('j F Y');
@@ -74,7 +78,8 @@
     function getTaskDetails($result) {
         require "../view/manager/task-header.php"; // table header;
         $taskDetails = file_get_contents("../template/task-details.php");
-        while ($row = $result->fetch_assoc()) {
+        //while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             // Oczyszczanie danych
             $id = htmlspecialchars($row["id"], ENT_QUOTES, "UTF-8");
             $title = htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8");
@@ -92,7 +97,8 @@
 
     function getTasks($result) {
         $taskDetails = file_get_contents("../template/task-details-window.php");
-        $row = $result->fetch_assoc();
+        //$row = $result->fetch_assoc();
+        $row = $result->fetch(PDO::FETCH_ASSOC);
         // Oczyszczanie wszystkich danych przed wyświetleniem
         $id = htmlspecialchars($row["id"], ENT_QUOTES, "UTF-8");
         $title = htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8");
@@ -123,38 +129,45 @@
         require "../view/admin/users-header.php"; // table header;
         $users = file_get_contents("../template/pendingUsers.php");
 
-        while ($row = $result->fetch_assoc()) {
+        //while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $isApproved = "Pending"; // <- Zawsze "Pending", bo zapytanie wybiera tylko is_approved = 0
             echo sprintf($users, $row["id"], $row["first_name"], $row["last_name"], $row["email"], $row["role"], $row["created_at"], $isApproved, $row["id"], $row["id"]);
         }
     }
 
     function createTeamSelectList($result) {
-        while($row = $result->fetch_assoc()) {
+        //while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             echo '<option value="'.$row["id"].'">'.$row["name"].'</option>';
         }
     }
 
     function createUserSelectList($result) {
-        while($row = $result->fetch_assoc()) {
+        //while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             echo '<option value="'.$row["id"].'">'.$row["first_name"].' '.$row["last_name"].'</option>';
         }
     }
 
     function addNewProject($connection) {
-        return $connection->insert_id;
+        //return $connection->insert_id;
+        return $connection->lastInsertId();
     }
 
     function addNewTask($connection) {
-        return $connection->insert_id;
+        //return $connection->insert_id;
+        return $connection->lastInsertId();
     }
 
     function getTaskInfo($result) {
-        return $result->fetch_assoc();
+        //return $result->fetch_assoc();
+        return $result->fetch(PDO::FETCH_ASSOC);
     }
 
     function getTeamName($result) {
-        $row = $result->fetch_assoc();
+        //$row = $result->fetch_assoc();
+        $row = $result->fetch(PDO::FETCH_ASSOC);
         return $row["name"];
     }
 
@@ -171,6 +184,39 @@
     }
 
     function query($query, $fun, $values) {
+
+        require "connect.php";
+
+        try {
+            $connection = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8mb4", $db_user, $db_password);
+            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            if (!is_array($values)) {
+                $values = [$values];
+            }
+
+            $stmt = $connection->prepare($query);
+            $stmt->execute($values);
+
+            if ($stmt->columnCount() > 0) { // SELECT
+                if ($stmt->rowCount() > 0) {
+                    return $fun($stmt);
+                } else {
+                    return null;
+                }
+            } else { // INSERT, UPDATE, DELETE
+                if ($stmt->rowCount() > 0) {
+                    return $fun ? $fun($connection) : true;
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    /*function query($query, $fun, $values) {
 
         // $query - SQL - "SELECT imie, nazwisko FROM klienci";
 
@@ -255,6 +301,6 @@
             return false;
 
         }
-    }
+    }*/
 
 ?>

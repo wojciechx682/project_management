@@ -20,17 +20,9 @@
         if ($userId && in_array($action, ["accept", "reject"])) {
 
             if ($action === "accept") {
-                $updateSuccessful = query(
-                    "UPDATE user SET is_approved='%s' WHERE id = '%s'",
-                    "",
-                    [1, $userId]
-                );
+                $updateSuccessful = query("UPDATE user SET is_approved=? WHERE id=?","", [1, $userId]);
             } elseif ($action === "reject") {
-                $updateSuccessful = query(
-                    "DELETE FROM user WHERE id = '%s'",
-                    "",
-                    [$userId]
-                );
+                $updateSuccessful = query("DELETE FROM user WHERE id=?","", [$userId]);
             }
         }
     }

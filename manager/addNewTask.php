@@ -71,14 +71,14 @@
                 }
 
                 $task = [$title, $description, $priorityFormatted, $statusFormatted, $dueDate, $projectId, $assignedUser];
-                $insertSuccessful = query("INSERT INTO task (id, title, description, priority, status, due_date, project_id, assigned_user_id, created_at, updated_at) VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s', '%s', NOW(), NOW())", "addNewTask", $task);
+                $insertSuccessful = query("INSERT INTO task (id, title, description, priority, status, due_date, project_id, assigned_user_id, created_at, updated_at) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())", "addNewTask", $task);
 
                 if ($insertSuccessful) {
 
                     $taskId = $insertSuccessful;
 
                     // Pobierz utworzone timestampy z bazy
-                    $taskDetails = query("SELECT task.created_at, task.updated_at, user.first_name, user.last_name FROM task JOIN user ON task.assigned_user_id = user.id WHERE task.id = '%s'", "getTaskInfo", $taskId);
+                    $taskDetails = query("SELECT task.created_at, task.updated_at, user.first_name, user.last_name FROM task JOIN user ON task.assigned_user_id = user.id WHERE task.id=?", "getTaskInfo", $taskId);
 
 
                     if (!$taskDetails) {

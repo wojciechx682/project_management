@@ -46,7 +46,7 @@
             <label for="task-assigned-user-id" class="task-details-assigned-user-left">Assigned User</label>
             <select id="task-assigned-user-id" name="assigned_user_id" class="task-details-assigned-user team-details-name" required>
                 <?php
-                    query("SELECT user.id, user.first_name, user.last_name FROM user WHERE user.role='Team Member'", "createUserSelectList", "");
+                    query("SELECT user.id, user.first_name, user.last_name FROM user WHERE user.role='Team Member'", "createUserSelectList", []);
                 ?>
             </select>
         </div>

@@ -43,7 +43,7 @@
             }
 
             // Aktualizacja projektu w bazie danych
-            $updateSuccessful = query("UPDATE project SET name = '%s', description = '%s', start_date = '%s', end_date = '%s', status = '%s', team_id = '%s', updated_at = NOW() WHERE id = '%s'","updateProject", [$title, $description, $startDate, $endDate, $statusFormatted, $teamId, $id]
+            $updateSuccessful = query("UPDATE project SET name=?, description=?, start_date=?, end_date=?, status=?, team_id=?, updated_at = NOW() WHERE id=?","updateProject", [$title, $description, $startDate, $endDate, $statusFormatted, $teamId, $id]
             );
 
             if($updateSuccessful) {

@@ -55,12 +55,12 @@
                 }
 
                 $project = [$title, $description, $startDate, $endDate, $statusFormatted, $teamId];
-                $insertSuccessful = query("INSERT INTO project (id, name, description, start_date, end_date, status, team_id, created_at, updated_at) VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s', NOW(), NOW())", "addNewProject", $project);
+                $insertSuccessful = query("INSERT INTO project (id, name, description, start_date, end_date, status, team_id, created_at, updated_at) VALUES (NULL, ?, ?, ?, ?, ?, ?, NOW(), NOW())", "addNewProject", $project);
 
                 if ($insertSuccessful) {
 
                     $projectId = $insertSuccessful;
-                    $team_name = query("SELECT team.name FROM team where team.id='%s'", "getTeamName", $teamId);
+                    $team_name = query("SELECT team.name FROM team where team.id=?", "getTeamName", $teamId);
 
                     if(!$team_name) {
                         $response["error"] = "An error occurred. Please try again";

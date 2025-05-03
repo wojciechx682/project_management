@@ -16,13 +16,13 @@
         }
 
         // Pobierz dane projektu z bazy danych
-        $result = query("SELECT project.*, team.name AS team_name FROM project JOIN team ON project.team_id = team.id WHERE project.id = '%s'", "getProjectForEdit", $projectId);
+        $result = query("SELECT project.*, team.name AS team_name FROM project JOIN team ON project.team_id = team.id WHERE project.id=?", "getProjectForEdit", $projectId);
 
         //var_dump($result);
 
         if($result) {
 
-            $project = $result->fetch_assoc();
+            $project = $result->fetch(PDO::FETCH_ASSOC);
 
             // Konwersja statusu do formatu formularza
             $status = strtolower(str_replace(' ', '_', $project["status"]));

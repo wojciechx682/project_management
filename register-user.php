@@ -79,7 +79,7 @@
 
             $user = [$firstName, $lastName, $email, $passwordHash, $role];
 
-            $insertSuccessful = query("INSERT INTO user (id, first_name, last_name, email, password, role, created_at, updated_at, is_approved) VALUES (NULL, '%s', '%s', '%s', '%s', '%s', NOW(), NOW(), 0)", "register", $user);
+            $insertSuccessful = query("INSERT INTO user (id, first_name, last_name, email, password, role, created_at, updated_at, is_approved) VALUES (NULL, ?, ?, ?, ?, ?, NOW(), NOW(), 0)", "register", $user);
 
             if ($insertSuccessful) {
                 header('Location: index.php'); // $_SESSION["register-successful"] = "...";
