@@ -7,7 +7,7 @@
     <div class="user-created-at">%s</div>
     <div class="user-is-approved">%s</div>
     <div class="user-action">
-        <div class="user-action-button"">
+        <div class="user-action-button">
             Manage <i class="icon-down-open"></i>
         </div>
         <div class="user-options-container">

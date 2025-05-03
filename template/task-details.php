@@ -25,6 +25,16 @@
     <!--<div class="project-created-at task-project-id"></div>-->
     <div class="task-assigned-user">%s %s</div>
     <div class="task-created-at">%s</div>
-    <div class="task-updated-at">%s</div>
+    <div class="task-manage">
+        <div class="task-action-button">
+            Manage <i class="icon-down-open"></i>
+        </div>
+        <div class="task-options-container">
+            <div class="task-action-options hidden">
+                <div class="task-option" onclick="showConfirmationModal(1, 'accept')">Edit</div>
+                <div class="task-option task-option-delete" onclick="showConfirmationModal(1, 'reject')">Delete</div>
+            </div>
+        </div>
+    </div>
 </div>
 

@@ -45,6 +45,7 @@
         <div class="project-details-updated-at-left">Updated at</div>
         <div class="project-details-updated-at">%s</div>
     </div>
+    <button class="btn-link btn-link-static btn-link-tasks btl-link-tasks-edit">Edit</button>
 </div>
 
 

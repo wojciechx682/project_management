@@ -60,5 +60,7 @@
 
 <script src="../scripts/add-task.js"></script>
 
+<script src="../scripts/toggleTaskOptions.js"></script>
+
 </body>
 </html>

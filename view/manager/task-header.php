@@ -24,8 +24,11 @@
     <div class="task-created-at">
         <span class="header-option">Created at</span>
     </div>
-    <div class="task-updated-at">
+    <!--<div class="task-updated-at">
         <span class="header-option">Updated at</span>
-    </div>
+    </div>-->
     <!--<div class="project-action">Manage</div>-->
+    <div class="task-manage">
+        <span class="header-option">Manage</span>
+    </div>
 </div>

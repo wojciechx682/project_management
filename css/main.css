@@ -393,6 +393,7 @@ div.users {
 .task-assigned-user,
 .task-created-at,
 .task-updated-at,
+.task-manage,
 
 .user-id,
 .user-first-name,
@@ -1005,7 +1006,7 @@ div#task-details div.project-details:nth-of-type(9) {
     width: 15%;
 }
 
-.task-id, .task-title, .task-desc, .task-priority, .task-status, .task-due-date, .task-project-id, .task-assigned-user, .task-created-at, .task-updated-at {
+.task-id, .task-title, .task-desc, .task-priority, .task-status, .task-due-date, .task-project-id, .task-assigned-user, .task-created-at, .task-updated-at, div.task-manage {
     width: 13.571%;
 }
 
@@ -1029,7 +1030,7 @@ div.task-id {
     width: 5%;
 }
 
-div.task-updated-at {
+div.task-updated-at, div.task-manage {
     border-right: 0;
 }
 
@@ -1268,13 +1269,16 @@ div#projects {
     padding: 10px;
 }
 
-div.user-action-button:hover {
-    /*border: 1px ridge rgba(210, 210, 210, 0.38);*/
+div.user-action-button:hover,
+div.task-action-button:hover
+{
     user-select: none;
     cursor: pointer;
 }
 
-div.user-action-button {
+div.user-action-button,
+div.task-action-button
+{
     position: relative;
     top: -3px;
     border: 1px ridge rgba(166, 166, 166, 0.38);
@@ -1285,7 +1289,8 @@ div.user-action-button {
     user-select: none;
 }
 
-div.user-options-container {
+div.user-options-container,
+div.task-options-container {
     /*border: 1px solid red;*/
     width: 120px;
     height: 55px;
@@ -1295,7 +1300,9 @@ div.user-options-container {
     background-color: #f2f2f2;
 }
 
-div.user-action-options {
+div.user-action-options,
+div.task-action-options
+{
     z-index: 100;
     position: absolute;
     /*top: 20px;*/
@@ -1311,16 +1318,24 @@ div.user-action-options {
     border-radius: 3px;
 }
 
-div.user-option {
+div.user-option,
+div.task-option
+{
     border-bottom: 1px ridge rgba(210, 210, 210, 0.38);
     padding-bottom: 5px;
     padding-top: 5px;
     border-radius: 2px;
 }
 
-div.user-option:hover {
+div.user-option:hover,
+div.task-option:hover
+{
     cursor: pointer;
     background-color: rgba(210, 210, 210, 0.38)
+}
+
+div.task-option-delete:hover {
+    color: #c71616;
 }
 
 .hidden {
@@ -1333,4 +1348,8 @@ div.user-option:hover {
 
 #task-details .project-details-assigned-user-left {
     width: 15% !important;
+}
+
+.btl-link-tasks-edit {
+    float: left;
 }
