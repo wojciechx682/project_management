@@ -5,7 +5,7 @@
     <i class="icon-cancel" onclick="closeProjectWindow()"></i>
     <hr>
 
-    <form id="add-task-form">
+    <form id="add-project-form">
 
         <div class="project-details">
             <label for="project-title" class="project-details-name-left">Title</label>
