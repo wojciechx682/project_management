@@ -69,6 +69,7 @@ document.getElementById("add-task-form").addEventListener("submit", function (ev
     const isValid = (
         cleanTitle === title && cleanTitle.length > 0 && cleanTitle.length <= 255 &&
         cleanDescription === description && cleanDescription.length > 0 && cleanDescription.length <= 90 &&
+        cleanPriority === priority && (["low", "medium", "high"].includes(cleanPriority)) &&
         cleanStatus === status && (["not_started", "in_progress", "completed", "cancelled"].includes(cleanStatus)) &&
         cleanDueDate === dueDate && cleanDueDate !== "" &&
         cleanAssignedUser === assignedUser && cleanAssignedUser.length > 0
@@ -130,8 +131,18 @@ document.getElementById("add-task-form").addEventListener("submit", function (ev
                         <div class="task-status">${data.status}</div>
                         <div class="task-due-date">${data.due_date}</div>                       
                         <div class="task-assigned-user">${data.assigned_user_first_name + " " + data.assigned_user_last_name}</div>
-                        <div class="task-created-at">${data.created_at}</div>
-                        <div class="task-updated-at">${data.updated_at}</div>
+                        <div class="task-created-at">${data.created_at}</div>                           
+                        <div class="task-manage">
+                            <div class="task-action-button">
+                                Manage <i class="icon-down-open"></i>
+                            </div>
+                            <div class="task-options-container">
+                                <div class="task-action-options hidden">
+                                    <div class="task-option" onclick="toggleEditTaskWindow(${data.id})">Edit</div>
+                                    <div class="task-option task-option-delete" onclick="toggleDeleteTaskWindow(${data.id})">Delete</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 `;
 

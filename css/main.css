@@ -1036,7 +1036,7 @@ div.task-updated-at, div.task-manage {
 
 /* --------------------------------------------------------------- */
 
-#update-status, .update-status, #add-comment, #add-project, #edit-project, #task-details, #add-task {
+#update-status, .update-status, #add-comment, #add-project, #edit-project, #task-details, #add-task, #edit-task {
     /*height: 310px;*/
     height: 750px;
     width: 750px;
@@ -1080,7 +1080,8 @@ div.task-updated-at, div.task-manage {
 #add-comment > h2, #add-project > h2,
 #edit-project > h2,
 #task-details > h2,
-#add-task > h2
+#add-task > h2,
+#edit-task > h2
 {
     margin-left: 20px;
     margin-top: 25px;

@@ -9,9 +9,7 @@
     <div class="task-details-assigned-user">Assigned user: </div>
     <div class="task-details-task-created">Created at: </div>
     <div class="task-details-task-updated">Updated at: </div>
-</div>
-
-<hr>-->
+</div> <hr>-->
 
 <div class="task task-content">
     <div class="task-id">%s</div>
@@ -31,8 +29,8 @@
         </div>
         <div class="task-options-container">
             <div class="task-action-options hidden">
-                <div class="task-option" onclick="showConfirmationModal(1, 'accept')">Edit</div>
-                <div class="task-option task-option-delete" onclick="showConfirmationModal(1, 'reject')">Delete</div>
+                <div class="task-option" onclick="toggleEditTaskWindow(%s)">Edit</div>
+                <div class="task-option task-option-delete" onclick="toggleDeleteTaskWindow(%s)">Delete</div>
             </div>
         </div>
     </div>
