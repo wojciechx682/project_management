@@ -697,7 +697,14 @@ div#task-details div.project-details:nth-of-type(9) {
 #add-task .task-details-priority,
 #add-task .task-details-status,
 #add-task .task-details-due-date,
-#add-task .task-details-assigned-user
+#add-task .task-details-assigned-user,
+
+#edit-task .task-details-name,
+#edit-task .task-details-desc,
+#edit-task .task-details-priority,
+#edit-task .task-details-status,
+#edit-task .task-details-due-date,
+#edit-task .task-details-assigned-user
 {
     width: 85%;
     text-align: left;
@@ -749,7 +756,8 @@ div#task-details div.project-details:nth-of-type(9) {
 
 #add-project .project-details input.project-details-name,
 #edit-project .project-details input.project-details-name,
-#add-task .task-details input.task-details-name
+#add-task .task-details input.task-details-name,
+#edit-task .task-details input.task-details-name
 {
     border: none;
     outline: none;
@@ -760,7 +768,8 @@ div#task-details div.project-details:nth-of-type(9) {
 /* Po focusie również brak ramki */
 #add-project .project-details input.project-details-name:focus,
 #edit-project .project-details input.project-details-name:focus,
-#add-task .task-details input.task-details-name:focus
+#add-task .task-details input.task-details-name:focus,
+#edit-task .task-details input.task-details-name:focus
 {
     border: none;
     outline: none;
@@ -768,7 +777,8 @@ div#task-details div.project-details:nth-of-type(9) {
 
 #add-project .project-details textarea.project-details-desc,
 #edit-project .project-details textarea.project-details-desc,
-#add-task .task-details textarea.task-details-desc
+#add-task .task-details textarea.task-details-desc,
+#edit-task .task-details textarea.task-details-desc
 {
     border: none;
     outline: none;
@@ -780,7 +790,8 @@ div#task-details div.project-details:nth-of-type(9) {
 /* Po focusie również brak ramki */
 #add-project .project-details textarea.project-details-desc:focus,
 #edit-project .project-details textarea.project-details-desc:focus,
-#add-task .task-details textarea.task-details-desc:focus
+#add-task .task-details textarea.task-details-desc:focus,
+#edit-task .task-details textarea.task-details-desc:focus
 {
     border: none;
     outline: none;
@@ -788,7 +799,8 @@ div#task-details div.project-details:nth-of-type(9) {
 
 #add-project .project-details select.project-details-priority,
 #edit-project .project-details select.project-details-priority,
-#add-task .task-details select.task-details-priority
+#add-task .task-details select.task-details-priority,
+#edit-task .task-details select.task-details-priority
 {
     border: none;
     outline: none;
@@ -799,7 +811,8 @@ div#task-details div.project-details:nth-of-type(9) {
 /* Po focusie również brak ramki */
 #add-project .project-details select.project-details-priority:focus,
 #edit-project .project-details select.project-details-priority:focus,
-#add-task .task-details select.task-details-priority:focus
+#add-task .task-details select.task-details-priority:focus,
+#edit-task .task-details select.task-details-priority:focus
 {
     border: none;
     outline: none;
@@ -808,7 +821,8 @@ div#task-details div.project-details:nth-of-type(9) {
 
 #add-project .project-details select.project-details-status,
 #edit-project .project-details select.project-details-status,
-#add-task .task-details select.task-details-status
+#add-task .task-details select.task-details-status,
+#edit-task .task-details select.task-details-status
 {
     border: none;
     outline: none;
@@ -819,12 +833,14 @@ div#task-details div.project-details:nth-of-type(9) {
 /* Po focusie również brak ramki */
 #add-project .project-details select.project-details-status:focus,
 #edit-project .project-details select.project-details-status:focus,
-#add-task .task-details select.task-details-status:focus
+#add-task .task-details select.task-details-status:focus,
+#edit-task .task-details select.task-details-status:focus
 {
     border: none;
     outline: none;
 }
-#add-task .task-details select.task-details-assigned-user
+#add-task .task-details select.task-details-assigned-user,
+#edit-task .task-details select.task-details-assigned-user
 {
     border: none;
     outline: none;
@@ -833,7 +849,9 @@ div#task-details div.project-details:nth-of-type(9) {
 }
 
 /* Po focusie również brak ramki */
-#add-task .task-details select.task-details-assigned-user:focus
+#add-task .task-details select.task-details-assigned-user:focus,
+#edit-task .task-details select.task-details-assigned-user:focus
+
 {
     border: none;
     outline: none;
@@ -841,7 +859,8 @@ div#task-details div.project-details:nth-of-type(9) {
 
 #add-project .project-details input.project-details-start-date,
 #edit-project .project-details input.project-details-start-date,
-#add-task .task-details input.task-details-due-date
+#add-task .task-details input.task-details-due-date,
+#edit-task .task-details input.task-details-due-date
 {
     border: none;
     outline: none;
@@ -851,7 +870,9 @@ div#task-details div.project-details:nth-of-type(9) {
 
 /* Po focusie również brak ramki */
 #add-project .project-details input.project-details-start-date:focus,
-#edit-project .project-details input.project-details-start-date:focus,#add-task .task-details input.task-details-due-date:focus
+#edit-project .project-details input.project-details-start-date:focus,
+#add-task .task-details input.task-details-due-date:focus,
+#edit-task .task-details input.task-details-due-date:focus
 {
     border: none;
     outline: none;
@@ -936,7 +957,9 @@ div#task-details div.project-details:nth-of-type(9) {
 #task-details .project-details-desc-left,
 #task-details .project-details-desc,
 #add-task .task-details-desc-left,
-#add-task .task-details-desc
+#add-task .task-details-desc,
+#edit-task .task-details-desc-left,
+#edit-task .task-details-desc
 {
     height: 82px;
 }
@@ -999,7 +1022,14 @@ div#task-details div.project-details:nth-of-type(9) {
 #add-task .task-details-priority-left,
 #add-task .task-details-status-left,
 #add-task .task-details-due-date-left,
-#add-task .task-details-assigned-user-left
+#add-task .task-details-assigned-user-left,
+
+#edit-task .task-details-name-left,
+#edit-task .task-details-desc-left,
+#edit-task .task-details-priority-left,
+#edit-task .task-details-status-left,
+#edit-task .task-details-due-date-left,
+#edit-task .task-details-assigned-user-left
 {
     /*text-align: right;
     padding-right: 10px;*/
@@ -1107,7 +1137,8 @@ div.task-updated-at, div.task-manage {
 #update-status hr, .update-status hr,
 #add-comment hr, #add-project hr,
 #edit-project hr, #task-details hr,
-#add-task hr
+#add-task hr,
+#edit-task hr
 {
     background-color: rgba(166, 166, 166, 0.7);
     border: none;
@@ -1343,7 +1374,9 @@ div.task-option-delete:hover {
     display: none;
 }
 
-#add-task .task-details-name-left {
+#add-task .task-details-name-left,
+#edit-task .task-details-name-left
+{
     width: 15%;
 }
 
