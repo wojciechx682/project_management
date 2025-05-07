@@ -1386,4 +1386,5 @@ div.task-option-delete:hover {
 
 .btl-link-tasks-edit {
     float: left;
+    margin-left: 5px;
 }

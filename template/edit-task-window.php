@@ -1,10 +1,12 @@
 <div id="edit-task" class="hidden">
 
-    <h2>Add new task</h2>
+    <h2>Edit task</h2>
 
     <i class="icon-cancel" onclick="closeEditTaskWindow()"></i><hr>
 
     <form id="edit-task-form">
+
+        <input type="hidden" id="edit-task-id" name="id">
 
         <div class="task-details">
             <label for="edit-task-title" class="task-details-name-left">Title</label>
@@ -52,7 +54,7 @@
         </div>
 
         <div class="task-details task-details-button">
-            <button type="submit" class="btn-link btn-link-static btn-submit-project">Add</button>
+            <button type="submit" class="btn-link btn-link-static btn-submit-project">Save</button>
         </div>
 
     </form>

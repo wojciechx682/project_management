@@ -9,7 +9,7 @@ function toggleEditTaskWindow(taskId) {
         .then(data => {
             if(data.success) {
                 // Wypełnij formularz danymi projektu
-                //document.getElementById("edit-project-id").value = data.project.id;
+                document.getElementById("edit-task-id").value = data.task.id;
                 document.getElementById("edit-task-title").value = data.task.title;
                 document.getElementById("edit-task-description").value = data.task.description;
                 document.getElementById("edit-task-priority").value = data.task.priority.toLowerCase();
@@ -93,9 +93,9 @@ document.getElementById("edit-task-form").addEventListener("submit", function(ev
                     window.location.reload();
                 }, 1500);
 
-                closeEditProjectWindow();
+                closeEditTaskWindow();
             } else {
-                resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to update project'}</span>`;
+                resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to update task'}</span>`;
             }
         })
         .catch(error => {

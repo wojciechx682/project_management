@@ -183,6 +183,10 @@
         return true; // lub bardziej złożona logika jeśli potrzebna
     }
 
+    function updateTask($connection) {
+        return true; // lub bardziej złożona logika jeśli potrzebna
+    }
+
     function verifyTaskExists($result) {
         return true;
     }

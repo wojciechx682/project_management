@@ -125,8 +125,7 @@ document.getElementById("add-task-form").addEventListener("submit", function (ev
                         <div class="task-id">${data.id}</div>
                         <div class="task-title">
                             <a href="#" onclick="toggleTaskDetails(${data.id})">${data.title}</a>
-                        </div>
-                        <!--<div class="task-desc"></div>-->
+                        </div>                        
                         <div class="task-priority">${data.priority}</div>
                         <div class="task-status">${data.status}</div>
                         <div class="task-due-date">${data.due_date}</div>                       
@@ -146,17 +145,59 @@ document.getElementById("add-task-form").addEventListener("submit", function (ev
                     </div>
                 `;
 
-                // Dodaj nowy projekt na koniec listy
-                const taskContainer = document.querySelector("#main .task");
+                /*// Dodaj nowy projekt na koniec listy
+                const taskContainer = document.querySelector("#main .task"); // null - gdy nie ma zadań
                 const taskList = document.querySelectorAll(".task.task-content"); // Pobierz wszystkie istniejące taski
                 const lastTask = taskList[taskList.length - 1]; // Znajdź ostatni task
-
                 // Jeśli istnieją taski, dodaj nowy poniżej ostatniego
                 if (lastTask) {
                     lastTask.insertAdjacentHTML("afterend", newTaskHTML);
                 } else {
-                    // Jeśli nie ma żadnych projektów, dodaj nowy na początku
-                    taskContainer.insertAdjacentHTML("beforeend", newTaskHTML);
+                    // Jeśli nie ma żadnych zadań, dodaj nowy na początku
+                    taskContainer.insertAdjacentHTML("beforeend", newTaskHTML); // "Cannot read properties of null (reading 'insertAdjacentHTML')". ponieważ taskContainer to null
+                }*/
+
+                const mainDiv = document.getElementById("main");
+                // Znajdź element <hr> po przycisku "ADD NEW", aby wstawić listę zadań po nim
+                const hrElement = mainDiv.querySelector("hr:last-of-type"); // Zakładamy, że to HR po "ADD NEW"
+
+                // Spróbuj znaleźć kontener nagłówka zadań.
+                // Nagłówek ma klasę 'task', ale nie 'task-content'.
+                let taskHeaderElement = mainDiv.querySelector(".task:not(.task-content)");
+
+                if (!taskHeaderElement) {
+                    // Nagłówek nie istnieje - to jest pierwsze zadanie. Stwórz HTML nagłówka.
+                    const taskHeaderHTML = `
+                        <div class="task">
+                            <div class="task-id"><span class="header-option">ID</span></div>
+                            <div class="task-title"><span class="header-option">Title</span></div>
+                            <div class="task-priority"><span class="header-option">Priority</span></div>
+                            <div class="task-status"><span class="header-option">Status</span></div>
+                            <div class="task-due-date"><span class="header-option">Due date</span></div>
+                            <div class="task-assigned-user"><span class="header-option">Assigned user</span></div>
+                            <div class="task-created-at"><span class="header-option">Created at</span></div>
+                            <div class="task-manage"><span class="header-option">Manage</span></div>
+                        </div>
+                    `;
+                    // Wstaw nagłówek, a ZARAZ PO NIM nowe zadanie.
+                    // Wstawiamy je po <hr>, a przed <div id="result">
+                    if (hrElement) {
+                        hrElement.insertAdjacentHTML("afterend", taskHeaderHTML + newTaskHTML);
+                    } else {
+                        // Fallback, jeśli <hr> nie został znaleziony - wstaw na końcu #main, ale przed #result
+                        const resultDivRef = document.getElementById("result");
+                        mainDiv.insertBefore(new DOMParser().parseFromString(taskHeaderHTML + newTaskHTML, "text/html").body.firstChild, resultDivRef);
+                    }
+                } else {
+                    // Nagłówek już istnieje, więc po prostu dodaj nowe zadanie na końcu listy zadań.
+                    // Zadania są dodawane po elemencie nagłówka, lub po ostatnim .task-content
+                    const existingTaskContents = mainDiv.querySelectorAll(".task.task-content");
+                    if (existingTaskContents.length > 0) {
+                        existingTaskContents[existingTaskContents.length - 1].insertAdjacentHTML("afterend", newTaskHTML);
+                    } else {
+                        // Nagłówek jest, ale nie ma jeszcze żadnych .task-content, dodaj po nagłówku
+                        taskHeaderElement.insertAdjacentHTML("afterend", newTaskHTML);
+                    }
                 }
 
                 // Opcjonalnie: zamknij okno dodawania projektu
