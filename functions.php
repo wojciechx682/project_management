@@ -191,6 +191,10 @@
         return true;
     }
 
+    function deleteTask($connection) {
+        return true;
+    }
+
     function query($query, $fun, $values) {
 
         require "connect.php";
