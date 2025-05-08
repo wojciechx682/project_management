@@ -46,7 +46,7 @@
             </span>
             <?php
                 if (isset($_SESSION["register-error"])) {
-                    echo '<span class="error">' . $_SESSION["register-error"] . '</span>';
+                    echo '<span class="error register-error">' . $_SESSION["register-error"] . '</span>';
                     unset($_SESSION["register-error"]);
                 }
             ?>

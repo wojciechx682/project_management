@@ -140,6 +140,12 @@ span#log-in a
     text-align: center;
 }
 
+.register-error {
+    position: relative;
+    top: 10px;
+    left: 32px;
+}
+
 .success {
     color: green;
     font-weight: bold;
