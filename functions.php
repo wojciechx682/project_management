@@ -195,6 +195,15 @@
         return true;
     }
 
+    function getTotalProjects($result) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        echo $row["total_projects"];
+    }
+
+    function canUserViewProject($result) {
+        return true;
+    }
+
     function query($query, $fun, $values) {
 
         require "connect.php";

@@ -12,6 +12,18 @@
 
         </div>
 
-        <div id="result"></div>
+        <div id="result">
+            <?php
+                // Wyświetlanie komunikatów, jeśli istnieją
+                if (isset($_SESSION["error_message"])) {
+                    echo '<span class="error">' . htmlspecialchars($_SESSION["error_message"]) . '</span>';
+                    unset($_SESSION["error_message"]);
+                }
+                if (isset($_SESSION["info_message"])) {
+                    echo '<span class="info">' . htmlspecialchars($_SESSION["info_message"]) . '</span>';
+                    unset($_SESSION["info_message"]);
+                }
+            ?>
+        </div>
     </div>
 </main>
