@@ -53,8 +53,6 @@
         $project = file_get_contents("../template/project.php");
         //while ($row = $result->fetch_assoc()) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
-            //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
             $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('j F Y');
             $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('j F Y');
             echo sprintf($project, $row["id"], $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $row["team_name"]);
@@ -66,8 +64,6 @@
         $projectDetails = file_get_contents("../template/project-details.php");
         //$row = $result->fetch_assoc();
         $row = $result->fetch(PDO::FETCH_ASSOC);
-        //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
-        //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
         $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('j F Y');
         $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('j F Y');
         $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');

@@ -36,7 +36,7 @@
             }
 
             // Sprawdź, czy ID projektu z formularza zgadza się z tym z sesji
-            if ($id !== $_SESSION["selected_project_id"]) {
+            if ($id != $_SESSION["selected_project_id"]) {
                 $response["message"] = "Project ID mismatch. Suspected data tampering. Please refresh and try again.";
                     echo json_encode($response);
                         exit();
