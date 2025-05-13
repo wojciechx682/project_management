@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 09, 2025 at 02:32 PM
+-- Generation Time: Maj 13, 2025 at 10:30 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -58,7 +58,9 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `name`, `description`, `start_date`, `end_date`, `status`, `team_id`, `created_at`, `updated_at`) VALUES
-(1, 'Project Management App', 'A web-based application for project management, team collaboration, and task tracking.', '2025-02-11', '2025-05-11', 'In Progress', 1, '2025-02-12 11:21:47', '2025-05-08 12:04:32');
+(1, 'Project Management App', 'A web-based application for project management, team collaboration, and task tracking.', '2025-02-11', '2025-05-11', 'In Progress', 1, '2025-02-12 11:21:47', '2025-05-12 16:00:59'),
+(3, 'New super project', 'Lorem ipsum asd  asd asd oudoa sdas 9udoas uoa8w u0q83ur 92ioje4fouiweh f98whe f9whef9w8he', '2025-05-12', '2025-05-20', 'In Progress', 1, '2025-05-11 13:35:38', '2025-05-11 13:35:38'),
+(4, 'Boring thing', 'asd asd asd', '2025-05-22', '2025-05-25', 'Cancelled', 2, '2025-05-13 07:40:46', '2025-05-13 08:25:55');
 
 -- --------------------------------------------------------
 
@@ -96,7 +98,8 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`id`, `name`, `created_at`) VALUES
-(1, 'PM App Team', '2025-02-12 11:20:58');
+(1, 'PM App Team', '2025-02-12 11:20:58'),
+(2, 'New super team', '2025-05-13 08:19:55');
 
 -- --------------------------------------------------------
 
@@ -115,7 +118,8 @@ CREATE TABLE `team_user` (
 
 INSERT INTO `team_user` (`team_id`, `user_id`) VALUES
 (1, 1),
-(1, 2);
+(1, 2),
+(2, 4);
 
 -- --------------------------------------------------------
 
@@ -142,7 +146,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `role`, `created_at`, `updated_at`, `is_approved`) VALUES
 (1, 'Adam', 'Nowak', 'adam.nowak@wp.pl', '$2y$10$EGpTDm5p1quyhyOjH7slVePIDzuq83TTBXSUX.PLrcs.nejlQGYNu', 'Team Member', '2025-02-06 14:15:04', '2025-04-16 15:43:20', 1),
 (2, 'Jan', 'Kowalski', 'jan.kowalski@wp.pl', '$2y$10$KGFAWx5gS7QQQVhQZFPQ5u6Jm5MbqyDpcp33PO7ynJNkRb1ZhiF/K', 'Project Manager', '2025-02-06 14:15:04', '2025-04-16 15:43:24', 1),
-(3, 'Kamil', 'Wójcik ', 'kamil.wojcik@wp.pl', '$2y$10$RPZ0dqvJmrD7z3ycI2uPbO4AjL8/of.EckwXUR5rwOR8Umv63RWRi', 'Admin', '2025-02-06 14:17:14', '2025-04-16 15:43:27', 1);
+(3, 'Kamil', 'Wójcik ', 'kamil.wojcik@wp.pl', '$2y$10$RPZ0dqvJmrD7z3ycI2uPbO4AjL8/of.EckwXUR5rwOR8Umv63RWRi', 'Admin', '2025-02-06 14:17:14', '2025-04-16 15:43:27', 1),
+(4, 'Jason', 'Statham', 'jason1@wp.pl', '$2y$10$xkrNFZT7kaA9SfON1zTVSOUX13ECDzWhu1MsvFDvCkAfVr2fVZJq2', 'Project Manager', '2025-05-13 08:25:01', '2025-05-13 08:30:07', 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -206,25 +211,25 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
