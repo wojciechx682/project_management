@@ -38,9 +38,6 @@
                 </select>
             </span>
             <input type="submit" value="Register">
-            <!--<span id="remind-password">
-                <a href="#">Remind password</a>
-            </span>-->
             <span id="log-in">
                 <a href="index.php">Log in</a>
             </span>
