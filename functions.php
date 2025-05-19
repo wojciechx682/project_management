@@ -24,16 +24,20 @@
             switch ($_SESSION["role"]) {
                 case "Admin":
                     header("Location: admin/admin.php");
+                        exit();
                     break;
                 case "Project Manager":
                     header("Location: manager/manager.php");
+                        exit();
                     break;
                 case "Team Member":
                     header("Location: user/user.php");
+                        exit();
                     break;
                 default:
                     $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned.</span>';
                     header("Location: index.php");
+                        exit();
                     break;
             }
 
