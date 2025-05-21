@@ -120,7 +120,7 @@ document.getElementById("add-project-form").addEventListener("submit", function 
                     </div>
                 `;
 
-                // Dodaj nowy projekt na koniec listy
+                /*// Dodaj nowy projekt na koniec listy
                 const projectContainer = document.querySelector("#main .project");
                 const projectList = document.querySelectorAll(".project.project-content"); // Pobierz wszystkie istniejące projekty
                 const lastProject = projectList[projectList.length - 1]; // Znajdź ostatni projekt
@@ -131,6 +131,30 @@ document.getElementById("add-project-form").addEventListener("submit", function 
                 } else {
                     // Jeśli nie ma żadnych projektów, dodaj nowy na początku
                     projectContainer.insertAdjacentHTML("beforeend", newProjectHTML);
+                }*/
+
+                // Znajdź kontener, w którym przechowywane są wszystkie projekty
+                const projectsListContainer = document.querySelector(".project-list");
+
+                // Sprawdzenie, czy kontener listy projektów istnieje
+                if (!projectsListContainer) {
+                    console.error("Error: '.project-list' container not found!");
+                    resultDiv.innerHTML = "<span class='error'>UI Error: Could not find where to add the project.</span>";
+                    return; // Zakończ, jeśli nie można znaleźć kontenera
+                }
+
+                // Pobierz wszystkie istniejące projekty (elementy z danymi) z właściwego kontenera
+                const existingDataProjects = projectsListContainer.querySelectorAll(".project.project-content");
+                const lastDataProject = existingDataProjects[existingDataProjects.length - 1]; // Znajdź ostatni projekt z danymi
+
+                // Jeśli istnieją projekty z danymi, dodaj nowy poniżej ostatniego
+                if (lastDataProject) {
+                    lastDataProject.insertAdjacentHTML("afterend", newProjectHTML);
+                } else {
+                    // Jeśli nie ma żadnych projektów z danymi, dodaj nowy jako ostatnie dziecko
+                    // kontenera listy projektów. Jeśli w .project-list jest tylko nagłówek,
+                    // nowy projekt zostanie dodany po nim.
+                    projectsListContainer.insertAdjacentHTML("beforeend", newProjectHTML);
                 }
 
                 // Opcjonalnie: zamknij okno dodawania projektu
