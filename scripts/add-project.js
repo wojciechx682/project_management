@@ -100,7 +100,34 @@ document.getElementById("add-project-form").addEventListener("submit", function 
             if (data.success) {
                 resultDiv.innerHTML = "<span class='success'>Project added successfully!</span>";
 
-                // Generowanie HTML nowego wiersza
+                // HTML dla nagłówka tabeli - taki sam jak w view/manager/project-header.php
+                const projectHeaderHTML = `
+                    <div class="project">
+                        <div class="project-id">
+                            <span class="header-option">ID</span>
+                        </div>
+                        <div class="project-name">
+                            <span class="header-option">Name</span>
+                        </div>
+                        <div class="project-desc">
+                            <span class="header-option">Description</span>
+                        </div>
+                        <div class="project-start-date">
+                            <span class="header-option">Start date</span>
+                        </div>
+                        <div class="project-end-date">
+                            <span class="header-option">End date</span>
+                        </div>
+                        <div class="project-status">
+                            <span class="header-option">Status</span>
+                        </div>
+                        <div class="project-team">
+                            <span class="header-option">Team name</span>
+                        </div>
+                    </div>
+                `;
+
+                // Generowanie HTML nowego wiersza projektu
                 const newProjectHTML = `
                     <div class="project project-content">
                         <div class="project-id">${data.id}</div>
@@ -143,7 +170,7 @@ document.getElementById("add-project-form").addEventListener("submit", function 
                     return; // Zakończ, jeśli nie można znaleźć kontenera
                 }
 
-                // Pobierz wszystkie istniejące projekty (elementy z danymi) z właściwego kontenera
+                /*// Pobierz wszystkie istniejące projekty (elementy z danymi) z właściwego kontenera
                 const existingDataProjects = projectsListContainer.querySelectorAll(".project.project-content");
                 const lastDataProject = existingDataProjects[existingDataProjects.length - 1]; // Znajdź ostatni projekt z danymi
 
@@ -155,7 +182,21 @@ document.getElementById("add-project-form").addEventListener("submit", function 
                     // kontenera listy projektów. Jeśli w .project-list jest tylko nagłówek,
                     // nowy projekt zostanie dodany po nim.
                     projectsListContainer.insertAdjacentHTML("beforeend", newProjectHTML);
+                }*/
+
+                // Sprawdzenie, czy nagłówek już istnieje
+                // Nagłówek ma klasę "project", ale nie ma klasy "project-content"
+                const existingHeader = projectsListContainer.querySelector(".project:not(.project-content)");
+
+                // Jeśli nagłówek nie istnieje, dodaj go
+                if (!existingHeader) {
+                    projectsListContainer.insertAdjacentHTML("afterbegin", projectHeaderHTML);
                 }
+
+                // Dodanie nowego projektu
+                // Można uprościć logikę dodawania, zawsze dodając na końcu kontenera,
+                // jeśli nagłówek jest już na początku lub został właśnie dodany.
+                projectsListContainer.insertAdjacentHTML("beforeend", newProjectHTML);
 
                 // Opcjonalnie: zamknij okno dodawania projektu
                 closeProjectWindow();
