@@ -79,7 +79,6 @@
 
 <?php require "../template/edit-project-window.php"; ?>
 
-
 <?php require "../template/add-task-window.php"; ?>
 
 <?php require "../template/edit-task-window.php"; ?>
