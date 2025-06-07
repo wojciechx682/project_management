@@ -97,5 +97,9 @@
 
 <script src="../scripts/delete-task.js"></script>
 
+<script src="../scripts/delete-project.js"></script>
+
+<?php require "../template/delete-project-window.php"; ?>
+
 </body>
 </html>

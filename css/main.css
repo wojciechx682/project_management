@@ -1092,7 +1092,7 @@ div.task-updated-at, div.task-manage {
     box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
 }
 
-.accept-user {
+.accept-user, .delete-project {
     /*height: 310px;*/
     height: 200px;
     width: 750px;
@@ -1129,7 +1129,7 @@ div.task-updated-at, div.task-manage {
     user-select: none;
 }
 
-.accept-user > h2 {
+.accept-user > h2, .delete-project > h2 {
     margin-left: 20px;
     margin-top: 25px;
     color: #FAFAFFFF;
@@ -1153,7 +1153,7 @@ div.task-updated-at, div.task-manage {
     /*max-width: 255px;*/
 }
 
-.accept-user hr {
+.accept-user hr, .delete-project hr {
     background-color: rgba(166, 166, 166, 0.7);
     border: none;
     height: 1px;
@@ -1161,7 +1161,7 @@ div.task-updated-at, div.task-manage {
     /*max-width: 255px;*/
 }
 
-div.delivery-date, .accept-user-container {
+div.delivery-date, .accept-user-container, .delete-project-container {
     /*display: none;*/
     color: #fafaff;
     /*border: 1px ridge darkblue;*/
@@ -1171,7 +1171,7 @@ div.delivery-date, .accept-user-container {
     clear: both;
 }
 
-form.accept-user-form {
+form.accept-user-form, form.delete-project-form {
     width: 150px;
     float: left;
 }

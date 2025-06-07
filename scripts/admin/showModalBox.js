@@ -26,7 +26,7 @@ function showConfirmationModal(userId, actionType) {
     let icon = document.querySelector(".icon-cancel");
     let cancelBtn = document.querySelector(".cancel-order");
 
-    buttons = [icon, cancelBtn];
+    let buttons = [icon, cancelBtn];
     buttons.forEach(function(button) {
         button.addEventListener("click", closeRemoveBox);
     });
