@@ -6,9 +6,11 @@
 
     <div class="delete-project-container hidden">
 
-        <form class="delete-project-form" method="post">
+        <div class="delete-error-message" style="color: red; margin-bottom: 15px;"></div>
 
-            <input type="hidden" name="project-id" value="%s"> <!-- project-id -->
+        <form id="deleteForm" class="delete-project-form" method="post">
+
+            <input type="hidden" id="project-id" name="project-id" value="%s"> <!-- project-id -->
 
             <button type="submit" class="update-order-status btn-link btn-link-static">Confirm</button>
 
