@@ -29,6 +29,7 @@
                     echo $_SESSION["invalid_credentials"];
                     unset($_SESSION["invalid_credentials"]);
                 }
+
                 if (isset($_SESSION["register-successful"])) {
                     echo '<span class="success">' . $_SESSION["register-successful"] . '</span>';
                     unset($_SESSION["register-successful"]);
@@ -38,6 +39,4 @@
         </form>
     </div>
 </body>
-
-
 </html>

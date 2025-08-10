@@ -70,7 +70,7 @@ form#register-form select
     padding: 8px;
     box-sizing: border-box;
     outline: none;
-    margin-left: 27px;
+    margin-left: 35px;
 }
 
 form#login-form input:hover,
@@ -92,7 +92,6 @@ form#register-form label {
     float: left;
     width: 50px;
     cursor: pointer;
-    margin-left: 8px;
 }
 
 form#register-form label {
@@ -1389,14 +1388,3 @@ div.task-option-delete:hover {
     float: left;
     margin-left: 5px;
 }
-
-/* ----------------------------------------- */
-
-/*
-form#login-form {
-    border: 1px solid black;
-}
-
-span.login-row {
-    border: 1px solid #1935bc;
-}*/
