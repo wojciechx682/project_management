@@ -42,7 +42,21 @@
             <label for="project-team-id" class="team-details-name-left">Team</label>
             <select id="project-team-id" name="team_id" class="team-details-name" required>
                 <?php
-                    query("SELECT team.id, team.name FROM team", "createTeamSelectList", []);
+                    //query("SELECT team.id, team.name FROM team", "createTeamSelectList", []);
+                ?>
+                <?php
+                    // Zakładamy, że ID zalogowanego użytkownika jest dostępne w $_SESSION['user_id']
+                    // Zmień 'user_id' na właściwą nazwę zmiennej sesji, np. 'id' jeśli tak masz
+                    $loggedInUserId = $_SESSION['id'];
+
+                    // Zapytanie wybierające tylko te zespoły, do których należy zalogowany Project Manager
+                    query("
+                        SELECT t.id, t.name 
+                        FROM team t
+                        JOIN team_user tu ON t.id = tu.team_id
+                        JOIN user u ON tu.user_id = u.id
+                        WHERE u.id = ? AND u.role = 'Project Manager'
+                        ", "createTeamSelectList", [$loggedInUserId]);
                 ?>
             </select>
         </div>

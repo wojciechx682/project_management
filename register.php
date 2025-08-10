@@ -38,15 +38,12 @@
                 </select>
             </span>
             <input type="submit" value="Register">
-            <!--<span id="remind-password">
-                <a href="#">Remind password</a>
-            </span>-->
             <span id="log-in">
                 <a href="index.php">Log in</a>
             </span>
             <?php
                 if (isset($_SESSION["register-error"])) {
-                    echo '<span class="error">' . $_SESSION["register-error"] . '</span>';
+                    echo '<span class="error register-error">' . $_SESSION["register-error"] . '</span>';
                     unset($_SESSION["register-error"]);
                 }
             ?>
