@@ -7,13 +7,6 @@
     }
 ?>
 
-<?php
-// Na początku pliku (po otwarciu sesji)
-if (isset($_GET['delete_success'])) {
-    echo '<div class="success-message">Project deleted successfully!</div>';
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 

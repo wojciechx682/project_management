@@ -31,7 +31,7 @@
 
         $_SESSION["valid"] = true; // validation flag;
 
-        $maxStringLength = 50;
+        $maxStringLength = 255;
 
         $firstName = ucfirst(strtolower(trim($firstName, " ")));
         $nameRegex = '/^[A-ZŁŚŻ]{1}[a-ząęółśżźćń]+$/u';
@@ -39,7 +39,7 @@
             $_SESSION["valid"] = false;
             $_SESSION["register-error"] = "The name can only consist of letters of the alphabet.";
         }
-        if (strlen($firstName)<3 || strlen($firstName)>$maxStringLength) {
+        if (strlen($firstName)<3 || strlen($firstName)>27) {
             $_SESSION["valid"] = false;
             $_SESSION["register-error"] = "Please provide the correct name";
         }
@@ -72,12 +72,12 @@
         }
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        query("SELECT user.id FROM user WHERE email=?", "registerVerifyEmail", $emailSanitized);
+        query("SELECT user.id FROM user WHERE email='%s'", "registerVerifyEmail", $emailSanitized);
         // will set the $_SESSION["valid"] variable to false if such an email already exists (i.e. if it RETURNS records -> $result);
 
         if ($_SESSION["valid"]) {
 
-            $user = [$firstName, $lastName, $emailSanitized, $passwordHash, $role];
+            $user = [$firstName, $lastName, $email, $passwordHash, $role];
 
             $insertSuccessful = query("INSERT INTO user (id, first_name, last_name, email, password, role, created_at, updated_at, is_approved) VALUES (NULL, ?, ?, ?, ?, ?, NOW(), NOW(), 0)", "register", $user);
 

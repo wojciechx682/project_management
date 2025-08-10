@@ -79,17 +79,10 @@ document.getElementById("edit-project-form").addEventListener("submit", function
     const cleanEndDate = DOMPurify.sanitize(endDate);
     const cleanTeamId = DOMPurify.sanitize(teamId);
 
-    formData.set('title', cleanTitle);
-    formData.set('description', cleanDescription);
-    formData.set('status', cleanStatus);
-    formData.set('start_date', cleanStartDate);
-    formData.set('end_date', cleanEndDate);
-    formData.set('team_id', cleanTeamId);
-
     // Wysłanie danych do serwera
     fetch("updateProject.php", {
         method: "POST",
-        body: formData // Teraz formData zawiera zaktualizowane, oczyszczone wartości
+        body: formData
     })
         .then(response => response.json())
         .then(data => {

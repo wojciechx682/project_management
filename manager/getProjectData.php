@@ -15,25 +15,6 @@
                 exit();
         }
 
-        // === WERYFIKACJA UPRAWNIEŃ DO ODZCZYTU DANYCH PROJEKTU ===
-        $result = query("
-                        SELECT p.id
-                        FROM user u
-                        JOIN team_user tu ON u.id = tu.user_id
-                        JOIN team t ON tu.team_id = t.id
-                        JOIN project p ON t.id = p.team_id
-                        WHERE u.id = ?  
-                        AND p.id = ? 
-                        AND u.role = 'Project Manager'
-                    ",
-            "canUserViewProject",
-            [$_SESSION["id"], $projectId]);
-
-        if (!$result) {
-            echo json_encode(["success" => false, "message" => "Access Denied: You do not have permission to view this project's data."]);
-                exit();
-        }
-
         // Pobierz dane projektu z bazy danych
         $result = query("SELECT project.*, team.name AS team_name FROM project JOIN team ON project.team_id = team.id WHERE project.id=?", "getProjectForEdit", $projectId);
 

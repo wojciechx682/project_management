@@ -2,6 +2,7 @@
     <div class="project-id">%s</div>
     <div class="project-name">
         <form action="project-details.php" method="post">
+
             <input type="hidden" name="project-id" value="%s">
             <button class="submit-order-form" type="submit">
                 %s

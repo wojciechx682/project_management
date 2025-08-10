@@ -28,20 +28,6 @@
             $endDate = $_POST["end_date"];
             $teamId = filter_var($_POST["team_id"], FILTER_VALIDATE_INT);
 
-            // === KLUCZOWA WERYFIKACJA ===
-            if ($id === false) {
-                $response["message"] = "Invalid Project ID format submitted.";
-                    echo json_encode($response);
-                        exit();
-            }
-
-            // Sprawdź, czy ID projektu z formularza zgadza się z tym z sesji
-            if ($id != $_SESSION["selected_project_id"]) {
-                $response["message"] = "Project ID mismatch. Suspected data tampering. Please refresh and try again.";
-                    echo json_encode($response);
-                        exit();
-            }
-
             if(!in_array($status, $validStatuses)) {
                 $response["message"] = "Invalid status";
                     echo json_encode($response);
@@ -57,7 +43,7 @@
             }
 
             // Aktualizacja projektu w bazie danych
-            $updateSuccessful = query("UPDATE project SET name=?, description=?, start_date=?, end_date=?, status=?, team_id=?, updated_at = NOW() WHERE id=?","updateProject", [$title, $description, $startDate, $endDate, $statusFormatted, $teamId, $_SESSION["selected_project_id"]]
+            $updateSuccessful = query("UPDATE project SET name=?, description=?, start_date=?, end_date=?, status=?, team_id=?, updated_at = NOW() WHERE id=?","updateProject", [$title, $description, $startDate, $endDate, $statusFormatted, $teamId, $id]
             );
 
             if($updateSuccessful) {

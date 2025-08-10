@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 13, 2025 at 10:30 AM
--- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.2.12
+-- Czas generowania: 16 Kwi 2025, 17:43
+-- Wersja serwera: 10.4.27-MariaDB
+-- Wersja PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `project_management`
+-- Baza danych: `project_management`
 --
 
 -- --------------------------------------------------------
@@ -54,13 +54,11 @@ CREATE TABLE `project` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
--- Dumping data for table `project`
+-- Zrzut danych tabeli `project`
 --
 
 INSERT INTO `project` (`id`, `name`, `description`, `start_date`, `end_date`, `status`, `team_id`, `created_at`, `updated_at`) VALUES
-(1, 'Project Management App', 'A web-based application for project management, team collaboration, and task tracking.', '2025-02-11', '2025-05-11', 'In Progress', 1, '2025-02-12 11:21:47', '2025-05-12 16:00:59'),
-(3, 'New super project', 'Lorem ipsum asd  asd asd oudoa sdas 9udoas uoa8w u0q83ur 92ioje4fouiweh f98whe f9whef9w8he', '2025-05-12', '2025-05-20', 'In Progress', 1, '2025-05-11 13:35:38', '2025-05-11 13:35:38'),
-(4, 'Boring thing', 'asd asd asd', '2025-05-22', '2025-05-25', 'Cancelled', 2, '2025-05-13 07:40:46', '2025-05-13 08:25:55');
+(1, 'Project Management App', 'A web-based application for project management, team collaboration, and task tracking.', '2025-02-11', '2025-05-11', 'in_progress', 1, '2025-02-12 11:21:47', '2025-02-12 11:21:47');
 
 -- --------------------------------------------------------
 
@@ -81,6 +79,14 @@ CREATE TABLE `task` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
+--
+-- Zrzut danych tabeli `task`
+--
+
+INSERT INTO `task` (`id`, `title`, `description`, `priority`, `status`, `due_date`, `project_id`, `assigned_user_id`, `created_at`, `updated_at`) VALUES
+(1, 'Task 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vestibulum ipsum arcu. Aenean imperdiet, quam sit amet eleifend varius, ligula nulla blandit lorem, at posuere augue ipsum varius ligula.', 'Low', 'To do', '2025-02-20', 1, 1, '2025-02-13 13:31:22', '2025-02-13 13:31:22'),
+(2, 'Task 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vestibulum ipsum arcu. Aenean imperdiet, quam sit amet eleifend varius, ligula nulla blandit lorem, at posuere augue ipsum varius ligula.', 'Medium', 'To do', '2025-02-20', 1, 1, '2025-02-13 13:31:22', '2025-02-13 13:31:22');
+
 -- --------------------------------------------------------
 
 --
@@ -94,12 +100,11 @@ CREATE TABLE `team` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
--- Dumping data for table `team`
+-- Zrzut danych tabeli `team`
 --
 
 INSERT INTO `team` (`id`, `name`, `created_at`) VALUES
-(1, 'PM App Team', '2025-02-12 11:20:58'),
-(2, 'New super team', '2025-05-13 08:19:55');
+(1, 'PM App Team', '2025-02-12 11:20:58');
 
 -- --------------------------------------------------------
 
@@ -111,15 +116,6 @@ CREATE TABLE `team_user` (
   `team_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Dumping data for table `team_user`
---
-
-INSERT INTO `team_user` (`team_id`, `user_id`) VALUES
-(1, 1),
-(1, 2),
-(2, 4);
 
 -- --------------------------------------------------------
 
@@ -140,14 +136,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
--- Dumping data for table `user`
+-- Zrzut danych tabeli `user`
 --
 
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `role`, `created_at`, `updated_at`, `is_approved`) VALUES
 (1, 'Adam', 'Nowak', 'adam.nowak@wp.pl', '$2y$10$EGpTDm5p1quyhyOjH7slVePIDzuq83TTBXSUX.PLrcs.nejlQGYNu', 'Team Member', '2025-02-06 14:15:04', '2025-04-16 15:43:20', 1),
 (2, 'Jan', 'Kowalski', 'jan.kowalski@wp.pl', '$2y$10$KGFAWx5gS7QQQVhQZFPQ5u6Jm5MbqyDpcp33PO7ynJNkRb1ZhiF/K', 'Project Manager', '2025-02-06 14:15:04', '2025-04-16 15:43:24', 1),
-(3, 'Kamil', 'Wójcik ', 'kamil.wojcik@wp.pl', '$2y$10$RPZ0dqvJmrD7z3ycI2uPbO4AjL8/of.EckwXUR5rwOR8Umv63RWRi', 'Admin', '2025-02-06 14:17:14', '2025-04-16 15:43:27', 1),
-(4, 'Jason', 'Statham', 'jason1@wp.pl', '$2y$10$xkrNFZT7kaA9SfON1zTVSOUX13ECDzWhu1MsvFDvCkAfVr2fVZJq2', 'Project Manager', '2025-05-13 08:25:01', '2025-05-13 08:30:07', 1);
+(3, 'Kamil', 'Wójcik ', 'kamil.wojcik@wp.pl', '$2y$10$RPZ0dqvJmrD7z3ycI2uPbO4AjL8/of.EckwXUR5rwOR8Umv63RWRi', 'Admin', '2025-02-06 14:17:14', '2025-04-16 15:43:27', 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -198,65 +193,65 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT dla zrzuconych tabel
 --
 
 --
--- AUTO_INCREMENT for table `comment`
+-- AUTO_INCREMENT dla tabeli `comment`
 --
 ALTER TABLE `comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `project`
+-- AUTO_INCREMENT dla tabeli `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `task`
+-- AUTO_INCREMENT dla tabeli `task`
 --
 ALTER TABLE `task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `team`
---
-ALTER TABLE `team`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT dla tabeli `team`
+--
+ALTER TABLE `team`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT dla tabeli `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Ograniczenia dla zrzutów tabel
 --
 
 --
--- Constraints for table `comment`
+-- Ograniczenia dla tabeli `comment`
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `task` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `project`
+-- Ograniczenia dla tabeli `project`
 --
 ALTER TABLE `project`
   ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `task`
+-- Ograniczenia dla tabeli `task`
 --
 ALTER TABLE `task`
   ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`assigned_user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `team_user`
+-- Ograniczenia dla tabeli `team_user`
 --
 ALTER TABLE `team_user`
   ADD CONSTRAINT `team_user_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`) ON DELETE CASCADE,

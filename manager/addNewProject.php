@@ -55,7 +55,7 @@
                 }
 
                 $project = [$title, $description, $startDate, $endDate, $statusFormatted, $teamId];
-                $insertSuccessful = query("INSERT INTO project (id, name, description, start_date, end_date, status, team_id, created_at, updated_at) VALUES (NULL, ?, ?, ?, ?, ?, ?, NOW(), NOW())", "addNewProject", $project); // $insertSuccessful == ID of new added project
+                $insertSuccessful = query("INSERT INTO project (id, name, description, start_date, end_date, status, team_id, created_at, updated_at) VALUES (NULL, ?, ?, ?, ?, ?, ?, NOW(), NOW())", "addNewProject", $project);
 
                 if ($insertSuccessful) {
 
