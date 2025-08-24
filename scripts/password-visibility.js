@@ -6,6 +6,7 @@
 
     if (!pwd || !toggle || !icon) return;
 
+    // ---- funkcja pokaz/ukryj ikonki oka ----
     function updateButtonVisibility() {
         const hasValue = pwd.value.length > 0;
         toggle.hidden = !hasValue;
@@ -35,5 +36,20 @@
 
     // inicjalizacja po załadowaniu (np. gdy przeglądarka przywróci wartość)
     updateButtonVisibility();
+
+    // ---- obsługa Caps Lock ----
+    function checkCaps(e) {
+        const caps = e.getModifierState && e.getModifierState('CapsLock');
+        if (caps) {
+            pwd.setCustomValidity('Caps Lock is on');
+            // pokaż natychmiast dymek
+            pwd.reportValidity();
+        } else {
+            pwd.setCustomValidity('');
+        }
+    }
+
+    pwd.addEventListener('keydown', checkCaps);
+    pwd.addEventListener('keyup', checkCaps);
 })();
 
