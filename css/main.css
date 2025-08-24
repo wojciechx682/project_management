@@ -1389,3 +1389,47 @@ div.task-option-delete:hover {
     float: left;
     margin-left: 5px;
 }
+
+/* wrapper, żeby mieć punkt odniesienia dla absolutnie pozycjonowanego przycisku */
+.password-field {
+    position: relative;
+    display: inline-block;
+    /* przejmujemy left margin z inputa (bo absolutny przycisk ma być wewnątrz) */
+    /*margin-left: 27px;*/
+}
+
+/* input w wrapperze nie potrzebuje już margin-left (miał go globalnie) */
+.password-field input[type="password"],
+.password-field input[type="text"] {
+    margin-left: 0;
+    padding-right: 40px; /* miejsce na ikonkę po prawej */
+}
+
+/* sam przycisk-ikonka oka */
+.password-field .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    line-height: 1;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.password-field .toggle-password:hover {
+    opacity: 1;
+}
+
+.password-field .toggle-password:focus-visible {
+    outline: 2px solid #2684ff;
+    outline-offset: 2px;
+}
+
+/* (opcjonalnie) żeby hidden zawsze znikał z layoutu, choć domyślnie tak działa */
+.password-field .toggle-password[hidden] {
+    display: none;
+}

@@ -1,8 +1,10 @@
 
-.icon-home:before { content: '\e800'; } /* '' */
-.icon-th-large:before { content: '\e801'; } /* '' */
-.icon-adult:before { content: '\e802'; } /* '' */
-.icon-down-open:before { content: '\e803'; } /* '' */
-.icon-up-open:before { content: '\e804'; } /* '' */
-.icon-cancel:before { content: '\e805'; } /* '' */
+.icon-eye:before { content: '\e800'; } /* '' */
+.icon-eye-off:before { content: '\e801'; } /* '' */
+.icon-home:before { content: '\e802'; } /* '' */
+.icon-th-large:before { content: '\e803'; } /* '' */
+.icon-adult:before { content: '\e804'; } /* '' */
+.icon-down-open:before { content: '\e805'; } /* '' */
+.icon-up-open:before { content: '\e806'; } /* '' */
+.icon-cancel:before { content: '\e807'; } /* '' */
 .icon-tasks:before { content: '\f0ae'; } /* '' */
