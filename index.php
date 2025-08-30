@@ -11,7 +11,15 @@
         <form id="login-form" method="post" action="login.php">
             <span class="login-row">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    inputmode="email"
+                    autocomplete="username"
+                    autofocus
+                >
             </span>
             <!--<span class="login-row">
                 <label for="password">Password</label>
@@ -20,7 +28,7 @@
             <span class="login-row">
                 <label for="password">Password</label>
 
-                    <!-- nowy wrapper: pozycjonuje przycisk wewnątrz inputa -->
+                <!-- nowy wrapper: pozycjonuje przycisk wewnątrz inputa -->
                 <span class="password-field">
                     <input
                         type="password"
@@ -37,7 +45,7 @@
                         aria-label="Pokaż hasło"
                         aria-pressed="false"
                         hidden
-                        title="Pokaż/ukryj hasło"
+                        title="Show/hide password"
                     >
                     <i class="icon-eye" aria-hidden="true"></i>
                     </button>
