@@ -11,7 +11,7 @@
         <form id="register-form" method="post" action="register-user.php">
             <span class="register-row">
                 <label for="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" required>
+                <input type="text" id="firstName" name="firstName" required autofocus>
             </span>
             <span class="register-row">
                 <label for="lastName">Last Name</label>
@@ -34,7 +34,6 @@
                 <select id="role" name="role" required>
                     <option value="team_member">Team Member</option>
                     <option value="project_manager">Project Manager</option>
-                    <option value="administrator">Administrator</option>
                 </select>
             </span>
             <input type="submit" value="Register">

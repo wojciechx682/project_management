@@ -23,9 +23,6 @@
             case "project_manager":
                 $role = "Project Manager";
                 break;
-            case "administrator":
-                $role = "Administrator";
-                break;
         }
 
 

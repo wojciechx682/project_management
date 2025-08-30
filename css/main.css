@@ -32,8 +32,7 @@ span.register-row
     margin: 18px 0 30px 0;
     line-height: 215%;
 }
-span.register-row
-{
+span.register-row {
     width: 401px;
 }
 
@@ -1433,3 +1432,4 @@ div.task-option-delete:hover {
 .password-field .toggle-password[hidden] {
     display: none;
 }
+
