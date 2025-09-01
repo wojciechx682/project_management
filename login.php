@@ -2,12 +2,31 @@
 
     require_once "start-session.php";
 
-    if (!isset($_POST["email"]) || !isset($_POST["password"])) {
+function verify_recaptcha($captchaToken) {
+    if (!$captchaToken) return false;
+
+    $response = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.RECAPTCHA_SECRET_KEY.'&response='.$_POST['g-recaptcha-response']));
+
+    if (!$response->success) {
+        return false;
+    }
+
+    return true;
+}
+
+if (!isset($_POST["email"]) || !isset($_POST["password"])) {
         header('Location: index.php');
             exit();
     } else {
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            $captchaToken = $_POST['g-recaptcha-response'];
+            if (!verify_recaptcha($captchaToken)) {
+                $_SESSION["invalid_credentials"] = '<span class="error">reCaptcha verification failed</span>';
+                header('Location: index.php');
+                    exit();
+            }
 
             if (isset($_POST["email"]) && isset($_POST["password"])) {
 

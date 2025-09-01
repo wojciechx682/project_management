@@ -51,7 +51,14 @@
                     </button>
                 </span>
             </span>
+
+            <div class="g-recaptcha"
+                 data-sitekey="<?= htmlspecialchars(RECAPTCHA_SITE_KEY, ENT_QUOTES) ?>">
+            </div>
+
             <input type="submit" value="Log in">
+
+
             <span id="remind-password">
                 <a href="#">Remind password</a>
             </span>
@@ -73,6 +80,7 @@
         </form>
     </div>
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="scripts/password-visibility.js"></script>
 
 </body>
