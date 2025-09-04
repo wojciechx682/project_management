@@ -50,6 +50,11 @@ form#register-form {
     padding-top: 65px;
 }
 
+form#login-form {
+    padding-top: 0;
+}
+
+
 form#register-form {
     top: 130px;
     left: 215px;
@@ -1435,6 +1440,6 @@ div.task-option-delete:hover {
 
 .g-recaptcha {
     margin-left: 14px;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
 }
 

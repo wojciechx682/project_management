@@ -27,7 +27,6 @@
             </span>-->
             <span class="login-row">
                 <label for="password">Password</label>
-
                 <!-- nowy wrapper: pozycjonuje przycisk wewnątrz inputa -->
                 <span class="password-field">
                     <input
