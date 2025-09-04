@@ -1300,10 +1300,74 @@ span#role {
 
 div#projects {
     border: 2px solid #d0d0d0;
-    width: 268px;
-    height: 220px;
+    width: 375px;
+    height: 230px;
     border-radius: 8px;
-    padding: 10px;
+   /* padding: 10px;*/
+}
+
+div#projects-left {
+    float: left;
+    width: 120px;              /* dowolna stała szerokość kolumny */
+    height: 230px;
+    /*border: 1px solid #d0d0d0;*/
+    position: relative;        /* KLUCZ: rodzic dla absolutnego centrowania */
+}
+
+/* ikona wyśrodkowana w pionie i poziomie */
+div#projects-left i.icon-th-large {
+    position: absolute;        /* KLUCZ */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 52px;
+    line-height: 1;
+    transition: color .3s ease;
+}
+div#projects-left i.icon-th-large:hover {
+    color: #505050;
+    cursor: pointer;
+}
+
+/* prawa część (tekst) */
+div#projects-right {
+    padding-left: 10px;
+    padding-top: 10px;
+    float: left;
+    height: 228px;
+    /*border: 1px solid #d0d0d0;*/
+    border-left: 2px solid #d0d0d0;
+    width: calc(100% - 120px - 2px); /* szerokość całości - lewa kolumna - jej border */
+}
+
+/* porządek po float’ach (zamiast <div style="clear: both;">) */
+div#projects::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.tile-title {
+    font-weight: bold;
+    font-size: 1.17em;
+    margin-bottom: 8px;
+}
+
+.tile-title a {
+    text-decoration: none;
+    color: black;
+    transition: color .3s ease;
+}
+
+.tile-title a:hover {
+    text-decoration: underline;
+    color: #505050;
+    cursor: pointer;
+}
+
+.projects-info {
+    display: block;
+    margin-bottom: 8px;
 }
 
 div.user-action-button:hover,

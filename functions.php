@@ -198,7 +198,27 @@
         return true;
     }
 
+    function displayNumberOfProjects($result) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $numberOfProjects = "";
+        if ($row["numberOfProjects"] >= 2) {
+            $numberOfProjects = "Projects";
+        } else {
+            $numberOfProjects = "Project";
+        }
+        echo '<span class="projects-info">'.$row["numberOfProjects"]." ".$numberOfProjects.'</span>';
+    }
 
+    function displayNumberOfTasks($result) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $numberOfTasks = "";
+        if ($row["numberOfTasks"] >= 2) {
+            $numberOfTasks = "Tasks";
+        } else {
+            $numberOfTasks = "Task";
+        }
+        echo '<span class="projects-info">'.$row["numberOfTasks"]." ".$numberOfTasks.'</span>';
+    }
 
     function query($query, $fun, $values) {
 
