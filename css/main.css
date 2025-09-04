@@ -1433,3 +1433,8 @@ div.task-option-delete:hover {
     display: none;
 }
 
+.g-recaptcha {
+    margin-left: 14px;
+    margin-bottom: 8px;
+}
+
