@@ -1,6 +1,6 @@
 <?php
 
-    function log_in($result) {
+    function logIn($result) {
 
         unset($_SESSION["invalid_credentials"]);
 
@@ -39,8 +39,8 @@
 
         } elseif (!$row["is_approved"]) {
             $_SESSION["invalid_credentials"] = '<span class="error">Your account is awaiting administrator approval</span>';
-                header('Location: index.php');
-                    exit();
+            header('Location: index.php');
+            exit();
         } else {
             $_SESSION["invalid_credentials"] = '<span class="error">Incorrect email or password</span>';
             header('Location: index.php');
@@ -195,6 +195,19 @@
     }
 
     function deleteTask($connection) {
+        return true;
+    }
+
+    function verifyRecaptcha($captchaToken) {
+
+        if (!$captchaToken) return false;
+
+        $response = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.RECAPTCHA_SECRET_KEY.'&response='.$_POST['g-recaptcha-response']));
+
+        if (!$response->success) {
+            return false;
+        }
+
         return true;
     }
 

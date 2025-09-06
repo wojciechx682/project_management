@@ -10,6 +10,10 @@ body {
     margin: 0;*/
     margin: 0;
     overflow: scroll;
+
+    background-image: url("../assets/img/background.png");
+    height: 100vh;
+    background-size: cover;
 }
 
 #login {
@@ -125,6 +129,11 @@ span#remind-password, span#register, span#log-in {
     text-align: center;
 }
 
+span#remind-password a:hover, span#register a:hover, span#log-in a:hover {
+    color: royalblue !important;
+
+}
+
 span#log-in {
     position: relative;
     left: 30px;
@@ -143,6 +152,10 @@ span#log-in a
     display: block;
     margin-top: 15px;
     text-align: center;
+}
+
+.register-success {
+    margin-top: 5px !important;
 }
 
 .success {

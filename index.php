@@ -64,7 +64,7 @@
                 }
 
                 if (isset($_SESSION["register-successful"])) {
-                    echo '<span class="success">' . $_SESSION["register-successful"] . '</span>';
+                    echo '<span class="register-success success">' . $_SESSION["register-successful"] . '</span>';
                     unset($_SESSION["register-successful"]);
                 }
             ?>
