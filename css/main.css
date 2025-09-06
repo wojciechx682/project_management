@@ -11,9 +11,9 @@ body {
     margin: 0;
     overflow: scroll;
 
-    background-image: url("../assets/img/background.png");
+    /*background-image: url("../assets/img/background.png");
     height: 100vh;
-    background-size: cover;
+    background-size: cover;*/
 }
 
 #login {
@@ -1317,6 +1317,7 @@ div#projects {
     height: 230px;
     border-radius: 8px;
    /* padding: 10px;*/
+    background-color: #f5f5f5;
 }
 
 div#projects-left {
@@ -1327,6 +1328,9 @@ div#projects-left {
     position: relative;        /* KLUCZ: rodzic dla absolutnego centrowania */
 }
 
+div#projects-left a {
+    color: black;
+}
 /* ikona wyśrodkowana w pionie i poziomie */
 div#projects-left i.icon-th-large {
     position: absolute;        /* KLUCZ */

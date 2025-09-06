@@ -3,7 +3,9 @@
 
     <div id="projects">
         <div id="projects-left">
-            <i class="icon-th-large"></i>
+            <a href="projects.php">
+                <i class="icon-th-large"></i>
+            </a>
         </div>
         <div id="projects-right">
             <div class="tile-title">
