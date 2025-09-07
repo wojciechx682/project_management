@@ -28,6 +28,25 @@ body {
     background-color: #f5f5f5;
 }
 
+div#register {
+    width: 500px;
+    /*height: 620px;*/
+    height: 715px;
+    border: 1px solid #939393;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f5f5f5;
+}
+
+
+div#register span.error {
+    position: relative;
+    left: 30px;
+}
+
 span.login-row,
 span.register-row
 {
@@ -1561,5 +1580,9 @@ div.task-option-delete:hover {
 .g-recaptcha {
     margin-left: 14px;
     margin-bottom: 20px;
+}
+
+form#register-form .g-recaptcha {
+    margin-left: 44px;
 }
 

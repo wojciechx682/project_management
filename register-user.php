@@ -25,10 +25,15 @@
                 break;
         }
 
-
         $_SESSION["valid"] = true; // validation flag;
 
         $maxStringLength = 255;
+
+        $captchaToken = $_POST["g-recaptcha-response"];
+        if (!verifyRecaptcha($captchaToken)) {
+            $_SESSION["valid"] = false;
+            $_SESSION["register-error"] = 'reCaptcha verification failed';
+        }
 
         $firstName = ucfirst(strtolower(trim($firstName, " ")));
         $nameRegex = '/^[A-ZŁŚŻ]{1}[a-ząęółśżźćń]+$/u';
@@ -69,7 +74,7 @@
         }
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        query("SELECT user.id FROM user WHERE email='%s'", "registerVerifyEmail", $emailSanitized);
+        query("SELECT user.id FROM user WHERE email=?", "registerVerifyEmail", $emailSanitized);
         // will set the $_SESSION["valid"] variable to false if such an email already exists (i.e. if it RETURNS records -> $result);
 
         if ($_SESSION["valid"]) {
@@ -80,19 +85,19 @@
 
             if ($insertSuccessful) {
                 header('Location: index.php'); // $_SESSION["register-successful"] = "...";
-                    exit();
+                exit();
             } else { // failed to add user
                 $_SESSION["register-error"] = "An error occurred. Could not add new user";
-                    header('Location: register.php');
-                        exit();
-            }
+                header('Location: register.php');
+                exit();
+        }
 
         } else {
             header('Location: register.php');
-                exit();
+            exit();
         }
 
     } else {
         header('Location: index.php');
-            exit();
+        exit();
     }

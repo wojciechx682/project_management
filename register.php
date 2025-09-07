@@ -7,7 +7,7 @@
 <?php require "view/head.php"; ?>
 
 <body>
-    <div id="login">
+    <div id="register">
         <form id="register-form" method="post" action="register-user.php">
             <span class="register-row">
                 <label for="firstName">First Name</label>
@@ -36,6 +36,11 @@
                     <option value="project_manager">Project Manager</option>
                 </select>
             </span>
+
+            <div class="g-recaptcha"
+                 data-sitekey="<?= htmlspecialchars(RECAPTCHA_SITE_KEY, ENT_QUOTES) ?>">
+            </div>
+
             <input type="submit" value="Register">
             <!--<span id="remind-password">
                 <a href="#">Remind password</a>
@@ -51,5 +56,8 @@
             ?>
         </form>
     </div>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </body>
 </html>
