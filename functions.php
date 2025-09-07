@@ -262,6 +262,13 @@
                 }
             }
         } catch (Exception $e) {
+            // PROD
+            //error_log('Database error: '.$e->getMessage());
+            //echo "<span style='color: red;'>A server error occurred. Please try again later</span>";
+            //return false;
+            // DEV
+            error_log('Database error: ' . $e->getMessage());
+            echo "<span style='color: red;'>An exception occurred in the database: {$e->getMessage()}<br>File: {$e->getFile()}<br>Line: {$e->getLine()}</span>";
             return false;
         }
     }

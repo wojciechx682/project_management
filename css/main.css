@@ -130,8 +130,47 @@ span#remind-password, span#register, span#log-in {
 }
 
 span#remind-password a:hover, span#register a:hover, span#log-in a:hover {
-    color: royalblue !important;
+    color: #5478c0 !important;
+    cursor: pointer;
+}
 
+span#remind-password a,
+span#register a,
+span#log-in a {
+    position: relative;
+    text-decoration: none;
+}
+
+span#remind-password a::after,
+span#register a::after,
+span#log-in a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: #5478c0;
+    transition: width 0s ease;
+}
+
+span#remind-password a:hover::after,
+span#register a:hover::after,
+span#log-in a:hover::after {
+    width: 100%;
+}
+
+span#remind-password a,
+span#register a,
+span#log-in a {
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+
+span#remind-password a:hover,
+span#register a:hover,
+span#log-in a:hover {
+    transform: scale(1.03);
 }
 
 span#log-in {
