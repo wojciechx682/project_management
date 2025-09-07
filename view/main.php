@@ -12,9 +12,9 @@
                 <a href="projects.php">Projects</a>
             </div>
             <?php
-                query("SELECT COUNT(*) AS numberOfProjects FROM project", "displayNumberOfProjects", []);
+                query("SELECT COUNT(*) AS numberOfProjects FROM project JOIN team_user ON team_user.team_id = project.team_id WHERE team_user.user_id = ?", "displayNumberOfProjects", [$_SESSION["id"]]);
 
-                query("SELECT COUNT(*) AS numberOfTasks FROM task", "displayNumberOfTasks", []);
+                query("SELECT COUNT(*) AS numberOfTasks FROM task JOIN project ON project.id = task.project_id JOIN team_user ON team_user.team_id = project.team_id WHERE team_user.user_id = ?", "displayNumberOfTasks", [$_SESSION["id"]]);
             ?>
         </div>
     </div>
