@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 16 Kwi 2025, 17:43
--- Wersja serwera: 10.4.27-MariaDB
--- Wersja PHP: 8.2.0
+-- Czas generowania: 08 Wrz 2025, 14:22
+-- Wersja serwera: 10.4.21-MariaDB
+-- Wersja PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `comment` (
   `id` int(11) NOT NULL,
   `task_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `content` text NOT NULL,
+  `content` text COLLATE utf8_polish_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
@@ -43,11 +43,11 @@ CREATE TABLE `comment` (
 
 CREATE TABLE `project` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+  `description` text COLLATE utf8_polish_ci DEFAULT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `status` varchar(50) NOT NULL,
+  `status` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `team_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -58,7 +58,8 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `name`, `description`, `start_date`, `end_date`, `status`, `team_id`, `created_at`, `updated_at`) VALUES
-(1, 'Project Management App', 'A web-based application for project management, team collaboration, and task tracking.', '2025-02-11', '2025-05-11', 'in_progress', 1, '2025-02-12 11:21:47', '2025-02-12 11:21:47');
+(1, 'Project Management App', 'A web-based application for project management, team collaboration, and task tracking.', '2025-02-11', '2025-05-11', 'in_progress', 1, '2025-02-12 11:21:47', '2025-02-12 11:21:47'),
+(3, 'New Project', 'asd asd asd', '2025-09-18', '2025-09-30', 'Planned', 1, '2025-09-08 12:21:39', '2025-09-08 12:21:39');
 
 -- --------------------------------------------------------
 
@@ -68,10 +69,10 @@ INSERT INTO `project` (`id`, `name`, `description`, `start_date`, `end_date`, `s
 
 CREATE TABLE `task` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `priority` varchar(50) NOT NULL,
-  `status` varchar(50) NOT NULL,
+  `title` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+  `description` text COLLATE utf8_polish_ci DEFAULT NULL,
+  `priority` varchar(50) COLLATE utf8_polish_ci NOT NULL,
+  `status` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `due_date` date NOT NULL,
   `project_id` int(11) NOT NULL,
   `assigned_user_id` int(11) DEFAULT NULL,
@@ -95,7 +96,7 @@ INSERT INTO `task` (`id`, `title`, `description`, `priority`, `status`, `due_dat
 
 CREATE TABLE `team` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `name` varchar(100) COLLATE utf8_polish_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
@@ -117,6 +118,13 @@ CREATE TABLE `team_user` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
+--
+-- Zrzut danych tabeli `team_user`
+--
+
+INSERT INTO `team_user` (`team_id`, `user_id`) VALUES
+(1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -125,11 +133,11 @@ CREATE TABLE `team_user` (
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(50) NOT NULL,
+  `first_name` varchar(50) COLLATE utf8_polish_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8_polish_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_polish_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+  `role` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `is_approved` tinyint(1) NOT NULL DEFAULT 0
@@ -142,7 +150,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `role`, `created_at`, `updated_at`, `is_approved`) VALUES
 (1, 'Adam', 'Nowak', 'adam.nowak@wp.pl', '$2y$10$EGpTDm5p1quyhyOjH7slVePIDzuq83TTBXSUX.PLrcs.nejlQGYNu', 'Team Member', '2025-02-06 14:15:04', '2025-04-16 15:43:20', 1),
 (2, 'Jan', 'Kowalski', 'jan.kowalski@wp.pl', '$2y$10$KGFAWx5gS7QQQVhQZFPQ5u6Jm5MbqyDpcp33PO7ynJNkRb1ZhiF/K', 'Project Manager', '2025-02-06 14:15:04', '2025-04-16 15:43:24', 1),
-(3, 'Kamil', 'Wójcik ', 'kamil.wojcik@wp.pl', '$2y$10$RPZ0dqvJmrD7z3ycI2uPbO4AjL8/of.EckwXUR5rwOR8Umv63RWRi', 'Admin', '2025-02-06 14:17:14', '2025-04-16 15:43:27', 1);
+(3, 'Kamil', 'Wójcik ', 'kamil.wojcik@wp.pl', '$2y$10$RPZ0dqvJmrD7z3ycI2uPbO4AjL8/of.EckwXUR5rwOR8Umv63RWRi', 'Admin', '2025-02-06 14:17:14', '2025-04-16 15:43:27', 1),
+(4, 'John', 'Doe', 'johndoe@wp.pl', '$2y$10$1EmdrvL02YXc0dcnbmWMHOK7nwABwKfv7ED3Vd24SSZLx.TlLkTMe', 'Project Manager', '2025-09-08 11:39:29', '2025-09-08 11:39:39', 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -206,7 +215,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT dla tabeli `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `task`
@@ -224,7 +233,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT dla tabeli `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ograniczenia dla zrzutów tabel
