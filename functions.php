@@ -115,9 +115,8 @@
         echo sprintf($taskDetails, $id, $title, $description, $priority, $status, $dueDate, $projectName, $firstName, $lastName, $createdAt, $updatedAt);
     }
 
-    function registerVerifyEmail($result) {
-        $_SESSION["valid"] = false;
-        $_SESSION["register-error"] = "There is already an account assigned to this email address";
+    function verifyEmailExists($result) {
+        return true;
     }
 
     function register($connection) {
@@ -128,8 +127,6 @@
     function getPendingUsers($result) {
         require "../view/admin/users-header.php"; // table header;
         $users = file_get_contents("../template/pendingUsers.php");
-
-
 
         //while ($row = $result->fetch_assoc()) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {

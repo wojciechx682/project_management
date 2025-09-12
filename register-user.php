@@ -74,8 +74,12 @@
         }
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        query("SELECT user.id FROM user WHERE email=?", "registerVerifyEmail", $emailSanitized);
-        // will set the $_SESSION["valid"] variable to false if such an email already exists (i.e. if it RETURNS records -> $result);
+        $emailExists = query("SELECT user.id FROM user WHERE email=?", "verifyEmailExists", $emailSanitized); // return TRUE if email exists, otherwise return NULL
+
+        if ($emailExists) {
+            $_SESSION["valid"] = false;
+            $_SESSION["register-error"] = "There is already an account assigned to this email address";
+        }
 
         if ($_SESSION["valid"]) {
 
@@ -90,7 +94,7 @@
                 $_SESSION["register-error"] = "An error occurred. Could not add new user";
                 header('Location: register.php');
                 exit();
-        }
+            }
 
         } else {
             header('Location: register.php');
