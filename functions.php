@@ -124,6 +124,11 @@
         return true;
     }
 
+    function insertToken($connection) {
+        //$_SESSION["register-successful"] = "The new account has been successfully created and is waiting for approval from the System Administrator";
+        return true;
+    }
+
     function getPendingUsers($result) {
         require "../view/admin/users-header.php"; // table header;
         $users = file_get_contents("../template/pendingUsers.php");

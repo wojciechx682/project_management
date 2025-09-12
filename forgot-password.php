@@ -22,7 +22,19 @@
             }
             // Generate Token
             $token = bin2hex(random_bytes(16)); // 32-znakowy losowy token
+            $tokenHashed = hash("sha256", $token); // hash user token using sha256 algorithm;
             $expires = date("Y-m-d H:i:s", time() + 900); // aktualny czas + 900 sekund
+
+            $resetData = [$email, $tokenHashed, $expires];
+
+            $insertSuccessful = query("INSERT INTO password_resets (id, email, token, expires_at) VALUES (NULL, ?, ?, ?)","insertToken", $resetData);
+
+            if (!$insertSuccessful) {
+                $_SESSION["reset-error"] = '<span class="error">An error occurred while generating the verification code. Please try again.</span>';
+                header("Location: forgot-password.php");
+                exit();
+            }
+
 
 
         }
