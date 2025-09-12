@@ -52,8 +52,9 @@
             <input type="submit" value="Log in">
 
             <span id="remind-password">
-                <a href="#">Remind password</a>
+                <a href="forgot-password.php">Remind password</a>
             </span>
+
             <span id="register">
                 <a href="register.php">Register</a>
             </span>

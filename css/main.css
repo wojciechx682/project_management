@@ -16,7 +16,7 @@ body {
     background-size: cover;*/
 }
 
-#login {
+#login, #reset {
     width: 500px;
     height: 525px;
     border: 1px solid #939393;
@@ -48,7 +48,8 @@ div#register span.error {
 }
 
 span.login-row,
-span.register-row
+span.register-row,
+span.reset-row
 {
     display: block;
     overflow: hidden;
@@ -60,7 +61,8 @@ span.register-row {
 }
 
 form#login-form,
-form#register-form {
+form#register-form,
+form#reset-form {
     /*text-align: center;*/
     width: 330px;
     height: 330px;
@@ -73,7 +75,7 @@ form#register-form {
     padding-top: 65px;
 }
 
-form#login-form {
+form#login-form, form#reset-form {
     padding-top: 0;
 }
 
@@ -86,7 +88,8 @@ form#register-form {
 
 form#login-form input,
 form#register-form input,
-form#register-form select
+form#register-form select,
+form#reset-form input
 {
     min-width: 150px;
     width: 235px;
@@ -114,7 +117,9 @@ form#register-form select:focus
 }
 
 form#login-form label,
-form#register-form label {
+form#register-form label,
+form#reset-form label
+{
     display: block;
     float: left;
     width: 50px;
@@ -127,13 +132,19 @@ form#register-form label {
 }
 
 form#login-form input[type="submit"],
-form#register-form input[type="submit"]
+form#register-form input[type="submit"],
+form#reset-form input[type="submit"]
 {
     display: block;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     width: 310px;
+}
+
+form#reset-form input:hover, form#reset-form input:focus {
+    cursor: pointer;
+    box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
 }
 
 form#register-form input[type="submit"]
@@ -192,7 +203,7 @@ span#log-in a:hover {
     transform: scale(1.03);
 }
 
-span#log-in {
+form#register-form span#log-in {
     position: relative;
     left: 30px;
 }
