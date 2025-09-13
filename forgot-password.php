@@ -37,8 +37,46 @@
 
             // Sending email with reset link
             $userEmail = $emailSanitized;
-            $resetLink = "http://your-domain.com/reset-password.php?token=$token";  // URL do strony resetu z tokenem
+            //$resetLink = "http://your-domain.com/reset-password.php?token=$token";  // URL do strony resetu z tokenem
+            $resetLink = "localhost/project_management/reset-password.php?token=$token";  // URL do strony resetu z tokenem
 
+            try {
+                require "PHPMailerConfig.php";           // konfiguracja PHPMailer (SMTP, nadawca itp.)
+
+                $message = "
+                            <html>
+                                <head>
+                                    <title>Reset password</title>
+                                </head>
+                                <body>
+                                    <p>Hello <b>$userEmail</b>, </p>                            
+                                    <p>You requested a password reset for your account.</p>                               
+                                    <p>Click the link below to set a new password (valid for 15 minutes):</p>                           
+                                    <p><a href='$resetLink'>$resetLink</a></p>
+                                    <p>If you did not request this, you can ignore this email.</p>                                    
+                                </body>                  
+                            </html>
+                        ";
+
+                $subject = "Password reset request";
+
+                if (sendEmail($message, $userEmail, $subject)) { // email wysłany pomyślnie
+                    $_SESSION["reset-success"] = '<span class="reset-success success">An email with password reset instructions has been sent to your address.</span>';
+                    header("Location: forgot-password.php");
+                    exit();
+                } else { // nie udało się wysłać wiadomości e-mail;
+                    $_SESSION["reset-error"] = '<span class="error">Failed to send reset email. Please try again.</span>';; // email niewysłany, wystąpił błąd;
+                    header("Location: forgot-password.php");
+                    exit();
+                }
+
+            } catch (Exception $e) {
+                // Jeśli wysyłka e-mail nie powiodła się, usuwamy wcześniej dodany token i informujemy użytkownika
+                query("DELETE FROM password_resets WHERE email=? AND token=?", "", [$userEmail, $tokenHashed]);
+                $_SESSION["reset-error"] = '<span class="error">Failed to send reset email. Please try again.</span>';
+                header("Location: forgot-password.php");
+                exit();
+            }
 
 
 
@@ -68,6 +106,11 @@
                 if (isset($_SESSION["reset-error"])) {
                     echo $_SESSION["reset-error"];
                     unset($_SESSION["reset-error"]);
+                }
+
+                if (isset($_SESSION["reset-success"])) {
+                    echo $_SESSION["reset-success"];
+                    unset($_SESSION["reset-success"]);
                 }
             ?>
         </form>

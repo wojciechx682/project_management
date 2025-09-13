@@ -67,6 +67,10 @@
                     echo '<span class="register-success success">' . $_SESSION["register-successful"] . '</span>';
                     unset($_SESSION["register-successful"]);
                 }
+                if (isset($_SESSION["reset-success"])) {
+                    echo '<span class="reset-success success">' . $_SESSION["reset-success"] . '</span>';
+                    unset($_SESSION["reset-success"]);
+                }
             ?>
 
         </form>

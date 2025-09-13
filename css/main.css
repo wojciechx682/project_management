@@ -16,7 +16,7 @@ body {
     background-size: cover;*/
 }
 
-#login, #reset {
+#login, #reset, #reset-password-form {
     width: 500px;
     height: 525px;
     border: 1px solid #939393;
@@ -153,27 +153,29 @@ form#register-form input[type="submit"]
     left: 30px;
 }
 
-span#remind-password, span#register, span#log-in {
+span#remind-password, span#register, span#log-in, span#back-to-login {
     display: block;
     margin-top: 15px;
     text-align: center;
 }
 
-span#remind-password a:hover, span#register a:hover, span#log-in a:hover {
+span#remind-password a:hover, span#register a:hover, span#log-in a:hover, span#back-to-login a:hover {
     color: #5478c0 !important;
     cursor: pointer;
 }
 
 span#remind-password a,
 span#register a,
-span#log-in a {
+span#log-in a,
+span#back-to-login a {
     position: relative;
     text-decoration: none;
 }
 
 span#remind-password a::after,
 span#register a::after,
-span#log-in a::after {
+span#log-in a::after,
+span#back-to-login a::after {
     content: "";
     position: absolute;
     left: 0;
@@ -186,20 +188,24 @@ span#log-in a::after {
 
 span#remind-password a:hover::after,
 span#register a:hover::after,
-span#log-in a:hover::after {
+span#log-in a:hover::after,
+span#back-to-login a:hover::after
+{
     width: 100%;
 }
 
 span#remind-password a,
 span#register a,
-span#log-in a {
+span#log-in a,
+span#back-to-login a {
     transition: transform 0.2s ease;
     display: inline-block;
 }
 
 span#remind-password a:hover,
 span#register a:hover,
-span#log-in a:hover {
+span#log-in a:hover,
+span#back-to-login a:hover {
     transform: scale(1.03);
 }
 
@@ -210,7 +216,8 @@ form#register-form span#log-in {
 
 span#remind-password a,
 span#register a,
-span#log-in a
+span#log-in a,
+span#back-to-login a
 {
     color: #383838;
 }

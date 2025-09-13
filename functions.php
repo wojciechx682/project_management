@@ -235,6 +235,11 @@
         echo '<span class="projects-info">'.$row["numberOfTasks"]." ".$numberOfTasks.'</span>';
     }
 
+    function fetchPasswordResetEntry($result) {
+        // Zwraca pierwszy (powinien być tylko jeden) znaleziony wpis resetu hasła jako tablicę asocjacyjną
+        return $result->fetch(PDO::FETCH_ASSOC);
+    }
+
     function query($query, $fun, $values) {
 
         require "connect.php";
