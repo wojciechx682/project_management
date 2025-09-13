@@ -56,7 +56,9 @@ span.reset-row
     margin: 18px 0 30px 0;
     line-height: 215%;
 }
-span.register-row {
+span.register-row,
+div#reset-password-form span.reset-row
+{
     width: 401px;
 }
 
@@ -79,8 +81,12 @@ form#login-form, form#reset-form {
     padding-top: 0;
 }
 
+div#reset-password-form form#reset-form {
+    padding-top: 65px;
+}
 
-form#register-form {
+form#register-form,
+div#reset-password-form form#reset-form {
     top: 130px;
     left: 215px;
 }
@@ -127,7 +133,8 @@ form#reset-form label
     margin-left: 8px;
 }
 
-form#register-form label {
+form#register-form label,
+div#reset-password-form form#reset-form label {
     width: 129px;
 }
 
@@ -147,7 +154,8 @@ form#reset-form input:hover, form#reset-form input:focus {
     box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
 }
 
-form#register-form input[type="submit"]
+form#register-form input[type="submit"],
+div#reset-password-form form#reset-form input[type="submit"]
 {
     position: relative;
     left: 30px;
@@ -209,7 +217,9 @@ span#back-to-login a:hover {
     transform: scale(1.03);
 }
 
-form#register-form span#log-in {
+form#register-form span#log-in,
+div#reset-password-form form#reset-form span#back-to-login
+{
     position: relative;
     left: 30px;
 }

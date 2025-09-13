@@ -36,7 +36,6 @@
 
             // Sending email with reset link
             $userEmail = $emailSanitized;
-            //$resetLink = "http://your-domain.com/reset-password.php?token=$token";  // URL do strony resetu z tokenem
             $resetLink = "localhost/project_management/reset-password.php?token=$token";  // URL do strony resetu z tokenem
 
             try {

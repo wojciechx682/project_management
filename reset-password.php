@@ -75,14 +75,14 @@
 <?php require "view/head.php"; ?>
 <body>
 <div id="reset-password-form">
-    <h2>Set a New Password</h2>
+    <!--<h2>Set a New Password</h2>-->
     <form id="reset-form" method="post" action="">
             <span class="reset-row">
-                <label for="new_password">New password:</label>
+                <label for="new_password">New password</label>
                 <input type="password" name="new_password" id="new_password" required>
             </span>
         <span class="reset-row">
-                <label for="confirm_password">Confirm password:</label>
+                <label for="confirm_password">Confirm password</label>
                 <input type="password" name="confirm_password" id="confirm_password" required>
             </span>
         <!-- Przekazujemy token jako ukryte pole, aby było dostępne przy POST (alternatywnie można trzymać w URL) -->
