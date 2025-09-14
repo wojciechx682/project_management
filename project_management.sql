@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 08 Wrz 2025, 14:22
+-- Czas generowania: 14 Wrz 2025, 08:21
 -- Wersja serwera: 10.4.21-MariaDB
 -- Wersja PHP: 8.0.12
 
@@ -38,6 +38,19 @@ CREATE TABLE `comment` (
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) COLLATE utf8_polish_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+  `expires_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `project`
 --
 
@@ -58,8 +71,8 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `name`, `description`, `start_date`, `end_date`, `status`, `team_id`, `created_at`, `updated_at`) VALUES
-(1, 'Project Management App', 'A web-based application for project management, team collaboration, and task tracking.', '2025-02-11', '2025-05-11', 'in_progress', 1, '2025-02-12 11:21:47', '2025-02-12 11:21:47'),
-(3, 'New Project', 'asd asd asd', '2025-09-18', '2025-09-30', 'Planned', 1, '2025-09-08 12:21:39', '2025-09-08 12:21:39');
+(1, 'Project Management App', 'A web-based application for project management, team collaboration, and task tracking.', '2025-02-11', '2025-05-11', 'In Progress', 1, '2025-02-12 11:21:47', '2025-09-14 01:02:44'),
+(3, 'New Project', 'asd asd asd', '2025-09-18', '2025-09-30', 'Planned', 1, '2025-09-08 12:21:39', '2025-09-13 16:51:12');
 
 -- --------------------------------------------------------
 
@@ -85,8 +98,7 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`id`, `title`, `description`, `priority`, `status`, `due_date`, `project_id`, `assigned_user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Task 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vestibulum ipsum arcu. Aenean imperdiet, quam sit amet eleifend varius, ligula nulla blandit lorem, at posuere augue ipsum varius ligula.', 'Low', 'To do', '2025-02-20', 1, 1, '2025-02-13 13:31:22', '2025-02-13 13:31:22'),
-(2, 'Task 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vestibulum ipsum arcu. Aenean imperdiet, quam sit amet eleifend varius, ligula nulla blandit lorem, at posuere augue ipsum varius ligula.', 'Medium', 'To do', '2025-02-20', 1, 1, '2025-02-13 13:31:22', '2025-02-13 13:31:22');
+(1, 'Task 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vestibulum ipsum arcu. Aenean imperdiet, quam sit amet eleifend varius, ligula nulla blandit lorem, at posuere augue ipsum varius ligula.', 'Low', 'To do', '2025-02-20', 1, 1, '2025-02-13 13:31:22', '2025-02-13 13:31:22');
 
 -- --------------------------------------------------------
 
@@ -150,8 +162,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `role`, `created_at`, `updated_at`, `is_approved`) VALUES
 (1, 'Adam', 'Nowak', 'adam.nowak@wp.pl', '$2y$10$EGpTDm5p1quyhyOjH7slVePIDzuq83TTBXSUX.PLrcs.nejlQGYNu', 'Team Member', '2025-02-06 14:15:04', '2025-04-16 15:43:20', 1),
 (2, 'Jan', 'Kowalski', 'jan.kowalski@wp.pl', '$2y$10$KGFAWx5gS7QQQVhQZFPQ5u6Jm5MbqyDpcp33PO7ynJNkRb1ZhiF/K', 'Project Manager', '2025-02-06 14:15:04', '2025-04-16 15:43:24', 1),
-(3, 'Kamil', 'Wójcik ', 'kamil.wojcik@wp.pl', '$2y$10$RPZ0dqvJmrD7z3ycI2uPbO4AjL8/of.EckwXUR5rwOR8Umv63RWRi', 'Admin', '2025-02-06 14:17:14', '2025-04-16 15:43:27', 1),
-(4, 'John', 'Doe', 'johndoe@wp.pl', '$2y$10$1EmdrvL02YXc0dcnbmWMHOK7nwABwKfv7ED3Vd24SSZLx.TlLkTMe', 'Project Manager', '2025-09-08 11:39:29', '2025-09-08 11:39:39', 1);
+(3, 'Kamil', 'Wójcik ', 'kamil.wojcik@wp.pl', '$2y$10$RPZ0dqvJmrD7z3ycI2uPbO4AjL8/of.EckwXUR5rwOR8Umv63RWRi', 'Admin', '2025-02-06 14:17:14', '2025-04-16 15:43:27', 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -164,6 +175,13 @@ ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`),
   ADD KEY `task_id` (`task_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indeksy dla tabeli `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `email` (`email`);
 
 --
 -- Indeksy dla tabeli `project`
@@ -212,6 +230,12 @@ ALTER TABLE `comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT dla tabeli `password_resets`
+--
+ALTER TABLE `password_resets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT dla tabeli `project`
 --
 ALTER TABLE `project`
@@ -233,7 +257,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT dla tabeli `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ograniczenia dla zrzutów tabel
@@ -245,6 +269,12 @@ ALTER TABLE `user`
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `task` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD CONSTRAINT `password_resets_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `project`
