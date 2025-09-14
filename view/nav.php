@@ -5,7 +5,7 @@
 
             <div id="user-info">
                 <?php
-                    echo $_SESSION["first_name"] . " " . $_SESSION["last_name"];
+                    echo '<a href="profile.php">'.$_SESSION["first_name"] . " " . $_SESSION["last_name"].'</a>';
                     echo "<br>";
                     echo '<span id="role">' . $_SESSION["role"] . '</span>';
                 ?>

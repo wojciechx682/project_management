@@ -300,6 +300,10 @@ nav #nav #top-nav #user-info {
     padding-top: 20px;
 }
 
+nav #nav #top-nav #user-info a:hover {
+    text-decoration: underline;
+}
+
 div#user-info {
     line-height: 20px;
 }

@@ -18,7 +18,7 @@
 
 <?php require "../view/header.php"; ?>
 
-<?php require "../view/main.php"; ?>
+<?php require "../view/profile.php"; ?>
 
 </body>
 </html>
