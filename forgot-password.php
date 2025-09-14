@@ -4,6 +4,14 @@
 <?php
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isset($_POST["email"])) {
+
+            $captchaToken = $_POST["g-recaptcha-response"];
+            if (!verifyRecaptcha($captchaToken)) {
+                $_SESSION["reCaptcha_error"] = '<span class="error">reCaptcha verification failed</span>';
+                header('Location: forgot-password.php');
+                exit();
+            }
+
             // Validate Email address
             $email = trim($_POST["email"]);
             $emailSanitized = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -75,9 +83,6 @@
                 header("Location: forgot-password.php");
                 exit();
             }
-
-
-
         }
     }
 ?>
@@ -90,11 +95,16 @@
 <body>
     <div id="reset">
         <form id="reset-form" method="post" action="forgot-password.php">
-                <span class="reset-row">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" required>
-                </span>
+            <span class="reset-row">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required autofocus>
+            </span>
             <!-- (Opcjonalnie: reCaptcha podobnie jak na logowaniu) -->
+
+            <div class="g-recaptcha"
+                 data-sitekey="<?= htmlspecialchars(RECAPTCHA_SITE_KEY, ENT_QUOTES) ?>">
+            </div>
+
             <input type="submit" value="Reset password">
             <span id="log-in">
                 <a href="index.php">Back to login</a>
@@ -108,8 +118,14 @@
                     echo $_SESSION["reset-success"];
                     unset($_SESSION["reset-success"]);
                 }
+                if (isset($_SESSION["reCaptcha_error"])) {
+                    echo $_SESSION["reCaptcha_error"];
+                    unset($_SESSION["reCaptcha_error"]);
+                }
             ?>
         </form>
     </div>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>

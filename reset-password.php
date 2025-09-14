@@ -1,17 +1,18 @@
+
 <?php require_once "start-session.php"; ?>
 
 <?php
     // 1. Pobranie tokenu z parametru URL i wstępna walidacja
     if (!isset($_GET["token"]) || empty($_GET["token"])) {
         // Brak tokenu w URL lub jest pusty – przekierowanie z komunikatem o błędzie
-        $_SESSION["reset-error"] = '<span class="error">Invalid or missing password reset token.</span>';
+        $_SESSION["reset-error"] = '<span class="error">Invalid or missing password reset token</span>';
         header("Location: forgot-password.php");
         exit();
     }
     $token = trim($_GET["token"]);
     // Opcjonalna dodatkowa walidacja formatu tokenu (32 znaki hexadecymalne)
     if (!ctype_xdigit($token) || strlen($token) !== 32) {
-        $_SESSION["reset-error"] = '<span class="error">Invalid password reset token.</span>';
+        $_SESSION["reset-error"] = '<span class="error">Invalid password reset token</span>';
         header("Location: forgot-password.php");
         exit();
     }
@@ -22,7 +23,7 @@
 
     if (!$resetEntry) {
         // Nie znaleziono pasującego rekordu (token nieprawidłowy lub wygasły)
-        $_SESSION["reset-error"] = '<span class="error">This password reset link is invalid or has expired.</span>';
+        $_SESSION["reset-error"] = '<span class="error">This password reset link is invalid or has expired</span>';
         header("Location: forgot-password.php");
         exit();
     }
@@ -36,14 +37,21 @@
             $confirmPassword = $_POST["confirm_password"];
 
             // Walidacja nowego hasła (np. minimalna długość i zgodność obu pól)
-            if (strlen($newPassword) < 8) {
+            /*if (strlen($newPassword) < 8) {
                 $_SESSION["reset-error"] = '<span class="error">Password must be at least 8 characters long.</span>';
                 // Przeładuj formularz z powrotem (zachowujemy token w URL, żeby nie wygasł)
                 header("Location: reset-password.php?token=" . urlencode($token));
                 exit();
+            }*/
+            $passRegex = '/^((?=.*[!@#$%^&_*+-\/\?])(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])).{10,31}$/';
+            if (!preg_match($passRegex, $newPassword)) {
+                $_SESSION["reset-error"] = '<span class="error">The password must be between 10 and 30 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character</span>';
+                header("Location: reset-password.php?token=" . urlencode($token));
+                exit();
             }
+
             if ($newPassword !== $confirmPassword) {
-                $_SESSION["reset-error"] = '<span class="error">New password and confirmation do not match.</span>';
+                $_SESSION["reset-error"] = '<span class="error">New password and confirmation do not match</span>';
                 header("Location: reset-password.php?token=" . urlencode($token));
                 exit();
             }
@@ -53,7 +61,7 @@
             $updateSuccess = query("UPDATE user SET password=? WHERE email=?","", [$newPasswordHashed, $userEmail]);
             if (!$updateSuccess) {
                 // Nie udało się zaktualizować hasła w bazie
-                $_SESSION["reset-error"] = '<span class="error">An error occurred. Password not updated.</span>';
+                $_SESSION["reset-error"] = '<span class="error">An error occurred. Password not updated</span>';
                 header("Location: reset-password.php?token=" . urlencode($token));
                 exit();
             }
@@ -62,12 +70,11 @@
             query("DELETE FROM password_resets WHERE email=?", "", $userEmail);
 
             // 6. Ustawienie komunikatu o sukcesie i przekierowanie na stronę logowania
-            $_SESSION["reset-success"] = "Your password has been reset successfully. You can now log in with the new password.";
+            $_SESSION["reset-success"] = "Your password has been reset successfully. You can now log in with the new password";
             header("Location: index.php");
             exit();
         }
     }
-
     // Jeśli to żądanie GET (pierwsze wejście na stronę) lub wystąpił błąd walidacji, wyświetlamy formularz
 ?>
 <!DOCTYPE html>
@@ -92,11 +99,11 @@
                 <a href="index.php">Back to login</a>
             </span>
         <?php
-        // Wyświetlanie ewentualnego komunikatu błędu (np. token wygasł lub walidacja hasła nie przeszła)
-        if (isset($_SESSION["reset-error"])) {
-            echo $_SESSION["reset-error"];
-            unset($_SESSION["reset-error"]);
-        }
+            // Wyświetlanie ewentualnego komunikatu błędu (np. token wygasł lub walidacja hasła nie przeszła)
+            if (isset($_SESSION["reset-error"])) {
+                echo $_SESSION["reset-error"];
+                unset($_SESSION["reset-error"]);
+            }
         ?>
     </form>
 </div>

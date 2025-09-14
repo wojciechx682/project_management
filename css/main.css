@@ -92,6 +92,11 @@ div#reset-password-form form#reset-form {
 }
 
 
+div#reset-password-form form#reset-form {
+    top: 50%;
+    padding-top: 0;
+}
+
 form#login-form input,
 form#register-form input,
 form#register-form select,
@@ -238,6 +243,11 @@ span#back-to-login a
     display: block;
     margin-top: 15px;
     text-align: center;
+}
+
+div#reset-password-form .error {
+    position: relative;
+    left: 30px;
 }
 
 .register-success {
