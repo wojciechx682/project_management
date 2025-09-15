@@ -12,6 +12,7 @@
         $firstName = trim($_POST["firstName"]);
         $lastName = trim($_POST["lastName"]);
         $email = trim($_POST["email"]);
+
         $password = $_POST["password"];
         $confirmPassword = $_POST["confirm-password"];
         $role = $_POST["role"];
@@ -39,7 +40,7 @@
         $nameRegex = '/^[A-ZŁŚŻ]{1}[a-ząęółśżźćń]+$/u';
         if (!preg_match($nameRegex, $firstName)) {
             $_SESSION["valid"] = false;
-            $_SESSION["register-error"] = "The name can only consist of letters of the alphabet.";
+            $_SESSION["register-error"] = "The name can only consist of letters of the alphabet";
         }
         if (strlen($firstName)<3 || strlen($firstName)>27) {
             $_SESSION["valid"] = false;
@@ -49,7 +50,7 @@
         $lastName = ucfirst(strtolower(trim($lastName, " ")));
         if (!preg_match($nameRegex, $lastName)) {
             $_SESSION["valid"] = false;
-            $_SESSION["register-error"] = "The name can only consist of letters of the alphabet.";
+            $_SESSION["register-error"] = "The name can only consist of letters of the alphabet";
         }
         if (strlen($lastName)<3 || strlen($lastName)>$maxStringLength) {
             $_SESSION["valid"] = false;

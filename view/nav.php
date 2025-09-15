@@ -1,16 +1,16 @@
 <nav>
     <div id="nav">
         <div id="top-nav">
-            <img src="../assets/img/user1.png">
-
-            <div id="user-info">
-                <?php
-                    echo '<a href="profile.php">'.$_SESSION["first_name"] . " " . $_SESSION["last_name"].'</a>';
-                    echo "<br>";
-                    echo '<span id="role">' . $_SESSION["role"] . '</span>';
-                ?>
-            </div>
-
+            <a href="profile.php" class="profile-link">
+                <img src="../assets/img/user1.png" alt="User profile picture">
+                <div id="user-info">
+                    <?php
+                        echo $_SESSION["first_name"] . " " . $_SESSION["last_name"];
+                        echo "<br>";
+                        echo '<span id="role">' . $_SESSION["role"] . '</span>';
+                    ?>
+                </div>
+            </a>
         </div>
 
         <a href="manager.php">

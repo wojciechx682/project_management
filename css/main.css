@@ -100,7 +100,8 @@ div#reset-password-form form#reset-form {
 form#login-form input,
 form#register-form input,
 form#register-form select,
-form#reset-form input
+form#reset-form input,
+form#profile-form input
 {
     min-width: 150px;
     width: 235px;
@@ -119,7 +120,10 @@ form#login-form input:focus,
 form#register-form input:hover,
 form#register-form input:focus,
 form#register-form select:hover,
-form#register-form select:focus
+form#register-form select:focus,
+form#profile-form input:hover,
+form#profile-form input:focus
+
 {
     cursor: pointer;
     -webkit-box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
@@ -136,6 +140,10 @@ form#reset-form label
     width: 50px;
     cursor: pointer;
     margin-left: 8px;
+}
+
+form#profile-form label {
+    cursor: pointer;
 }
 
 form#register-form label,
@@ -262,6 +270,15 @@ div#reset-password-form .error {
     text-align: center;
 }
 
+div#profile-container .success {
+    text-align: left;
+}
+
+div#profile-container .error {
+    text-align: left;
+}
+
+
 nav #nav {
     width: 300px;
     /*width: 30vw;*/
@@ -300,6 +317,12 @@ nav #nav #top-nav img {
     margin-left: 7px;
 
 }
+
+.profile-link:hover {
+    filter: brightness(1.1); /* 1.0 = normalnie, >1 = jaśniej, <1 = ciemniej */
+    transition: filter 0.13s ease;
+}
+
 
 header #header {
     height: 85px;
@@ -1627,4 +1650,70 @@ div.task-option-delete:hover {
 form#register-form .g-recaptcha {
     margin-left: 44px;
 }
+
+/* ------------------------------------------------- */
+
+#profile-container {
+    width: 400px;      /* stała szerokość kontenera, jak w login/register */
+    margin: 0;         /* wyrównanie do lewej */
+    padding: 20px;
+}
+
+#profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#profile-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#profile-form input,
+#profile-form textarea,
+#profile-form select {
+    width: 100% !important;             /* pełna szerokość kontenera */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;  /* uwzględnia padding w szerokości */
+    margin-left: 0 !important;
+}
+
+
+
+#profile-form input[readonly],
+#profile-form textarea[readonly] {
+    background-color: #f4f4f4;
+    color: #555;
+    cursor: not-allowed;
+}
+
+#profile-form button {
+    padding: 10px;
+    background-color: #5478c0;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#profile-form button:hover {
+    background-color: #5b83cd;
+}
+
+#profile-form button[type="submit"] {
+
+    padding: 8px 16px; /* podobnie jak przycisk "Log out" */
+    display: inline-block;
+    width: 125px;
+    margin-top: 8px;
+}
+
+
+
 

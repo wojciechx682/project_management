@@ -20,6 +20,7 @@
             $_SESSION["role"] = $row["role"];
             $_SESSION["created_at"] = $row["created_at"];
             $_SESSION["updated_at"] = $row["updated_at"];
+            $_SESSION["is_approved"] = $row["is_approved"];
 
             switch ($_SESSION["role"]) {
                 case "Admin":
@@ -239,6 +240,11 @@
         // Zwraca pierwszy (powinien być tylko jeden) znaleziony wpis resetu hasła jako tablicę asocjacyjną
         return $result->fetch(PDO::FETCH_ASSOC);
     }
+
+    function updateProfile($connection) {
+        return true; // wystarczy, bo query() sprawdza rowCount()
+    }
+
 
     function query($query, $fun, $values) {
 

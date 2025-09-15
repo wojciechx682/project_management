@@ -1,6 +1,5 @@
 <div id="main">
     <!--<h3>Welcome Manager</h3>-->
-
     <div id="projects">
         <div id="projects-left">
             <a href="projects.php">
