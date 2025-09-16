@@ -20,5 +20,7 @@
 
 <?php require "../view/profile.php"; ?>
 
+<script src="../scripts/update-profile.js"></script>
+
 </body>
 </html>

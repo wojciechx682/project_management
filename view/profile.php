@@ -34,5 +34,7 @@
                 unset($_SESSION["profile-error"]);
             }
         ?>
+
+        <div id="result"></div>
     </div>
 </div>
