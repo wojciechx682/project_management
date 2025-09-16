@@ -242,7 +242,11 @@
     }
 
     function updateProfile($connection) {
-        return true; // wystarczy, bo query() sprawdza rowCount()
+        $userId = $_SESSION["id"]; // ID masz w sesji
+        // W tym miejscu $connection to nadal PDO, którego użyto do UPDATE
+        $stmt = $connection->prepare("SELECT updated_at FROM user WHERE id=?");
+        $stmt->execute([$userId]);
+        return $stmt->fetchColumn(); // zwraca timestamp w formacie 'YYYY-MM-DD HH:MM:SS'
     }
 
 

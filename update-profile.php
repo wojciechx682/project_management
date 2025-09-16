@@ -59,13 +59,14 @@
 
                 $user = [$firstName, $lastName, $emailSanitized, $_SESSION["id"]];
 
-                $updateSuccessful = query("UPDATE user SET first_name=?, last_name=?, email=?, updated_at=NOW() WHERE id=?","updateProfile", $user);
+                $updatedAt  = query("UPDATE user SET first_name=?, last_name=?, email=?, updated_at=NOW() WHERE id=?","updateProfile", $user); // zwróci timmestamp "updated_at: jeśli zapytanie UPDATE się powiedzie.
 
-                if ($updateSuccessful) {
+                if ($updatedAt) {
                     // zaktualizuj sesję
                     $_SESSION["first_name"] = $firstName;
                     $_SESSION["last_name"] = $lastName;
                     $_SESSION["email"] = $emailSanitized;
+                    $_SESSION["updated_at"] = $updatedAt;
 
                     $_SESSION["profile-successful"] = "Profile has been updated successfully";
                     header('Location: manager/profile.php');

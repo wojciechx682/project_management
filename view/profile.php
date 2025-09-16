@@ -22,9 +22,6 @@
             <label for="updated">Last Updated</label>
             <input type="text" id="updated" value="<?= htmlspecialchars($_SESSION['updated_at']) ?>" readonly>
 
-            <label for="approved">Approved</label>
-            <input type="text" id="approved" value="<?= $_SESSION['is_approved'] ? 'Yes' : 'No' ?>" readonly>
-
             <button type="submit">Update Profile</button>
         </form>
         <?php
