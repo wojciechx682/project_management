@@ -101,7 +101,8 @@ form#login-form input,
 form#register-form input,
 form#register-form select,
 form#reset-form input,
-form#profile-form input
+form#profile-form input,
+form#password-form input
 {
     min-width: 150px;
     width: 235px;
@@ -122,8 +123,9 @@ form#register-form input:focus,
 form#register-form select:hover,
 form#register-form select:focus,
 form#profile-form input:hover,
-form#profile-form input:focus
-
+form#profile-form input:focus,
+form#password-form input:hover,
+form#password-form input:focus
 {
     cursor: pointer;
     -webkit-box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
@@ -142,7 +144,8 @@ form#reset-form label
     margin-left: 8px;
 }
 
-form#profile-form label {
+form#profile-form label,
+form#password-form label {
     cursor: pointer;
 }
 
@@ -1659,20 +1662,25 @@ form#register-form .g-recaptcha {
     padding: 20px;
 }
 
-#profile-form {
+#profile-form, #password-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-#profile-form label {
+form#password-form {
+    margin-top: 15px;
+}
+#profile-form label,
+#password-form label {
     font-weight: bold;
     margin-bottom: 5px;
 }
 
 #profile-form input,
 #profile-form textarea,
-#profile-form select {
+#profile-form select,
+#password-form input {
     width: 100% !important;             /* pełna szerokość kontenera */
     padding: 8px;
     border: 1px solid #ccc;
@@ -1691,7 +1699,8 @@ form#register-form .g-recaptcha {
     cursor: not-allowed;
 }
 
-#profile-form button {
+#profile-form button[type="submit"],
+#password-form button[type="submit"] {
     padding: 10px;
     background-color: #5478c0;
     border: none;
@@ -1702,11 +1711,13 @@ form#register-form .g-recaptcha {
     transition: background-color 0.2s ease;
 }
 
-#profile-form button:hover {
+#profile-form button[type="submit"]:hover,
+#password-form button[type="submit"]:hover {
     background-color: #5b83cd;
 }
 
-#profile-form button[type="submit"] {
+#profile-form button[type="submit"],
+#password-form button[type="submit"] {
 
     padding: 8px 16px; /* podobnie jak przycisk "Log out" */
     display: inline-block;

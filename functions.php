@@ -249,6 +249,10 @@
         return $stmt->fetchColumn(); // zwraca timestamp w formacie 'YYYY-MM-DD HH:MM:SS'
     }
 
+    function fetchPasswordHash($result) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        return $row["password"];
+    }
 
     function query($query, $fun, $values) {
 

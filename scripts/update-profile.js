@@ -51,3 +51,39 @@ document.getElementById("profile-form").addEventListener("submit", function(even
             resultDiv.innerHTML = "<span class='error'>An error occurred. Please try again</span>";
         });
 });
+
+// Obsługa formularza zmiany hasła
+document.getElementById("password-form").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const resultDiv = document.getElementById("password-result");
+    const formData = new FormData(this);
+
+    const newPassword = formData.get("newPassword");
+    const confirmPassword = formData.get("confirmPassword");
+
+    if (newPassword !== confirmPassword) {
+        resultDiv.innerHTML = "<span class='error'>Passwords do not match</span>";
+        return;
+    }
+
+    fetch("../update-password.php", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                resultDiv.innerHTML = "<span class='success'>" + data.message + "</span>";
+                document.getElementById("password-form").reset();
+            } else {
+                resultDiv.innerHTML = "<span class='error'>" + (data.message || "Password update failed") + "</span>";
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            resultDiv.innerHTML = "<span class='error'>An error occurred. Please try again</span>";
+        });
+});
+

@@ -36,5 +36,76 @@
         ?>
 
         <div id="result"></div>
+
+        <form id="password-form" action="../update-password.php" method="post">
+            <label for="currentPassword">Current Password</label>
+            <span class="password-field">
+                <input
+                        type="password"
+                        id="currentPassword"
+                        name="currentPassword"
+                        required
+                        autocomplete="current-password"
+                >
+                <button
+                        type="button"
+                        class="toggle-password"
+                        id="toggleCurrent"
+                        aria-label="Pokaż hasło"
+                        aria-pressed="false"
+                        hidden
+                        title="Show/hide password"
+                >
+                    <i class="icon-eye" aria-hidden="true"></i>
+                </button>
+            </span>
+
+                <label for="newPassword">New Password</label>
+                <span class="password-field">
+            <input
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    required
+                    autocomplete="new-password"
+            >
+            <button
+                    type="button"
+                    class="toggle-password"
+                    id="toggleNew"
+                    aria-label="Pokaż hasło"
+                    aria-pressed="false"
+                    hidden
+                    title="Show/hide password"
+            >
+                <i class="icon-eye" aria-hidden="true"></i>
+            </button>
+        </span>
+
+                <label for="confirmPassword">Confirm New Password</label>
+                <span class="password-field">
+            <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    required
+                    autocomplete="new-password"
+            >
+            <button
+                    type="button"
+                    class="toggle-password"
+                    id="toggleConfirm"
+                    aria-label="Pokaż hasło"
+                    aria-pressed="false"
+                    hidden
+                    title="Show/hide password"
+            >
+                <i class="icon-eye" aria-hidden="true"></i>
+            </button>
+        </span>
+
+            <button type="submit">Set Password</button>
+        </form>
+        <div id="password-result"></div>
     </div>
 </div>
