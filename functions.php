@@ -62,6 +62,16 @@
         }
     }
 
+    function getAllTeamsForProjectManager($result) {
+        require "../view/manager/teams-header.php"; // table header;
+        $team = file_get_contents("../template/team.php");
+        //while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
+            echo sprintf($team, $row["id"], $row["name"], $createdAt, $row["members_count"]);
+        }
+    }
+
     function getProjectDetails($result) {
         //require "../view/manager/project-header.php"; // table header;
         $projectDetails = file_get_contents("../template/project-details.php");

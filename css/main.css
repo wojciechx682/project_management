@@ -446,7 +446,7 @@ header #header button.btn-link:hover {
 }
 
 
-div.project, div.project-details, div.task, div.users {
+div.project, div.project-details, div.task, div.users, div.team {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 0;
@@ -456,7 +456,7 @@ div.project, div.project-details, div.task, div.users {
     margin-top: 20px;
 }
 
-.project, div.project-details, div.task, div.users, div.task-details {
+.project, div.project-details, div.task, div.users, div.task-details, .team {
     border: 1px ridge rgba(166, 166, 166, 0.38);
     border-radius: 15px;
     margin: 0px auto 40px auto;
@@ -550,7 +550,11 @@ div.users {
 .user-action,
 
 #add-project .assigned-user-left,
-#add-project .assigned-user
+#add-project .assigned-user,
+.team-id,
+.teams-name,
+.team-created-at,
+.team-members-count
 {
     /* border: 1px dashed black; */
     /* border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
@@ -584,7 +588,7 @@ div.users {
     width: 17.88%;
 }
 
-div.project-content, div.users-content {
+div.project-content, div.users-content, div.team-content {
     margin: 0;
     padding: 0;
     border-radius: 0;
@@ -592,22 +596,23 @@ div.project-content, div.users-content {
 
 div.project-content:last-of-type,
 div.task-content:last-of-type,
-div.users-content:last-of-type {
+div.users-content:last-of-type,
+div.team-content:last-of-type {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
-.project-team, .team-name {
+.project-team, .team-name,
+.team-members-count {
     border-right: 0px;
     width: 17.84%;
-
 }
 
-.project-id, .user-id {
+.project-id, .user-id, div.team .team-id {
     width: 5%;
 }
 
-.project-desc {
+.project-desc, .team-created-at {
     width: 30.6%;
 }
 
@@ -618,17 +623,25 @@ div.users-content:last-of-type {
 .project-content .project-end-date,
 .project-content .project-status,
 .project-content .team-name,
-.project-content .project-action
+.project-content .project-action,
+
+.team-content .team-id,
+.team-content .teams-name,
+.team-content .team-created-at,
+.team-content .team-members-count
 {
     height: 70px; /* Zmień wysokość według potrzeb */
     padding-top: 24px; /* Dostosuj, aby wyrównać tekst w pionie */
 }
 
-.project-content .project-desc {
+/*.project-content .project-desc,
+.team-content .team-created-at
+{
     padding-top: 15px;
-}
+}*/
 
-.project-start-date, .project-end-date {
+.project-start-date, .project-end-date,
+.team-members-count {
     width: 9%;
 }
 
@@ -1725,6 +1738,18 @@ form#password-form {
     margin-top: 8px;
 }
 
+div.team .team-id {
+    width: 5%;
+}
 
+div.team .teams-name {
+    width: 50%;
+}
 
+div.team .team-created-at {
+    width: 35%;
+}
 
+div.team .team-members-count {
+    width: 10%;
+}
