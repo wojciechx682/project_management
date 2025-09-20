@@ -107,22 +107,18 @@
     }
 
     function getTeamMembers($result) {
-        require "../view/manager/task-header.php"; // table header;
-        $taskDetails = file_get_contents("../template/task-details.php");
-        //while ($row = $result->fetch_assoc()) {
+        require "../view/manager/team-header.php"; // table header;
+        $teamDetails = file_get_contents("../template/team-members-details.php");
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             // Oczyszczanie danych
-            $id = htmlspecialchars($row["id"], ENT_QUOTES, "UTF-8");
-            $title = htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8");
-            $priority = htmlspecialchars($row["priority"], ENT_QUOTES, "UTF-8");
-            $status = htmlspecialchars($row["status"], ENT_QUOTES, "UTF-8");
+            $id = htmlspecialchars($row["user_id"], ENT_QUOTES, "UTF-8");
             $firstName = htmlspecialchars($row["first_name"], ENT_QUOTES, "UTF-8");
             $lastName = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
-            // Formatowanie dat
-            $dueDate = DateTime::createFromFormat('Y-m-d', $row["due_date"])->format('j F Y');
-            $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
-            //$updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
-            echo sprintf($taskDetails, $id, $id, $title, $priority, $status, $dueDate, $firstName, $lastName, $createdAt, $id, $id);
+            $email = htmlspecialchars($row["email"], ENT_QUOTES, "UTF-8");
+            $role = htmlspecialchars($row["role"], ENT_QUOTES, "UTF-8");
+            $createdAt = htmlspecialchars($row["created_at"], ENT_QUOTES, "UTF-8");
+            $updatedAt = htmlspecialchars($row["updated_at"], ENT_QUOTES, "UTF-8");
+            echo sprintf($teamDetails, $id, $firstName, $lastName, $email, $role, $createdAt, $updatedAt);
         }
     }
 

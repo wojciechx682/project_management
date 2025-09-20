@@ -9,25 +9,27 @@
 
 <?php
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if (isset($_POST["team-id"])) {
-            $projectId = filter_input(INPUT_POST, "team-id", FILTER_SANITIZE_NUMBER_INT);
 
-            if ($projectId) {
-                $_SESSION["selected_team_id"] = $projectId; // Zapisz ID projektu do sesji
-                    header("Location: team-details.php"); // PRG - Przekierowanie GET
-                        exit();
+        if (isset($_POST["team-id"])) {
+
+            $teamId = filter_input(INPUT_POST, "team-id", FILTER_SANITIZE_NUMBER_INT);
+
+            if ($teamId) {
+                $_SESSION["selected_team_id"] = $teamId; // Zapisz ID zespołu do sesji
+                header("Location: team-details.php"); // PRG - Przekierowanie GET
+                exit();
             }
         }
 
-        header("Location: projects.php"); // Jeśli brak ID projektu, wróć do listy projektów
+        header("Location: teams.php"); // Jeśli brak ID zespołu, wróć do listy zespołów
         exit();
     }
 
-    $projectId = $_SESSION["selected_team_id"] ?? null; // Pobierz ID projektu z sesji (po przekierowaniu)
+    $teamId = $_SESSION["selected_team_id"] ?? null; // Pobierz ID zespołu z sesji (po przekierowaniu)
 
-    if (!$projectId) {
-        header("Location: projects.php");
-            exit();
+    if (!$teamId) {
+        header("Location: teams.php");
+        exit();
     }
 ?>
 
