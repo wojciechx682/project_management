@@ -9,12 +9,12 @@
 
 <?php
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if (isset($_POST["project-id"])) {
-            $projectId = filter_input(INPUT_POST, "project-id", FILTER_SANITIZE_NUMBER_INT);
+        if (isset($_POST["team-id"])) {
+            $projectId = filter_input(INPUT_POST, "team-id", FILTER_SANITIZE_NUMBER_INT);
 
             if ($projectId) {
-                $_SESSION["selected_project_id"] = $projectId; // Zapisz ID projektu do sesji
-                    header("Location: project-details.php"); // PRG - Przekierowanie GET
+                $_SESSION["selected_team_id"] = $projectId; // Zapisz ID projektu do sesji
+                    header("Location: team-details.php"); // PRG - Przekierowanie GET
                         exit();
             }
         }
@@ -23,7 +23,7 @@
         exit();
     }
 
-    $projectId = $_SESSION["selected_project_id"] ?? null; // Pobierz ID projektu z sesji (po przekierowaniu)
+    $projectId = $_SESSION["selected_team_id"] ?? null; // Pobierz ID projektu z sesji (po przekierowaniu)
 
     if (!$projectId) {
         header("Location: projects.php");
@@ -44,18 +44,18 @@
 
 <?php require "../view/header.php"; ?>
 
-<?php require "../view/manager/project-details.php"; ?>
+<?php require "../view/manager/team-details.php"; ?>
 
 </div>
 
-<?php require "../template/edit-project-window.php"; ?>
+<?php /*require "../template/edit-project-window.php";*/ ?>
 
 
-<?php require "../template/add-task-window.php"; ?>
+<?php /*require "../template/add-task-window.php";*/ ?>
 
-<?php require "../template/edit-task-window.php"; ?>
+<?php /*require "../template/edit-task-window.php";*/ ?>
 
-<div id="task-details-window"></div>
+<!--<div id="task-details-window"></div>
 
 <script src="../scripts/task-details.js"></script>
 
@@ -67,7 +67,7 @@
 
 <script src="../scripts/edit-task.js"></script>
 
-<script src="../scripts/delete-task.js"></script>
+<script src="../scripts/delete-task.js"></script>-->
 
 </body>
 </html>

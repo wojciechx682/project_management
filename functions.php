@@ -68,7 +68,7 @@
         //while ($row = $result->fetch_assoc()) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
-            echo sprintf($team, $row["id"], $row["name"], $createdAt, $row["members_count"]);
+            echo sprintf($team, $row["id"], $row["id"], $row["name"], $createdAt, $row["members_count"]);
         }
     }
 
@@ -106,6 +106,26 @@
         }
     }
 
+    function getTeamMembers($result) {
+        require "../view/manager/task-header.php"; // table header;
+        $taskDetails = file_get_contents("../template/task-details.php");
+        //while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            // Oczyszczanie danych
+            $id = htmlspecialchars($row["id"], ENT_QUOTES, "UTF-8");
+            $title = htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8");
+            $priority = htmlspecialchars($row["priority"], ENT_QUOTES, "UTF-8");
+            $status = htmlspecialchars($row["status"], ENT_QUOTES, "UTF-8");
+            $firstName = htmlspecialchars($row["first_name"], ENT_QUOTES, "UTF-8");
+            $lastName = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
+            // Formatowanie dat
+            $dueDate = DateTime::createFromFormat('Y-m-d', $row["due_date"])->format('j F Y');
+            $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
+            //$updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
+            echo sprintf($taskDetails, $id, $id, $title, $priority, $status, $dueDate, $firstName, $lastName, $createdAt, $id, $id);
+        }
+    }
+
     function getTasks($result) {
         $taskDetails = file_get_contents("../template/task-details-window.php");
         //$row = $result->fetch_assoc();
@@ -124,6 +144,17 @@
         $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
         $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
         echo sprintf($taskDetails, $id, $title, $description, $priority, $status, $dueDate, $projectName, $firstName, $lastName, $createdAt, $updatedAt);
+    }
+
+    function getTeamDetails($result) {
+        //require "../view/manager/project-header.php"; // table header;
+        $teamDetails = file_get_contents("../template/team-details.php");
+        //$row = $result->fetch_assoc();
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
+        //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
+        $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
+        echo sprintf($teamDetails, $row["id"], $row["name"], $createdAt, $row["members_count"], $row["leader_name"]);
     }
 
     function verifyEmailExists($result) {
