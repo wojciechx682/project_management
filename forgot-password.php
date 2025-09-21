@@ -2,7 +2,9 @@
 <?php require_once "start-session.php"; ?>
 
 <?php
+
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
         if (isset($_POST["email"])) {
 
             $captchaToken = $_POST["g-recaptcha-response"];

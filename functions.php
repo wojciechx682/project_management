@@ -165,7 +165,6 @@
     }
 
     function insertToken($connection) {
-        //$_SESSION["register-successful"] = "The new account has been successfully created and is waiting for approval from the System Administrator";
         return true;
     }
 
