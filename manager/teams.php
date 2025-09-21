@@ -24,5 +24,9 @@
 
 </div>
 
+<?php require "../template/add-team-window.php"; ?>
+
+<script src="../scripts/add-team.js"></script>
+
 </body>
 </html>

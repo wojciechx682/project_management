@@ -116,8 +116,10 @@
             $lastName = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
             $email = htmlspecialchars($row["email"], ENT_QUOTES, "UTF-8");
             $role = htmlspecialchars($row["role"], ENT_QUOTES, "UTF-8");
-            $createdAt = htmlspecialchars($row["created_at"], ENT_QUOTES, "UTF-8");
-            $updatedAt = htmlspecialchars($row["updated_at"], ENT_QUOTES, "UTF-8");
+            //$createdAt = htmlspecialchars($row["created_at"], ENT_QUOTES, "UTF-8");
+            $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
+            //$updatedAt = htmlspecialchars($row["updated_at"], ENT_QUOTES, "UTF-8");
+            $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
             echo sprintf($teamDetails, $id, $firstName, $lastName, $email, $role, $createdAt, $updatedAt);
         }
     }
@@ -194,6 +196,11 @@
     }
 
     function addNewProject($connection) {
+        //return $connection->insert_id;
+        return $connection->lastInsertId();
+    }
+
+    function addNewTeam($connection) {
         //return $connection->insert_id;
         return $connection->lastInsertId();
     }
@@ -289,6 +296,16 @@
     function fetchPasswordHash($result) {
         $row = $result->fetch(PDO::FETCH_ASSOC);
         return $row["password"];
+    }
+
+    function getTeamMembersCount($result) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        return $row["members_count"];
+    }
+
+    function checkIfTeamNameExists($result) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        return $row["name"];
     }
 
     function query($query, $fun, $values) {

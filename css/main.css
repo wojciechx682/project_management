@@ -456,7 +456,8 @@ div.project, div.project-details, div.task, div.users, div.team {
     margin-top: 20px;
 }
 
-.project, div.project-details, div.task, div.users, div.task-details, .team {
+.project, div.project-details, div.task, div.users, div.task-details, .team,
+div.team-details {
     border: 1px ridge rgba(166, 166, 166, 0.38);
     border-radius: 15px;
     margin: 0px auto 40px auto;
@@ -554,7 +555,10 @@ div.users {
 .team-id,
 .teams-name,
 .team-created-at,
-.team-members-count
+.team-members-count,
+
+.team-details-name-left,
+.team-details-name
 {
     /* border: 1px dashed black; */
     /* border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
@@ -752,7 +756,8 @@ i.icon-home, i.icon-th-large, i.icon-tasks, i.icon-adult {
     margin: 0;
 }
 
-div.project-details, div.task-details {
+div.project-details, div.task-details,
+div.team-details {
     margin: 0;
     border-radius: 0;
 }
@@ -761,7 +766,9 @@ div.project-details-button, div.task-details-button {
     border: 0;
 }
 
-div.project-details:first-of-type {
+div.project-details:first-of-type,
+
+div.team-details:first-of-type {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
@@ -770,7 +777,9 @@ div.project-details:first-of-type {
 #add-project div.project-details:first-of-type,
 #edit-project div.project-details:first-of-type,
 #task-details div.project-details:first-of-type,
-#add-task div.task-details:first-of-type
+#add-task div.task-details:first-of-type,
+
+#add-team div.team-details:first-of-type
 {
     border-radius: 0;
 }
@@ -861,7 +870,9 @@ div#task-details div.project-details:nth-of-type(9) {
 #edit-task .task-details-priority,
 #edit-task .task-details-status,
 #edit-task .task-details-due-date,
-#edit-task .task-details-assigned-user
+#edit-task .task-details-assigned-user,
+
+#add-team .team-details-name
 {
     width: 85%;
     text-align: left;
@@ -906,7 +917,8 @@ div#task-details div.project-details:nth-of-type(9) {
 }
 
 #add-project form label,
-#edit-project form label
+#edit-project form label,
+#add-team form label
 {
     cursor: pointer;
 }
@@ -914,7 +926,9 @@ div#task-details div.project-details:nth-of-type(9) {
 #add-project .project-details input.project-details-name,
 #edit-project .project-details input.project-details-name,
 #add-task .task-details input.task-details-name,
-#edit-task .task-details input.task-details-name
+#edit-task .task-details input.task-details-name,
+
+#add-team .team-details input.team-details-name
 {
     border: none;
     outline: none;
@@ -1186,7 +1200,9 @@ div#task-details div.project-details:nth-of-type(9) {
 #edit-task .task-details-priority-left,
 #edit-task .task-details-status-left,
 #edit-task .task-details-due-date-left,
-#edit-task .task-details-assigned-user-left
+#edit-task .task-details-assigned-user-left,
+
+#add-team .team-details-name-left
 {
     /*text-align: right;
     padding-right: 10px;*/
@@ -1223,7 +1239,16 @@ div.task-updated-at, div.task-manage {
 
 /* --------------------------------------------------------------- */
 
-#update-status, .update-status, #add-comment, #add-project, #edit-project, #task-details, #add-task, #edit-task {
+#update-status,
+.update-status,
+#add-comment,
+#add-project,
+#edit-project,
+#task-details,
+#add-task,
+#edit-task,
+
+#add-team {
     /*height: 310px;*/
     height: 750px;
     width: 750px;
@@ -1268,7 +1293,9 @@ div.task-updated-at, div.task-manage {
 #edit-project > h2,
 #task-details > h2,
 #add-task > h2,
-#edit-task > h2
+#edit-task > h2,
+
+#add-team > h2
 {
     margin-left: 20px;
     margin-top: 25px;
@@ -1295,7 +1322,9 @@ div.task-updated-at, div.task-manage {
 #add-comment hr, #add-project hr,
 #edit-project hr, #task-details hr,
 #add-task hr,
-#edit-task hr
+#edit-task hr,
+
+#add-team hr
 {
     background-color: rgba(166, 166, 166, 0.7);
     border: none;
@@ -1752,4 +1781,8 @@ div.team .team-created-at {
 
 div.team .team-members-count {
     width: 10%;
+}
+
+div#add-team {
+    height: 200px;
 }
