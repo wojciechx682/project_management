@@ -50,7 +50,7 @@
 
 </div>
 
-<?php /*require "../template/edit-project-window.php";*/ ?>
+<?php require "../template/edit-team-window.php"; ?>
 
 
 <?php /*require "../template/add-task-window.php";*/ ?>
@@ -59,11 +59,11 @@
 
 <!--<div id="task-details-window"></div>
 
-<script src="../scripts/task-details.js"></script>
+<script src="../scripts/task-details.js"></script>-->
 
-<script src="../scripts/edit-project.js"></script>
+<script src="../scripts/edit-team.js"></script>
 
-<script src="../scripts/add-task.js"></script>
+<!--<script src="../scripts/add-task.js"></script>
 
 <script src="../scripts/toggleTaskOptions.js"></script>
 

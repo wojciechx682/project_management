@@ -228,6 +228,10 @@
         return $result;
     }
 
+    function getTeamForEdit($result) {
+        return $result;
+    }
+
     function updateProject($connection) {
         return true; // lub bardziej złożona logika jeśli potrzebna
     }

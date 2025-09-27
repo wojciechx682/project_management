@@ -77,7 +77,7 @@ document.getElementById("add-team-form").addEventListener("submit", function (ev
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                resultDiv.innerHTML = "<span class='success'>Team added successfully!</span>";
+                resultDiv.innerHTML = "<span class='success'>Team added successfully</span>";
 
                 // Generowanie HTML nowego wiersza
                 const newTeamHTML = `
