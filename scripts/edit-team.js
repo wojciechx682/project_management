@@ -33,67 +33,71 @@ function toggleEditTeamWindow(teamId) {
         });
 }
 
-function closeEditProjectWindow() {
-    console.log("closeEditProjectWindow function");
-    let editWindow = document.querySelector("#edit-project");
+function closeEditTeamWindow() {
+
+    console.log("closeEditTeamWindow function");
+
+    let editWindow = document.querySelector("#edit-team-window");
     let mainContainer = document.getElementById("main-container");
 
-    if(editWindow) editWindow.classList.add("hidden");
-    if(mainContainer) mainContainer.classList.remove("unreachable");
+    if (editWindow) {
+        editWindow.classList.add("hidden");
+    }
+    if (mainContainer) {
+        mainContainer.classList.remove("unreachable");
+    }
 }
 
-// Zamykanie formularza po naciśnięciu Esc
+// Zamykanie formularza edycji zespołu po naciśnięciu Esc
 document.addEventListener("keydown", function(event) {
-    let editWindow = document.querySelector("#edit-project");
-    if(!editWindow || editWindow.classList.contains("hidden")) return;
+    let editWindow = document.querySelector("#edit-team-window");
+    if (!editWindow || editWindow.classList.contains("hidden")) return;
 
-    if(event.key === "Escape") {
-        closeEditProjectWindow();
+    if (event.key === "Escape") {
+        closeEditTeamWindow();
     }
 });
 
+
 // Obsługa formularza edycji
-document.getElementById("edit-project-form").addEventListener("submit", function(event) {
+// Obsługa formularza edycji zespołu
+document.getElementById("edit-team-form").addEventListener("submit", function(event) {
 
     event.preventDefault();
 
     const resultDiv = document.getElementById("result");
     const formData = new FormData(this);
 
-    // Walidacja danych
-    const title = formData.get("title").trim();
-    const description = formData.get("description").trim();
-    const status = formData.get("status");
-    const startDate = formData.get("start_date");
-    const endDate = formData.get("end_date");
+    // Pobranie i walidacja danych
     const teamId = formData.get("team_id");
+    const teamName = formData.get("team_name").trim();
 
-    // Walidacja DOMPurify
-    const cleanTitle = DOMPurify.sanitize(title);
-    const cleanDescription = DOMPurify.sanitize(description);
-    const cleanStatus = DOMPurify.sanitize(status);
-    const cleanStartDate = DOMPurify.sanitize(startDate);
-    const cleanEndDate = DOMPurify.sanitize(endDate);
     const cleanTeamId = DOMPurify.sanitize(teamId);
+    const cleanTeamName = DOMPurify.sanitize(teamName);
+
+    if (!cleanTeamId || !cleanTeamName) {
+        resultDiv.innerHTML = "<span class='error'>Please provide a valid team name</span>";
+        return;
+    }
 
     // Wysłanie danych do serwera
-    fetch("updateProject.php", {
+    fetch("updateTeam.php", {
         method: "POST",
         body: formData
     })
         .then(response => response.json())
         .then(data => {
-            if(data.success) {
-                resultDiv.innerHTML = "<span class='success'>Project updated successfully!</span>";
+            if (data.success) {
+                resultDiv.innerHTML = "<span class='success'>Team updated successfully!</span>";
 
                 // Odśwież stronę, aby pokazać zmiany
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);
 
-                closeEditProjectWindow();
+                closeEditTeamWindow();
             } else {
-                resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to update project'}</span>`;
+                resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to update team'}</span>`;
             }
         })
         .catch(error => {
@@ -101,11 +105,3 @@ document.getElementById("edit-project-form").addEventListener("submit", function
             resultDiv.innerHTML = "<span class='error'>An error occurred. Please try again</span>";
         });
 });
-
-// Dodaj obsługę przycisku Edit w projekcie
-/*
-document.querySelector('.btn-link-tasks').addEventListener('click', function() {
-    // Pobierz ID projektu z URL lub innego miejsca
-    const projectId = <?php echo $_SESSION["selected_project_id"]; ?>;
-    toggleEditProjectWindow(projectId);
-});*/
