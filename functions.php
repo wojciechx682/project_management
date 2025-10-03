@@ -58,7 +58,7 @@
             //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
             $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('j F Y');
             $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('j F Y');
-            echo sprintf($project, $row["id"], $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $row["team_name"]);
+            echo sprintf($project, $row["id"], $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $row["team_id"], $row["team_name"]);
         }
     }
 
@@ -308,7 +308,19 @@
 
     function checkIfTeamNameExists($result) {
         $row = $result->fetch(PDO::FETCH_ASSOC);
-        return $row["name"];
+        return $row ? true : false;
+    }
+
+    function getAvailableUsersForTeam($result) {
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function getUserForTeam($result) {
+        return $result->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function checkIfUserInTeam($result) {
+        return $result->fetch() ? true : false;
     }
 
     function query($query, $fun, $values) {

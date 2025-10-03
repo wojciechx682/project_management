@@ -25,7 +25,7 @@
 
             // Sprawdź, czy nazwa zespołu już istnieje
             $teamExists = query("SELECT id FROM team WHERE name=? AND id != ? LIMIT 1", "checkIfTeamNameExists", [$teamName, $id]);
-            if ($teamExists === true) {
+            if ($teamExists) {
                 $response["success"] = false;
                 $response["message"] = "Team name already exists";
                 echo json_encode($response);

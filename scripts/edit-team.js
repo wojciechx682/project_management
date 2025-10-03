@@ -88,7 +88,7 @@ document.getElementById("edit-team-form").addEventListener("submit", function(ev
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                resultDiv.innerHTML = "<span class='success'>Team updated successfully!</span>";
+                resultDiv.innerHTML = "<span class='success'>Team updated successfully</span>";
 
                 // Odśwież stronę, aby pokazać zmiany
                 setTimeout(() => {

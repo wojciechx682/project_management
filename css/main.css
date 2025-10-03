@@ -456,8 +456,14 @@ div.project, div.project-details, div.task, div.users, div.team {
     margin-top: 20px;
 }
 
-.project, div.project-details, div.task, div.users, div.task-details, .team,
-div.team-details {
+.project,
+div.project-details,
+div.task,
+div.users,
+div.task-details,
+.team,
+div.team-details,
+div.team-member {
     border: 1px ridge rgba(166, 166, 166, 0.38);
     border-radius: 15px;
     margin: 0px auto 40px auto;
@@ -558,7 +564,16 @@ div.users {
 .team-members-count,
 
 .team-details-name-left,
-.team-details-name
+.team-details-name,
+
+.team-member-id,
+.team-member-first-name,
+.team-member-last-name,
+.team-member-email,
+.team-member-role,
+.team-member-created-at,
+.team-member-updated-at,
+.team-member-manage
 {
     /* border: 1px dashed black; */
     /* border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
@@ -780,7 +795,8 @@ div.team-details:first-of-type {
 #add-task div.task-details:first-of-type,
 
 #add-team div.team-details:first-of-type,
-#edit-team-window div.team-details:first-of-type
+#edit-team-window div.team-details:first-of-type,
+#add-user div.team-details:first-of-type
 {
     border-radius: 0;
 }
@@ -874,7 +890,8 @@ div#task-details div.project-details:nth-of-type(9) {
 #edit-task .task-details-assigned-user,
 
 #add-team .team-details-name,
-#edit-team-window .team-details-name
+#edit-team-window .team-details-name,
+#add-user .team-details-name
 {
     width: 85%;
     text-align: left;
@@ -932,7 +949,8 @@ div#task-details div.project-details:nth-of-type(9) {
 #edit-task .task-details input.task-details-name,
 
 #add-team .team-details input.team-details-name,
-#edit-team-window .team-details input.team-details-name
+#edit-team-window .team-details input.team-details-name,
+#add-user .team-details select.team-details-name
 {
     border: none;
     outline: none;
@@ -1207,18 +1225,38 @@ div#task-details div.project-details:nth-of-type(9) {
 #edit-task .task-details-assigned-user-left,
 
 #add-team .team-details-name-left,
-#edit-team-window .team-details-name-left
+#edit-team-window .team-details-name-left,
+#add-user .team-details-name-left
 {
     /*text-align: right;
     padding-right: 10px;*/
     width: 15%;
 }
 
-.task-id, .task-title, .task-desc, .task-priority, .task-status, .task-due-date, .task-project-id, .task-assigned-user, .task-created-at, .task-updated-at, div.task-manage {
+.task-id,
+.task-title,
+.task-desc,
+.task-priority,
+.task-status,
+.task-due-date,
+.task-project-id,
+.task-assigned-user,
+.task-created-at,
+.task-updated-at,
+div.task-manage,
+.team-member-first-name,
+.team-member-last-name,
+.team-member-email,
+.team-member-role,
+.team-member-created-at,
+.team-member-updated-at,
+.team-member-manage {
     width: 13.571%;
 }
 
-div.task {
+div.task,
+div.team-member,
+div.team-member-content {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 0;
@@ -1226,19 +1264,22 @@ div.task {
     margin: 0;
 }
 
-div.task-content {
+div.task-content,
+div.team-member-content {
     border-radius: 0;
 }
 
-div.task-assigned-user, div.task-created-at {
+div.task-assigned-user, div.task-created-at, div.team-member-created-at, div.team-member-updated-at {
     border-right: 1px ridge rgba(166, 166, 166, 0.38);
 }
 
-div.task-id {
+div.task-id, div.team-member-id {
     width: 5%;
 }
 
-div.task-updated-at, div.task-manage {
+div.task-updated-at,
+div.task-manage,
+div.team-member-manage {
     border-right: 0;
 }
 
@@ -1254,7 +1295,8 @@ div.task-updated-at, div.task-manage {
 #edit-task,
 
 #add-team,
-#edit-team-window {
+#edit-team-window,
+#add-user {
     /*height: 310px;*/
     height: 750px;
     width: 750px;
@@ -1302,7 +1344,8 @@ div.task-updated-at, div.task-manage {
 #edit-task > h2,
 
 #add-team > h2,
-#edit-team-window > h2
+#edit-team-window > h2,
+#add-user > h2
 {
     margin-left: 20px;
     margin-top: 25px;
@@ -1472,12 +1515,15 @@ div.update-status button {
     user-select: none;
 }
 
-div.task-title a {
+div.task-title a,
+div.team-member-first-name a
+{
     color: black;
     text-decoration: none;
 }
 
-div.task-title a:hover {
+div.task-title a:hover,
+div.team-member-first-name a:hover {
     text-decoration: underline;
 }
 
@@ -1564,14 +1610,16 @@ div#projects::after {
 }
 
 div.user-action-button:hover,
-div.task-action-button:hover
+div.task-action-button:hover,
+div.team-member-action-button:hover
 {
     user-select: none;
     cursor: pointer;
 }
 
 div.user-action-button,
-div.task-action-button
+div.task-action-button,
+div.team-member-action-button
 {
     position: relative;
     top: -3px;
@@ -1584,7 +1632,8 @@ div.task-action-button
 }
 
 div.user-options-container,
-div.task-options-container {
+div.task-options-container,
+div.team-member-options-container {
     /*border: 1px solid red;*/
     width: 120px;
     height: 55px;
@@ -1595,7 +1644,8 @@ div.task-options-container {
 }
 
 div.user-action-options,
-div.task-action-options
+div.task-action-options,
+div.team-member-action-options
 {
     z-index: 100;
     position: absolute;
@@ -1613,7 +1663,8 @@ div.task-action-options
 }
 
 div.user-option,
-div.task-option
+div.task-option,
+div.team-member-option
 {
     border-bottom: 1px ridge rgba(210, 210, 210, 0.38);
     padding-bottom: 5px;
@@ -1791,6 +1842,6 @@ div.team .team-members-count {
     width: 10%;
 }
 
-div#add-team, div#edit-team-window {
+div#add-team, div#edit-team-window, div#add-user {
     height: 200px;
 }

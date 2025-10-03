@@ -53,7 +53,7 @@
 <?php require "../template/edit-team-window.php"; ?>
 
 
-<?php /*require "../template/add-task-window.php";*/ ?>
+<?php require "../template/add-user-window.php"; ?>
 
 <?php /*require "../template/edit-task-window.php";*/ ?>
 
@@ -63,9 +63,9 @@
 
 <script src="../scripts/edit-team.js"></script>
 
-<!--<script src="../scripts/add-task.js"></script>
+<script src="../scripts/add-user.js"></script>
 
-<script src="../scripts/toggleTaskOptions.js"></script>
+<!--<script src="../scripts/toggleTaskOptions.js"></script>
 
 <script src="../scripts/edit-task.js"></script>
 

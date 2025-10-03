@@ -7,7 +7,21 @@
         <div class="project-list">
 
         <?php
-            query("SELECT project.id, project.name, project.description, project.start_date, project.end_date, project.status, project.created_at, project.updated_at, team.name AS team_name FROM project JOIN team ON project.team_id = team.id JOIN team_user ON team_user.team_id = team.id WHERE team_user.user_id = ?", "getAllProjects", [$_SESSION['id']]);
+            query("SELECT 
+                            project.id, 
+                            project.name, 
+                            project.description, 
+                            project.start_date, 
+                            project.end_date, 
+                            project.status, 
+                            project.created_at, 
+                            project.updated_at, 
+                            team.id AS team_id,
+                            team.name AS team_name
+                        FROM project
+                        JOIN team ON project.team_id = team.id
+                        JOIN team_user ON team_user.team_id = team.id
+                        WHERE team_user.user_id = ?", "getAllProjects", [$_SESSION['id']]);
         ?>
 
         </div>
