@@ -69,5 +69,7 @@
 
 <script src="../scripts/delete-task.js"></script>
 
+<script src="../scripts/search.js"></script>
+
 </body>
 </html>

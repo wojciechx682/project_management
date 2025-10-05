@@ -19,6 +19,12 @@ function toggleDeleteTaskWindow(taskId) {
                     taskHeader.remove();
                 }
                 resultDiv.innerHTML = '<span class="success">Task deleted successfully!</span>';
+
+                // Odśwież stronę, aby pokazać zmiany
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+
             } else {
                 resultDiv.innerHTML = `<span class="error">${data.message}</span>`;
             }

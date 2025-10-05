@@ -28,5 +28,7 @@
 
 <script src="../scripts/add-team.js"></script>
 
+<script src="../scripts/search.js"></script>
+
 </body>
 </html>

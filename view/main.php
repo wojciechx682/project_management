@@ -17,4 +17,29 @@
             ?>
         </div>
     </div>
+
+    <div id="teams">
+        <div id="teams-left">
+            <a href="teams.php">
+                <i class="icon-adult"></i>
+            </a>
+        </div>
+        <div id="teams-right">
+            <div class="tile-title">
+                <a href="teams.php">Teams</a>
+            </div>
+            <?php
+                query("SELECT COUNT(*) AS numberOfTeams
+                             FROM team_user 
+                             WHERE user_id = ?", "displayNumberOfTeams", [$_SESSION["id"]]);
+
+                query("SELECT COUNT(DISTINCT tu2.user_id) AS numberOfMembers
+                             FROM team_user tu1
+                             JOIN team_user tu2 ON tu1.team_id = tu2.team_id
+                             WHERE tu1.user_id = ?",
+                        "displayNumberOfMembers",
+                            [$_SESSION['id']]);
+            ?>
+        </div>
+    </div>
 </div>

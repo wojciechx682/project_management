@@ -27,8 +27,8 @@
         </div>
         <div class="team-member-options-container">
             <div class="team-member-action-options hidden">
-                <div class="team-member-option" onclick="toggleEditTaskWindow()">Edit</div>
-                <div class="team-member-option team-member-option-delete" onclick="toggleDeleteTaskWindow()">Delete</div>
+                <!--<div class="team-member-option" onclick="toggleEditTaskWindow()">Edit</div>-->
+                <div class="team-member-option team-member-option-delete" onclick="toggleDeleteUserWindow(%s)">Delete</div>
             </div>
         </div>
     </div>

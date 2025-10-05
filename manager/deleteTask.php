@@ -2,8 +2,8 @@
     require_once "../start-session.php";
     if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Project Manager") {
         $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
-            header("Location: ../index.php");
-                exit();
+        header("Location: ../index.php");
+        exit();
     }
 
     $response = ["success" => false, "message" => ""];
@@ -14,8 +14,8 @@
 
         if (!$taskId) {
             $response["message"] = "Invalid task ID";
-                echo json_encode($response);
-                    exit();
+            echo json_encode($response);
+            exit();
         }
 
         $success = query("DELETE FROM task WHERE id = ?", "deleteTask", $taskId);

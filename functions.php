@@ -120,7 +120,7 @@
             $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
             //$updatedAt = htmlspecialchars($row["updated_at"], ENT_QUOTES, "UTF-8");
             $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
-            echo sprintf($teamDetails, $id, $firstName, $lastName, $email, $role, $createdAt, $updatedAt);
+            echo sprintf($teamDetails, $id, $firstName, $lastName, $email, $role, $createdAt, $updatedAt, $id);
         }
     }
 
@@ -283,6 +283,28 @@
         echo '<span class="projects-info">'.$row["numberOfTasks"]." ".$numberOfTasks.'</span>';
     }
 
+    function displayNumberOfTeams($result) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $numberOfTeams = "";
+        if ($row["numberOfTeams"] >= 2) {
+            $numberOfTeams = "Teams";
+        } else {
+            $numberOfTeams = "Team";
+        }
+        echo '<span class="projects-info">'.$row["numberOfTeams"]." ".$numberOfTeams.'</span>';
+    }
+
+    function displayNumberOfMembers($result) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $numberOfMembers = "";
+        if ($row["numberOfMembers"] >= 2) {
+            $numberOfMembers = "Members";
+        } else {
+            $numberOfMembers = "Member";
+        }
+        echo '<span class="projects-info">'.$row["numberOfMembers"]." ".$numberOfMembers.'</span>';
+    }
+
     function fetchPasswordResetEntry($result) {
         // Zwraca pierwszy (powinien być tylko jeden) znaleziony wpis resetu hasła jako tablicę asocjacyjną
         return $result->fetch(PDO::FETCH_ASSOC);
@@ -321,6 +343,18 @@
 
     function checkIfUserInTeam($result) {
         return $result->fetch() ? true : false;
+    }
+
+    function deleteUser($connection) {
+        return true;
+    }
+
+    function getUserRoleForDelete($stmt) {
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function fetchAllAssoc($stmt) {
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function query($query, $fun, $values) {

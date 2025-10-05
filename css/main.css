@@ -1533,16 +1533,23 @@ span#role {
 
 /* ----------------------------------------------------------- */
 
-div#projects {
+div#projects, div#teams {
     border: 2px solid #d0d0d0;
     width: 375px;
     height: 230px;
     border-radius: 8px;
    /* padding: 10px;*/
     background-color: #f5f5f5;
+
+    display: inline-block;
 }
 
-div#projects-left {
+div#projects {
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+div#projects-left, div#teams-left {
     float: left;
     width: 120px;              /* dowolna stała szerokość kolumny */
     height: 230px;
@@ -1550,11 +1557,12 @@ div#projects-left {
     position: relative;        /* KLUCZ: rodzic dla absolutnego centrowania */
 }
 
-div#projects-left a {
+div#projects-left a, div#teams-left a {
     color: black;
 }
 /* ikona wyśrodkowana w pionie i poziomie */
-div#projects-left i.icon-th-large {
+div#projects-left i.icon-th-large,
+div#teams-left i.icon-adult {
     position: absolute;        /* KLUCZ */
     top: 50%;
     left: 50%;
@@ -1563,13 +1571,17 @@ div#projects-left i.icon-th-large {
     line-height: 1;
     transition: color .3s ease;
 }
-div#projects-left i.icon-th-large:hover {
+div#projects-left i.icon-th-large:hover,
+div#teams-left i.icon-adult:hover
+{
     color: #505050;
     cursor: pointer;
 }
 
 /* prawa część (tekst) */
-div#projects-right {
+div#projects-right,
+div#teams-right
+{
     padding-left: 10px;
     padding-top: 10px;
     float: left;
@@ -1580,7 +1592,9 @@ div#projects-right {
 }
 
 /* porządek po float’ach (zamiast <div style="clear: both;">) */
-div#projects::after {
+div#projects::after,
+div#teams::after
+{
     content: "";
     display: block;
     clear: both;
@@ -1844,4 +1858,80 @@ div.team .team-members-count {
 
 div#add-team, div#edit-team-window, div#add-user {
     height: 200px;
+}
+
+
+/* ------------------------------------------------------- */
+
+#global-search {
+    /*padding: 6px;*/
+    width: 250px;
+    /*border: 1px solid #ccc;
+    border-radius: 4px;*/
+
+    /*min-width: 165px;*/
+    /*width: calc(100% * 0.75);*/
+    color: #707070;
+    border: 1px ridge #b7b7b7;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 8px;
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 25px;
+    margin-left: 15px;
+}
+
+#global-search:focus,
+#global-search:hover {
+    cursor: pointer;
+    -webkit-box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
+    -moz-box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
+    box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
+}
+
+#global-search::placeholder {
+    font-weight: normal;
+}
+
+#search-results {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 260px;
+    left: 315px;
+    margin-top: 5px;
+    padding: 10px;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+#search-results.hidden {
+    display: none;
+}
+
+#search-results h4 {
+    margin: 8px 0 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+    border-bottom: 1px solid #eee;
+}
+
+.search-item {
+    padding: 4px 0;
+}
+
+.search-item button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+}
+
+.search-item button:hover {
+    text-decoration: underline;
 }

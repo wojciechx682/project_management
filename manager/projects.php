@@ -28,5 +28,7 @@
 
 <script src="../scripts/add-project.js"></script>
 
+<script src="../scripts/search.js"></script>
+
 </body>
 </html>

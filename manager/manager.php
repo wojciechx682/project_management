@@ -20,5 +20,7 @@
 
 <?php require "../view/main.php"; ?>
 
+<script src="../scripts/search.js"></script>
+
 </body>
 </html>

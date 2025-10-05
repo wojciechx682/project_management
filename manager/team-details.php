@@ -65,11 +65,13 @@
 
 <script src="../scripts/add-user.js"></script>
 
-<!--<script src="../scripts/toggleTaskOptions.js"></script>
+<script src="../scripts/toggleUserOptions.js"></script>
 
-<script src="../scripts/edit-task.js"></script>
+<!--<script src="../scripts/edit-task.js"></script>-->
 
-<script src="../scripts/delete-task.js"></script>-->
+<script src="../scripts/delete-user.js"></script>
+
+<script src="../scripts/search.js"></script>
 
 </body>
 </html>
