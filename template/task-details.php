@@ -29,6 +29,7 @@
         </div>
         <div class="task-options-container">
             <div class="task-action-options hidden">
+                <div class="task-option" onclick="toggleAddCommentWindow(%s)">Add comment</div>
                 <div class="task-option" onclick="toggleEditTaskWindow(%s)">Edit</div>
                 <div class="task-option task-option-delete" onclick="toggleDeleteTaskWindow(%s)">Delete</div>
             </div>

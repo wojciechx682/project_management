@@ -50,8 +50,9 @@
 
 <?php require "../template/edit-project-window.php"; ?>
 
-
 <?php require "../template/add-task-window.php"; ?>
+
+<?php require "../template/add-comment-window.php"; ?>
 
 <?php require "../template/edit-task-window.php"; ?>
 
@@ -64,6 +65,8 @@
 <script src="../scripts/add-task.js"></script>
 
 <script src="../scripts/toggleTaskOptions.js"></script>
+
+<script src="../scripts/add-comment.js"></script>
 
 <script src="../scripts/edit-task.js"></script>
 
