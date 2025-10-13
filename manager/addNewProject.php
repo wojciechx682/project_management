@@ -2,8 +2,8 @@
     require_once "../start-session.php";
     if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Project Manager") {
         $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
-            header("Location: ../index.php");
-                exit();
+        header("Location: ../index.php");
+        exit();
     }
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
@@ -35,8 +35,8 @@
                 $teamId === false || $teamId != $_POST["team_id"]
             ) {
                 $response["error"] = "An error occurred. Please provide valid information";
-                    echo json_encode($response);
-                        exit();
+                echo json_encode($response);
+                exit();
             } else {
 
                 switch ($status) {

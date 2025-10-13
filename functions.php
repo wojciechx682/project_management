@@ -199,6 +199,10 @@
         return $connection->lastInsertId();
     }
 
+    function addNewComment($connection) {
+        return $connection->lastInsertId();
+    }
+
     function addNewTeam($connection) {
         //return $connection->insert_id;
         return $connection->lastInsertId();

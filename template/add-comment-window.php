@@ -8,6 +8,7 @@
 
     <form id="add-comment-form" method="post" action="addComment.php">
 
+        <!-- Ukryte pole z ID zadania -->
         <input type="hidden" id="comment-task-id" name="task_id" value="%s">
 
         <div class="task-details">
