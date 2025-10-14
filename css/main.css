@@ -5,15 +5,15 @@
 body {
     background-color: #e8e8e8;
     font-family: 'Lato', sans-serif;
-    /*position: relative;
-    height: 100vh;
-    margin: 0;*/
     margin: 0;
-    overflow: scroll;
+    height: 100%;
+    overflow-y: auto;  /* zamiast scroll – pozwala działać 100vh */
+}
 
-    /*background-image: url("../assets/img/background.png");
-    height: 100vh;
-    background-size: cover;*/
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #login, #reset, #reset-password-form {
@@ -284,8 +284,6 @@ div#profile-container .error {
 
 nav #nav {
     width: 300px;
-    /*width: 30vw;*/
-    /*width: 300px;*/
     height: 100vh; /* 100% wysokości ekranu */
     background-color: #25273a;
 }
@@ -1934,4 +1932,83 @@ div#add-team, div#edit-team-window, div#add-user {
 
 .search-item button:hover {
     text-decoration: underline;
+}
+
+/* Główny wrapper na sekcję komentarzy */
+#comments {
+    /*max-height: 350px;*/       /* kontrolowana wysokość całej sekcji */
+    overflow-y: auto;        /* przewijanie tylko tutaj */
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Kontener na wszystkie komentarze */
+.comments-container. .main-comment {
+    padding: 10px;
+    background-color: #fafafa;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+}
+
+.main-comment {
+    padding: 10px;
+    background-color: #fafafa;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    margin: 10px 0 10px 0;
+}
+
+/* Pojedynczy komentarz */
+.comment {
+    margin-bottom: 15px;
+    clear: both;
+}
+
+/* Nagłówek komentarza (autor + data) */
+.comment-header {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.comment-author {
+    float: left;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.comment-date {
+    float: right;
+    font-size: 12px;
+    color: #777;
+}
+
+/* Treść komentarza */
+.comment-content {
+    clear: both;
+    padding-top: 5px;
+    padding-left: 5px;
+    color: #333;
+    line-height: 1.4em;
+    word-wrap: break-word;
+}
+
+/* Ostatni komentarz bez marginesu dolnego */
+.comment:last-child {
+    margin-bottom: 0;
+}
+
+nav {
+    float: left;
+    color: #d3d3d3;
+    height: 100vh;           /* pełna wysokość widoku */
+    position: fixed;         /* przyklejony do lewej krawędzi */
+    top: 0;
+    left: 0;
+}
+
+nav #nav {
+    width: 300px;
+    height: 100%;
+    background-color: #25273a;
 }

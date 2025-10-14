@@ -72,20 +72,6 @@
         }
     }
 
-    function getProjectDetails($result) {
-        //require "../view/manager/project-header.php"; // table header;
-        $projectDetails = file_get_contents("../template/project-details.php");
-        //$row = $result->fetch_assoc();
-        $row = $result->fetch(PDO::FETCH_ASSOC);
-        //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
-        //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
-        $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('j F Y');
-        $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('j F Y');
-        $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
-        $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
-        echo sprintf($projectDetails, $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $createdAt, $updatedAt, $row["team_name"]);
-    }
-
     function getTaskDetails($result) {
         require "../view/manager/task-header.php"; // table header;
         $taskDetails = file_get_contents("../template/task-details.php");
@@ -103,6 +89,7 @@
             $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
             //$updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
             echo sprintf($taskDetails, $id, $id, $title, $priority, $status, $dueDate, $firstName, $lastName, $createdAt, $id, $id, $id);
+            //echo sprintf($taskDetails, $id, $title, $priority, $status, $dueDate, $firstName, $lastName, $createdAt, $id, $id, $id);
         }
     }
 
@@ -124,8 +111,22 @@
         }
     }
 
+    function getProjectDetails($result) {
+        //require "../view/manager/project-header.php"; // table header;
+        $projectDetails = file_get_contents("../template/project-details.php");
+        //$row = $result->fetch_assoc();
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
+        //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
+        $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('j F Y');
+        $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('j F Y');
+        $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
+        $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
+        echo sprintf($projectDetails, $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $createdAt, $updatedAt, $row["team_name"]);
+    }
+
     function getTasks($result) {
-        $taskDetails = file_get_contents("../template/task-details-window.php");
+        $taskDetails = file_get_contents("../template/tasks-details.php");
         //$row = $result->fetch_assoc();
         $row = $result->fetch(PDO::FETCH_ASSOC);
         // Oczyszczanie wszystkich danych przed wyświetleniem
@@ -144,7 +145,30 @@
         echo sprintf($taskDetails, $id, $title, $description, $priority, $status, $dueDate, $projectName, $firstName, $lastName, $createdAt, $updatedAt);
     }
 
-    function getTeamDetails($result) {
+    function getTaskComments($result) {
+
+        $comment = file_get_contents("../template/comment.php");
+
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            // Oczyszczanie danych
+            $authorFirst = htmlspecialchars($row["first_name"], ENT_QUOTES, "UTF-8");
+            $authorLast = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
+            $content = htmlspecialchars($row["content"], ENT_QUOTES, "UTF-8");
+            $createdAt = DateTime::createFromFormat("Y-m-d H:i:s", $row["created_at"])->format("j F Y, H:i");
+
+            // Wypisanie szablonu z danymi
+            echo sprintf(
+                $comment,
+                $authorFirst,
+                $authorLast,
+                $createdAt,
+                $content
+            );
+        }
+    }
+
+
+function getTeamDetails($result) {
         //require "../view/manager/project-header.php"; // table header;
         $teamDetails = file_get_contents("../template/team-details.php");
         //$row = $result->fetch_assoc();

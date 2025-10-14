@@ -14,7 +14,14 @@
 <div class="task task-content">
     <div class="task-id">%s</div>
     <div class="task-title">
-        <a href="#" onclick="toggleTaskDetails(%s)">%s</a>
+        <!--<a href="#" onclick="toggleTaskDetails(s)">s</a>-->
+
+        <form action="task-details.php" method="post">
+            <input type="hidden" name="task_id" value="%s">
+            <button class="submit-order-form" type="submit">
+                %s
+            </button>
+        </form>
     </div>
     <!--<div class="task-desc"></div>-->
     <div class="task-priority">%s</div>
