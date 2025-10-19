@@ -93,6 +93,27 @@
         }
     }
 
+    function getTaskDetailsForUser($result) {
+        require "../view/user/task-header.php"; // table header;
+        $taskDetails = file_get_contents("../template/user/task-details.php");
+        //while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            // Oczyszczanie danych
+            $id = htmlspecialchars($row["id"], ENT_QUOTES, "UTF-8");
+            $title = htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8");
+            $priority = htmlspecialchars($row["priority"], ENT_QUOTES, "UTF-8");
+            $status = htmlspecialchars($row["status"], ENT_QUOTES, "UTF-8");
+            $firstName = htmlspecialchars($row["first_name"], ENT_QUOTES, "UTF-8");
+            $lastName = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
+            // Formatowanie dat
+            $dueDate = DateTime::createFromFormat('Y-m-d', $row["due_date"])->format('j F Y');
+            $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
+            //$updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
+            echo sprintf($taskDetails, $id, $id, $title, $priority, $status, $dueDate, $firstName, $lastName, $createdAt, $id, $id, $id);
+            //echo sprintf($taskDetails, $id, $title, $priority, $status, $dueDate, $firstName, $lastName, $createdAt, $id, $id, $id);
+        }
+    }
+
     function getTeamMembers($result) {
         require "../view/manager/team-header.php"; // table header;
         $teamDetails = file_get_contents("../template/team-members-details.php");
@@ -136,6 +157,26 @@
         $priority = htmlspecialchars($row["priority"], ENT_QUOTES, "UTF-8");
         $status = htmlspecialchars($row["status"], ENT_QUOTES, "UTF-8");
         $projectName = htmlspecialchars($row["name"], ENT_QUOTES, "UTF-8");
+        $firstName = htmlspecialchars($row["first_name"], ENT_QUOTES, "UTF-8");
+        $lastName = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
+        // Formatowanie dat (już po oczyszczaniu)
+        $dueDate = DateTime::createFromFormat('Y-m-d', $row["due_date"])->format('j F Y');
+        $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
+        $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
+        echo sprintf($taskDetails, $id, $title, $description, $priority, $status, $dueDate, $projectName, $firstName, $lastName, $createdAt, $updatedAt);
+    }
+
+    function getTasksForUser($result) {
+        $taskDetails = file_get_contents("../template/user/tasks-details.php");
+        //$row = $result->fetch_assoc();
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        // Oczyszczanie wszystkich danych przed wyświetleniem
+        $id = htmlspecialchars($row["id"], ENT_QUOTES, "UTF-8");
+        $title = htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8");
+        $description = htmlspecialchars($row["description"], ENT_QUOTES, "UTF-8");
+        $priority = htmlspecialchars($row["priority"], ENT_QUOTES, "UTF-8");
+        $status = htmlspecialchars($row["status"], ENT_QUOTES, "UTF-8");
+        $projectName = htmlspecialchars($row["project_name"], ENT_QUOTES, "UTF-8");
         $firstName = htmlspecialchars($row["first_name"], ENT_QUOTES, "UTF-8");
         $lastName = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
         // Formatowanie dat (już po oczyszczaniu)
@@ -266,6 +307,10 @@ function getTeamDetails($result) {
 
     function updateTask($connection) {
         return true; // lub bardziej złożona logika jeśli potrzebna
+    }
+
+    function updateTaskStatus($connection) {
+        return true;
     }
 
     function verifyTaskExists($result) {

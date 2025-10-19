@@ -3,36 +3,36 @@ function toggleEditTaskWindow(taskId) {
 
     console.log("toggleEditTaskWindow function");
 
-    // Pobierz dane projektu (możesz to zrobić przez AJAX lub wcześniej załadować dane)
+    // Pobierz dane zadania (możesz to zrobić przez AJAX lub wcześniej załadować dane)
     fetch(`getTaskData.php?id=${taskId}`)
-        .then(response => response.json())
-        .then(data => {
-            if(data.success) {
-                // Wypełnij formularz danymi projektu
-                document.getElementById("edit-task-id").value = data.task.id;
-                document.getElementById("edit-task-title").value = data.task.title;
-                document.getElementById("edit-task-description").value = data.task.description;
-                document.getElementById("edit-task-priority").value = data.task.priority.toLowerCase();
-                document.getElementById("edit-task-status").value = data.task.status.toLowerCase().replace(' ', '_');
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Wypełnij formularz danymi projektu
+            document.getElementById("edit-task-id").value = data.task.id;
+            document.getElementById("edit-task-title").value = data.task.title;
+            document.getElementById("edit-task-description").value = data.task.description;
+            document.getElementById("edit-task-priority").value = data.task.priority.toLowerCase();
+            document.getElementById("edit-task-status").value = data.task.status.toLowerCase().replace(' ', '_');
 
-                // Konwersja dat do formatu YYYY-MM-DD (wymaganego przez input type="date")
-                const duedate = new Date(data.task.dueDate).toISOString().split('T')[0];
+            // Konwersja dat do formatu YYYY-MM-DD (wymaganego przez input type="date")
+            const duedate = new Date(data.task.dueDate).toISOString().split('T')[0];
 
-                document.getElementById("edit-task-due-date").value = duedate;
-                document.getElementById("edit-task-assigned-user-id").value = data.task.assigned_user_id;
+            document.getElementById("edit-task-due-date").value = duedate;
+            document.getElementById("edit-task-assigned-user-id").value = data.task.assigned_user_id;
 
-                // Otwórz okno edycji
-                let editWindow = document.querySelector("#edit-task");
-                let mainContainer = document.getElementById("main-container");
+            // Otwórz okno edycji
+            let editWindow = document.querySelector("#edit-task");
+            let mainContainer = document.getElementById("main-container");
 
-                editWindow.classList.remove("hidden");
-                mainContainer.classList.add("unreachable");
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            document.getElementById("result").innerHTML = "<span class='error'>Failed to load task data</span>";
-        });
+            editWindow.classList.remove("hidden");
+            mainContainer.classList.add("unreachable");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("result").innerHTML = "<span class='error'>Failed to load task data</span>";
+    });
 }
 
 function closeEditTaskWindow() {
@@ -104,10 +104,3 @@ document.getElementById("edit-task-form").addEventListener("submit", function(ev
         });
 });
 
-// Dodaj obsługę przycisku Edit w projekcie
-/*
-document.querySelector('.btn-link-tasks').addEventListener('click', function() {
-    // Pobierz ID projektu z URL lub innego miejsca
-    const projectId = <?php echo $_SESSION["selected_project_id"]; ?>;
-    toggleEditTaskWindow(projectId);
-});*/

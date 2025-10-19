@@ -13,13 +13,13 @@
 
         </div>
 
-        <a href="manager.php">
+        <a href="user.php">
             <h3>
                 <i class="icon-home"></i>Home
             </h3>
         </a>
         <hr class="nav-hr">
-        <a href="projects.php">
+        <a href="#">
             <h3>
                 <i class="icon-th-large"></i>Projects
             </h3>
@@ -37,7 +37,5 @@
             </h3>
         </a>
         <hr class="nav-hr">
-
-
     </div>
 </nav>

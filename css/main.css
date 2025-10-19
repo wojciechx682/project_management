@@ -8,6 +8,8 @@ body {
     margin: 0;
     height: 100%;
     overflow-y: auto;  /* zamiast scroll – pozwala działać 100vh */
+
+
 }
 
 html, body {
@@ -1898,7 +1900,7 @@ div#add-team, div#edit-team-window, div#add-user {
     border: 1px solid #ccc;
     border-radius: 6px;
     width: 260px;
-    left: 315px;
+    left: 15px;
     margin-top: 5px;
     padding: 10px;
     z-index: 1000;
@@ -2012,3 +2014,129 @@ nav #nav {
     height: 100%;
     background-color: #25273a;
 }
+
+header {
+    margin-left: 300px;   /* odsuwamy header od lewego panelu */
+    width: calc(100% - 300px);  /* zajmuje resztę szerokości */
+    position: relative;   /* utrzymuje poprawne pozycjonowanie */
+    z-index: 10;          /* żeby był nad nawigacją */
+}
+
+/* --------------------------------------------- */
+/* CHANGE STATUS WINDOW */ /* do poprawy w przyszłości ! */
+/* --------------------------------------------- */
+
+#change-status {
+    height: 350px;                       /* podobnie jak #add-user */
+    width: 750px;
+    background-color: #31344d;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 90;
+    border-radius: 5px;
+    box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
+}
+
+#change-status.hidden {
+    display: none;
+}
+
+#change-status h2 {
+    margin-left: 20px;
+    margin-top: 25px;
+    color: #fafaff;
+    font-size: 1.2rem;
+    width: 690px;
+    display: inline-block;
+    user-select: none;
+}
+
+#change-status hr {
+    background-color: rgba(166, 166, 166, 0.7);
+    border: none;
+    height: 1px;
+    margin: 5px 15px 5px 15px;
+}
+
+/* ikonka zamknięcia */
+#change-status .icon-cancel {
+    display: inline-block;
+    padding-bottom: 2px;
+    position: relative;
+    top: -3px;
+    border-radius: 3px;
+    float: right;
+    margin-right: 25px;
+    color: #fafaff;
+}
+
+#change-status .icon-cancel:hover {
+    cursor: pointer;
+    user-select: none;
+    color: #c71616;
+    background-color: rgba(14, 14, 14, 0.4);
+}
+
+/* sekcje formularza */
+#change-status .team-details {
+    border: 1px ridge rgba(166, 166, 166, 0.38);
+    border-radius: 15px;
+    margin: 15px auto;
+    overflow: auto;
+    text-align: left !important;
+    width: 90%;
+    background-color: #f2f2f2;
+    padding: 10px 0;
+}
+
+#change-status .team-details-name-left {
+    width: 25%;
+    float: left;
+    text-align: right;
+    padding-right: 10px;
+    color: #1f1f1f;
+    font-weight: bold;
+}
+
+#change-status .team-details-name {
+    width: 70%;
+    float: left;
+    text-align: left;
+    padding-left: 10px;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: #1f1f1f;
+    background: transparent;
+}
+
+#change-status .team-details-name select,
+#change-status select.team-details-name {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    width: 100%;
+}
+
+#change-status .team-details-name select:focus {
+    border: none;
+    outline: none;
+}
+
+/* przycisk Update */
+#change-status .project-details.project-details-button {
+    border: 0;
+    text-align: center;
+}
+
+#change-status .btn-link.btn-submit-project {
+    margin-top: 15px;
+    width: 150px !important;
+}
+
+/* --------------------------------------------- */

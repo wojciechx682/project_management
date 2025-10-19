@@ -10,11 +10,14 @@
                          JOIN user ON task.assigned_user_id = user.id
                          WHERE task.assigned_user_id = ?
                          ORDER BY task.due_date ASC",
-                    "getTaskDetails",
+                    "getTaskDetailsForUser",
                     [$_SESSION['id']]
             );
 
 
         ?>
+
+        <div id="result"></div>
+
     </div>
 </main>
