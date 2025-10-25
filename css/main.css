@@ -796,7 +796,9 @@ div.team-details:first-of-type {
 
 #add-team div.team-details:first-of-type,
 #edit-team-window div.team-details:first-of-type,
-#add-user div.team-details:first-of-type
+#add-user div.team-details:first-of-type,
+
+#change-status div.team-details
 {
     border-radius: 0;
 }
@@ -891,7 +893,9 @@ div#task-details div.project-details:nth-of-type(9) {
 
 #add-team .team-details-name,
 #edit-team-window .team-details-name,
-#add-user .team-details-name
+#add-user .team-details-name,
+
+#change-statis .team-details-name
 {
     width: 85%;
     text-align: left;
@@ -950,7 +954,10 @@ div#task-details div.project-details:nth-of-type(9) {
 
 #add-team .team-details input.team-details-name,
 #edit-team-window .team-details input.team-details-name,
-#add-user .team-details select.team-details-name
+#add-user .team-details select.team-details-name,
+
+#change-status .team-details span.team-details-name,
+#change-status .team-details select.team-details-name
 {
     border: none;
     outline: none;
@@ -1226,7 +1233,9 @@ div#task-details div.project-details:nth-of-type(9) {
 
 #add-team .team-details-name-left,
 #edit-team-window .team-details-name-left,
-#add-user .team-details-name-left
+#add-user .team-details-name-left,
+
+#change-status .team-details-name-left
 {
     /*text-align: right;
     padding-right: 10px;*/
@@ -1296,7 +1305,8 @@ div.team-member-manage {
 
 #add-team,
 #edit-team-window,
-#add-user {
+#add-user,
+#change-status {
     /*height: 310px;*/
     height: 750px;
     width: 750px;
@@ -1345,7 +1355,8 @@ div.team-member-manage {
 
 #add-team > h2,
 #edit-team-window > h2,
-#add-user > h2
+#add-user > h2,
+#change-status > h2
 {
     margin-left: 20px;
     margin-top: 25px;
@@ -2027,8 +2038,8 @@ header {
 /* --------------------------------------------- */
 
 #change-status {
-    height: 350px;                       /* podobnie jak #add-user */
-    width: 750px;
+    height: 280px;                       /* podobnie jak #add-user */
+    /*width: 750px;
     background-color: #31344d;
     position: absolute;
     top: 50%;
@@ -2036,7 +2047,7 @@ header {
     transform: translate(-50%, -50%);
     z-index: 90;
     border-radius: 5px;
-    box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
+    box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);*/
 }
 
 #change-status.hidden {
@@ -2053,7 +2064,9 @@ header {
     user-select: none;
 }
 
-#change-status hr {
+#change-status hr,
+#add-user hr
+{
     background-color: rgba(166, 166, 166, 0.7);
     border: none;
     height: 1px;
@@ -2062,14 +2075,14 @@ header {
 
 /* ikonka zamknięcia */
 #change-status .icon-cancel {
-    display: inline-block;
+    /*display: inline-block;
     padding-bottom: 2px;
     position: relative;
     top: -3px;
     border-radius: 3px;
     float: right;
     margin-right: 25px;
-    color: #fafaff;
+    color: #fafaff;*/
 }
 
 #change-status .icon-cancel:hover {
@@ -2081,27 +2094,29 @@ header {
 
 /* sekcje formularza */
 #change-status .team-details {
-    border: 1px ridge rgba(166, 166, 166, 0.38);
+   /* border: 1px ridge rgba(166, 166, 166, 0.38);
     border-radius: 15px;
     margin: 15px auto;
     overflow: auto;
     text-align: left !important;
     width: 90%;
     background-color: #f2f2f2;
-    padding: 10px 0;
+    padding: 10px 0;*/
 }
 
 #change-status .team-details-name-left {
-    width: 25%;
+   /* width: 25%;
     float: left;
     text-align: right;
     padding-right: 10px;
     color: #1f1f1f;
-    font-weight: bold;
+    font-weight: bold;*/
+
+
 }
 
 #change-status .team-details-name {
-    width: 70%;
+    /*width: 70%;
     float: left;
     text-align: left;
     padding-left: 10px;
@@ -2110,17 +2125,18 @@ header {
     font-family: inherit;
     font-size: inherit;
     color: #1f1f1f;
-    background: transparent;
+    background: transparent;*/
+    width: 85%;
 }
 
 #change-status .team-details-name select,
 #change-status select.team-details-name {
-    border: none;
+   /* border: none;
     outline: none;
     background: transparent;
     font-family: inherit;
     font-size: inherit;
-    width: 100%;
+    width: 100%;*/
 }
 
 #change-status .team-details-name select:focus {
