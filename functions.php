@@ -143,7 +143,7 @@
         $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('j F Y');
         $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
         $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
-        echo sprintf($projectDetails, $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $createdAt, $updatedAt, $row["team_name"]);
+        echo sprintf($projectDetails, $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $createdAt, $updatedAt, $row["id"], $row["team_name"]);
     }
 
     function getTasks($result) {
@@ -428,6 +428,10 @@ function getTeamDetails($result) {
 
     function fetchAllAssoc($stmt) {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function getProjectsCount($result) {
+        return $result->fetchColumn();
     }
 
     function query($query, $fun, $values) {

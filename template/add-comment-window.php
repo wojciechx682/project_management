@@ -12,9 +12,9 @@
         <input type="hidden" id="comment-task-id" name="task_id" value="%s">
 
         <div class="task-details">
-            <label for="comment-content" class="task-details-desc-left project-details-desc-left">
+            <!--<label for="comment-content" class="task-details-desc-left project-details-desc-left">
                 Comment
-            </label>
+            </label>-->
             <textarea
                     id="comment-content"
                     name="content"
@@ -23,8 +23,7 @@
                     maxlength="255"
                     minlength="10"
                     required
-                    onfocus="resetError(this)">
-            </textarea>
+                    onfocus="resetError(this)"></textarea>
         </div>
 
         <span class="task-comment-error hidden">

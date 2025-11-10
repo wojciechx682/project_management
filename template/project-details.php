@@ -34,7 +34,14 @@
 </div>
 <div class="project-details">
     <div class="team-details-name-left">Team name</div>
-    <div class="team-details-name">%s</div>
+    <div class="team-details-name">
+        <form action="team-details.php" method="post">
+            <input type="hidden" name="team-id" value="%s">
+            <button class="submit-order-form" type="submit">
+                %s
+            </button>
+        </form>
+    </div>
 </div>
 
 <!--</div>-->
