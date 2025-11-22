@@ -11,35 +11,13 @@
         <form id="login-form" method="post" action="login.php">
             <span class="login-row">
                 <label for="email">E-mail</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    inputmode="email"
-                    autocomplete="username"
-                    autofocus
-                >
+                <input type="email" id="email" name="email" required inputmode="email" autocomplete="username" autofocus>
             </span>
             <span class="login-row">
                 <label for="password">Password</label>
                 <span class="password-field">
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        required
-                        autocomplete="current-password"
-                    >
-                    <button
-                        type="button"
-                        class="toggle-password"
-                        id="togglePass"
-                        aria-label="Pokaż hasło"
-                        aria-pressed="false"
-                        hidden
-                        title="Show/hide password"
-                    >
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                    <button type="button" class="toggle-password" id="togglePass" aria-label="Pokaż hasło" aria-pressed="false" hidden title="Show/hide password">
                     <i class="icon-eye" aria-hidden="true"></i>
                     </button>
                 </span>

@@ -49,6 +49,10 @@
 
 </div>
 
+<?php require "../template/edit-comment-window.php"; ?>
+
+<script src="../scripts/toggleCommentOptions.js"></script>
+
 <script src="../scripts/search.js"></script>
 
 </body>

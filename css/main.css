@@ -1950,7 +1950,7 @@ div#add-team, div#edit-team-window, div#add-user {
 /* Główny wrapper na sekcję komentarzy */
 #comments {
     /*max-height: 350px;*/       /* kontrolowana wysokość całej sekcji */
-    overflow-y: auto;        /* przewijanie tylko tutaj */
+    /*overflow-y: auto;*/        /* przewijanie tylko tutaj */
     margin-bottom: 20px;
     border-radius: 8px;
 }
@@ -2201,4 +2201,143 @@ textarea#comment-content {
 
 .tile:hover {
     background: #fdfdfd !important;
+}
+
+/*.comment-content {
+    position: relative;
+}
+
+.comment-content .task-manage {
+    position: absolute;
+    top: 0;
+    right: 0;
+}*/
+
+/* ------------------------------------------------------- */
+
+/*.main-comment {
+    margin-bottom: 10px;
+}
+
+.comment {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.comment-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.comment-text {
+    flex: 1;
+    padding-right: 12px;
+    !* jeśli chcesz zachować łamanie wierszy tak jak wpisano w textarea *!
+    !*white-space: pre-wrap;*!
+}
+
+!* nowe menu dla komentarza – NIE używamy tabelkowego .task-manage *!
+.comment-manage {
+    flex: 0 0 auto;
+}
+
+!* możesz spokojnie użyć istniejących styli od task-action-button itd. *!
+.comment-manage .task-action-button {
+    position: relative;
+    top: 0;
+    border: 1px ridge rgba(166, 166, 166, 0.38);
+    border-radius: 3px;
+    width: 120px;
+    padding: 3px 3px 4px 10px;
+    margin: 0 auto;
+    user-select: none;
+}
+
+.comment-manage .task-options-container {
+    width: 120px;
+    margin: 0 auto;
+}*/
+
+/* jeśli chcesz, możesz też użyć tych samych styli co dla zadań:
+   .task-action-options, .task-option, itd. */
+
+/* -------------------------------------------- */
+
+
+.main-comment {
+    margin-bottom: 10px;
+}
+
+.comment {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+}
+
+/* nagłówek może dalej używać flexa, ale jeśli chcesz 100% bez flex:
+.comment-header {
+    overflow: hidden;
+}
+.comment-author {
+    float: left;
+}
+.comment-date {
+    float: right;
+}
+*/
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+/* >>> tu zmiana: bez flexa */
+.comment-content {
+    position: relative;      /* punkt odniesienia dla menu */
+    padding-right: 140px;    /* miejsce na menu po prawej (szerokość ~120 + margines) */
+    min-height: 40px;        /* żeby menu miało gdzie "usiąść" */
+}
+
+/* zwykły blok z tekstem */
+.comment-text {
+    /* opcjonalnie: żeby zachować entery */
+    /* white-space: pre-wrap; */
+}
+
+/* menu przyklejone w prawym górnym rogu comment-content */
+.comment-manage {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    text-align: center;
+}
+
+/* możesz użyć istniejących styli od task-action-button */
+.comment-manage .task-action-button {
+    position: relative;
+    top: 0;
+    border: 1px ridge rgba(166, 166, 166, 0.38);
+    border-radius: 3px;
+    width: 120px;
+    padding: 3px 3px 4px 10px;
+    margin: 0 auto;
+    user-select: none;
+}
+
+.comment-manage .task-options-container {
+    width: 120px;
+    margin: 0 auto;
+}
+
+.comment-content .task-options-container {
+    background-color: transparent;
 }

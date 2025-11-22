@@ -209,7 +209,7 @@
     }
 
 
-function getTeamDetails($result) {
+    function getTeamDetails($result) {
         //require "../view/manager/project-header.php"; // table header;
         $teamDetails = file_get_contents("../template/team-details.php");
         //$row = $result->fetch_assoc();
@@ -431,6 +431,10 @@ function getTeamDetails($result) {
     }
 
     function getProjectsCount($result) {
+        return $result->fetchColumn();
+    }
+
+    function getTeamsCount($result) {
         return $result->fetchColumn();
     }
 
