@@ -196,6 +196,7 @@
             $authorLast = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
             $content = htmlspecialchars($row["content"], ENT_QUOTES, "UTF-8");
             $createdAt = DateTime::createFromFormat("Y-m-d H:i:s", $row["created_at"])->format("j F Y, H:i");
+            $commentId = htmlspecialchars($row["comment_id"], ENT_QUOTES, "UTF-8");
 
             // Wypisanie szablonu z danymi
             echo sprintf(
@@ -203,7 +204,8 @@
                 $authorFirst,
                 $authorLast,
                 $createdAt,
-                $content
+                $content,
+                $commentId
             );
         }
     }

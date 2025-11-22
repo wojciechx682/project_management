@@ -53,6 +53,8 @@
 
 <script src="../scripts/toggleCommentOptions.js"></script>
 
+<script src="../scripts/edit-comment.js"></script>
+
 <script src="../scripts/search.js"></script>
 
 </body>

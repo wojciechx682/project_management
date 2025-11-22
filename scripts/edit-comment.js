@@ -1,4 +1,4 @@
-function toggleAddCommentWindow(taskId) {
+function toggleEditCommentWindow(commentId) {
     console.log("toggleEditCommentWindow function");
     const modal = document.getElementById("add-comment");
     const input = document.getElementById("comment-task-id");
@@ -7,7 +7,7 @@ function toggleAddCommentWindow(taskId) {
     if (!modal) return;
 
     // Ustaw ID zadania w ukrytym polu
-    if (input) input.value = taskId;
+    if (input) input.value = commentId;
 
     // Przełącz widoczność okna modalnego
     modal.classList.toggle("hidden");
