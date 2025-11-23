@@ -1,12 +1,15 @@
 <div id="add-comment" class="hidden">
 
-    <h2>Add Comment</h2>
+    <h2>Edit Comment</h2>
 
     <i class="icon-cancel" onclick="closeAddCommentWindow()"></i>
 
     <hr>
 
-    <form id="add-comment-form" method="post" action="addComment.php">
+    <form id="add-comment-form" method="post" action="editComment.php">
+
+        <!-- ID komentarza (do edycji) -->
+        <input type="hidden" id="comment-id" name="comment_id" value="">
 
         <!-- Ukryte pole z ID zadania -->
         <input type="hidden" id="comment-task-id" name="task_id" value="%s">

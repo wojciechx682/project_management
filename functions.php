@@ -299,6 +299,10 @@
         return $result;
     }
 
+    function getCommentForEdit($result) {
+        return $result;
+    }
+
     function getTeamForEdit($result) {
         return $result;
     }

@@ -1,13 +1,23 @@
 function toggleEditCommentWindow(commentId) {
+
     console.log("toggleEditCommentWindow function");
+
     const modal = document.getElementById("add-comment");
     const input = document.getElementById("comment-task-id");
     const mainContainer = document.getElementById("main-container");
 
-    if (!modal) return;
+    const textarea      = document.getElementById("comment-content");
+    const commentIdInput = document.getElementById("comment-id");
+
+    if (!modal || !textarea) return;
 
     // Ustaw ID zadania w ukrytym polu
-    if (input) input.value = commentId;
+    // if (input) input.value = commentId;
+
+    // Ustaw ID komentarza w hidden
+    if (commentIdInput) {
+        commentIdInput.value = commentId;
+    }
 
     // Przełącz widoczność okna modalnego
     modal.classList.toggle("hidden");
@@ -18,6 +28,26 @@ function toggleEditCommentWindow(commentId) {
     } else {
         if (mainContainer) mainContainer.classList.remove("unreachable");
     }
+
+    // Pobierz dane komentarza (AJAX)
+    fetch(`getCommentData.php?id=${commentId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+
+                // Wstaw treść komentarza do textarea
+                textarea.value = data.comment.content || "";
+
+                // Ustaw ID zadania (jeśli chcesz mieć je w formularzu)
+                if (input && data.comment.task_id) {
+                    input.value = data.comment.task_id;
+                }
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("result").innerHTML = "<span class='error'>Failed to load comment data</span>";
+        });
 }
 
 function closeAddCommentWindow() {
