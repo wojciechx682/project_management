@@ -2,7 +2,7 @@ function toggleEditCommentWindow(commentId) {
 
     console.log("toggleEditCommentWindow function");
 
-    const modal = document.getElementById("add-comment");
+    const modal = document.getElementById("add-comment"); // edit comment modal
     const input = document.getElementById("comment-task-id");
     const mainContainer = document.getElementById("main-container");
 
@@ -39,9 +39,9 @@ function toggleEditCommentWindow(commentId) {
                 textarea.value = data.comment.content || "";
 
                 // Ustaw ID zadania (jeśli chcesz mieć je w formularzu)
-                if (input && data.comment.task_id) {
+                /*if (input && data.comment.task_id) {
                     input.value = data.comment.task_id;
-                }
+                }*/
             }
         })
         .catch(error => {

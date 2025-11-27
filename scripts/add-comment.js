@@ -1,4 +1,5 @@
 function toggleAddCommentWindow(taskId) {
+
     console.log("toggleAddCommentWindow function");
     const modal = document.getElementById("add-comment");
     const input = document.getElementById("comment-task-id");
