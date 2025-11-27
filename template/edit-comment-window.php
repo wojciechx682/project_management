@@ -12,7 +12,7 @@
         <input type="hidden" id="comment-id" name="comment_id" value="">
 
         <!-- Ukryte pole z ID zadania -->
-        <input type="hidden" id="comment-task-id" name="task_id" value="%s">
+        <input type="hidden" id="comment-task-id" name="task_id" value="">
 
         <div class="task-details">
             <!--<label for="comment-content" class="task-details-desc-left project-details-desc-left">

@@ -1,5 +1,4 @@
 <?php
-
     require_once "../start-session.php";
     if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Project Manager") {
         $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
