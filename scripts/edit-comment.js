@@ -70,34 +70,29 @@ document.addEventListener("keydown", function(event) {
 });
 
 // ========================
-//  Obsługa formularza dodawania komentarza
+//  Obsługa formularza edytowania komentarza
 // ========================
+
 
 document.getElementById("add-comment-form").addEventListener("submit", function (event) {
 
     console.log("add-comment-form submit event occurred");
 
-    event.preventDefault(); // zatrzymaj przeładowanie strony
+    event.preventDefault();
 
     const resultDiv = document.getElementById("result");
 
-    // ========================
-    //  Pobranie danych z formularza
-    // ========================
-    const taskId = document.getElementById("comment-task-id").value.trim();
-    const content = document.getElementById("comment-content").value.trim();
+    const commentId = document.getElementById("comment-id").value.trim();
+    const taskId    = document.getElementById("comment-task-id").value.trim();
+    const content   = document.getElementById("comment-content").value.trim();
 
-    // ========================
-    //  Walidacja DOMPurify
-    // ========================
-    const cleanTaskId = DOMPurify.sanitize(taskId);
-    const cleanContent = DOMPurify.sanitize(content);
+    const cleanCommentId = DOMPurify.sanitize(commentId);
+    const cleanTaskId    = DOMPurify.sanitize(taskId);
+    const cleanContent   = DOMPurify.sanitize(content);
 
-    // ========================
-    //  Walidacja danych
-    // ========================
     const isValid = (
-        cleanTaskId === taskId && cleanTaskId !== "" &&
+        cleanCommentId === commentId && commentId !== "" &&
+        cleanTaskId === taskId && taskId !== "" &&
         cleanContent === content && cleanContent.length >= 10 && cleanContent.length <= 255
     );
 
@@ -107,41 +102,26 @@ document.getElementById("add-comment-form").addEventListener("submit", function 
         return;
     }
 
-    // ========================
-    //  Przygotowanie danych do wysłania
-    // ========================
     const formData = new FormData();
+    formData.append("comment_id", cleanCommentId);
     formData.append("task_id", cleanTaskId);
     formData.append("content", cleanContent);
 
-    // ========================
-    //  Wysłanie danych do serwera
-    // ========================
-    fetch("addNewComment.php", {
+    fetch("editComment.php", {
         method: "POST",
         body: formData
     })
         .then(response => response.json())
         .then(data => {
 
-            // console.log("Server response:", data);
-
             if (data.success) {
-                resultDiv.innerHTML = "<span class='success'>Comment added successfully</span>";
-
-                // Zamknij okno po sukcesie
+                resultDiv.innerHTML = "<span class='success'>Comment updated successfully</span>";
                 closeAddCommentWindow();
-
-                // Opcjonalnie: wyczyść pole formularza
-                document.getElementById("comment-content").value = "";
-
-                // Odśwież stronę, aby pokazać zmiany
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);
-
             } else {
-                resultDiv.innerHTML = `<span class='error'>${data.message || "Failed to add comment. Please try again."}</span>`;
+                resultDiv.innerHTML = `<span class='error'>${data.message || "Failed to update comment. Please try again."}</span>`;
             }
         })
         .catch(error => {

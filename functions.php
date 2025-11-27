@@ -327,6 +327,10 @@
         return true;
     }
 
+    function updateComment($connection) {
+        return true;
+    }
+
     function verifyRecaptcha($captchaToken) {
 
         if (!$captchaToken) return false;

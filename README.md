@@ -71,6 +71,10 @@ Tasks View:
 
 ![Tasks view](assets/git/4.png)
 
+Adding comment to task (Team member role):
+
+![Adding comments](assets/git/4_1.png)
+
 Projects View (Project Manager Role):
 
 ![Projects view](assets/git/5.png)
@@ -78,8 +82,6 @@ Projects View (Project Manager Role):
 Adding New Project:
 
 ![New Project](assets/git/6.png)
-
-![New Project](assets/git/7.png)
 
 Project Details View (Project Manager Role):
 
@@ -89,8 +91,6 @@ Editing Project:
 
 ![Editing Project](assets/git/9.png)
 
-![Editing Project](assets/git/10.png)
-
 Adding New Task:
 
 ![Adding New Task](assets/git/11.png)
@@ -99,11 +99,17 @@ Editing Task:
 
 ![Editing Task](assets/git/12.png)
 
-![Editing Task](assets/git/13.png)
-
 Deleting Task:
 
 ![Deleting Task](assets/git/14.png)
+
+Task Details page:
+
+![Task Details page](assets/git/22.png)
+
+Editing comments:
+
+![Editing comments](assets/git/23.png)
 
 After Successful Registration:
 
@@ -129,15 +135,25 @@ Teams page:
 
 ![Teams page](assets/git/21.png)
 
+Adding new team:
 
+![Teams page](assets/git/24.png)
 
+Team Details page:
 
+![Teams page](assets/git/25.png)
 
+Editing Team Name:
 
+![Teams page](assets/git/26.png)
 
+Adding a new Team Member:
 
+![Teams page](assets/git/27.png)
 
+Search engine (AJAX/Fetch API):
 
+![Teams page](assets/git/28.png)
 
 
 
