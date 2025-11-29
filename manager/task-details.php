@@ -54,6 +54,8 @@
 
 <script src="../scripts/edit-comment.js"></script>
 
+<script src="../scripts/delete-comment.js"></script>
+
 <script src="../scripts/search.js"></script>
 
 </body>

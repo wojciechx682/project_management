@@ -201,15 +201,21 @@
             // Wypisanie szablonu z danymi
             echo sprintf(
                 $comment,
+                $commentId,
                 $authorFirst,
                 $authorLast,
                 $createdAt,
                 $content,
+                $commentId,
                 $commentId
             );
         }
     }
 
+    function deleteComment($connection) {
+        // Możesz tu dodać np. logowanie operacji, jeśli kiedyś zechcesz.
+        return true;
+    }
 
     function getTeamDetails($result) {
         //require "../view/manager/project-header.php"; // table header;

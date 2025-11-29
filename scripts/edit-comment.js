@@ -83,16 +83,16 @@ document.getElementById("add-comment-form").addEventListener("submit", function 
     const resultDiv = document.getElementById("result");
 
     const commentId = document.getElementById("comment-id").value.trim();
-    const taskId    = document.getElementById("comment-task-id").value.trim();
+    //const taskId    = document.getElementById("comment-task-id").value.trim();
     const content   = document.getElementById("comment-content").value.trim();
 
     const cleanCommentId = DOMPurify.sanitize(commentId);
-    const cleanTaskId    = DOMPurify.sanitize(taskId);
+    //const cleanTaskId    = DOMPurify.sanitize(taskId);
     const cleanContent   = DOMPurify.sanitize(content);
 
     const isValid = (
         cleanCommentId === commentId && commentId !== "" &&
-        cleanTaskId === taskId && taskId !== "" &&
+        /*cleanTaskId === taskId && taskId !== "" &&*/
         cleanContent === content && cleanContent.length >= 10 && cleanContent.length <= 255
     );
 
@@ -104,7 +104,7 @@ document.getElementById("add-comment-form").addEventListener("submit", function 
 
     const formData = new FormData();
     formData.append("comment_id", cleanCommentId);
-    formData.append("task_id", cleanTaskId);
+    /*formData.append("task_id", cleanTaskId);*/
     formData.append("content", cleanContent);
 
     fetch("editComment.php", {

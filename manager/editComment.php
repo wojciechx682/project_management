@@ -10,20 +10,19 @@
 
         $response = ["success" => false];
 
-        if (isset($_POST["comment_id"], $_POST["task_id"], $_POST["content"]) &&
+        if (isset($_POST["comment_id"], $_POST["content"]) &&
             $_POST["comment_id"] !== "" &&
-            $_POST["task_id"] !== "" &&
             $_POST["content"] !== "") {
 
             $commentIdRaw = $_POST["comment_id"];
-            $taskIdRaw    = $_POST["task_id"];
+            //$taskIdRaw    = $_POST["task_id"];
             $contentRaw   = trim($_POST["content"]);
 
             $commentId = filter_var($commentIdRaw, FILTER_VALIDATE_INT);
-            $taskId    = filter_var($taskIdRaw, FILTER_VALIDATE_INT);
+            //$taskId    = filter_var($taskIdRaw, FILTER_VALIDATE_INT);
             $content   = htmlspecialchars($contentRaw);
 
-            if ($commentId === false || $taskId === false || $commentIdRaw != $commentId || $taskIdRaw != $taskId) {
+            if ($commentId === false || /*$taskId === false ||*/ $commentIdRaw != $commentId /*|| $taskIdRaw != $taskId*/) {
                 $response["message"] = "Invalid identifiers.";
                 echo json_encode($response);
                 exit();
@@ -36,9 +35,9 @@
             }
 
             $updateSuccessful = query(
-                "UPDATE comment SET content = ? WHERE id = ? AND task_id = ?",
+                "UPDATE comment SET content = ? WHERE id = ?",
                 "updateComment",
-                [$content, $commentId, $taskId]
+                [$content, $commentId]
             );
 
             if ($updateSuccessful) {

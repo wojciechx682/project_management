@@ -1,4 +1,7 @@
 <div class="main-comment">
+
+    <div class="comment-id">%s</div>
+
     <div class="comment">
         <div class="comment-header">
             <div class="comment-author">%s %s</div>
@@ -17,7 +20,7 @@
                 <div class="task-options-container">
                     <div class="task-action-options hidden">
                         <div class="task-option" onclick="toggleEditCommentWindow(%s)">Edit</div>
-                        <div class="task-option task-option-delete" onclick="toggleDeleteTaskWindow(s)">Delete</div>
+                        <div class="task-option task-option-delete" onclick="toggleDeleteCommentWindow(%s)">Delete</div>
                     </div>
                 </div>
             </div>

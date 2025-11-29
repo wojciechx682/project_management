@@ -2341,3 +2341,7 @@ textarea#comment-content {
 .comment-content .task-options-container {
     background-color: transparent;
 }
+
+.main-comment .comment-id {
+    display: none;
+}
