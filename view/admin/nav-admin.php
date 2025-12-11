@@ -13,7 +13,7 @@
 
         </div>
 
-        <a href="manager.php">
+        <a href="admin.php">
             <h3>
                 <i class="icon-home"></i>Home
             </h3>
