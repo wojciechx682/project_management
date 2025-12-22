@@ -2345,3 +2345,80 @@ textarea#comment-content {
 .main-comment .comment-id {
     display: none;
 }
+
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* ---------------------------------- */
+
+/* Admin Projects — styl jak Project Manager (nagłówek + doklejone wiersze) */
+div.admin-project {
+    border: 1px ridge rgba(166, 166, 166, 0.38);
+    border-radius: 15px;
+    margin: 0px auto 40px auto;
+    overflow: auto;
+    text-align: left !important;
+    margin-top: 20px;
+}
+
+/* komórki jak u PM */
+div.admin-project > div {
+    border-right: 1px ridge rgba(166, 166, 166, 0.38);
+    float: left;
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 12px;
+    font-weight: normal;
+    min-height: 30px;
+    height: 45px;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* szerokości (10 kolumn) */
+.admin-project-id { width: 5%; }
+.admin-project-name { width: 12%; }
+.admin-project-description { width: 23%; }
+.admin-project-start-date { width: 8%; }
+.admin-project-end-date { width: 8%; }
+.admin-project-status { width: 7%; }
+.admin-project-team-name { width: 10%; }
+.admin-project-team-leader { width: 12%; }
+.admin-project-tasks-count { width: 6%; }
+.admin-project-created-at { width: 9%; border-right: 0; }
+
+/* nagłówek: bez odstępu, bez dolnych rogów i bez dolnej ramki */
+div.admin-project:not(.admin-project-content) {
+    margin-bottom: 0;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    /*border-bottom: 0;*/
+}
+
+/* wiersze: jak project-content */
+div.admin-project.admin-project-content {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    border-top: 0; /* żeby się skleiło z nagłówkiem */
+}
+
+/* wiersze: wysokość jak u PM */
+div.admin-project.admin-project-content > div {
+    height: 70px;
+    padding-top: 24px;
+}
+
+/* ostatni wiersz: dolne rogi jak u PM */
+div.admin-project.admin-project-content:last-of-type {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* opis wyrównany jak w PM */
+div.admin-project .admin-project-description {
+    text-align: left;
+    padding-left: 10px;
+}

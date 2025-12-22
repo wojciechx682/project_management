@@ -6,61 +6,52 @@
 
         <div class="project-list">
 
-        <?php
+            <?php
 
             $projectsPerPage = 13;
             $page = isset($_GET["page"]) && is_numeric($_GET["page"]) ? (int) $_GET["page"] : 1;
             if ($page < 1) $page = 1;
-            $offset = ($page - 1) * $projectsPerPage; // przesunięcie, czyli ile projektów pominąć żeby wczytać te z wybranej strony - np. strona 1: offset 0, strona 2: offset 13, strona 3: offset 26
+            $offset = ($page - 1) * $projectsPerPage;
 
-            /*query("SELECT
-                            project.id, 
-                            project.name, 
-                            project.description, 
-                            project.start_date, 
-                            project.end_date, 
-                            project.status, 
-                            project.created_at, 
-                            project.updated_at, 
-                            team.id AS team_id,
-                            team.name AS team_name
-                        FROM project
-                        JOIN team ON project.team_id = team.id
-                        JOIN team_user ON team_user.team_id = team.id
-                        WHERE team_user.user_id = ?", "getAllProjects", [$_SESSION['id']]);*/
+            $totalProjects = query(
+                "SELECT COUNT(*) FROM project",
+                "getProjectsCount",
+                []
+            );
 
+            $totalPages = $totalProjects ? ceil($totalProjects / $projectsPerPage) : 0;
 
-            // Zapytanie zlicza ile wszystkich projektów należy do zespołów, w których jesteś
-            $totalProjects = query("SELECT COUNT(*) FROM project 
-                                          JOIN team ON project.team_id = team.id
-                                          JOIN team_user ON team_user.team_id = team.id
-                                          WHERE team_user.user_id = ?",
-                                    "getProjectsCount",
-                                        [$_SESSION['id']]);
+            query(
+                "SELECT
+                    p.id,
+                    p.name,
+                    p.description,
+                    p.start_date,
+                    p.end_date,
+                    p.status,
+                    p.created_at,
+                    t.name AS team_name,
+                    (
+                        SELECT CONCAT(u.first_name, ' ', u.last_name)
+                        FROM team_user tu
+                        JOIN user u ON u.id = tu.user_id
+                        WHERE tu.team_id = t.id AND u.role = 'Project Manager'
+                        LIMIT 1
+                    ) AS leader_name,
+                    (
+                        SELECT COUNT(*)
+                        FROM task tk
+                        WHERE tk.project_id = p.id
+                    ) AS tasks_count
+                FROM project p
+                JOIN team t ON t.id = p.team_id
+                ORDER BY p.created_at DESC
+                LIMIT $projectsPerPage OFFSET $offset",
+                "getAllProjectsForAdmin",
+                []
+            );
 
-            $totalPages = ceil($totalProjects / $projectsPerPage); // Zaokrąglasz w górę liczbę stron. Np. 27 projektów → 3 strony (bo 13+13+1)
-
-            // paginacja
-            query("SELECT 
-                            project.id, 
-                            project.name, 
-                            project.description, 
-                            project.start_date, 
-                            project.end_date, 
-                            project.status, 
-                            project.created_at, 
-                            project.updated_at, 
-                            team.id AS team_id,
-                            team.name AS team_name
-                        FROM project
-                        JOIN team ON project.team_id = team.id
-                        JOIN team_user ON team_user.team_id = team.id
-                        WHERE team_user.user_id = ?
-                        LIMIT $projectsPerPage OFFSET $offset",
-                "getAllProjects",
-                [$_SESSION['id']]);
-
-        ?>
+            ?>
 
         </div>
 
