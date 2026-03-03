@@ -42,7 +42,7 @@
             <label for="project-team-id" class="team-details-name-left">Team</label>
             <select id="project-team-id" name="team_id" class="team-details-name" required>
                 <?php
-                    query("SELECT team.id, team.name FROM team", "createTeamSelectList", []);
+                    query("SELECT team.id, team.name, team_user.user_id FROM team, team_user WHERE team.id = team_user.team_id AND team_user.user_id = ?", "createTeamSelectList", [$_SESSION['id']]);
                 ?>
             </select>
         </div>
