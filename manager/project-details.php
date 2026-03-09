@@ -56,6 +56,8 @@
 
 <?php require "../template/edit-task-window.php"; ?>
 
+<?php require "../template/delete-project.php"; ?>
+
 <div id="task-details-window"></div>
 
 <script src="../scripts/task-details.js"></script>
@@ -71,6 +73,8 @@
 <script src="../scripts/edit-task.js"></script>
 
 <script src="../scripts/delete-task.js"></script>
+
+<script src="../scripts/delete-project.js"></script> <!-- Usuwanie projektu -->
 
 <script src="../scripts/search.js"></script>
 

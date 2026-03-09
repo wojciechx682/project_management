@@ -57,6 +57,8 @@
 
 <?php /*require "../template/edit-task-window.php";*/ ?>
 
+<?php require "../template/delete-team.php"; ?> <!-- usuwanie zespołu -->
+
 <!--<div id="task-details-window"></div>
 
 <script src="../scripts/task-details.js"></script>-->
@@ -72,6 +74,8 @@
 <script src="../scripts/delete-user.js"></script>
 
 <script src="../scripts/search.js"></script>
+
+<script src="../scripts/delete-team.js"></script> <!-- usuwanie zespołu -->
 
 </body>
 </html>

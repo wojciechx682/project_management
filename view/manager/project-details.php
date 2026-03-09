@@ -1,8 +1,8 @@
 <main>
     <div id="main">
         <h3 style="position: absolute;">Project details</h3>
-        <button class="btn-link btn-link-static btn-link-tasks" onclick="toggleEditProjectWindow(<?php echo $_SESSION['selected_project_id']; ?>)">Edit</button>
-        <button class="btn-link btn-link-static btn-link-tasks" onclick="toggleEditProjectWindow(<?php echo $_SESSION['selected_project_id']; ?>)">Edit</button>
+        <button class="btn-link btn-link-static btn-link-tasks" style="background-color: #ce3737;" onclick="toggleDeleteProjectWindow(<?php echo $_SESSION['selected_project_id']; ?>)">Delete</button>
+        <button class="btn-link btn-link-static btn-link-tasks" style="margin-right: 8px;" onclick="toggleEditProjectWindow(<?php echo $_SESSION['selected_project_id']; ?>)">Edit</button>
         <hr>
         <?php
             query("SELECT project.id, project.name, project.description, project.start_date, project.end_date, project.status, project.created_at, project.updated_at, team.name AS team_name, team.id FROM project JOIN team ON project.team_id = team.id WHERE project.id=?", "getProjectDetails", $_SESSION["selected_project_id"]);

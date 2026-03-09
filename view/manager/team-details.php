@@ -1,7 +1,8 @@
 <main>
     <div id="main">
         <h3 style="position: absolute;">Team details</h3>
-        <button class="btn-link btn-link-static btn-link-tasks" onclick="toggleEditTeamWindow(<?php echo $_SESSION['selected_team_id']; ?>)">Edit</button>
+        <button class="btn-link btn-link-static btn-link-tasks" style="background-color: #ce3737;" onclick="toggleDeleteTeamWindow(<?php echo $_SESSION['selected_team_id']; ?>)">Delete</button>
+        <button class="btn-link btn-link-static btn-link-tasks" style="margin-right: 8px;" onclick="toggleEditTeamWindow(<?php echo $_SESSION['selected_team_id']; ?>)">Edit</button>
         <hr>
 
         <?php

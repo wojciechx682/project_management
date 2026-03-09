@@ -382,6 +382,14 @@ function getAllProjectsForAdmin($result) {
         return true;
     }
 
+    function deleteProject($connection) {
+        return true;
+    }
+
+    function deleteTeam($connection) {
+        return true;
+    }
+
     function updateComment($connection) {
         return true;
     }

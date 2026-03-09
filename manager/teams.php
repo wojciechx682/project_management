@@ -30,5 +30,17 @@
 
 <script src="../scripts/search.js"></script>
 
+<script>
+
+    const result = document.getElementById("result");
+
+    if (result && result.innerHTML.trim() !== "") {
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
+    }
+
+</script>
+
 </body>
 </html>
