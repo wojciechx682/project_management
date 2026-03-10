@@ -30,28 +30,7 @@
 
 <script src="../scripts/search.js"></script>
 
-<!--<script>
-    setTimeout(() => {
-        const result = document.getElementById("result").innerHTML;
-        if (result) {
-            result.innerHTML = "";
-            //result.style.display = "none";
-            window.location.reload();
-        }
-    }, 1500);
-</script>-->
-
 <script>
-    /*let result = document.getElementById("result").innerHTML;
-
-    if (result) {
-
-        result.innerHTML = null;
-
-        setTimeout(() => {
-            window.location.reload();
-        }, 1500);
-    }*/
 
     const result = document.getElementById("result");
 

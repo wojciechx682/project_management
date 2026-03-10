@@ -30,7 +30,7 @@
                         WHERE team_user.user_id = ?", "getAllProjects", [$_SESSION['id']]);*/
 
 
-            // Zapytanie zlicza ile wszystkich projektów należy do zespołów, w których jesteś
+            // Zapytanie zlicza ile wszystkich projektów należy do zespołów, w których jesteś (PM)
             $totalProjects = query("SELECT COUNT(*) FROM project 
                                           JOIN team ON project.team_id = team.id
                                           JOIN team_user ON team_user.team_id = team.id

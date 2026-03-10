@@ -11,16 +11,18 @@
             $projectsPerPage = 13;
             $page = isset($_GET["page"]) && is_numeric($_GET["page"]) ? (int) $_GET["page"] : 1;
             if ($page < 1) $page = 1;
-            $offset = ($page - 1) * $projectsPerPage;
+            $offset = ($page - 1) * $projectsPerPage; // przesunięcie, czyli ile projektów pominąć żeby wczytać te z wybranej strony - np. strona 1: offset 0, strona 2: offset 13, strona 3: offset 26
 
+            // Zapytanie zlicza ile jest wszystkich projektów (Admin)
             $totalProjects = query(
                 "SELECT COUNT(*) FROM project",
                 "getProjectsCount",
                 []
             );
 
-            $totalPages = $totalProjects ? ceil($totalProjects / $projectsPerPage) : 0;
+            $totalPages = $totalProjects ? ceil($totalProjects / $projectsPerPage) : 0; // Zaokrąglasz w górę liczbę stron. Np. 27 projektów → 3 strony (bo 13+13+1)
 
+            // paginacja
             query(
                 "SELECT
                     p.id,
@@ -31,6 +33,7 @@
                     p.status,
                     p.created_at,
                     t.name AS team_name,
+                    t.id AS team_id,
                     (
                         SELECT CONCAT(u.first_name, ' ', u.last_name)
                         FROM team_user tu
@@ -73,6 +76,13 @@
             </div>
         <?php endif; ?>
 
-        <div id="result"></div>
+        <div id="result">
+            <?php
+                if (isset($_SESSION["message"])) {
+                    echo $_SESSION["message"];
+                    unset($_SESSION["message"]);
+                }
+            ?>
+        </div>
     </div>
 </main>

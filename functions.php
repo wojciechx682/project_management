@@ -62,54 +62,67 @@
         }
     }
 
-function getAllProjectsForAdmin($result) {
+    /*function getAllProjectsForAdmin($result) {
 
-    require "../view/admin/projects-header.php";
+        require "../view/admin/projects-header.php";
 
-    $template = file_get_contents("../template/admin/project.php");
+        $template = file_get_contents("../template/admin/project.php");
 
-    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-        $id = htmlspecialchars($row["id"] ?? "", ENT_QUOTES, "UTF-8");
-        $name = htmlspecialchars($row["name"] ?? "", ENT_QUOTES, "UTF-8");
-        $description = htmlspecialchars($row["description"] ?? "", ENT_QUOTES, "UTF-8");
-        $status = htmlspecialchars($row["status"] ?? "", ENT_QUOTES, "UTF-8");
-        $teamName = htmlspecialchars($row["team_name"] ?? "", ENT_QUOTES, "UTF-8");
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $id = htmlspecialchars($row["id"] ?? "", ENT_QUOTES, "UTF-8");
+            $name = htmlspecialchars($row["name"] ?? "", ENT_QUOTES, "UTF-8");
+            $description = htmlspecialchars($row["description"] ?? "", ENT_QUOTES, "UTF-8");
+            $status = htmlspecialchars($row["status"] ?? "", ENT_QUOTES, "UTF-8");
+            $teamName = htmlspecialchars($row["team_name"] ?? "", ENT_QUOTES, "UTF-8");
 
-        $leaderNameRaw = $row["leader_name"] ?? null;
-        $leaderName = $leaderNameRaw ? htmlspecialchars($leaderNameRaw, ENT_QUOTES, "UTF-8") : "—";
+            $leaderNameRaw = $row["leader_name"] ?? null;
+            $leaderName = $leaderNameRaw ? htmlspecialchars($leaderNameRaw, ENT_QUOTES, "UTF-8") : "—";
 
-        $tasksCount = htmlspecialchars((string)($row["tasks_count"] ?? 0), ENT_QUOTES, "UTF-8");
+            $tasksCount = htmlspecialchars((string)($row["tasks_count"] ?? 0), ENT_QUOTES, "UTF-8");
 
-        $startDate = "";
-        if (!empty($row["start_date"])) {
-            $startDate = DateTime::createFromFormat("Y-m-d", $row["start_date"])->format("j F Y");
+            $startDate = "";
+            if (!empty($row["start_date"])) {
+                $startDate = DateTime::createFromFormat("Y-m-d", $row["start_date"])->format("j F Y");
+            }
+
+            $endDate = "";
+            if (!empty($row["end_date"])) {
+                $endDate = DateTime::createFromFormat("Y-m-d", $row["end_date"])->format("j F Y");
+            }
+
+            $createdAt = "";
+            if (!empty($row["created_at"])) {
+                $createdAt = DateTime::createFromFormat("Y-m-d H:i:s", $row["created_at"])->format("j F Y, H:i");
+            }
+
+            echo sprintf(
+                $template,
+                $id,
+                $name,
+                $description,
+                $startDate,
+                $endDate,
+                $status,
+                $teamName,
+                $leaderName,
+                $tasksCount,
+                $createdAt
+            );
         }
+    }*/
 
-        $endDate = "";
-        if (!empty($row["end_date"])) {
-            $endDate = DateTime::createFromFormat("Y-m-d", $row["end_date"])->format("j F Y");
+    function getAllProjectsForAdmin($result) {
+        require "../view/admin/projects-header.php"; // table header;
+        $project = file_get_contents("../template/project.php");
+        //while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');
+            //$endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('d-m-Y');
+            $startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('j F Y');
+            $endDate = DateTime::createFromFormat('Y-m-d', $row["end_date"])->format('j F Y');
+            echo sprintf($project, $row["id"], $row["id"], $row["name"], $row["description"], $startDate, $endDate, $row["status"], $row["team_id"], $row["team_name"]);
         }
-
-        $createdAt = "";
-        if (!empty($row["created_at"])) {
-            $createdAt = DateTime::createFromFormat("Y-m-d H:i:s", $row["created_at"])->format("j F Y, H:i");
-        }
-
-        echo sprintf(
-            $template,
-            $id,
-            $name,
-            $description,
-            $startDate,
-            $endDate,
-            $status,
-            $teamName,
-            $leaderName,
-            $tasksCount,
-            $createdAt
-        );
     }
-}
 
     function getAllTeamsForProjectManager($result) {
         require "../view/manager/teams-header.php"; // table header;
