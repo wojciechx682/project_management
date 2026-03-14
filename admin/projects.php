@@ -24,7 +24,7 @@
 
 </div>
 
-<?php require "../template/add-project-window.php"; ?>
+<?php require "../template/admin/add-project-window.php"; ?>
 
 <script src="../scripts/add-project.js"></script>
 
