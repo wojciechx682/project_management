@@ -113,7 +113,7 @@
 
     function getAllProjectsForAdmin($result) {
         require "../view/admin/projects-header.php"; // table header;
-        $project = file_get_contents("../template/project.php");
+        $project = file_get_contents("../template/admin/project.php");
         //while ($row = $result->fetch_assoc()) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             //$startDate = DateTime::createFromFormat('Y-m-d', $row["start_date"])->format('d-m-Y');

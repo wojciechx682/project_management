@@ -97,11 +97,13 @@ document.getElementById("edit-project-form").addEventListener("submit", function
                 closeEditProjectWindow();
             } else {
                 resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to update project'}</span>`;
+                closeEditProjectWindow();
             }
         })
         .catch(error => {
             console.error("Error:", error);
             resultDiv.innerHTML = "<span class='error'>An error occurred. Please try again</span>";
+            closeEditProjectWindow();
         });
 });
 

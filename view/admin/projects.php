@@ -47,8 +47,7 @@
                         WHERE tk.project_id = p.id
                     ) AS tasks_count
                 FROM project p
-                JOIN team t ON t.id = p.team_id
-                ORDER BY p.created_at DESC
+                JOIN team t ON t.id = p.team_id                
                 LIMIT $projectsPerPage OFFSET $offset",
                 "getAllProjectsForAdmin",
                 []

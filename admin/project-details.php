@@ -1,6 +1,6 @@
 <?php
     require_once "../start-session.php";
-    if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Project Manager") {
+    if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Admin") {
         $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
         header("Location: ../index.php");
         exit();
@@ -34,21 +34,21 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require "../view/manager/head-manager.php"; ?>
+<?php require "../view/admin/head-admin.php"; ?>
 
 <body>
 
 <div id="main-container">
 
-<?php require "../view/nav.php"; ?>
+<?php require "../view/admin/nav-admin.php"; ?>
 
 <?php require "../view/header.php"; ?>
 
-<?php require "../view/manager/project-details.php"; ?>
+<?php require "../view/admin/project-details.php"; ?>
 
 </div>
 
-<?php require "../template/edit-project-window.php"; ?>
+<?php require "../template/admin/edit-project-window.php"; ?>
 
 <?php require "../template/add-task-window.php"; ?>
 

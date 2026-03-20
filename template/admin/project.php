@@ -1,12 +1,25 @@
-<div class="admin-project admin-project-content">
-    <div class="admin-project-id">%s</div>
-    <div class="admin-project-name">%s</div>
-    <div class="admin-project-description">%s</div>
-    <div class="admin-project-start-date">%s</div>
-    <div class="admin-project-end-date">%s</div>
-    <div class="admin-project-status">%s</div>
-    <div class="admin-project-team-name">%s</div>
-    <div class="admin-project-team-leader">%s</div>
-    <div class="admin-project-tasks-count">%s</div>
-    <div class="admin-project-created-at">%s</div>
+<div class="project project-content">
+    <div class="project-id">%s</div>
+    <div class="project-name">
+        <form action="project-details.php" method="post">
+            <input type="hidden" name="project-id" value="%s">
+            <button class="submit-order-form" type="submit">
+                %s
+            </button>
+        </form>
+    </div>
+    <div class="project-desc">%s</div>
+    <div class="project-start-date">%s</div>
+    <div class="project-end-date">%s</div>
+    <div class="project-status">%s</div>
+    <!--<div class="project-created-at"></div>
+    <div class="project-updated-at"></div>-->
+    <div class="team-name">
+        <form action="team-details.php" method="post">
+            <input type="hidden" name="team-id" value="%s">
+            <button class="submit-order-form" type="submit">
+                %s
+            </button>
+        </form>
+    </div>
 </div>
