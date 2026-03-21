@@ -156,6 +156,7 @@ document.getElementById("delete-project-form").addEventListener("submit", functi
                 }, 1500);*/
 
                 window.location.href = "projects.php";
+
                 /*const resultDiv = document.getElementById('result');
                 resultDiv.innerHTML = '<span class="success">Project deleted successfully</span>';*/
 
@@ -163,6 +164,7 @@ document.getElementById("delete-project-form").addEventListener("submit", functi
                 //resultDiv.innerHTML = `<span class="error">${data.message}</span>`;
 
                 window.location.href = "projects.php";
+
                 /*const resultDiv = document.getElementById('result');
                 resultDiv.innerHTML = '<span class="error">${data.message}</span>';*/
             }
@@ -172,6 +174,7 @@ document.getElementById("delete-project-form").addEventListener("submit", functi
             document.getElementById('result').innerHTML = '<span class="error">Failed to delete project</span>';*/
 
             window.location.href = "projects.php";
+
             /*const resultDiv = document.getElementById('result');
             resultDiv.innerHTML = '<span class="error">Failed to delete project</span>';*/
         });
