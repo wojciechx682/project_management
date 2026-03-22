@@ -37,6 +37,12 @@
             </h3>
         </a>
         <hr class="nav-hr">
+        <a href="teams.php">
+            <h3>
+                <i class="icon-adult"></i>Teams
+            </h3>
+        </a>
+        <hr class="nav-hr">
 
     </div>
 </nav>
