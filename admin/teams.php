@@ -24,9 +24,9 @@
 
 </div>
 
-<?php require "../template/add-team-window.php"; ?>
+<?php require "../template/admin/add-team-window.php"; ?>
 
-<script src="../scripts/add-team.js"></script>
+<script src="../scripts/admin/add-team.js"></script> <!-- pobranie listy PM'ów do znacznika select dynamicznie -->
 
 <script src="../scripts/search.js"></script>
 

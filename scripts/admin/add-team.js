@@ -76,16 +76,19 @@ document.getElementById("add-team-form").addEventListener("submit", function (ev
     const resultDiv = document.getElementById("result");
     // Pobranie danych z formularza
     const teamName = document.getElementById("team-name").value.trim();
+    const projectManagerId = document.getElementById("user-id").value;
+
     // Walidacja DOMPurify
     const cleanTeamName = DOMPurify.sanitize(teamName);
+    const cleanProjectManagerId = DOMPurify.sanitize(projectManagerId);
 
     // Walidacja danych
     const isValid = (
-        cleanTeamName === teamName && cleanTeamName.length > 0 && cleanTeamName.length <= 255
+        cleanTeamName === teamName && cleanTeamName.length > 0 && cleanTeamName.length <= 255 && cleanProjectManagerId === projectManagerId && projectManagerId !== "" && cleanProjectManagerId !== ""
     );
 
     if (!isValid) {
-        resultDiv.innerHTML = "<span class='error'>An error occurred. Please provide valid team name</span>";
+        resultDiv.innerHTML = "<span class='error'>An error occurred. Please provide valid team name or valid Project Manager</span>";
         closeTeamWindow();
         return;
     }
@@ -93,6 +96,7 @@ document.getElementById("add-team-form").addEventListener("submit", function (ev
     // Przygotowanie danych do wysłania
     const formData = new FormData();
     formData.append("team_name", cleanTeamName);
+    formData.append("user_id", cleanProjectManagerId);
 
     // Wysłanie danych do serwera za pomocą Fetch API
     fetch("addNewTeam.php", {   // <-- analogicznie do addNewProject.php

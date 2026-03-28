@@ -22,5 +22,7 @@
 
 <script src="../scripts/search.js"></script>
 
+<script src="../scripts/toggle-sidebar.js"></script>
+
 </body>
 </html>
