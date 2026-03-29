@@ -24,7 +24,12 @@
         </form>
     </div>
     <!--<div class="task-desc"></div>-->
-    <div class="task-priority">%s</div>
+    <div class="task-priority">
+        <!-- tutaj jest miejsce na kolorową ikonę statusu zadania -->
+        <span class="priority-dot priority-%s"></span>
+        <span class="task-status-value">%s</span>
+
+    </div>
     <div class="task-status">%s</div>
     <div class="task-due-date">%s</div>
     <!--<div class="project-created-at task-project-id"></div>-->

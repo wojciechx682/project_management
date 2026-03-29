@@ -143,6 +143,7 @@
             $id = htmlspecialchars($row["id"], ENT_QUOTES, "UTF-8");
             $title = htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8");
             $priority = htmlspecialchars($row["priority"], ENT_QUOTES, "UTF-8");
+            $priorityFormatted = lcfirst($priority);
             $status = htmlspecialchars($row["status"], ENT_QUOTES, "UTF-8");
             $firstName = htmlspecialchars($row["first_name"], ENT_QUOTES, "UTF-8");
             $lastName = htmlspecialchars($row["last_name"], ENT_QUOTES, "UTF-8");
@@ -150,7 +151,7 @@
             $dueDate = DateTime::createFromFormat('Y-m-d', $row["due_date"])->format('j F Y');
             $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"])->format('j F Y, H:i');
             //$updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["updated_at"])->format('j F Y, H:i');
-            echo sprintf($taskDetails, $id, $id, $title, $priority, $status, $dueDate, $firstName, $lastName, $createdAt, $id, $id, $id);
+            echo sprintf($taskDetails, $id, $id, $title, $priorityFormatted, $priority, $status, $dueDate, $firstName, $lastName, $createdAt, $id, $id, $id);
             //echo sprintf($taskDetails, $id, $title, $priority, $status, $dueDate, $firstName, $lastName, $createdAt, $id, $id, $id);
         }
     }
