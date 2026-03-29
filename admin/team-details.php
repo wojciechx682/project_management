@@ -46,7 +46,7 @@
 
 <?php require "../view/header.php"; ?>
 
-<?php require "../view/manager/team-details.php"; ?>
+<?php require "../view/admin/team-details.php"; ?>
 
 </div>
 
@@ -63,7 +63,7 @@
 
 <script src="../scripts/task-details.js"></script>-->
 
-<script src="../scripts/edit-team.js"></script>
+<script src="../scripts/edit-team.js"></script> <!-- edytowanie nazwy zespołu -->
 
 <script src="../scripts/add-user.js"></script>
 
