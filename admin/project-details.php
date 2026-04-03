@@ -64,15 +64,15 @@
 
 <script src="../scripts/edit-project.js"></script>
 
-<script src="../scripts/add-task.js"></script>
+<script src="../scripts/admin/add-task.js"></script>
 
 <script src="../scripts/toggleTaskOptions.js"></script>
 
 <script src="../scripts/add-comment.js"></script>
 
-<script src="../scripts/edit-task.js"></script>
+<script src="../scripts/admin/edit-task.js"></script>
 
-<script src="../scripts/delete-task.js"></script>
+<script src="../scripts/admin/delete-task.js"></script>
 
 <script src="../scripts/delete-project.js"></script> <!-- Usuwanie projektu -->
 
