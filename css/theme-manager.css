@@ -1,0 +1,13 @@
+/* Project Manager — niebieska paleta */
+:root {
+    --theme-nav-bg: #1a365d;
+    --theme-nav-top-bg: #2c5282;
+    --theme-nav-hover-bg: #2b6cb0;
+    --theme-nav-text: #e2e8f0;
+    --theme-modal-bg: #2c5282;
+    --theme-modal-title: #f7fafc;
+    --theme-accent: #3182ce;
+    --theme-accent-hover: #4299e1;
+    --theme-shadow-inset: rgba(44, 82, 130, 0.85);
+    --theme-shadow-modal: rgba(26, 54, 93, 0.65);
+}

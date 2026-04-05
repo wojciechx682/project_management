@@ -36,7 +36,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require "../view/manager/head-manager.php"; ?>
+<?php require "../view/admin/head-admin.php"; ?>
 
 <body>
 

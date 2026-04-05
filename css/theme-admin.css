@@ -1,0 +1,13 @@
+/* Admin — ciemny fiolet (jak wcześniej w main.css) */
+:root {
+    --theme-nav-bg: #25273a;
+    --theme-nav-top-bg: #32324d;
+    --theme-nav-hover-bg: #32334d;
+    --theme-nav-text: #d3d3d3;
+    --theme-modal-bg: #31344d;
+    --theme-modal-title: #fafaff;
+    --theme-accent: #5478c0;
+    --theme-accent-hover: #5b83cd;
+    --theme-shadow-inset: rgba(66, 68, 90, 1);
+    --theme-shadow-modal: rgba(66, 68, 90, 1);
+}

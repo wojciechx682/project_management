@@ -1,0 +1,13 @@
+/* Team Member — zielona paleta */
+:root {
+    --theme-nav-bg: #22543d;
+    --theme-nav-top-bg: #276749;
+    --theme-nav-hover-bg: #2f855a;
+    --theme-nav-text: #e6fffa;
+    --theme-modal-bg: #276749;
+    --theme-modal-title: #f0fff4;
+    --theme-accent: #38a169;
+    --theme-accent-hover: #48bb78;
+    --theme-shadow-inset: rgba(47, 133, 90, 0.85);
+    --theme-shadow-modal: rgba(34, 84, 61, 0.6);
+}

@@ -2,6 +2,20 @@
     box-sizing: border-box;
 }
 
+/* Paleta semantyczna — domyślnie Admin (fiolet). Podstrony ról ładują dodatkowo css/theme-*.css */
+:root {
+    --theme-nav-bg: #25273a;
+    --theme-nav-top-bg: #32324d;
+    --theme-nav-hover-bg: #32334d;
+    --theme-nav-text: #d3d3d3;
+    --theme-modal-bg: #31344d;
+    --theme-modal-title: #fafaff;
+    --theme-accent: #5478c0;
+    --theme-accent-hover: #5b83cd;
+    --theme-shadow-inset: rgba(66, 68, 90, 1);
+    --theme-shadow-modal: rgba(66, 68, 90, 1);
+}
+
 body {
     background-color: #e8e8e8;
     font-family: 'Lato', sans-serif;
@@ -130,9 +144,9 @@ form#password-form input:hover,
 form#password-form input:focus
 {
     cursor: pointer;
-    -webkit-box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
-    -moz-box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
-    box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
+    -webkit-box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
+    -moz-box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
+    box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
 }
 
 form#login-form label,
@@ -169,7 +183,7 @@ form#reset-form input[type="submit"]
 
 form#reset-form input:hover, form#reset-form input:focus {
     cursor: pointer;
-    box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
+    box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
 }
 
 form#register-form input[type="submit"],
@@ -186,7 +200,7 @@ span#remind-password, span#register, span#log-in, span#back-to-login {
 }
 
 span#remind-password a:hover, span#register a:hover, span#log-in a:hover, span#back-to-login a:hover {
-    color: #5478c0 !important;
+    color: var(--theme-accent) !important;
     cursor: pointer;
 }
 
@@ -208,7 +222,7 @@ span#back-to-login a::after {
     bottom: -2px;
     width: 0;
     height: 2px;
-    background: #5478c0;
+    background: var(--theme-accent);
     transition: width 0s ease;
 }
 
@@ -287,12 +301,12 @@ div#profile-container .error {
 nav #nav {
     width: 300px;
     height: 100vh; /* 100% wysokości ekranu */
-    background-color: #25273a;
+    background-color: var(--theme-nav-bg);
 }
 
 nav {
     float: left;
-    color: #d3d3d3;
+    color: var(--theme-nav-text);
 }
 
 #main {
@@ -305,7 +319,7 @@ nav {
 
 nav #nav #top-nav {
     height: 85px;
-    background-color: #32324d;
+    background-color: var(--theme-nav-top-bg);
     padding: 3px;
     /*color: #e8e8e8;*/
     border-bottom: 1px solid rgba(166, 166, 166, 0.7);
@@ -346,12 +360,12 @@ div#user-info {
 
 nav a {
     text-decoration: none;
-    color: #d3d3d3;
+    color: var(--theme-nav-text);
 }
 
 nav a:hover h3 {
     text-decoration: underline;
-    background-color: #32334d;
+    background-color: var(--theme-nav-hover-bg);
 }
 
 nav h3 {
@@ -410,7 +424,7 @@ header #header button.btn-link:hover {
 
 .btn-link {
     align-items: center;
-    background-color: #5478c0;
+    background-color: var(--theme-accent);
     border-radius: 8px;
     border-style: none;
     box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
@@ -1310,7 +1324,7 @@ div.team-member-manage {
     /*height: 310px;*/
     height: 750px;
     width: 750px;
-    background-color: #31344d;
+    background-color: var(--theme-modal-bg);
     /*position: fixed;
     top: 25em;
     left: 45em;*/
@@ -1321,16 +1335,16 @@ div.team-member-manage {
     transform: translate(-50%, -50%);
     z-index: 90;
     border-radius: 5px;
-    -webkit-box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
-    -moz-box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
-    box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
+    -webkit-box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
+    -moz-box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
+    box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
 }
 
 .accept-user {
     /*height: 310px;*/
     height: 200px;
     width: 750px;
-    background-color: #31344d;
+    background-color: var(--theme-modal-bg);
     /*position: fixed;
     top: 25em;
     left: 45em;*/
@@ -1341,9 +1355,9 @@ div.team-member-manage {
     transform: translate(-50%, -50%);
     z-index: 100;
     border-radius: 5px;
-    -webkit-box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
-    -moz-box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
-    box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);
+    -webkit-box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
+    -moz-box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
+    box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
 }
 
 #update-status > h2, .update-status > h2,
@@ -1360,7 +1374,7 @@ div.team-member-manage {
 {
     margin-left: 20px;
     margin-top: 25px;
-    color: #FAFAFFFF;
+    color: var(--theme-modal-title);
     /*border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
     font-size: 1.2rem;
     width: 690px;
@@ -1371,7 +1385,7 @@ div.team-member-manage {
 .accept-user > h2 {
     margin-left: 20px;
     margin-top: 25px;
-    color: #FAFAFFFF;
+    color: var(--theme-modal-title);
     /*border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
     font-size: 1.2rem;
     width: 690px;
@@ -1405,7 +1419,7 @@ div.team-member-manage {
 
 div.delivery-date, .accept-user-container {
     /*display: none;*/
-    color: #fafaff;
+    color: var(--theme-modal-title);
     /*border: 1px ridge darkblue;*/
     padding: 6px 20px 20px 15px;
     min-height: 90px;
@@ -1828,7 +1842,7 @@ form#password-form {
 #profile-form button[type="submit"],
 #password-form button[type="submit"] {
     padding: 10px;
-    background-color: #5478c0;
+    background-color: var(--theme-accent);
     border: none;
     border-radius: 4px;
     color: white;
@@ -1839,7 +1853,7 @@ form#password-form {
 
 #profile-form button[type="submit"]:hover,
 #password-form button[type="submit"]:hover {
-    background-color: #5b83cd;
+    background-color: var(--theme-accent-hover);
 }
 
 #profile-form button[type="submit"],
@@ -1896,9 +1910,9 @@ div#add-team, div#edit-team-window, div#add-user {
 #global-search:focus,
 #global-search:hover {
     cursor: pointer;
-    -webkit-box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
-    -moz-box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
-    box-shadow: inset 0px 0px 13px -10px rgba(66, 68, 90, 1);
+    -webkit-box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
+    -moz-box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
+    box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
 }
 
 #global-search::placeholder {
@@ -2013,7 +2027,7 @@ div#add-team, div#edit-team-window, div#add-user {
 
 nav {
     float: left;
-    color: #d3d3d3;
+    color: var(--theme-nav-text);
     height: 100vh;           /* pełna wysokość widoku */
     position: fixed;         /* przyklejony do lewej krawędzi */
     top: 0;
@@ -2023,7 +2037,7 @@ nav {
 nav #nav {
     width: 300px;
     height: 100%;
-    background-color: #25273a;
+    background-color: var(--theme-nav-bg);
 }
 
 header {
@@ -2040,14 +2054,14 @@ header {
 #change-status {
     height: 280px;                       /* podobnie jak #add-user */
     /*width: 750px;
-    background-color: #31344d;
+    background-color: var(--theme-modal-bg);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 90;
     border-radius: 5px;
-    box-shadow: -5px 0px 26px -5px rgba(66, 68, 90, 1);*/
+    box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);*/
 }
 
 #change-status.hidden {
@@ -2057,7 +2071,7 @@ header {
 #change-status h2 {
     margin-left: 20px;
     margin-top: 25px;
-    color: #fafaff;
+    color: var(--theme-modal-title);
     font-size: 1.2rem;
     width: 690px;
     display: inline-block;
@@ -2082,7 +2096,7 @@ header {
     border-radius: 3px;
     float: right;
     margin-right: 25px;
-    color: #fafaff;*/
+    color: var(--theme-modal-title);*/
 }
 
 #change-status .icon-cancel:hover {
@@ -2181,7 +2195,7 @@ textarea#comment-content {
 }
 
 .pagination a.active {
-    background-color: #5478c0;
+    background-color: var(--theme-accent);
     color: white;
 }
 
