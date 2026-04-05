@@ -1,83 +1,8 @@
 <?php
-    require_once "../start-session.php";
-    if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Project Manager") {
-        $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
-        header("Location: ../index.php");
-        exit();
-    }
-?>
 
-<?php
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+declare(strict_types=1);
 
-        if (isset($_POST["project-id"])) {
-            $projectId = filter_input(INPUT_POST, "project-id", FILTER_SANITIZE_NUMBER_INT);
-
-            if ($projectId) {
-                $_SESSION["selected_project_id"] = $projectId; // Zapisz ID projektu do sesji
-                header("Location: project-details.php"); // PRG - Przekierowanie GET
-                exit();
-            }
-        }
-
-        header("Location: projects.php"); // Jeśli brak ID projektu, wróć do listy projektów
-        exit();
-    }
-
-    $projectId = $_SESSION["selected_project_id"] ?? null; // Pobierz ID projektu z sesji (po przekierowaniu)
-
-    if (!$projectId) {
-        header("Location: projects.php");
-        exit();
-    }
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<?php require "../view/manager/head-manager.php"; ?>
-
-<body>
-
-<div id="main-container">
-
-<?php require "../view/nav.php"; ?>
-
-<?php require "../view/header.php"; ?>
-
-<?php require "../view/manager/project-details.php"; ?>
-
-</div>
-
-<?php require "../template/edit-project-window.php"; ?>
-
-<?php require "../template/add-task-window.php"; ?>
-
-<?php require "../template/add-comment-window.php"; ?>
-
-<?php require "../template/edit-task-window.php"; ?>
-
-<?php require "../template/delete-project.php"; ?>
-
-<div id="task-details-window"></div>
-
-<script src="../scripts/task-details.js"></script>
-
-<script src="../scripts/edit-project.js"></script>
-
-<script src="../scripts/add-task.js"></script>
-
-<script src="../scripts/toggleTaskOptions.js"></script>
-
-<script src="../scripts/add-comment.js"></script>
-
-<script src="../scripts/edit-task.js"></script>
-
-<script src="../scripts/delete-task.js"></script>
-
-<script src="../scripts/delete-project.js"></script> <!-- Usuwanie projektu -->
-
-<script src="../scripts/search.js"></script>
-
-</body>
-</html>
+require_once __DIR__ . '/../common/auth.php';
+requireRole(['Project Manager']);
+$GLOBALS['__PAGE_UI'] = 'manager';
+require __DIR__ . '/../common/pages/project-details.php';

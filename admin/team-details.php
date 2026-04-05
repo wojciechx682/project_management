@@ -1,81 +1,8 @@
 <?php
-    require_once "../start-session.php";
-    if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Admin") {
-        $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
-        header("Location: ../index.php");
-        exit();
-    }
-?>
 
-<?php
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+declare(strict_types=1);
 
-        if (isset($_POST["team-id"])) {
-
-            $teamId = filter_input(INPUT_POST, "team-id", FILTER_SANITIZE_NUMBER_INT);
-
-            if ($teamId) {
-                $_SESSION["selected_team_id"] = $teamId; // Zapisz ID zespołu do sesji
-                header("Location: team-details.php"); // PRG - Przekierowanie GET
-                exit();
-            }
-        }
-
-        header("Location: teams.php"); // Jeśli brak ID zespołu, wróć do listy zespołów
-        exit();
-    }
-
-    $teamId = $_SESSION["selected_team_id"] ?? null; // Pobierz ID zespołu z sesji (po przekierowaniu)
-
-    if (!$teamId) {
-        header("Location: teams.php");
-        exit();
-    }
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<?php require "../view/admin/head-admin.php"; ?>
-
-<body>
-
-<div id="main-container">
-
-<?php require "../view/nav.php"; ?>
-
-<?php require "../view/header.php"; ?>
-
-<?php require "../view/admin/team-details.php"; ?>
-
-</div>
-
-<?php require "../template/edit-team-window.php"; ?>
-
-
-<?php require "../template/add-user-window.php"; ?>
-
-<?php /*require "../template/edit-task-window.php";*/ ?>
-
-<?php require "../template/delete-team.php"; ?> <!-- usuwanie zespołu -->
-
-<!--<div id="task-details-window"></div>
-
-<script src="../scripts/task-details.js"></script>-->
-
-<script src="../scripts/edit-team.js"></script> <!-- edytowanie nazwy zespołu -->
-
-<script src="../scripts/add-user.js"></script>
-
-<script src="../scripts/toggleUserOptions.js"></script>
-
-<!--<script src="../scripts/edit-task.js"></script>-->
-
-<script src="../scripts/delete-user.js"></script>
-
-<script src="../scripts/search.js"></script>
-
-<script src="../scripts/delete-team.js"></script> <!-- usuwanie zespołu -->
-
-</body>
-</html>
+require_once __DIR__ . '/../common/auth.php';
+requireRole(['Admin']);
+$GLOBALS['__PAGE_UI'] = 'admin';
+require __DIR__ . '/../common/pages/team-details.php';
