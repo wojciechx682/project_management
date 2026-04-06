@@ -1,8 +1,46 @@
 <?php
+    require_once "../start-session.php";
+    if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Project Manager") {
+        $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
+        header("Location: ../index.php");
+        exit();
+    }
+?>
 
-declare(strict_types=1);
+<!DOCTYPE html>
+<html lang="en">
 
-require_once __DIR__ . '/../common/auth.php';
-requireRole(['Project Manager']);
-$GLOBALS['__PAGE_UI'] = 'manager';
-require __DIR__ . '/../common/pages/teams.php';
+<?php require "../view/manager/head-manager.php"; ?>
+
+<body>
+
+<div id="main-container">
+
+    <?php require "../view/nav.php"; ?>
+
+    <?php require "../view/header.php"; ?>
+
+    <?php require "../view/manager/teams.php"; ?>
+
+</div>
+
+<?php require "../template/add-team-window.php"; ?>
+
+<script src="../scripts/add-team.js"></script>
+
+<script src="../scripts/search.js"></script>
+
+<script>
+
+    const result = document.getElementById("result");
+
+    if (result && result.innerHTML.trim() !== "") {
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
+    }
+
+</script>
+
+</body>
+</html>
