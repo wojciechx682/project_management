@@ -518,6 +518,18 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // notifications
+    function fetchOneAssoc($stmt) {
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row === false ? null : $row;
+    }
+
+    // funkcja pod INSERT powiadomień - ostatnie ID po INSERT do notification
+    function addNotificationLastId($connection) {
+        return $connection->lastInsertId();
+    }
+    // end notifications
+
     function getProjectsCount($result) {
         return $result->fetchColumn();
     }

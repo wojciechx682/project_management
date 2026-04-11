@@ -42,11 +42,21 @@
                 case "cancelled": $statusFormatted = "Cancelled"; break;
             }
 
+            // notification - zmiana statusu projektu (dla Team Members w zespole projektu)
+            require_once __DIR__ . "/../notification_service.php";
+            $oldProject = query("SELECT status, name FROM project WHERE id = ?", "fetchOneAssoc", [$id]);
+            // end notification
+
             // Aktualizacja projektu w bazie danych
             $updateSuccessful = query("UPDATE project SET name=?, description=?, start_date=?, end_date=?, status=?, team_id=?, updated_at = NOW() WHERE id=?","updateProject", [$title, $description, $startDate, $endDate, $statusFormatted, $teamId, $id]
             );
 
             if($updateSuccessful) {
+                // notification - zmiana statusu projektu (dla Team Members w zespole projektu)
+                if ($oldProject && $oldProject["status"] !== $statusFormatted) {
+                    notification_project_status_changed($id, $oldProject["status"], $statusFormatted, $title);
+                }
+                // end notification
                 $response["success"] = true;
                 $response["message"] = "Project updated successfully";
             } else {

@@ -60,6 +60,13 @@
             );
 
             if ($insertSuccessful) {
+                // notification - Dodanie nowego członka do zespołu (PM)
+                require_once __DIR__ . "/../notification_service.php";
+                $tname = query("SELECT name FROM team WHERE id = ?", "fetchOneAssoc", [$teamId]);
+                if ($tname) {
+                    notification_team_joined($userId, $tname["name"], $teamId);
+                }
+                // end notification
                 $response["success"] = true;
                 $response["message"] = "User added successfully";
                 $response["user"] = [

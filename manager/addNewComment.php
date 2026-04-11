@@ -52,6 +52,17 @@
             //  Odpowiedź JSON
             // ========================
             if ($insertSuccessful) {
+                // notification - Komentarz od PM'a do zadania (dla osoby przypisanej)
+                require_once __DIR__ . "/../notification_service.php";
+                $ctx = query(
+                    "SELECT task.assigned_user_id, task.title, project.name AS project_name, project.id AS project_id FROM task JOIN project ON project.id = task.project_id WHERE task.id = ?",
+                    "fetchOneAssoc",
+                    [$taskId]
+                );
+                if ($ctx && isset($_SESSION["role"]) && ($_SESSION["role"] === "Project Manager" || $_SESSION["role"] === "Admin")) {
+                    notification_comment_on_task_pm($taskId, $_SESSION["id"], $ctx["title"], $ctx["project_name"], $ctx["assigned_user_id"], $ctx["project_id"]);
+                }
+                // end notification
                 echo json_encode([
                     "success" => true,
                     "message" => "Comment added successfully",

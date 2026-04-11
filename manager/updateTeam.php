@@ -32,10 +32,20 @@
                 exit();
             }
 
+            // notification - Zmiana nazwy zespołu (dla członków zespołu)
+            require_once __DIR__ . "/../notification_service.php";
+            $oldTeam = query("SELECT name FROM team WHERE id = ?", "fetchOneAssoc", [$id]);
+            // end notification
+
             // Aktualizacja zespołu w bazie danych
             $updateSuccessful = query("UPDATE team SET name=? WHERE id=?","", [$teamName, $id]);
 
             if ($updateSuccessful) {
+                // notification - Zmiana nazwy zespołu (dla członków zespołu)
+                if ($oldTeam && $oldTeam["name"] !== $teamName) {
+                    notification_team_renamed($id, $oldTeam["name"], $teamName);
+                }
+                // end notification
                 $response["success"] = true;
                 $response["message"] = "Team updated successfully";
             } else {

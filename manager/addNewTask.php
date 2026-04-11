@@ -96,6 +96,13 @@
                     $firstName = $taskDetails["first_name"];
                     $lastName = $taskDetails["last_name"];
 
+                    // notifications - nowe zadanie przypisane
+                    require_once __DIR__ . "/../notification_service.php";
+                    $pnameRow = query("SELECT name FROM project WHERE id = ?", "fetchOneAssoc", [$projectId]); // nazwa projektu
+                    if ($pnameRow) {
+                        notification_task_assigned($taskId, $assignedUser, $title, $pnameRow["name"], $projectId);
+                    }
+                    // end notification
 
                     //$team_name = query("SELECT team.name FROM team where team.id='%s'", "getTeamName", $teamId);
                     /*if(!$team_name) {

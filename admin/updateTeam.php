@@ -32,10 +32,16 @@
                 exit();
             }
 
+            require_once __DIR__ . "/../notification_service.php";
+            $oldTeam = query("SELECT name FROM team WHERE id = ?", "fetchOneAssoc", [$id]);
+
             // Aktualizacja zespołu w bazie danych
             $updateSuccessful = query("UPDATE team SET name=? WHERE id=?","", [$teamName, $id]);
 
             if ($updateSuccessful) {
+                if ($oldTeam && $oldTeam["name"] !== $teamName) {
+                    notification_team_renamed($id, $oldTeam["name"], $teamName);
+                }
                 $response["success"] = true;
                 $response["message"] = "Team updated successfully";
             } else {

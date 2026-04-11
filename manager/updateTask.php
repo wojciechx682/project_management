@@ -56,11 +56,23 @@
                 case "cancelled": $statusFormatted = "Cancelled"; break;
             }
 
+            // notification - zmiana osoby przypisanej do taska
+            require_once __DIR__ . "/../notification_service.php";
+            $oldTask = query("SELECT assigned_user_id, title, project_id FROM task WHERE id = ?", "fetchOneAssoc", [$id]);
+            // end notification
+
             // Aktualizacja projektu w bazie danych
             $updateSuccessful = query("UPDATE task SET title=?, description=?, priority=?, status=?, due_date=?, assigned_user_id=?, updated_at = NOW() WHERE id=?","updateTask", [$title, $description, $priorityFormatted, $statusFormatted, $dueDate, $assignedUserId, $id]
             );
 
             if($updateSuccessful) {
+                // notification - zmiana osoby przypisanej do taska
+                if ($oldTask && (int) $oldTask["assigned_user_id"] !== (int) $assignedUserId) {
+                    $pnameRow = query("SELECT name FROM project WHERE id = ?", "fetchOneAssoc", [$oldTask["project_id"]]);
+                    if ($pnameRow) {
+                        notification_task_reassigned($id, $assignedUserId, $title, $pnameRow["name"], $oldTask["project_id"]);
+                    }
+                } // end notification
                 $response["success"] = true;
                 $response["message"] = "Task updated successfully";
             } else {
