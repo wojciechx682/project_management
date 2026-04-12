@@ -2605,3 +2605,19 @@ span.task-status-value {
     color: #888;
     margin-top: 6px;
 }
+
+#task-kanban {
+    float: right;
+    color: black;
+    font-size: 125%;
+    position: relative;
+    top: -4px;
+}
+
+.divider-hr {
+    margin-bottom: 16px;
+}
+
+/* Kanban board --> */
+
+
