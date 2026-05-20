@@ -34,8 +34,9 @@
         </span>
 
         <div class="task-details task-details-button">
-            <button type="submit" class="btn-link btn-link-static btn-submit-project">Save</button>
-            <button type="button" class="btn-link btn-link-static btn-cancel" onclick="closeAddCommentWindow()">Cancel</button>
+            <button type="submit" class="btn-link btn-link-static btn-submit-project btn-submit-add-comment">Save</button>
+            <button type="button" class="btn-link btn-link-static btn-cancel btn-cancel-add-comment" onclick="closeAddCommentWindow()">Cancel</button>
+            <div style="clear: both;"></div>
         </div>
 
     </form>

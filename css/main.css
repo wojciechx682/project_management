@@ -4,26 +4,58 @@
 
 /* Paleta semantyczna — domyślnie Admin (fiolet). Podstrony ról ładują dodatkowo css/theme-*.css */
 :root {
-    --theme-nav-bg: #25273a;
-    --theme-nav-top-bg: #32324d;
-    --theme-nav-hover-bg: #32334d;
-    --theme-nav-text: #d3d3d3;
-    --theme-modal-bg: #31344d;
-    --theme-modal-title: #fafaff;
-    --theme-accent: #5478c0;
-    --theme-accent-hover: #5b83cd;
-    --theme-shadow-inset: rgba(66, 68, 90, 1);
-    --theme-shadow-modal: rgba(66, 68, 90, 1);
+    --theme-nav-bg: #1e2030;
+    --theme-nav-top-bg: #2a2d42;
+    --theme-nav-hover-bg: #343752;
+    --theme-nav-text: #e8e9ef;
+    --theme-modal-bg: #2d3048;
+    --theme-modal-title: #fafbff;
+    --theme-accent: #5b7fd6;
+    --theme-accent-hover: #6b8fe0;
+    --theme-shadow-inset: rgba(91, 127, 214, 0.18);
+    --theme-shadow-modal: rgba(30, 32, 48, 0.4);
+
+    --surface-page: #eef1f6;
+    --surface-card: #ffffff;
+    --surface-muted: #f6f7f9;
+    --surface-elevated: #ffffff;
+    --surface-header: rgba(255, 255, 255, 0.92);
+
+    --text-primary: #1a1d26;
+    --text-secondary: #5c6370;
+    --text-muted: #8b929e;
+    --text-on-accent: #ffffff;
+
+    --border-subtle: rgba(15, 23, 42, 0.07);
+    --border-default: rgba(15, 23, 42, 0.11);
+    --border-strong: rgba(15, 23, 42, 0.16);
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+    --shadow-md: 0 4px 20px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 16px 48px rgba(15, 23, 42, 0.14);
+
+    --transition-fast: 0.12s ease;
+    --transition-base: 0.2s ease;
+
+    --nav-width: 280px;
+    --header-height: 72px;
 }
 
 body {
-    background-color: #e8e8e8;
-    font-family: 'Lato', sans-serif;
+    background-color: var(--surface-page);
+    color: var(--text-primary);
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
     margin: 0;
     height: 100%;
-    overflow-y: auto;  /* zamiast scroll – pozwala działać 100vh */
-
-
+    overflow-y: auto;
+    -webkit-font-smoothing: antialiased;
 }
 
 html, body {
@@ -33,28 +65,31 @@ html, body {
 }
 
 #login, #reset, #reset-password-form {
-    width: 500px;
-    height: 525px;
-    border: 1px solid #939393;
-    border-radius: 20px;
+    width: 440px;
+    height: auto;
+    min-height: 480px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #f5f5f5;
+    background-color: var(--surface-card);
+    box-shadow: var(--shadow-lg);
 }
 
 div#register {
-    width: 500px;
-    /*height: 620px;*/
-    height: 715px;
-    border: 1px solid #939393;
-    border-radius: 20px;
+    width: 440px;
+    height: auto;
+    min-height: 680px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #f5f5f5;
+    background-color: var(--surface-card);
+    box-shadow: var(--shadow-lg);
 }
 
 
@@ -122,14 +157,16 @@ form#password-form input
 {
     min-width: 150px;
     width: 235px;
-    color: #707070;
-    border: 1px ridge #b7b7b7;
-    border-radius: 5px;
-    font-weight: bold;
-    padding: 8px;
+    color: var(--text-primary);
+    background: var(--surface-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    font-weight: 400;
+    padding: 10px 12px;
     box-sizing: border-box;
     outline: none;
     margin-left: 27px;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 form#login-form input:hover,
@@ -143,10 +180,8 @@ form#profile-form input:focus,
 form#password-form input:hover,
 form#password-form input:focus
 {
-    cursor: pointer;
-    -webkit-box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
-    -moz-box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
-    box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 3px rgba(91, 127, 214, 0.12);
 }
 
 form#login-form label,
@@ -182,8 +217,8 @@ form#reset-form input[type="submit"]
 }
 
 form#reset-form input:hover, form#reset-form input:focus {
-    cursor: pointer;
-    box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 3px rgba(91, 127, 214, 0.12);
 }
 
 form#register-form input[type="submit"],
@@ -261,11 +296,11 @@ span#register a,
 span#log-in a,
 span#back-to-login a
 {
-    color: #383838;
+    color: var(--text-secondary);
 }
 
 .error {
-    color: #aa1c1c;
+    color: #c53030;
     font-weight: bold;
     display: block;
     margin-top: 15px;
@@ -299,8 +334,8 @@ div#profile-container .error {
 
 
 nav #nav {
-    width: 300px;
-    height: 100vh; /* 100% wysokości ekranu */
+    width: var(--nav-width);
+    height: 100vh;
     background-color: var(--theme-nav-bg);
 }
 
@@ -311,25 +346,24 @@ nav {
 
 #main {
     float: none;
-    padding-left: 315px;
-    padding-right: 15px;
-    /*width: 70vw;*/
-    padding-top: 15px;
+    padding-left: calc(var(--nav-width) + 24px);
+    padding-right: 24px;
+    padding-top: 20px;
+    /* max-width: 1600px; */
 }
 
 nav #nav #top-nav {
-    height: 85px;
+    height: var(--header-height);
     background-color: var(--theme-nav-top-bg);
-    padding: 3px;
-    /*color: #e8e8e8;*/
-    border-bottom: 1px solid rgba(166, 166, 166, 0.7);
-    margin-bottom: 8px;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 4px;
 }
 
 nav #nav #top-nav img {
     float: left;
     margin-right: 10px;
-    width: 70px;
+    width: 50px;
     margin-top: 6px;
     margin-left: 7px;
 
@@ -342,12 +376,14 @@ nav #nav #top-nav img {
 
 
 header #header {
-    height: 85px;
-    background-color: #d0d0d0;
+    height: var(--header-height);
+    background-color: var(--surface-header);
+    border-bottom: 1px solid var(--border-subtle);
+    backdrop-filter: blur(8px);
 }
 
 nav #nav #top-nav #user-info {
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 nav #nav #top-nav #user-info a:hover {
@@ -364,28 +400,26 @@ nav a {
 }
 
 nav a:hover h3 {
-    text-decoration: underline;
+    text-decoration: none;
     background-color: var(--theme-nav-hover-bg);
 }
 
 nav h3 {
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 0;
-
-    /*border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 15px;
+    padding: 12px 16px;
     user-select: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 nav a h3 {
-    transition: background-color 0.05s ease-in-out, color 0.05s ease-in-out;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
 nav hr, #main hr {
-    background-color: rgba(166, 166, 166, 0.7);
+    background-color: var(--border-subtle);
     border: none;
     height: 1px;
     /*margin: 5px 15px 5px 15px;*/
@@ -410,41 +444,53 @@ nav hr, #main hr {
 }
 
 header #header button.btn-link {
-    /*width: 110px !important;*/
-    background-color: #2f2f2f4a !important;
-    border-radius: 6px;
+    background-color: var(--theme-accent) !important;
+    border-radius: var(--radius-sm);
     float: right;
-    margin-right: 15px;
-    margin-top: 25px;
+    margin-right: 20px;
+    margin-top: 18px;
+    box-shadow: var(--shadow-sm);
 }
 
 header #header button.btn-link:hover {
-    background-color: rgba(89, 89, 89, 0.29) !important;
+    background-color: var(--theme-accent-hover) !important;
 }
 
 .btn-link {
     align-items: center;
     background-color: var(--theme-accent);
-    border-radius: 8px;
-    border-style: none;
-    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+    border-radius: var(--radius-sm);
+    border: none;
+    box-shadow: var(--shadow-sm);
     box-sizing: border-box;
-    color: #fff;
+    color: var(--text-on-accent);
     cursor: pointer;
     display: flex;
     flex-direction: row;
     flex-shrink: 0;
-    font-family: "RM Neue",sans-serif;
-    line-height: 1.15;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
     margin: 0 0 5px 0;
-    padding: 10px 21px;
+    padding: 10px 18px;
     text-align: center;
-    text-transform: uppercase;
-    transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+    text-transform: none;
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
     outline: none;
+}
+
+.btn-link:hover {
+    background-color: var(--theme-accent-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-link:active {
+    transform: translateY(1px);
 }
 
 .btn-link-tasks {
@@ -478,15 +524,17 @@ div.task-details,
 .team,
 div.team-details,
 div.team-member {
-    border: 1px ridge rgba(166, 166, 166, 0.38);
-    border-radius: 15px;
-    margin: 0px auto 40px auto;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    margin: 0 auto 32px auto;
     overflow: auto;
     text-align: left !important;
+    background: var(--surface-card);
+    box-shadow: var(--shadow-sm);
 }
 
 div.users {
-    margin: 0px auto 0px auto;
+    margin: 20px auto 0px auto;
     border-radius: 0;
 }
 
@@ -591,22 +639,21 @@ div.users {
 {
     /* border: 1px dashed black; */
     /* border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
-    border-right: 1px ridge rgba(166, 166, 166, 0.38);
+    border-right: 1px solid var(--border-subtle);
     float: left;
-    /*width: 16.66%;*/
     width: 14.28%;
     text-align: center;
     padding-bottom: 5px;
-    padding-top: 5px;
-    /*color: var(--text-color);*/
     border-bottom: none;
-    font-weight: normal;
+    font-weight: 500;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
     min-height: 30px;
     height: 45px;
     overflow: hidden;
     padding-top: 12px;
     z-index: 0;
-    background-color: #f2f2f2;
+    background-color: var(--surface-muted);
 }
 
 .user-first-name {
@@ -685,7 +732,7 @@ div.team-content:last-of-type {
 /*div.order-action-button {
     position: relative;
     top: -3px;
-    border: 1px ridge rgba(166, 166, 166, 0.38);
+    border: 1px solid var(--border-default);
     border-radius: 3px;
     width: 120px;
     padding: 3px 3px 4px 10px;
@@ -725,7 +772,7 @@ div.order-action-options {
 }
 
 div.order-option {
-    border-bottom: 1px ridge rgba(210, 210, 210, 0.38);
+    border-bottom: 1px solid var(--border-subtle);
     padding-bottom: 5px;
     padding-top: 5px;
     border-radius: 2px;
@@ -771,7 +818,7 @@ i.icon-home, i.icon-th-large, i.icon-tasks, i.icon-adult {
 .submit-order-form {
     all: unset;
     cursor: pointer;
-    color: black;
+    color: var(--text-primary);
 }
 
 .submit-order-form:hover {
@@ -1293,7 +1340,7 @@ div.team-member-content {
 }
 
 div.task-assigned-user, div.task-created-at, div.team-member-created-at, div.team-member-updated-at {
-    border-right: 1px ridge rgba(166, 166, 166, 0.38);
+    border-right: 1px solid var(--border-subtle);
 }
 
 div.task-id, div.team-member-id {
@@ -1321,43 +1368,33 @@ div.team-member-manage {
 #edit-team-window,
 #add-user,
 #change-status {
-    /*height: 310px;*/
     height: 750px;
-    width: 750px;
+    width: 720px;
+    max-width: calc(100vw - 48px);
     background-color: var(--theme-modal-bg);
-    /*position: fixed;
-    top: 25em;
-    left: 45em;*/
     position: absolute;
     top: 50%;
-    /*left: 60%;*/
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 90;
-    border-radius: 5px;
-    -webkit-box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
-    -moz-box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
-    box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-lg);
 }
 
 .accept-user {
-    /*height: 310px;*/
     height: 200px;
-    width: 750px;
+    width: 720px;
+    max-width: calc(100vw - 48px);
     background-color: var(--theme-modal-bg);
-    /*position: fixed;
-    top: 25em;
-    left: 45em;*/
     position: absolute;
     top: 50%;
-    /*left: 60%;*/
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100;
-    border-radius: 5px;
-    -webkit-box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
-    -moz-box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
-    box-shadow: -5px 0px 26px -5px var(--theme-shadow-modal);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-lg);
 }
 
 #update-status > h2, .update-status > h2,
@@ -1377,7 +1414,7 @@ div.team-member-manage {
     color: var(--theme-modal-title);
     /*border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
     font-size: 1.2rem;
-    width: 690px;
+    width: 660px;
     display: inline-block;
     user-select: none;
 }
@@ -1388,7 +1425,7 @@ div.team-member-manage {
     color: var(--theme-modal-title);
     /*border-bottom: 1px ridge rgba(166, 166, 166, 0.38);*/
     font-size: 1.2rem;
-    width: 690px;
+    width: 660px;
     display: inline-block;
     user-select: none;
 }
@@ -1402,7 +1439,7 @@ div.team-member-manage {
 #add-team hr,
 #edit-team-window hr
 {
-    background-color: rgba(166, 166, 166, 0.7);
+    background-color: var(--border-subtle);
     border: none;
     height: 1px;
     margin: 5px 15px 5px 15px;
@@ -1410,7 +1447,7 @@ div.team-member-manage {
 }
 
 .accept-user hr {
-    background-color: rgba(166, 166, 166, 0.7);
+    background-color: var(--border-subtle);
     border: none;
     height: 1px;
     margin: 5px 15px 5px 15px;
@@ -1452,26 +1489,24 @@ span.info {
 }
 
 textarea#comment {
-    /* komentarz dodany przez pracownika - przy usuwaniu zamówienia */
-    width: 600px; /* Set the desired width */
-    height: 110px; /* Set the desired height */
-    resize: none; /* Prevent resizing of the textarea */
+    width: 600px;
+    height: 110px;
+    resize: none;
     outline: none;
-
-    color: #707070;
-    border: 1px ridge #b7b7b7;
-    border-radius: 5px;
-    padding: 8px;
+    color: var(--text-primary);
+    background: var(--surface-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
     box-sizing: border-box;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    /*display: inline-block;*/
+    font-weight: 400;
     float: left;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
 
-    /*position: relative;
-    top: 15px;*/
+textarea#comment:focus {
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 3px rgba(91, 127, 214, 0.1);
 }
 
 .remove-order-error,
@@ -1543,12 +1578,14 @@ div.update-status button {
 div.task-title a,
 div.team-member-first-name a
 {
-    color: black;
+    color: var(--text-primary);
     text-decoration: none;
+    font-weight: 500;
 }
 
 div.task-title a:hover,
 div.team-member-first-name a:hover {
+    color: var(--theme-accent);
     text-decoration: underline;
 }
 
@@ -1559,14 +1596,19 @@ span#role {
 /* ----------------------------------------------------------- */
 
 div#projects, div#teams {
-    border: 2px solid #d0d0d0;
+    border: 1px solid var(--border-default);
     width: 375px;
     height: 230px;
-    border-radius: 8px;
-   /* padding: 10px;*/
-    background-color: #f5f5f5;
-
+    border-radius: var(--radius-md);
+    background-color: var(--surface-card);
+    box-shadow: var(--shadow-sm);
     display: inline-block;
+    transition: box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+div#projects:hover, div#teams:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
 }
 
 div#projects, div#teams {
@@ -1583,7 +1625,7 @@ div#projects-left, div#teams-left {
 }
 
 div#projects-left a, div#teams-left a {
-    color: black;
+    color: var(--text-primary);
 }
 /* ikona wyśrodkowana w pionie i poziomie */
 div#projects-left i.icon-th-large,
@@ -1599,7 +1641,7 @@ div#teams-left i.icon-adult {
 div#projects-left i.icon-th-large:hover,
 div#teams-left i.icon-adult:hover
 {
-    color: #505050;
+    color: var(--theme-accent);
     cursor: pointer;
 }
 
@@ -1612,7 +1654,7 @@ div#teams-right
     float: left;
     height: 228px;
     /*border: 1px solid #d0d0d0;*/
-    border-left: 2px solid #d0d0d0;
+    border-left: 1px solid var(--border-subtle);
     width: calc(100% - 120px - 2px); /* szerokość całości - lewa kolumna - jej border */
 }
 
@@ -1633,13 +1675,13 @@ div#teams::after
 
 .tile-title a {
     text-decoration: none;
-    color: black;
-    transition: color .3s ease;
+    color: var(--text-primary);
+    transition: color var(--transition-base);
 }
 
 .tile-title a:hover {
     text-decoration: underline;
-    color: #505050;
+    color: var(--theme-accent);
     cursor: pointer;
 }
 
@@ -1662,7 +1704,7 @@ div.team-member-action-button
 {
     position: relative;
     top: -3px;
-    border: 1px ridge rgba(166, 166, 166, 0.38);
+    border: 1px solid var(--border-default);
     border-radius: 3px;
     width: 120px;
     padding: 3px 3px 4px 10px;
@@ -1679,7 +1721,7 @@ div.team-member-options-container {
     text-align: center !important;
     margin: 0 auto;
     /*padding-left: 2px;*/
-    background-color: #f2f2f2;
+    background-color: var(--surface-muted);
 }
 
 div.user-action-options,
@@ -1690,11 +1732,11 @@ div.team-member-action-options
     position: absolute;
     /*top: 20px;*/
     margin: 0 auto 0 auto;
-    border: 1px ridge rgba(166, 166, 166, 0.38);
+    border: 1px solid var(--border-default);
     /*margin-left: auto;*/
     text-align: center !important;
     /*display: none;*/
-    background-color: #f2f2f2;
+    background-color: var(--surface-muted);
     /*padding: 0 20px 0 20px;*/ /* (!) */
     width: 120px;
 
@@ -1705,17 +1747,18 @@ div.user-option,
 div.task-option,
 div.team-member-option
 {
-    border-bottom: 1px ridge rgba(210, 210, 210, 0.38);
+    border-bottom: 1px solid var(--border-subtle);
     padding-bottom: 5px;
     padding-top: 5px;
     border-radius: 2px;
 }
 
 div.user-option:hover,
-div.task-option:hover
+div.task-option:hover,
+div.team-member-option:hover
 {
     cursor: pointer;
-    background-color: rgba(210, 210, 210, 0.38)
+    background-color: var(--surface-page);
 }
 
 div.task-option-delete:hover {
@@ -1821,21 +1864,31 @@ form#password-form {
 #profile-form textarea,
 #profile-form select,
 #password-form input {
-    width: 100% !important;             /* pełna szerokość kontenera */
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 100% !important;
+    padding: 10px 12px;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
     font-size: 14px;
-    box-sizing: border-box;  /* uwzględnia padding w szerokości */
+    box-sizing: border-box;
     margin-left: 0 !important;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+#profile-form input:focus,
+#profile-form textarea:focus,
+#profile-form select:focus,
+#password-form input:focus {
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 3px rgba(91, 127, 214, 0.1);
+    outline: none;
 }
 
 
 
 #profile-form input[readonly],
 #profile-form textarea[readonly] {
-    background-color: #f4f4f4;
-    color: #555;
+    background-color: var(--surface-muted);
+    color: var(--text-muted);
     cursor: not-allowed;
 }
 
@@ -1882,37 +1935,31 @@ div.team .team-members-count {
 }
 
 div#add-team, div#edit-team-window, div#add-user {
-    height: 200px;
+    height: 240px;
 }
 
 
 /* ------------------------------------------------------- */
 
 #global-search {
-    /*padding: 6px;*/
-    width: 250px;
-    /*border: 1px solid #ccc;
-    border-radius: 4px;*/
-
-    /*min-width: 165px;*/
-    /*width: calc(100% * 0.75);*/
-    color: #707070;
-    border: 1px ridge #b7b7b7;
-    border-radius: 5px;
-    font-weight: bold;
-    padding: 8px;
+    width: 260px;
+    color: var(--text-primary);
+    background: var(--surface-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    font-weight: 400;
+    padding: 10px 12px;
     box-sizing: border-box;
     outline: none;
-    margin-top: 25px;
-    margin-left: 15px;
+    margin-top: 18px;
+    margin-left: 16px;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 #global-search:focus,
 #global-search:hover {
-    cursor: pointer;
-    -webkit-box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
-    -moz-box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
-    box-shadow: inset 0px 0px 13px -10px var(--theme-shadow-inset);
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 3px rgba(91, 127, 214, 0.1);
 }
 
 #global-search::placeholder {
@@ -1921,15 +1968,15 @@ div#add-team, div#edit-team-window, div#add-user {
 
 #search-results {
     position: absolute;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    width: 260px;
-    left: 15px;
-    margin-top: 5px;
-    padding: 10px;
+    background: var(--surface-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    width: 280px;
+    left: 16px;
+    margin-top: 6px;
+    padding: 8px;
     z-index: 1000;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow-md);
 }
 
 #search-results.hidden {
@@ -1951,7 +1998,7 @@ div#add-team, div#edit-team-window, div#add-user {
 .search-item button {
     background: none;
     border: none;
-    color: #007bff;
+    color: var(--theme-accent);
     cursor: pointer;
     text-align: left;
     font-size: 14px;
@@ -1978,11 +2025,12 @@ div#add-team, div#edit-team-window, div#add-user {
 }
 
 .main-comment {
-    padding: 10px;
-    background-color: #fafafa;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    margin: 10px 0 10px 0;
+    padding: 12px 14px;
+    background-color: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    margin: 10px 0;
+    box-shadow: var(--shadow-sm);
 }
 
 /* Pojedynczy komentarz */
@@ -2000,23 +2048,22 @@ div#add-team, div#edit-team-window, div#add-user {
 
 .comment-author {
     float: left;
-    font-weight: bold;
-    color: #2c3e50;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
 .comment-date {
     float: right;
     font-size: 12px;
-    color: #777;
+    color: var(--text-muted);
 }
 
-/* Treść komentarza */
 .comment-content {
     clear: both;
     padding-top: 5px;
     padding-left: 5px;
-    color: #333;
-    line-height: 1.4em;
+    color: var(--text-secondary);
+    line-height: 1.5;
     word-wrap: break-word;
 }
 
@@ -2028,23 +2075,25 @@ div#add-team, div#edit-team-window, div#add-user {
 nav {
     float: left;
     color: var(--theme-nav-text);
-    height: 100vh;           /* pełna wysokość widoku */
-    position: fixed;         /* przyklejony do lewej krawędzi */
+    height: 100vh;
+    position: fixed;
     top: 0;
     left: 0;
+    z-index: 20;
 }
 
 nav #nav {
-    width: 300px;
+    width: var(--nav-width);
     height: 100%;
     background-color: var(--theme-nav-bg);
 }
 
 header {
-    margin-left: 300px;   /* odsuwamy header od lewego panelu */
-    width: calc(100% - 300px);  /* zajmuje resztę szerokości */
-    position: relative;   /* utrzymuje poprawne pozycjonowanie */
-    z-index: 10;          /* żeby był nad nawigacją */
+    margin-left: var(--nav-width);
+    width: calc(100% - var(--nav-width));
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 /* --------------------------------------------- */
@@ -2052,7 +2101,7 @@ header {
 /* --------------------------------------------- */
 
 #change-status {
-    height: 280px;                       /* podobnie jak #add-user */
+    height: 290px;                       /* podobnie jak #add-user */
     /*width: 750px;
     background-color: var(--theme-modal-bg);
     position: absolute;
@@ -2073,7 +2122,7 @@ header {
     margin-top: 25px;
     color: var(--theme-modal-title);
     font-size: 1.2rem;
-    width: 690px;
+    width: 660px;
     display: inline-block;
     user-select: none;
 }
@@ -2081,7 +2130,7 @@ header {
 #change-status hr,
 #add-user hr
 {
-    background-color: rgba(166, 166, 166, 0.7);
+    background-color: var(--border-subtle);
     border: none;
     height: 1px;
     margin: 5px 15px 5px 15px;
@@ -2108,13 +2157,13 @@ header {
 
 /* sekcje formularza */
 #change-status .team-details {
-   /* border: 1px ridge rgba(166, 166, 166, 0.38);
+   /* border: 1px solid var(--border-default);
     border-radius: 15px;
     margin: 15px auto;
     overflow: auto;
     text-align: left !important;
     width: 90%;
-    background-color: #f2f2f2;
+    background-color: var(--surface-muted);
     padding: 10px 0;*/
 }
 
@@ -2181,17 +2230,22 @@ textarea#comment-content {
 }
 
 .pagination a {
-    padding: 6px 12px;
+    padding: 8px 14px;
     margin: 2px;
-    border: 1px solid #ccc;
-    color: #333;
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
     text-decoration: none;
-    border-radius: 4px;
-    background-color: #eee;
-    font-weight: bold;
+    border-radius: var(--radius-sm);
+    background-color: var(--surface-card);
+    font-weight: 500;
     display: inline-block;
     min-width: 48px;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
 
+.pagination a:hover {
+    border-color: var(--theme-accent);
+    color: var(--theme-accent);
 }
 
 .pagination a.active {
@@ -2214,7 +2268,7 @@ textarea#comment-content {
 }
 
 .tile:hover {
-    background: #fdfdfd !important;
+    background: var(--surface-muted) !important;
 }
 
 /*.comment-content {
@@ -2234,9 +2288,10 @@ textarea#comment-content {
 }
 
 .comment {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    padding: 8px 12px;
+    background-color: var(--surface-muted);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
 }
 
 .comment-header {
@@ -2267,7 +2322,7 @@ textarea#comment-content {
 .comment-manage .task-action-button {
     position: relative;
     top: 0;
-    border: 1px ridge rgba(166, 166, 166, 0.38);
+    border: 1px solid var(--border-default);
     border-radius: 3px;
     width: 120px;
     padding: 3px 3px 4px 10px;
@@ -2291,9 +2346,10 @@ textarea#comment-content {
 }
 
 .comment {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    padding: 8px 12px;
+    background-color: var(--surface-muted);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
 }
 
 /* nagłówek może dalej używać flexa, ale jeśli chcesz 100% bez flex:
@@ -2339,7 +2395,7 @@ textarea#comment-content {
 .comment-manage .task-action-button {
     position: relative;
     top: 0;
-    border: 1px ridge rgba(166, 166, 166, 0.38);
+    border: 1px solid var(--border-default);
     border-radius: 3px;
     width: 120px;
     padding: 3px 3px 4px 10px;
@@ -2367,17 +2423,18 @@ textarea#comment-content {
 
 /* Admin Projects — styl jak Project Manager (nagłówek + doklejone wiersze) */
 div.admin-project {
-    border: 1px ridge rgba(166, 166, 166, 0.38);
-    border-radius: 15px;
-    margin: 0px auto 40px auto;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    margin: 20px auto 32px auto;
     overflow: auto;
     text-align: left !important;
-    margin-top: 20px;
+    background: var(--surface-card);
+    box-shadow: var(--shadow-sm);
 }
 
 /* komórki jak u PM */
 div.admin-project > div {
-    border-right: 1px ridge rgba(166, 166, 166, 0.38);
+    border-right: 1px solid var(--border-subtle);
     float: left;
     text-align: center;
     padding-bottom: 5px;
@@ -2386,7 +2443,7 @@ div.admin-project > div {
     min-height: 30px;
     height: 45px;
     overflow: hidden;
-    background-color: #f2f2f2;
+    background-color: var(--surface-muted);
     white-space: nowrap;
     text-overflow: ellipsis;
 }
@@ -2494,7 +2551,7 @@ span.task-status-value {
 .notification-app {
     position: relative;
     float: left;
-    margin-top: 22px;
+    margin-top: 16px;
     margin-left: 15px;
     margin-right: 10px;
 }
@@ -2544,10 +2601,10 @@ span.task-status-value {
     margin-top: 6px;
     width: 320px;
     max-height: 380px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    background: var(--surface-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
     z-index: 200;
     overflow: hidden;
 }
@@ -2558,9 +2615,9 @@ span.task-status-value {
 
 .notification-panel-header {
     padding: 10px 12px;
-    font-weight: bold;
-    border-bottom: 1px solid #e0e0e0;
-    background: #f5f5f5;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface-muted);
 }
 
 .notification-list {
@@ -2596,28 +2653,118 @@ span.task-status-value {
 
 .notification-item-body {
     font-size: 13px;
-    color: #444;
+    color: var(--text-secondary);
     line-height: 1.35;
 }
 
 .notification-item-meta {
     font-size: 11px;
-    color: #888;
+    color: var(--text-muted);
     margin-top: 6px;
 }
 
 #task-kanban {
     float: right;
-    color: black;
-    font-size: 125%;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
     position: relative;
     top: -4px;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+#task-kanban:hover {
+    color: var(--theme-accent);
 }
 
 .divider-hr {
     margin-bottom: 16px;
 }
 
-/* Kanban board --> */
+/* === Wiersze tabel — subtelny hover i czytelniejsza treść === */
 
+.project-content > div,
+.team-content > div,
+.task-content > div,
+.users-content > div,
+.team-member-content > div,
+div.admin-project.admin-project-content > div {
+    background-color: var(--surface-card);
+    color: var(--text-primary);
+    font-weight: 400;
+    transition: background-color var(--transition-fast);
+}
 
+.project-content:hover > div,
+.team-content:hover > div,
+.task-content:hover > div,
+.users-content:hover > div,
+.team-member-content:hover > div,
+div.admin-project.admin-project-content:hover > div {
+    background-color: var(--surface-muted);
+}
+
+form#login-form input[type="submit"],
+form#register-form input[type="submit"],
+form#reset-form input[type="submit"] {
+    background-color: var(--theme-accent);
+    color: var(--text-on-accent);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+form#login-form input[type="submit"]:hover,
+form#register-form input[type="submit"]:hover,
+form#reset-form input[type="submit"]:hover {
+    background-color: var(--theme-accent-hover);
+    box-shadow: var(--shadow-sm);
+}
+
+div.user-action-button,
+div.task-action-button,
+div.team-member-action-button,
+div.order-action-button {
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    background: var(--surface-card);
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+div.user-action-button:hover,
+div.task-action-button:hover,
+div.team-member-action-button:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-muted);
+}
+
+.icon-cancel:hover {
+    color: #e53e3e;
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+.priority-dot {
+    border: none;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.project-details-button,
+.task-details-button {
+    background-color: transparent !important;
+}
+
+.btn-cancel-add-comment,
+.btn-submit-add-comment {
+    float: left;
+}
+
+.btn-submit-add-comment {
+    margin-right: 22px;
+}
+
+form#register-form {
+    left: 185px;
+}

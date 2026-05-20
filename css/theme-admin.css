@@ -1,13 +1,13 @@
-/* Admin — ciemny fiolet (jak wcześniej w main.css) */
+/* Admin — ciemny fiolet */
 :root {
-    --theme-nav-bg: #25273a;
-    --theme-nav-top-bg: #32324d;
-    --theme-nav-hover-bg: #32334d;
-    --theme-nav-text: #d3d3d3;
-    --theme-modal-bg: #31344d;
-    --theme-modal-title: #fafaff;
-    --theme-accent: #5478c0;
-    --theme-accent-hover: #5b83cd;
-    --theme-shadow-inset: rgba(66, 68, 90, 1);
-    --theme-shadow-modal: rgba(66, 68, 90, 1);
+    --theme-nav-bg: #1e2030;
+    --theme-nav-top-bg: #2a2d42;
+    --theme-nav-hover-bg: #343752;
+    --theme-nav-text: #e8e9ef;
+    --theme-modal-bg: #2d3048;
+    --theme-modal-title: #fafbff;
+    --theme-accent: #5b7fd6;
+    --theme-accent-hover: #6b8fe0;
+    --theme-shadow-inset: rgba(91, 127, 214, 0.18);
+    --theme-shadow-modal: rgba(30, 32, 48, 0.4);
 }

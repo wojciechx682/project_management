@@ -49,77 +49,39 @@ The system uses the following main tables:
 
 ➡️ Full SQL dump: [`project_management.sql`](./project_management.sql)
 
-Main login page (index.php): 
+Screenshoots : 
 
 ![Main Login Page](assets/git/1.png)
 
-Register page:
-
 ![Register Page](assets/git/2.png)
 
-Password reset page:
+![Password reset page](assets/git/3.png)
 
-![Password reset page](assets/git/2_1.png)
+![Password reset page](assets/git/4.png)
 
-![Password reset page](assets/git/2_2.png)
+![Team Member Main Page](assets/git/5.png)
 
-Main page (after log in) for Team Member (role):
+![Tasks view](assets/git/6.png)
 
-![Team Member Main Page](assets/git/3.png)
+![Adding comments](assets/git/7.png)
 
-Tasks View:
+![Projects view](assets/git/8.png)
 
-![Tasks view](assets/git/4.png)
+![New Project](assets/git/9.png)
 
-Adding comment to task (Team member role):
+![Projects Details View](assets/git/10.png)
 
-![Adding comments](assets/git/4_1.png)
+![Editing Project](assets/git/11.png)
 
-Projects View (Project Manager Role):
+![Adding New Task](assets/git/12.png)
 
-![Projects view](assets/git/5.png)
-
-Adding New Project:
-
-![New Project](assets/git/6.png)
-
-Project Details View (Project Manager Role):
-
-![Projects Details View](assets/git/8.png)
-
-Editing Project:
-
-![Editing Project](assets/git/9.png)
-
-Adding New Task:
-
-![Adding New Task](assets/git/11.png)
-
-Editing Task:
-
-![Editing Task](assets/git/12.png)
-
-Deleting Task:
+![Editing Task](assets/git/13.png)
 
 ![Deleting Task](assets/git/14.png)
 
-Task Details page:
+![Task Details page](assets/git/15.png)
 
-![Task Details page](assets/git/22.png)
-
-Editing comments:
-
-![Editing comments](assets/git/23.png)
-
-After Successful Registration:
-
-![Deleting Task](assets/git/15.png)
-
-Attempted to log in before the administrator approved the account:
-
-![Deleting Task](assets/git/16.png)
-
-Verification of user accounts by the administrator:
+![Editing comments](assets/git/16.png)
 
 ![Deleting Task](assets/git/17.png)
 
@@ -127,41 +89,6 @@ Verification of user accounts by the administrator:
 
 ![Deleting Task](assets/git/19.png)
 
-User profile page:
+![Deleting Task](assets/git/20.png)
 
-![User profile page](assets/git/20.png)
-
-Teams page:
-
-![Teams page](assets/git/21.png)
-
-Adding new team:
-
-![Teams page](assets/git/24.png)
-
-Team Details page:
-
-![Teams page](assets/git/25.png)
-
-Editing Team Name:
-
-![Teams page](assets/git/26.png)
-
-Adding a new Team Member:
-
-![Teams page](assets/git/27.png)
-
-Search engine (AJAX/Fetch API):
-
-![Teams page](assets/git/28.png)
-
-
-
-
-
-
-
-
-
-
-
+![Deleting Task](assets/git/21.png)

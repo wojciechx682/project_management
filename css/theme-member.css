@@ -1,13 +1,13 @@
 /* Team Member — zielona paleta */
 :root {
-    --theme-nav-bg: #22543d;
-    --theme-nav-top-bg: #276749;
-    --theme-nav-hover-bg: #2f855a;
-    --theme-nav-text: #e6fffa;
-    --theme-modal-bg: #276749;
+    --theme-nav-bg: #1a3d2e;
+    --theme-nav-top-bg: #22543d;
+    --theme-nav-hover-bg: #2d6a4f;
+    --theme-nav-text: #e8f5ef;
+    --theme-modal-bg: #22543d;
     --theme-modal-title: #f0fff4;
-    --theme-accent: #38a169;
-    --theme-accent-hover: #48bb78;
-    --theme-shadow-inset: rgba(47, 133, 90, 0.85);
-    --theme-shadow-modal: rgba(34, 84, 61, 0.6);
+    --theme-accent: #3d9b6a;
+    --theme-accent-hover: #4aad7a;
+    --theme-shadow-inset: rgba(61, 155, 106, 0.18);
+    --theme-shadow-modal: rgba(26, 61, 46, 0.4);
 }
