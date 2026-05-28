@@ -25,17 +25,17 @@
             switch ($_SESSION["role"]) {
                 case "Admin":
                     header("Location: admin/admin.php");
-                    break;
+                    exit();                    
                 case "Project Manager":
                     header("Location: manager/manager.php");
-                    break;
+                    exit();                    
                 case "Team Member":
                     header("Location: user/user.php");
-                    break;
+                    exit();                   
                 default:
                     $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned.</span>';
                     header("Location: index.php");
-                    break;
+                    exit();                    
             }
 
         } elseif (!$row["is_approved"]) {
