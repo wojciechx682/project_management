@@ -12,7 +12,9 @@
 
         if (password_verify($password, $row["password"]) && $row["is_approved"]) {
 
-            $_SESSION["logged-in"] = true;
+            session_regenerate_id(true); // ochrona przed session fixation
+
+            $_SESSION["logged-in"] = true; // tej wartości nigdzie w projekcie nie sprawdzamy
             $_SESSION["id"] = $row["id"];
             $_SESSION["first_name"] = $row["first_name"];
             $_SESSION["last_name"] = $row["last_name"];
@@ -413,7 +415,7 @@
 
         if (!$captchaToken) return false;
 
-        $response = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.RECAPTCHA_SECRET_KEY.'&response='.$_POST['g-recaptcha-response']));
+        $response = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.RECAPTCHA_SECRET_KEY.'&response='.$captchaToken));
 
         if (!$response->success) {
             return false;
