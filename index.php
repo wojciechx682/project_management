@@ -71,6 +71,10 @@
                     echo '<span class="reset-success success">' . $_SESSION["reset-success"] . '</span>';
                     unset($_SESSION["reset-success"]);
                 }
+                if (isset($_SESSION["password-updated-success"])) {
+                    echo '<span class="reset-success success">' . htmlspecialchars($_SESSION["password-updated-success"], ENT_QUOTES) . '</span>';
+                    unset($_SESSION["password-updated-success"]);
+                }
             ?>
 
         </form>

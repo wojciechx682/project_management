@@ -16,7 +16,7 @@
 
 <?php require "../view/profile.php"; ?>
 
-<script src="../scripts/update-profile.js"></script>
+<script src="../scripts/update-profile.js?v=2"></script>
 
 <script src="../scripts/manager/password-visibility.js"></script>
 

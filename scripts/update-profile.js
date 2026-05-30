@@ -75,11 +75,11 @@ document.getElementById("password-form").addEventListener("submit", function(eve
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                resultDiv.innerHTML = "<span class='success'>" + data.message + "</span>";
-                document.getElementById("password-form").reset();
-            } else {
-                resultDiv.innerHTML = "<span class='error'>" + (data.message || "Password update failed") + "</span>";
+                window.location.replace("../index.php");
+                return;
             }
+
+            resultDiv.innerHTML = "<span class='error'>" + (data.message || "Password update failed") + "</span>";
         })
         .catch(error => {
             console.error("Error:", error);

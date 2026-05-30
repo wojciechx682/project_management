@@ -56,8 +56,25 @@
         $updateSuccessful = query("UPDATE user SET password=?, updated_at=NOW() WHERE id=?", "", [$newHash, $_SESSION["id"]]);
 
         if ($updateSuccessful) {
+            $_SESSION["password-updated-success"] = "Password has been updated successfully";
+
+            unset(
+                $_SESSION["logged_in"],
+                $_SESSION["id"],
+                $_SESSION["first_name"],
+                $_SESSION["last_name"],
+                $_SESSION["email"],
+                $_SESSION["role"],
+                $_SESSION["created_at"],
+                $_SESSION["updated_at"],
+                $_SESSION["is_approved"]
+            );
+
+            session_regenerate_id(true);
+
             $response["success"] = true;
             $response["message"] = "Password has been updated successfully";
+            $response["redirect"] = "../index.php";
         } else {
             $response["message"] = "Failed to update password";
         }
