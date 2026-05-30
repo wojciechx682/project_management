@@ -2,30 +2,38 @@
     require_once "../start-session.php";
     require_role("Team Member");
 
-    header('Content-Type: application/json; charset=UTF-8');
+    if(isset($_GET["id"])) {
 
-    if (!isset($_GET["id"])) {
-        json_error('Task ID not provided');
+        $taskId = filter_var($_GET["id"], FILTER_VALIDATE_INT);
+
+        if($taskId === false) {
+            echo json_encode(["success" => false, "message" => "Invalid task ID"]);
+            exit();
+        }
+
+        // Pobierz dane projektu z bazy danych
+        $result = query("SELECT task.* FROM task WHERE task.id=?", "getTaskForEdit", $taskId);
+
+        //var_dump($result);
+
+        if($result) {
+
+            $task = $result->fetch(PDO::FETCH_ASSOC);
+
+            //$status = strtolower(str_replace(' ', '_', $task["status"]));
+            $status = $task["status"];
+
+            echo json_encode([
+                "success" => true,
+                "task" => [
+                    "id" => $task["id"],
+                    "title" => $task["title"],
+                    "status" => $status
+                ]
+            ]);
+        } else {
+            echo json_encode(["success" => false, "message" => "Task not found"]);
+        }
+    } else {
+        echo json_encode(["success" => false, "message" => "Task ID not provided"]);
     }
-
-    $taskId = filter_var($_GET["id"], FILTER_VALIDATE_INT);
-
-    if ($taskId === false) {
-        json_error('Invalid task ID');
-    }
-
-    $result = query("SELECT task.* FROM task WHERE task.id=?", "getTaskForEdit", $taskId);
-
-    if (!$result) {
-        json_error('Task not found');
-    }
-
-    $task = $result->fetch(PDO::FETCH_ASSOC);
-
-    json_success([
-        'task' => [
-            'id' => $task["id"],
-            'title' => $task["title"],
-            'status' => $task["status"],
-        ],
-    ]);

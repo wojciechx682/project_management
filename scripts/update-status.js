@@ -1,35 +1,34 @@
 
+// Funkcje do otwierania i zamykania okna edycji
 function toggleEditTaskWindowUser(taskId) {
 
-    const resultDiv = document.getElementById("result");
+    console.log("toggleEditTaskWindowUser function");
 
+    // Pobierz dane zadania (możesz to zrobić przez AJAX lub wcześniej załadować dane)
     fetch(`getTaskDataUser.php?id=${taskId}`)
     .then(response => response.json())
     .then(data => {
-        if (data.success && data.data && data.data.task) {
-            const task = data.data.task;
-            document.getElementById("edit-task-id").value = task.id;
-            document.getElementById("task-title").textContent = task.title;
-            document.getElementById("current-status").textContent = task.status;
+        if (data.success) {
+            // Wypełnij formularz danymi projektu
+            document.getElementById("edit-task-id").value = data.task.id;
+            document.getElementById("task-title").textContent = data.task.title;
+            document.getElementById("current-status").textContent = data.task.status;
 
+            // Otwórz okno edycji
             let editWindow = document.querySelector("#change-status");
             let mainContainer = document.getElementById("main-container");
 
             editWindow.classList.remove("hidden");
             mainContainer.classList.add("unreachable");
-        } else {
-            resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to load task data'}</span>`;
-            setTimeout(() => window.location.reload(), 1500);
         }
     })
     .catch(error => {
         console.error("Error:", error);
-        resultDiv.innerHTML = "<span class='error'>Failed to load task data</span>";
-        setTimeout(() => window.location.reload(), 1500);
+        document.getElementById("result").innerHTML = "<span class='error'>Failed to load task data</span>";
     });
 }
-
 function closeChangeStatusWindow() {
+    console.log("closeChangeStatusWindow function");
     let changeStatusWindow = document.querySelector("#change-status");
     let mainContainer = document.getElementById("main-container");
 
@@ -46,6 +45,7 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+// Obsługa formularza zmiany statusu
 document.getElementById("change-status-form").addEventListener("submit", function(event) {
 
     event.preventDefault();
@@ -53,6 +53,7 @@ document.getElementById("change-status-form").addEventListener("submit", functio
     const resultDiv = document.getElementById("result");
     const formData = new FormData(this);
 
+    // Walidacja danych
     const taskId = formData.get("id");
     const status = formData.get("status");
 
@@ -61,30 +62,44 @@ document.getElementById("change-status-form").addEventListener("submit", functio
         return;
     }
 
+    // Walidacja DOMPurify
     const cleanTaskId = DOMPurify.sanitize(taskId);
     const cleanStatus = DOMPurify.sanitize(status);
 
     formData.set("id", cleanTaskId);
     formData.set("status", cleanStatus);
 
+    // Wysłanie danych do serwera
     fetch("updateTaskStatus.php", {
         method: "POST",
         body: formData
     })
         .then(response => response.json())
         .then(data => {
-            closeChangeStatusWindow();
             if (data.success) {
-                resultDiv.innerHTML = `<span class='success'>${data.message || 'Task status updated successfully!'}</span>`;
+                resultDiv.innerHTML = "<span class='success'>Task status updated successfully!</span>";
+
+                // Odśwież stronę, aby pokazać zmiany
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+
+                closeChangeStatusWindow();
             } else {
                 resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to update task status'}</span>`;
             }
-            setTimeout(() => window.location.reload(), 1500);
         })
         .catch(error => {
             console.error("Error:", error);
-            closeChangeStatusWindow();
             resultDiv.innerHTML = "<span class='error'>An error occurred. Please try again</span>";
-            setTimeout(() => window.location.reload(), 1500);
         });
 });
+
+
+// Dodaj obsługę przycisku Edit w projekcie
+/*
+document.querySelector('.btn-link-tasks').addEventListener('click', function() {
+    // Pobierz ID projektu z URL lub innego miejsca
+    const projectId = <?php echo $_SESSION["selected_project_id"]; ?>;
+    toggleEditTaskWindow(projectId);
+});*/

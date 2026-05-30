@@ -540,26 +540,6 @@
         return $result->fetchColumn();
     }
 
-function json_success(array $data = [], string $message = ''): void {
-    header('Content-Type: application/json; charset=UTF-8');
-    $payload = [
-        'success' => true,
-        'data'    => $data,
-    ];
-    if ($message !== '') {
-        $payload['message'] = $message;
-    }
-    echo json_encode($payload);
-    exit;
-}
-
-function json_error(string $message, int $httpCode = 400): void {
-    http_response_code($httpCode);
-    header('Content-Type: application/json; charset=UTF-8');
-    echo json_encode(['success' => false, 'message' => $message]);
-    exit;
-}
-
 function require_login() {
     if (!isset($_SESSION["logged_in"])) {
         header("Location: /project_management/index.php");
