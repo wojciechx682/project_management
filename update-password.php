@@ -30,7 +30,7 @@
         }
 
         if (strlen($newPassword) < 10) {
-            $response["message"] = "Password must be at least 8 characters long";
+            $response["message"] = "Password must be at least 10 characters long";
             echo json_encode($response);
             exit();
         }
