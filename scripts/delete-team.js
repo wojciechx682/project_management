@@ -62,7 +62,7 @@ document.getElementById("delete-team-form").addEventListener("submit", function(
 
     event.preventDefault();
 
-    //const resultDiv = document.getElementById("result");
+    const resultDiv = document.getElementById("result");
     let form = document.getElementById("delete-team-form");
     let teamIdInput = form.querySelector('input[name="teamId"]');
     let teamId = teamIdInput.value;
@@ -72,14 +72,19 @@ document.getElementById("delete-team-form").addEventListener("submit", function(
     })
         .then(response => response.json())
         .then(data => {
+            closeDeleteProjectWindow();
             if (data.success) {
-                window.location.href = "teams.php";
+                resultDiv.innerHTML = `<span class='success'>${data.message || 'Team deleted successfully'}</span>`;
             } else {
-                window.location.href = "teams.php";
+                resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to delete team'}</span>`;
             }
+            setTimeout(() => window.location.reload(), 1500);
         })
         .catch(error => {
-            window.location.href = "teams.php";
+            console.error('Error:', error);
+            closeDeleteProjectWindow();
+            resultDiv.innerHTML = '<span class="error">Failed to delete team</span>';
+            setTimeout(() => window.location.reload(), 1500);
         });
 });
 

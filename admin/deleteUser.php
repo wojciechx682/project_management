@@ -1,6 +1,6 @@
 <?php
     require_once "../start-session.php";
-    require_role("Project Manager");
+    require_role("Admin");
 
     header('Content-Type: application/json; charset=UTF-8');
 

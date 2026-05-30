@@ -2,29 +2,22 @@
     require_once "../start-session.php";
     require_role("Admin");
 
-    $response = ["success" => false, "message" => ""];
+    header('Content-Type: application/json; charset=UTF-8');
 
-    if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-
-        $commentId = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : null;
-
-        if (!$commentId) {
-            $response["message"] = "Invalid comment ID";
-            echo json_encode($response);
-            exit();
-        }
-
-        $success = query("DELETE FROM comment WHERE id = ?", "deleteComment", $commentId);
-
-        if ($success) {
-            $response["success"] = true;
-            $response["message"] = "Comment deleted successfully";
-        } else {
-            $response["message"] = "Comment not found or deletion failed";
-        }
-    } else {
-        $response["message"] = "Invalid request method";
+    if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
+        json_error('Invalid request method', 405);
     }
 
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    $commentId = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : null;
+
+    if (!$commentId) {
+        json_error('Invalid comment ID');
+    }
+
+    $success = query("DELETE FROM comment WHERE id = ?", "deleteComment", $commentId);
+
+    if ($success) {
+        json_success([], 'Comment deleted successfully');
+    }
+
+    json_error('Comment not found or deletion failed');

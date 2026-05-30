@@ -1,57 +1,43 @@
 function toggleEditCommentWindow(commentId) {
 
-    console.log("toggleEditCommentWindow function");
-
-    const modal = document.getElementById("add-comment"); // edit comment modal
-    const input = document.getElementById("comment-task-id");
+    const modal = document.getElementById("add-comment");
     const mainContainer = document.getElementById("main-container");
-
-    const textarea      = document.getElementById("comment-content");
+    const textarea = document.getElementById("comment-content");
     const commentIdInput = document.getElementById("comment-id");
+    const resultDiv = document.getElementById("result");
 
     if (!modal || !textarea) return;
 
-    // Ustaw ID zadania w ukrytym polu
-    // if (input) input.value = commentId;
-
-    // Ustaw ID komentarza w hidden
     if (commentIdInput) {
         commentIdInput.value = commentId;
     }
 
-    // Przełącz widoczność okna modalnego
     modal.classList.toggle("hidden");
 
-    // Jeśli modal jest widoczny, zablokuj interakcję z tłem
     if (!modal.classList.contains("hidden")) {
         if (mainContainer) mainContainer.classList.add("unreachable");
     } else {
         if (mainContainer) mainContainer.classList.remove("unreachable");
     }
 
-    // Pobierz dane komentarza (AJAX)
     fetch(`getCommentData.php?id=${commentId}`)
         .then(response => response.json())
         .then(data => {
-            if (data.success) {
-
-                // Wstaw treść komentarza do textarea
-                textarea.value = data.comment.content || "";
-
-                // Ustaw ID zadania (jeśli chcesz mieć je w formularzu)
-                /*if (input && data.comment.task_id) {
-                    input.value = data.comment.task_id;
-                }*/
+            if (data.success && data.data && data.data.comment) {
+                textarea.value = data.data.comment.content || "";
+            } else {
+                resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to load comment data'}</span>`;
+                setTimeout(() => window.location.reload(), 1500);
             }
         })
         .catch(error => {
             console.error("Error:", error);
-            document.getElementById("result").innerHTML = "<span class='error'>Failed to load comment data</span>";
+            resultDiv.innerHTML = "<span class='error'>Failed to load comment data</span>";
+            setTimeout(() => window.location.reload(), 1500);
         });
 }
 
 function closeAddCommentWindow() {
-    console.log("closeAddCommentWindow function");
     const modal = document.getElementById("add-comment");
     const mainContainer = document.getElementById("main-container");
 
@@ -59,7 +45,6 @@ function closeAddCommentWindow() {
     if (mainContainer) mainContainer.classList.remove("unreachable");
 }
 
-// Zamknij okno po naciśnięciu Esc
 document.addEventListener("keydown", function(event) {
     const modal = document.getElementById("add-comment");
     if (!modal || modal.classList.contains("hidden")) return;
@@ -69,42 +54,32 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-// ========================
-//  Obsługa formularza edytowania komentarza
-// ========================
-
-
 document.getElementById("add-comment-form").addEventListener("submit", function (event) {
-
-    console.log("add-comment-form submit event occurred");
 
     event.preventDefault();
 
     const resultDiv = document.getElementById("result");
 
     const commentId = document.getElementById("comment-id").value.trim();
-    //const taskId    = document.getElementById("comment-task-id").value.trim();
-    const content   = document.getElementById("comment-content").value.trim();
+    const content = document.getElementById("comment-content").value.trim();
 
     const cleanCommentId = DOMPurify.sanitize(commentId);
-    //const cleanTaskId    = DOMPurify.sanitize(taskId);
-    const cleanContent   = DOMPurify.sanitize(content);
+    const cleanContent = DOMPurify.sanitize(content);
 
     const isValid = (
         cleanCommentId === commentId && commentId !== "" &&
-        /*cleanTaskId === taskId && taskId !== "" &&*/
         cleanContent === content && cleanContent.length >= 10 && cleanContent.length <= 255
     );
 
     if (!isValid) {
         resultDiv.innerHTML = "<span class='error'>Please provide a valid comment (10–255 characters)</span>";
         closeAddCommentWindow();
+        setTimeout(() => window.location.reload(), 1500);
         return;
     }
 
     const formData = new FormData();
     formData.append("comment_id", cleanCommentId);
-    /*formData.append("task_id", cleanTaskId);*/
     formData.append("content", cleanContent);
 
     fetch("editComment.php", {
@@ -113,19 +88,18 @@ document.getElementById("add-comment-form").addEventListener("submit", function 
     })
         .then(response => response.json())
         .then(data => {
-
+            closeAddCommentWindow();
             if (data.success) {
-                resultDiv.innerHTML = "<span class='success'>Comment updated successfully</span>";
-                closeAddCommentWindow();
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
+                resultDiv.innerHTML = `<span class='success'>${data.message || 'Comment updated successfully'}</span>`;
             } else {
-                resultDiv.innerHTML = `<span class='error'>${data.message || "Failed to update comment. Please try again."}</span>`;
+                resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to update comment. Please try again.'}</span>`;
             }
+            setTimeout(() => window.location.reload(), 1500);
         })
         .catch(error => {
             console.error("Error:", error);
+            closeAddCommentWindow();
             resultDiv.innerHTML = "<span class='error'>An unexpected error occurred. Please try again.</span>";
+            setTimeout(() => window.location.reload(), 1500);
         });
 });

@@ -1,34 +1,36 @@
 <?php
-
     require_once "../start-session.php";
-
     require_role("Admin");
 
-    header('Content-Type: application/json');
-    $response = [];
-    $updateSuccessful = false;
+    header('Content-Type: application/json; charset=UTF-8');
 
-    if (isset($_POST["user-id"], $_POST["action"])) {
-
-        $userId = filter_var($_POST["user-id"], FILTER_SANITIZE_NUMBER_INT);
-        $action = filter_var($_POST["action"], FILTER_SANITIZE_STRING);
-
-        if ($userId && in_array($action, ["accept", "reject"])) {
-
-            if ($action === "accept") {
-                $updateSuccessful = query("UPDATE user SET is_approved=? WHERE id=?","", [1, $userId]);
-            } elseif ($action === "reject") {
-                $updateSuccessful = query("DELETE FROM user WHERE id=?","", [$userId]);
-            }
-        }
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        json_error('Invalid request method', 405);
     }
 
-    if ($updateSuccessful === true) {
-        $response["success"] = true;
-        $response["message"] = "Użytkownik został " . ($action === "accept" ? "zaakceptowany" : "odrzucony i usunięty");
+    if (!isset($_POST["user-id"], $_POST["action"])) {
+        json_error('Wystąpił problem. Nie udało się zaktualizować użytkownika.');
+    }
+
+    $userId = filter_var($_POST["user-id"], FILTER_SANITIZE_NUMBER_INT);
+    $action = filter_var($_POST["action"], FILTER_SANITIZE_STRING);
+
+    if (!$userId || !in_array($action, ["accept", "reject"])) {
+        json_error('Wystąpił problem. Nie udało się zaktualizować użytkownika.');
+    }
+
+    if ($action === "accept") {
+        $updateSuccessful = query("UPDATE user SET is_approved=? WHERE id=?", "", [1, $userId]);
     } else {
-        $response["success"] = false;
-        $response["message"] = "Wystąpił problem. Nie udało się zaktualizować użytkownika.";
+        $updateSuccessful = query("DELETE FROM user WHERE id=?", "", [$userId]);
     }
 
-    echo json_encode($response);
+    if (!$updateSuccessful) {
+        json_error('Wystąpił problem. Nie udało się zaktualizować użytkownika.');
+    }
+
+    $message = $action === "accept"
+        ? "Użytkownik został zaakceptowany"
+        : "Użytkownik został odrzucony i usunięty";
+
+    json_success([], $message);

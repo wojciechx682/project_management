@@ -1,13 +1,13 @@
 <?php
     require_once "../start-session.php";
-
     require_role("Project Manager");
+
+    header('Content-Type: application/json; charset=UTF-8');
 
     $teamId = filter_var($_SESSION["selected_team_id"], FILTER_VALIDATE_INT);
 
     if (!$teamId) {
-        echo json_encode(["success" => false, "message" => "No team selected"]);
-        exit();
+        json_error('No team selected');
     }
 
     $users = query(
@@ -25,8 +25,4 @@
         [$teamId]
     );
 
-    if ($users && count($users) > 0) {
-        echo json_encode(["success" => true, "users" => $users]);
-    } else {
-        echo json_encode(["success" => false, "message" => "No available users"]);
-    }
+    json_success(['users' => $users ?: []]);

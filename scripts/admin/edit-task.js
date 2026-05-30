@@ -1,42 +1,40 @@
-// Funkcje do otwierania i zamykania okna edycji
 function toggleEditTaskWindow(taskId) {
 
-    console.log("toggleEditTaskWindow function");
+    const resultDiv = document.getElementById("result");
 
-    // Pobierz dane zadania (możesz to zrobić przez AJAX lub wcześniej załadować dane)
     fetch(`getTaskData.php?id=${taskId}`)
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            // Wypełnij formularz danymi projektu
-            document.getElementById("edit-task-id").value = data.task.id;
-            document.getElementById("edit-task-title").value = data.task.title;
-            document.getElementById("edit-task-description").value = data.task.description;
-            document.getElementById("edit-task-priority").value = data.task.priority.toLowerCase();
-            document.getElementById("edit-task-status").value = data.task.status.toLowerCase().replace(' ', '_');
+        if (data.success && data.data && data.data.task) {
+            const task = data.data.task;
+            document.getElementById("edit-task-id").value = task.id;
+            document.getElementById("edit-task-title").value = task.title;
+            document.getElementById("edit-task-description").value = task.description;
+            document.getElementById("edit-task-priority").value = task.priority.toLowerCase();
+            document.getElementById("edit-task-status").value = task.status.toLowerCase().replace(' ', '_');
 
-            // Konwersja dat do formatu YYYY-MM-DD (wymaganego przez input type="date")
-            const duedate = new Date(data.task.dueDate).toISOString().split('T')[0];
-
+            const duedate = new Date(task.dueDate).toISOString().split('T')[0];
             document.getElementById("edit-task-due-date").value = duedate;
-            document.getElementById("edit-task-assigned-user-id").value = data.task.assigned_user_id;
+            document.getElementById("edit-task-assigned-user-id").value = task.assigned_user_id;
 
-            // Otwórz okno edycji
             let editWindow = document.querySelector("#edit-task");
             let mainContainer = document.getElementById("main-container");
 
             editWindow.classList.remove("hidden");
             mainContainer.classList.add("unreachable");
+        } else {
+            resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to load task data'}</span>`;
+            setTimeout(() => window.location.reload(), 1500);
         }
     })
     .catch(error => {
         console.error("Error:", error);
-        document.getElementById("result").innerHTML = "<span class='error'>Failed to load task data</span>";
+        resultDiv.innerHTML = "<span class='error'>Failed to load task data</span>";
+        setTimeout(() => window.location.reload(), 1500);
     });
 }
 
 function closeEditTaskWindow() {
-    console.log("closeEditTaskWindow function");
     let editWindow = document.querySelector("#edit-task");
     let mainContainer = document.getElementById("main-container");
 
@@ -44,7 +42,6 @@ function closeEditTaskWindow() {
     if(mainContainer) mainContainer.classList.remove("unreachable");
 }
 
-// Zamykanie formularza po naciśnięciu Esc
 document.addEventListener("keydown", function(event) {
     let editWindow = document.querySelector("#edit-task");
     if(!editWindow || editWindow.classList.contains("hidden")) return;
@@ -54,7 +51,6 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-// Obsługa formularza edycji
 document.getElementById("edit-task-form").addEventListener("submit", function(event) {
 
     event.preventDefault();
@@ -62,45 +58,24 @@ document.getElementById("edit-task-form").addEventListener("submit", function(ev
     const resultDiv = document.getElementById("result");
     const formData = new FormData(this);
 
-    // Walidacja danych
-    const title = formData.get("title").trim();
-    const description = formData.get("description").trim();
-    const priority = formData.get("priority");
-    const status = formData.get("status");
-    const dueDate = formData.get("due_date");
-    const assignedUserId = formData.get("assigned_user_id");
-
-    // Walidacja DOMPurify
-    const cleanTitle = DOMPurify.sanitize(title);
-    const cleanDescription = DOMPurify.sanitize(description);
-    const cleanPriority = DOMPurify.sanitize(priority);
-    const cleanStatus = DOMPurify.sanitize(status);
-    const cleanDueDate = DOMPurify.sanitize(dueDate);
-    const cleanAssignedUserId = DOMPurify.sanitize(assignedUserId);
-
-    // Wysłanie danych do serwera
     fetch("updateTask.php", {
         method: "POST",
         body: formData
     })
         .then(response => response.json())
         .then(data => {
-            if(data.success) {
-                resultDiv.innerHTML = "<span class='success'>Task updated successfully!</span>";
-
-                // Odśwież stronę, aby pokazać zmiany
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
-
-                closeEditTaskWindow();
+            closeEditTaskWindow();
+            if (data.success) {
+                resultDiv.innerHTML = `<span class='success'>${data.message || 'Task updated successfully!'}</span>`;
             } else {
                 resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to update task'}</span>`;
             }
+            setTimeout(() => window.location.reload(), 1500);
         })
         .catch(error => {
             console.error("Error:", error);
+            closeEditTaskWindow();
             resultDiv.innerHTML = "<span class='error'>An error occurred. Please try again</span>";
+            setTimeout(() => window.location.reload(), 1500);
         });
 });
-

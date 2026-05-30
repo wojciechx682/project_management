@@ -8,6 +8,7 @@ document.querySelector("form.accept-user-form").addEventListener("submit", funct
 
     const modal = document.querySelector(".accept-user");
     const mainContainer = document.getElementById("main-container");
+    const resultDiv = document.getElementById("result");
 
     const formData = new FormData();
     formData.append("user-id", userId);
@@ -19,46 +20,20 @@ document.querySelector("form.accept-user-form").addEventListener("submit", funct
     })
         .then(response => response.json())
         .then(data => {
-            if (data.success === true) {
-                // Zamknij modal
-                modal.classList.add("hidden");
-                mainContainer.classList.remove("unreachable");
-
-                // Usuń wiersz użytkownika z DOM
-                document.querySelectorAll(".user-id").forEach(function(el) {
-                    if (el.textContent.trim() === userId) {
-                        const userRow = el.closest(".users-content");
-                        if (userRow) {
-                            userRow.remove();
-                        }
-                    }
-                });
-
-                // Po usunięciu sprawdź, czy są jeszcze jacyś użytkownicy
-                const remainingUsers = document.querySelectorAll(".users-content");
-                if (remainingUsers.length === 0) {
-                    // Usuń nagłówek tabeli
-                    const header = document.querySelector(".users:not(.users-content)");
-                    if (header) {
-                        header.remove();
-                    }
-
-                    // Wyświetl komunikat "No pending users"
-                    const main = document.getElementById("main");
-                    const message = document.createElement("div");
-                    message.textContent = "No pending users";
-                    main.appendChild(message);
-                }
-
-            } else {
-                // Zamknij modal nawet jeśli nieudane
-                modal.classList.add("hidden");
-                mainContainer.classList.remove("unreachable");
-            }
-        })
-        .catch(() => {
-            // W przypadku błędu również po prostu zamknij modal
             modal.classList.add("hidden");
             mainContainer.classList.remove("unreachable");
+
+            if (data.success) {
+                resultDiv.innerHTML = `<span class='success'>${data.message || 'User status updated'}</span>`;
+            } else {
+                resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to update user'}</span>`;
+            }
+            setTimeout(() => window.location.reload(), 1500);
+        })
+        .catch(() => {
+            modal.classList.add("hidden");
+            mainContainer.classList.remove("unreachable");
+            resultDiv.innerHTML = "<span class='error'>An error occurred. Please try again</span>";
+            setTimeout(() => window.location.reload(), 1500);
         });
 });

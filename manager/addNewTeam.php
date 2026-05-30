@@ -2,67 +2,49 @@
     require_once "../start-session.php";
     require_role("Project Manager");
 
-    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    header('Content-Type: application/json; charset=UTF-8');
 
-        $response = ["success" => false];
-
-        if (isset($_POST["team_name"]) && !empty($_POST["team_name"])) {
-
-            // Pobranie danych + walidacja
-            $teamName = htmlspecialchars($_POST["team_name"], ENT_QUOTES, "UTF-8");
-
-            if ($teamName !== $_POST["team_name"] || strlen($teamName) > 255) {
-                $response["error"] = "An error occurred. Please provide valid team name";
-                echo json_encode($response);
-                exit();
-            }
-
-            $teamNameExists = query("SELECT team.name FROM team WHERE team.name = ? LIMIT 1","checkIfTeamNameExists", [$teamName]);
-            if ($teamNameExists) {
-                echo json_encode(["success" => false, "message" => "Team name already exists"]);
-                exit();
-            }
-
-
-            // Wstawienie nowego zespołu do bazy
-            $teamData = [$teamName];
-            $insertSuccessful = query("INSERT INTO team (id, name, created_at) VALUES (NULL, ?, NOW())","addNewTeam", $teamData);
-
-            if ($insertSuccessful) {
-
-                $teamId = $insertSuccessful;
-
-                $pmId   = $_SESSION["id"]; // ID zalogowanego Project Managera
-                // Dodanie wpisu do team_user: PM -> team
-                $teamUserData = [$teamId, $pmId];
-                $insertTeamUser = query("INSERT INTO team_user (team_id, user_id) VALUES (?, ?)",null, $teamUserData);
-
-                if (!$insertTeamUser) {
-                    echo json_encode(["success" => false, "message" => "Failed to link PM to team"]);
-                    exit();
-                }
-
-                // Pobranie informacji o nowym zespole (np. liczby członków)
-                $membersCount = query("SELECT COUNT(*) AS members_count FROM team_user WHERE team_id = ?","getTeamMembersCount", $teamId);
-
-                if ($membersCount === null) {
-                    $membersCount = 0;
-                }
-
-                echo json_encode([
-                    "success" => true,
-                    "id" => $teamId,
-                    "team_name" => $teamName,
-                    "created_at" => date("j F Y, H:i"),
-                    "members_count" => $membersCount
-                ]);
-            } else {
-                echo json_encode(["success" => false, "message" => "Failed to insert team"]);
-                exit();
-            }
-
-        } else {
-            echo json_encode(["success" => false, "message" => "Team name is required"]);
-            exit();
-        }
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        json_error('Invalid request method', 405);
     }
+
+    if (!isset($_POST["team_name"]) || empty($_POST["team_name"])) {
+        json_error('Team name is required');
+    }
+
+    $teamName = htmlspecialchars($_POST["team_name"], ENT_QUOTES, 'UTF-8');
+
+    if ($teamName !== $_POST["team_name"] || strlen($teamName) > 255) {
+        json_error('An error occurred. Please provide valid team name');
+    }
+
+    $teamNameExists = query("SELECT team.name FROM team WHERE team.name = ? LIMIT 1", "checkIfTeamNameExists", [$teamName]);
+    if ($teamNameExists) {
+        json_error('Team name already exists');
+    }
+
+    $insertSuccessful = query("INSERT INTO team (id, name, created_at) VALUES (NULL, ?, NOW())", "addNewTeam", [$teamName]);
+
+    if (!$insertSuccessful) {
+        json_error('Failed to insert team');
+    }
+
+    $teamId = $insertSuccessful;
+    $pmId = $_SESSION["id"];
+    $insertTeamUser = query("INSERT INTO team_user (team_id, user_id) VALUES (?, ?)", null, [$teamId, $pmId]);
+
+    if (!$insertTeamUser) {
+        json_error('Failed to link PM to team');
+    }
+
+    $membersCount = query("SELECT COUNT(*) AS members_count FROM team_user WHERE team_id = ?", "getTeamMembersCount", $teamId);
+    if ($membersCount === null) {
+        $membersCount = 0;
+    }
+
+    json_success([
+        'id' => $teamId,
+        'team_name' => $teamName,
+        'created_at' => date("j F Y, H:i"),
+        'members_count' => $membersCount,
+    ], 'Team added successfully');
