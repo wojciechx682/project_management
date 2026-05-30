@@ -25,7 +25,7 @@
             // Check if user exists in DB
             $userExists = query("SELECT user.id FROM user WHERE email=?", "verifyEmailExists", $emailSanitized); // return TRUE if email exists, otherwise return NULL
             if (!$userExists) {
-                $_SESSION["reset-error"] = '<span class="error">Account with this email not found</span>';
+                $_SESSION["reset-error"] = '<span class="success">An email with password reset instructions has been sent to your address</span>';
                 header("Location: forgot-password.php");
                 exit();
             }

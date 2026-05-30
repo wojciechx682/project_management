@@ -540,6 +540,22 @@
         return $result->fetchColumn();
     }
 
+function require_login() {
+    if (!isset($_SESSION["id"])) {
+        header("Location: /project_management/index.php");
+        exit();
+    }
+}
+
+function require_role($role) {
+    require_login();
+    if ($_SESSION["role"] !== $role) {
+        $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
+        header("Location: /project_management/index.php");
+        exit();
+    }
+}                
+
     function query($query, $fun, $values) {
 
         require "connect.php";
