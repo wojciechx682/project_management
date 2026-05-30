@@ -95,10 +95,25 @@ document.getElementById("add-task-form").addEventListener("submit", function (ev
         method: "POST",
         body: formData
     })
-        .then(response => response.json())
+        .then(response => response.text())
+        .then(text => JSON.parse(text))
         .then(data => {
             if (data.success) {
-                const task = data.data && data.data.task ? data.data.task : data;
+                let task = (data.data && data.data.task) ? data.data.task : null;
+                if (!task && data.data && data.data.id != null) {
+                    task = data.data;
+                }
+                if (!task && data.task) {
+                    task = data.task;
+                }
+                if (!task && data.id != null) {
+                    task = data;
+                }
+                if (!task || task.id == null) {
+                    resultDiv.innerHTML = "<span class='error'>Failed to add task. Please try again</span>";
+                    closeTaskWindow();
+                    return;
+                }
                 resultDiv.innerHTML = `<span class='success'>${data.message || 'Task added successfully!'}</span>`;
 
                 // Generowanie HTML nowego wiersza
@@ -185,9 +200,12 @@ document.getElementById("add-task-form").addEventListener("submit", function (ev
                     if (hrElement) {
                         hrElement.insertAdjacentHTML("afterend", taskHeaderHTML + newTaskHTML);
                     } else {
-                        // Fallback, jeśli <hr> nie został znaleziony - wstaw na końcu #main, ale przed #result
                         const resultDivRef = document.getElementById("result");
-                        mainDiv.insertBefore(new DOMParser().parseFromString(taskHeaderHTML + newTaskHTML, "text/html").body.firstChild, resultDivRef);
+                        if (resultDivRef) {
+                            resultDivRef.insertAdjacentHTML("beforebegin", taskHeaderHTML + newTaskHTML);
+                        } else {
+                            mainDiv.insertAdjacentHTML("beforeend", taskHeaderHTML + newTaskHTML);
+                        }
                     }
                 } else {
                     // Nagłówek już istnieje, więc po prostu dodaj nowe zadanie na końcu listy zadań.

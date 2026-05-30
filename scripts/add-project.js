@@ -95,10 +95,26 @@ document.getElementById("add-project-form").addEventListener("submit", function 
         method: "POST",
         body: formData
     })
-        .then(response => response.json())
+        .then(response => response.text())
+        .then(text => JSON.parse(text))
         .then(data => {
             if (data.success) {
-                const project = data.data && data.data.project ? data.data.project : data;
+                let project = (data.data && data.data.project) ? data.data.project : null;
+                if (!project && data.data && data.data.id != null) {
+                    project = data.data;
+                }
+                if (!project && data.project) {
+                    project = data.project;
+                }
+                if (!project && data.id != null) {
+                    project = data;
+                }
+                if (!project) {
+                    resultDiv.innerHTML = "<span class='error'>Failed to add project. Please try again</span>";
+                    closeProjectWindow();
+                    return;
+                }
+                const projectTitle = project.title || project.name || "";
                 resultDiv.innerHTML = `<span class='success'>${data.message || 'Project added successfully!'}</span>`;
 
                 // Generowanie HTML nowego wiersza
@@ -109,7 +125,7 @@ document.getElementById("add-project-form").addEventListener("submit", function 
                             <form action="project-details.php" method="post">
                                 <input type="hidden" name="project-id" value="${project.id}">
                                 <button class="submit-order-form" type="submit">
-                                    ${project.title}
+                                    ${projectTitle}
                                 </button>
                             </form>
                         </div>
@@ -122,16 +138,14 @@ document.getElementById("add-project-form").addEventListener("submit", function 
                 `;
 
                 // Dodaj nowy projekt na koniec listy
-                const projectContainer = document.querySelector("#main .project");
-                const projectList = document.querySelectorAll(".project.project-content"); // Pobierz wszystkie istniejące projekty
-                const lastProject = projectList[projectList.length - 1]; // Znajdź ostatni projekt
+                const projectListEl = document.querySelector(".project-list");
+                const projectList = document.querySelectorAll(".project.project-content");
+                const lastProject = projectList[projectList.length - 1];
 
-                // Jeśli istnieją projekty, dodaj nowy poniżej ostatniego
                 if (lastProject) {
                     lastProject.insertAdjacentHTML("afterend", newProjectHTML);
-                } else {
-                    // Jeśli nie ma żadnych projektów, dodaj nowy na początku
-                    projectContainer.insertAdjacentHTML("beforeend", newProjectHTML);
+                } else if (projectListEl) {
+                    projectListEl.insertAdjacentHTML("beforeend", newProjectHTML);
                 }
 
                 // Opcjonalnie: zamknij okno dodawania projektu

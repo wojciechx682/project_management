@@ -71,10 +71,21 @@ document.getElementById("add-user-form").addEventListener("submit", function (ev
         method: "POST",
         body: formData
     })
-        .then(response => response.json())
+        .then(response => response.text())
+        .then(text => JSON.parse(text))
         .then(data => {
             if (data.success) {
-                const user = data.data && data.data.user ? data.data.user : data.user;
+                let user = (data.data && data.data.user) ? data.data.user : null;
+                if (!user && data.data && data.data.id != null) {
+                    user = data.data;
+                }
+                if (!user) {
+                    user = data.user;
+                }
+                if (!user || user.id == null) {
+                    resultDiv.innerHTML = "<span class='error'>Failed to add user. Please try again</span>";
+                    return;
+                }
                 resultDiv.innerHTML = `<span class='success'>${data.message || 'User added successfully!'}</span>`;
 
                 const newUserHTML = `

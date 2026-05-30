@@ -5,16 +5,29 @@ function toggleEditTaskWindow(taskId) {
 
     // Pobierz dane zadania (możesz to zrobić przez AJAX lub wcześniej załadować dane)
     fetch(`getTaskData.php?id=${taskId}`)
-    .then(response => response.json())
+    .then(response => response.text())
+    .then(text => JSON.parse(text))
     .then(data => {
         if (data.success) {
-            const task = data.data && data.data.task ? data.data.task : data.task;
-            // Wypełnij formularz danymi projektu
+            let task = (data.data && data.data.task) ? data.data.task : null;
+            if (!task && data.data && data.data.id != null) {
+                task = data.data;
+            }
+            if (!task) {
+                task = data.task;
+            }
+            if (!task || task.id == null) {
+                document.getElementById("result").innerHTML = "<span class='error'>Failed to load task data</span>";
+                return;
+            }
+            const priority = String(task.priority || "").toLowerCase();
+            const status = String(task.status || "").toLowerCase().replace(/ /g, "_");
+            // Wypełnij formularz danymi zadania
             document.getElementById("edit-task-id").value = task.id;
             document.getElementById("edit-task-title").value = task.title;
             document.getElementById("edit-task-description").value = task.description;
-            document.getElementById("edit-task-priority").value = task.priority.toLowerCase();
-            document.getElementById("edit-task-status").value = task.status.toLowerCase().replace(' ', '_');
+            document.getElementById("edit-task-priority").value = priority;
+            document.getElementById("edit-task-status").value = status;
 
             // Konwersja dat do formatu YYYY-MM-DD (wymaganego przez input type="date")
             const duedate = task.dueDate;

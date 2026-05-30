@@ -53,11 +53,13 @@
 
             if ($insertSuccessful) {
                 // notification - Dodanie nowego członka do zespołu (PM)
+                ob_start();
                 require_once __DIR__ . "/../notification_service.php";
                 $tname = query("SELECT name FROM team WHERE id = ?", "fetchOneAssoc", [$teamId]);
                 if ($tname) {
                     notification_team_joined($userId, $tname["name"], $teamId);
                 }
+                ob_end_clean();
                 // end notification
                 json_success([
                     "user" => [
@@ -66,8 +68,8 @@
                         "last_name" => $user["last_name"],
                         "email" => $user["email"],
                         "role" => $user["role"],
-                        "created_at" => DateTime::createFromFormat('Y-m-d H:i:s', $user["created_at"])->format('j F Y, H:i'),
-                        "updated_at" => DateTime::createFromFormat('Y-m-d H:i:s', $user["updated_at"])->format('j F Y, H:i'),
+                        "created_at" => (new DateTime($user["created_at"]))->format('j F Y, H:i'),
+                        "updated_at" => (new DateTime($user["updated_at"]))->format('j F Y, H:i'),
                     ],
                 ], "User added successfully");
             } else {

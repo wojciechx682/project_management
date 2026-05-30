@@ -14,13 +14,11 @@
         json_error("Invalid task ID");
     }
 
-    $result = query("SELECT task.* FROM task WHERE task.id=?", "getTaskForEdit", $taskId);
+    $task = query("SELECT task.* FROM task WHERE task.id=?", "getTaskInfo", $taskId);
 
-    if (!$result) {
+    if (!$task) {
         json_error("Task not found", 404);
     }
-
-    $task = $result->fetch(PDO::FETCH_ASSOC);
 
     json_success([
         "task" => [

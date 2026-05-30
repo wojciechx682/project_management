@@ -92,7 +92,8 @@ document.getElementById("add-comment-form").addEventListener("submit", function 
         method: "POST",
         body: formData
     })
-        .then(response => response.json())
+        .then(response => response.text())
+        .then(text => JSON.parse(text))
         .then(data => {
 
             // console.log("Server response:", data);

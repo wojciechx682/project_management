@@ -47,6 +47,7 @@
             // ========================
             if ($insertSuccessful) {
                 // notification - Komentarz od Admina do zadania (dla osoby przypisanej)
+                ob_start();
                 require_once __DIR__ . "/../notification_service.php";
                 $ctx = query(
                     "SELECT task.assigned_user_id, task.title, project.name AS project_name, project.id AS project_id FROM task JOIN project ON project.id = task.project_id WHERE task.id = ?",
@@ -56,6 +57,7 @@
                 if ($ctx && isset($_SESSION["role"]) && ($_SESSION["role"] === "Project Manager" || $_SESSION["role"] === "Admin")) {
                     notification_comment_on_task_pm($taskId, $_SESSION["id"], $ctx["title"], $ctx["project_name"], $ctx["assigned_user_id"], $ctx["project_id"]);
                 }
+                ob_end_clean();
                 // end notification
                 json_success([
                     "comment" => [
