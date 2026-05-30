@@ -2,6 +2,8 @@
     require_once "../start-session.php";
     require_role("Admin");
 
+    header('Content-Type: application/json; charset=UTF-8');
+
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $response = ["success" => false];
@@ -19,15 +21,11 @@
             $content   = htmlspecialchars($contentRaw);
 
             if ($commentId === false || /*$taskId === false ||*/ $commentIdRaw != $commentId /*|| $taskIdRaw != $taskId*/) {
-                $response["message"] = "Invalid identifiers.";
-                echo json_encode($response);
-                exit();
+                json_error("Invalid identifiers.");
             }
 
             if ($content !== $contentRaw || strlen($content) < 10 || strlen($content) > 255) {
-                $response["message"] = "Comment must contain between 10 and 255 characters and no special characters.";
-                echo json_encode($response);
-                exit();
+                json_error("Comment must contain between 10 and 255 characters and no special characters.");
             }
 
             $updateSuccessful = query(
@@ -37,16 +35,13 @@
             );
 
             if ($updateSuccessful) {
-                $response["success"] = true;
-                $response["message"] = "Comment updated successfully";
+                json_success([], "Comment updated successfully");
             } else {
-                $response["message"] = "Failed to update comment. Please try again.";
+                json_error("Failed to update comment. Please try again.");
             }
         } else {
-            $response["message"] = "All fields are required.";
+            json_error("All fields are required.");
         }
-
-        echo json_encode($response);
     } else {
-        echo json_encode(["success" => false, "message" => "Invalid request method."]);
+        json_error("Invalid request method.", 405);
     }

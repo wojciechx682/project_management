@@ -34,9 +34,10 @@ function toggleEditCommentWindow(commentId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
+                const comment = data.data && data.data.comment ? data.data.comment : data.comment;
 
                 // Wstaw treść komentarza do textarea
-                textarea.value = data.comment.content || "";
+                textarea.value = comment.content || "";
 
                 // Ustaw ID zadania (jeśli chcesz mieć je w formularzu)
                 /*if (input && data.comment.task_id) {

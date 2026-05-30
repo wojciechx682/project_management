@@ -8,19 +8,20 @@ function toggleEditProjectWindow(projectId) {
         .then(response => response.json())
         .then(data => {
             if(data.success) {
+                const project = data.data && data.data.project ? data.data.project : data.project;
                 // Wypełnij formularz danymi projektu
-                document.getElementById("edit-project-id").value = data.project.id;
-                document.getElementById("edit-project-title").value = data.project.name;
-                document.getElementById("edit-project-description").value = data.project.description;
-                document.getElementById("edit-project-status").value = data.project.status.toLowerCase().replace(' ', '_');
+                document.getElementById("edit-project-id").value = project.id;
+                document.getElementById("edit-project-title").value = project.name;
+                document.getElementById("edit-project-description").value = project.description;
+                document.getElementById("edit-project-status").value = project.status.toLowerCase().replace(' ', '_');
 
                 // Konwersja dat do formatu YYYY-MM-DD (wymaganego przez input type="date")
-                const startDate = new Date(data.project.start_date).toISOString().split('T')[0];
-                const endDate = new Date(data.project.end_date).toISOString().split('T')[0];
+                const startDate = project.start_date;
+                const endDate = project.end_date;
 
                 document.getElementById("edit-project-start-date").value = startDate;
                 document.getElementById("edit-project-end-date").value = endDate;
-                document.getElementById("edit-project-team-id").value = data.project.team_id;
+                document.getElementById("edit-project-team-id").value = project.team_id;
 
                 // Otwórz okno edycji
                 let editWindow = document.querySelector("#edit-project");

@@ -4,8 +4,7 @@
 
     require_role("Admin");
 
-    header('Content-Type: application/json');
-    $response = [];
+    header('Content-Type: application/json; charset=UTF-8');
     $updateSuccessful = false;
 
     if (isset($_POST["user-id"], $_POST["action"])) {
@@ -24,11 +23,7 @@
     }
 
     if ($updateSuccessful === true) {
-        $response["success"] = true;
-        $response["message"] = "Użytkownik został " . ($action === "accept" ? "zaakceptowany" : "odrzucony i usunięty");
+        json_success([], "Użytkownik został " . ($action === "accept" ? "zaakceptowany" : "odrzucony i usunięty"));
     } else {
-        $response["success"] = false;
-        $response["message"] = "Wystąpił problem. Nie udało się zaktualizować użytkownika.";
+        json_error("Wystąpił problem. Nie udało się zaktualizować użytkownika.");
     }
-
-    echo json_encode($response);

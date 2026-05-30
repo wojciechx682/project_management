@@ -554,7 +554,31 @@ function require_role($role) {
         header("Location: /project_management/index.php");
         exit();
     }
-}                
+}
+
+function json_response(array $payload, int $httpCode = 200): void {
+    http_response_code($httpCode);
+    header('Content-Type: application/json; charset=UTF-8');
+    echo json_encode($payload);
+    exit();
+}
+
+function json_success(array $data = [], string $message = ''): void {
+    $payload = [
+        'success' => true,
+        'data' => $data,
+    ];
+
+    if ($message !== '') {
+        $payload['message'] = $message;
+    }
+
+    json_response($payload);
+}
+
+function json_error(string $message, int $httpCode = 400): void {
+    json_response(['success' => false, 'message' => $message], $httpCode);
+}
 
     function query($query, $fun, $values) {
 

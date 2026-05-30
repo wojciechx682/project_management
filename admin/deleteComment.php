@@ -2,6 +2,8 @@
     require_once "../start-session.php";
     require_role("Admin");
 
+    header('Content-Type: application/json; charset=UTF-8');
+
     $response = ["success" => false, "message" => ""];
 
     if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
@@ -10,8 +12,7 @@
 
         if (!$commentId) {
             $response["message"] = "Invalid comment ID";
-            echo json_encode($response);
-            exit();
+            json_response($response);
         }
 
         $success = query("DELETE FROM comment WHERE id = ?", "deleteComment", $commentId);
@@ -25,6 +26,4 @@
     } else {
         $response["message"] = "Invalid request method";
     }
-
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    json_response($response);

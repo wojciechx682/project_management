@@ -2,6 +2,8 @@
     require_once "../start-session.php";
     require_role("Project Manager");
 
+    header('Content-Type: application/json; charset=UTF-8');
+
     // ========================
     //  Sprawdzenie metody żądania
     // ========================
@@ -22,15 +24,11 @@
             $content = htmlspecialchars(trim($_POST["content"]));
 
             if ($taskId === false || $taskId != $_POST["task_id"]) {
-                $response["error"] = "Invalid task ID.";
-                echo json_encode($response);
-                exit();
+                json_error("Invalid task ID.");
             }
 
             if ($content !== trim($_POST["content"]) || strlen($content) < 10 || strlen($content) > 255) {
-                $response["error"] = "Comment must contain between 10 and 255 characters and no special characters.";
-                echo json_encode($response);
-                exit();
+                json_error("Comment must contain between 10 and 255 characters and no special characters.");
             }
 
             // ========================
@@ -59,24 +57,22 @@
                     notification_comment_on_task_pm($taskId, $_SESSION["id"], $ctx["title"], $ctx["project_name"], $ctx["assigned_user_id"], $ctx["project_id"]);
                 }
                 // end notification
-                echo json_encode([
-                    "success" => true,
-                    "message" => "Comment added successfully",
+                json_success([
                     "comment" => [
                         "task_id" => $taskId,
                         "user_id" => $_SESSION["id"],
                         "content" => $content,
-                        "created_at" => date("j F Y, H:i")
-                    ]
-                ]);
+                        "created_at" => date("j F Y, H:i"),
+                    ],
+                ], "Comment added successfully");
             } else {
-                echo json_encode(["success" => false, "message" => "Failed to add comment. Please try again."]);
+                json_error("Failed to add comment. Please try again.");
             }
 
         } else {
-            echo json_encode(["success" => false, "message" => "All fields are required."]);
+            json_error("All fields are required.");
         }
 
     } else {
-        echo json_encode(["success" => false, "message" => "Invalid request method."]);
+        json_error("Invalid request method.", 405);
     }

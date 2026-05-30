@@ -8,7 +8,7 @@ function toggleEditTeamWindow(teamId) {
         .then(data => {
             if(data.success) {
                 // Używamy data.team, a nie data.project!
-                const team = data.team;
+                const team = data.data && data.data.team ? data.data.team : data.team;
 
                 // Wypełniamy formularz o nowych ID
                 document.getElementById("edit-team-id").value = team.id;

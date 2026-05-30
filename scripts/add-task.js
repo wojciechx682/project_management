@@ -98,7 +98,8 @@ document.getElementById("add-task-form").addEventListener("submit", function (ev
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                resultDiv.innerHTML = "<span class='success'>Task added successfully!</span>";
+                const task = data.data && data.data.task ? data.data.task : data;
+                resultDiv.innerHTML = `<span class='success'>${data.message || 'Task added successfully!'}</span>`;
 
                 // Generowanie HTML nowego wiersza
                 /*const newProjectHTML = `
@@ -122,23 +123,23 @@ document.getElementById("add-task-form").addEventListener("submit", function (ev
 
                 const newTaskHTML = `
                     <div class="task task-content">
-                        <div class="task-id">${data.id}</div>
+                        <div class="task-id">${task.id}</div>
                         <div class="task-title">
-                            <a href="#" onclick="toggleTaskDetails(${data.id})">${data.title}</a>
+                            <a href="#" onclick="toggleTaskDetails(${task.id})">${task.title}</a>
                         </div>                        
-                        <div class="task-priority">${data.priority}</div>
-                        <div class="task-status">${data.status}</div>
-                        <div class="task-due-date">${data.due_date}</div>                       
-                        <div class="task-assigned-user">${data.assigned_user_first_name + " " + data.assigned_user_last_name}</div>
-                        <div class="task-created-at">${data.created_at}</div>                           
+                        <div class="task-priority">${task.priority}</div>
+                        <div class="task-status">${task.status}</div>
+                        <div class="task-due-date">${task.due_date}</div>
+                        <div class="task-assigned-user">${task.assigned_user_first_name + " " + task.assigned_user_last_name}</div>
+                        <div class="task-created-at">${task.created_at}</div>
                         <div class="task-manage">
                             <div class="task-action-button">
                                 Manage <i class="icon-down-open"></i>
                             </div>
                             <div class="task-options-container">
                                 <div class="task-action-options hidden">
-                                    <div class="task-option" onclick="toggleEditTaskWindow(${data.id})">Edit</div>
-                                    <div class="task-option task-option-delete" onclick="toggleDeleteTaskWindow(${data.id})">Delete</div>
+                                    <div class="task-option" onclick="toggleEditTaskWindow(${task.id})">Edit</div>
+                                    <div class="task-option task-option-delete" onclick="toggleDeleteTaskWindow(${task.id})">Delete</div>
                                 </div>
                             </div>
                         </div>
@@ -202,9 +203,10 @@ document.getElementById("add-task-form").addEventListener("submit", function (ev
 
                 // Opcjonalnie: zamknij okno dodawania projektu
                 closeTaskWindow();
+                setTimeout(() => window.location.reload(), 1500);
 
             } else {
-                resultDiv.innerHTML = "<span class='error'>Failed to add task. Please try again</span>";
+                resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to add task. Please try again'}</span>`;
                 closeTaskWindow();
             }
         })

@@ -98,25 +98,26 @@ document.getElementById("add-project-form").addEventListener("submit", function 
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                resultDiv.innerHTML = "<span class='success'>Project added successfully!</span>";
+                const project = data.data && data.data.project ? data.data.project : data;
+                resultDiv.innerHTML = `<span class='success'>${data.message || 'Project added successfully!'}</span>`;
 
                 // Generowanie HTML nowego wiersza
                 const newProjectHTML = `
                     <div class="project project-content">
-                        <div class="project-id">${data.id}</div>
+                        <div class="project-id">${project.id}</div>
                         <div class="project-name">
                             <form action="project-details.php" method="post">
-                                <input type="hidden" name="project-id" value="${data.id}">
+                                <input type="hidden" name="project-id" value="${project.id}">
                                 <button class="submit-order-form" type="submit">
-                                    ${data.title}
+                                    ${project.title}
                                 </button>
                             </form>
                         </div>
-                        <div class="project-desc">${data.description}</div>
-                        <div class="project-start-date">${data.start_date}</div>
-                        <div class="project-end-date">${data.end_date}</div>
-                        <div class="project-status">${data.status}</div>
-                        <div class="team-name">${data.team_name}</div>
+                        <div class="project-desc">${project.description}</div>
+                        <div class="project-start-date">${project.start_date}</div>
+                        <div class="project-end-date">${project.end_date}</div>
+                        <div class="project-status">${project.status}</div>
+                        <div class="team-name">${project.team_name}</div>
                     </div>
                 `;
 
@@ -135,9 +136,10 @@ document.getElementById("add-project-form").addEventListener("submit", function 
 
                 // Opcjonalnie: zamknij okno dodawania projektu
                 closeProjectWindow();
+                setTimeout(() => window.location.reload(), 1500);
 
             } else {
-                resultDiv.innerHTML = "<span class='error'>Failed to add project. Please try again</span>";
+                resultDiv.innerHTML = `<span class='error'>${data.message || 'Failed to add project. Please try again'}</span>`;
                 closeProjectWindow();
             }
         })

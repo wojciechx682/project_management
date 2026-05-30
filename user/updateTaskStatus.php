@@ -3,6 +3,8 @@
 
     require_role("Team Member");
 
+    header('Content-Type: application/json; charset=UTF-8');
+
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         $response = ["success" => false];
@@ -16,9 +18,7 @@
             $validStatuses = ["not_started", "in_progress", "completed", "cancelled"];
 
             if (!in_array($status, $validStatuses)) {
-                $response["message"] = "Invalid status";
-                echo json_encode($response);
-                exit();
+                json_error("Invalid status");
             }
 
             // Formatowanie statusu do bazy danych (tak jak w updateTask.php)
@@ -37,16 +37,15 @@
             );
 
             if ($updateSuccessful) {
-                $response["success"] = true;
-                $response["message"] = "Task status updated successfully";
+                json_success([], "Task status updated successfully");
             } else {
-                $response["message"] = "Failed to update task status";
+                json_error("Failed to update task status");
             }
 
         } else {
-            $response["message"] = "Task ID and status are required";
+            json_error("Task ID and status are required");
         }
-
-        echo json_encode($response);
+    } else {
+        json_error("Invalid request method", 405);
     }
 

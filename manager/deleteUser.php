@@ -2,6 +2,8 @@
     require_once "../start-session.php";
     require_role("Project Manager");
 
+    header('Content-Type: application/json; charset=UTF-8');
+
     $response = ["success" => false, "message" => ""];
 
     if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
@@ -11,8 +13,7 @@
 
         if (!$userId || !$teamId) {
             $response["message"] = "Invalid user or team ID";
-            echo json_encode($response);
-            exit();
+            json_response($response);
         }
 
         // 🔹 Sprawdź rolę użytkownika
@@ -27,8 +28,7 @@
 
         if ($user && $user["role"] === "Project Manager") {
             $response["message"] = "You cannot remove the Project Manager from the team";
-            echo json_encode($response);
-            exit();
+            json_response($response);
         }
 
         // 🔹 Usuń tylko, jeśli to nie PM
@@ -47,6 +47,4 @@
     } else {
         $response["message"] = "Invalid request method";
     }
-
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    json_response($response);

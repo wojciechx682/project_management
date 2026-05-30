@@ -19,9 +19,10 @@ function toggleTeamWindow() {
         .then(data => {
             const select = document.getElementById("user-id");
             select.innerHTML = ""; // wyczyść listę
+            const users = data.data && data.data.users ? data.data.users : data.users;
 
-            if (data.success && data.users.length > 0) {
-                data.users.forEach(user => {
+            if (data.success && users.length > 0) {
+                users.forEach(user => {
                     const option = document.createElement("option");
                     option.value = user.id;
                     option.textContent = `${user.first_name} ${user.last_name} (${user.email})`;
@@ -102,22 +103,23 @@ document.getElementById("add-team-form").addEventListener("submit", function (ev
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                resultDiv.innerHTML = "<span class='success'>Team added successfully</span>";
+                const team = data.data && data.data.team ? data.data.team : data;
+                resultDiv.innerHTML = `<span class='success'>${data.message || 'Team added successfully'}</span>`;
 
                 // Generowanie HTML nowego wiersza
                 const newTeamHTML = `
                     <div class="team team-content">
-                        <div class="team-id">${data.id}</div>
+                        <div class="team-id">${team.id}</div>
                         <div class="teams-name">
                             <form action="team-details.php" method="post">
-                                <input type="hidden" name="team-id" value="${data.id}">
+                                <input type="hidden" name="team-id" value="${team.id}">
                                 <button class="submit-order-form" type="submit">
-                                    ${data.team_name}
+                                    ${team.team_name}
                                 </button>
                             </form>
                         </div>
-                        <div class="team-created-at">${data.created_at}</div>
-                        <div class="team-members-count">${data.members_count}</div>
+                        <div class="team-created-at">${team.created_at}</div>
+                        <div class="team-members-count">${team.members_count}</div>
                     </div>
                 `;
 
@@ -134,6 +136,7 @@ document.getElementById("add-team-form").addEventListener("submit", function (ev
 
                 // Zamknij okno dodawania zespołu
                 closeTeamWindow();
+                setTimeout(() => window.location.reload(), 1500);
 
             } else {
                 /*resultDiv.innerHTML = "<span class='error'>Failed to add team. Please try again</span>";

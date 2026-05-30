@@ -2,6 +2,8 @@
     require_once "../start-session.php";
     require_role("Project Manager");
 
+    header('Content-Type: application/json; charset=UTF-8');
+
     $response = ["success" => false, "message" => ""];
 
     $_SESSION["message"] = "";
@@ -13,8 +15,7 @@
         if (!$teamId) {
             $response["message"] = "Invalid team ID";
             $_SESSION["message"] = '<span class="error">Invalid team ID</span>';
-            echo json_encode($response);
-            exit();
+            json_response($response);
         }
 
         $success = query("DELETE FROM team WHERE id = ?", "deleteTeam", $teamId);
@@ -34,6 +35,4 @@
 
         $_SESSION["message"] = '<span class="error">Invalid request method</span>';
     }
-
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    json_response($response);

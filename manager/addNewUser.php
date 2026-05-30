@@ -2,6 +2,8 @@
     require_once "../start-session.php";
     require_role("Project Manager");
 
+    header('Content-Type: application/json; charset=UTF-8');
+
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         $response = ["success" => false];
@@ -14,9 +16,7 @@
             $teamId = filter_var($_SESSION["selected_team_id"], FILTER_VALIDATE_INT);
 
             if (!$userId || !$teamId) {
-                $response["message"] = "Invalid user or team ID";
-                echo json_encode($response);
-                exit();
+                json_error("Invalid user or team ID");
             }
 
             // Sprawdź, czy użytkownik istnieje i spełnia warunki (is_approved=1, role=Team Member)
@@ -30,9 +30,7 @@
             );
 
             if (!$user) {
-                $response["message"] = "User not eligible to join team";
-                echo json_encode($response);
-                exit();
+                json_error("User not eligible to join team");
             }
 
             // Sprawdź, czy nie jest już w tym zespole
@@ -43,9 +41,7 @@
             );
 
             if ($exists) {
-                $response["message"] = "User is already a member of this team";
-                echo json_encode($response);
-                exit();
+                json_error("User is already a member of this team");
             }
 
             // Dodanie do team_user
@@ -63,23 +59,23 @@
                     notification_team_joined($userId, $tname["name"], $teamId);
                 }
                 // end notification
-                $response["success"] = true;
-                $response["message"] = "User added successfully";
-                $response["user"] = [
-                    "id" => $user["id"],
-                    "first_name" => $user["first_name"],
-                    "last_name" => $user["last_name"],
-                    "email" => $user["email"],
-                    "role" => $user["role"],
-                    "created_at" => DateTime::createFromFormat('Y-m-d H:i:s', $user["created_at"])->format('j F Y, H:i'),
-                    "updated_at" => DateTime::createFromFormat('Y-m-d H:i:s', $user["updated_at"])->format('j F Y, H:i')
-                ];
+                json_success([
+                    "user" => [
+                        "id" => $user["id"],
+                        "first_name" => $user["first_name"],
+                        "last_name" => $user["last_name"],
+                        "email" => $user["email"],
+                        "role" => $user["role"],
+                        "created_at" => DateTime::createFromFormat('Y-m-d H:i:s', $user["created_at"])->format('j F Y, H:i'),
+                        "updated_at" => DateTime::createFromFormat('Y-m-d H:i:s', $user["updated_at"])->format('j F Y, H:i'),
+                    ],
+                ], "User added successfully");
             } else {
-                $response["message"] = "Failed to add user to team";
+                json_error("Failed to add user to team");
             }
         } else {
-            $response["message"] = "All fields are required";
+            json_error("All fields are required");
         }
-
-        echo json_encode($response);
+    } else {
+        json_error("Invalid request method", 405);
     }

@@ -1,6 +1,8 @@
 <?php
     require_once "../start-session.php";
     require_role("Project Manager");
+    header('Content-Type: application/json; charset=UTF-8');
+
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         $response = ["success" => false];
@@ -34,9 +36,7 @@
                 $projectId === false || $projectId != $_SESSION["selected_project_id"] ||
                 $assignedUser === false || $assignedUser != $_POST["assignedUser"]
             ) {
-                $response["error"] = "An error occurred. Please provide valid information";
-                    echo json_encode($response);
-                        exit();
+                json_error("An error occurred. Please provide valid information");
             } else {
 
                 switch ($priority) {
@@ -78,16 +78,12 @@
 
 
                     if (!$taskDetails) {
-                        echo json_encode(["success" => false, "message" => "Failed to fetch timestamps and user info"]);
-                            exit();
+                        json_error("Failed to fetch timestamps and user info");
                     }
 
                     // Sformatuj daty
-                    $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $taskDetails["created_at"]);
-                    $updatedAt = DateTime::createFromFormat('Y-m-d H:i:s', $taskDetails["updated_at"]);
-
-                    $formattedCreatedAt = $createdAt->format('j F Y, H:i');
-                    $formattedUpdatedAt = $updatedAt->format('j F Y, H:i');
+                    $formattedCreatedAt = (new DateTime($taskDetails["created_at"]))->format('j F Y, H:i');
+                    $formattedUpdatedAt = (new DateTime($taskDetails["updated_at"]))->format('j F Y, H:i');
 
                     $firstName = $taskDetails["first_name"];
                     $lastName = $taskDetails["last_name"];
@@ -108,26 +104,29 @@
                     }*/
 
                     // Zwracamy odpowiedź w formacie JSON
-                    echo json_encode([
-                        "success" => true,
-                        "id" => $taskId,
-                        "title" => $title,
-                        "description" => $description,
-                        "priority" => $priorityFormatted,
-                        "status" => $statusFormatted,
-                        "due_date" => DateTime::createFromFormat('Y-m-d', $dueDate)->format('j F Y'),
-                        "project_id" => $projectId,
-                        "assigned_user_id" => $assignedUser,
-                        "assigned_user_first_name" => $firstName,
-                        "assigned_user_last_name" => $lastName,
-                        "created_at" => $formattedCreatedAt,
-                        "updated_at" => $formattedUpdatedAt,
-                    ]);
+                    json_success([
+                        "task" => [
+                            "id" => $taskId,
+                            "title" => $title,
+                            "description" => $description,
+                            "priority" => $priorityFormatted,
+                            "status" => $statusFormatted,
+                            "due_date" => DateTime::createFromFormat('Y-m-d', $dueDate)->format('j F Y'),
+                            "project_id" => $projectId,
+                            "assigned_user_id" => $assignedUser,
+                            "assigned_user_first_name" => $firstName,
+                            "assigned_user_last_name" => $lastName,
+                            "created_at" => $formattedCreatedAt,
+                            "updated_at" => $formattedUpdatedAt,
+                        ],
+                    ], "Task added successfully");
                 } else {
-                    echo json_encode(["success" => false, "message" => "Failed to insert project"]);
+                    json_error("Failed to insert task");
                 }
             }
         } else {
-            echo json_encode(["success" => false, "message" => "All fields are required"]);
+            json_error("All fields are required");
         }
+    } else {
+        json_error("Invalid request method", 405);
     }

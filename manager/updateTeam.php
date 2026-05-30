@@ -2,6 +2,8 @@
     require_once "../start-session.php";
     require_role("Project Manager");
 
+    header('Content-Type: application/json; charset=UTF-8');
+
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         $response = ["success" => false];
@@ -14,18 +16,13 @@
             $teamName = htmlspecialchars(trim($_POST["team_name"]), ENT_QUOTES, "UTF-8");
 
             if (!$id || !$teamName || strlen($teamName) > 255) {
-                $response["message"] = "Invalid team data";
-                echo json_encode($response);
-                exit();
+                json_error("Invalid team data");
             }
 
             // Sprawdź, czy nazwa zespołu już istnieje
             $teamExists = query("SELECT id FROM team WHERE name=? AND id != ? LIMIT 1", "checkIfTeamNameExists", [$teamName, $id]);
             if ($teamExists) {
-                $response["success"] = false;
-                $response["message"] = "Team name already exists";
-                echo json_encode($response);
-                exit();
+                json_error("Team name already exists");
             }
 
             // notification - Zmiana nazwy zespołu (dla członków zespołu)
@@ -42,14 +39,13 @@
                     notification_team_renamed($id, $oldTeam["name"], $teamName);
                 }
                 // end notification
-                $response["success"] = true;
-                $response["message"] = "Team updated successfully";
+                json_success([], "Team updated successfully");
             } else {
-                $response["message"] = "Failed to update team";
+                json_error("Failed to update team");
             }
         } else {
-            $response["message"] = "All fields are required";
+            json_error("All fields are required");
         }
-
-        echo json_encode($response);
+    } else {
+        json_error("Invalid request method", 405);
     }

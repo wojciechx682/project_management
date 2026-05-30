@@ -2,34 +2,29 @@
     require_once "../start-session.php";
     require_role("Admin");
 
-    if(isset($_GET["id"])) {
+    header('Content-Type: application/json; charset=UTF-8');
 
-        $teamId = filter_var($_GET["id"], FILTER_VALIDATE_INT);
-
-        if($teamId === false) {
-            echo json_encode(["success" => false, "message" => "Invalid team ID"]);
-            exit();
-        }
-
-        // Pobierz dane projektu z bazy danych
-        $result = query("SELECT team.id, team.name FROM team WHERE team.id = ?", "getTeamForEdit", $teamId);
-
-        //var_dump($result);
-
-        if($result) {
-
-            $team = $result->fetch(PDO::FETCH_ASSOC);
-
-            echo json_encode([
-                "success" => true,
-                "team" => [
-                    "id" => $team["id"],
-                    "name" => $team["name"]
-                ]
-            ]);
-        } else {
-            echo json_encode(["success" => false, "message" => "Team not found"]);
-        }
-    } else {
-        echo json_encode(["success" => false, "message" => "Team ID not provided"]);
+    if (!isset($_GET["id"])) {
+        json_error("Team ID not provided");
     }
+
+    $teamId = filter_var($_GET["id"], FILTER_VALIDATE_INT);
+
+    if ($teamId === false) {
+        json_error("Invalid team ID");
+    }
+
+    $result = query("SELECT team.id, team.name FROM team WHERE team.id = ?", "getTeamForEdit", $teamId);
+
+    if (!$result) {
+        json_error("Team not found", 404);
+    }
+
+    $team = $result->fetch(PDO::FETCH_ASSOC);
+
+    json_success([
+        "team" => [
+            "id" => $team["id"],
+            "name" => $team["name"],
+        ],
+    ]);

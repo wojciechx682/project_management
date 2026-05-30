@@ -8,18 +8,19 @@ function toggleEditTaskWindow(taskId) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
+            const task = data.data && data.data.task ? data.data.task : data.task;
             // Wypełnij formularz danymi projektu
-            document.getElementById("edit-task-id").value = data.task.id;
-            document.getElementById("edit-task-title").value = data.task.title;
-            document.getElementById("edit-task-description").value = data.task.description;
-            document.getElementById("edit-task-priority").value = data.task.priority.toLowerCase();
-            document.getElementById("edit-task-status").value = data.task.status.toLowerCase().replace(' ', '_');
+            document.getElementById("edit-task-id").value = task.id;
+            document.getElementById("edit-task-title").value = task.title;
+            document.getElementById("edit-task-description").value = task.description;
+            document.getElementById("edit-task-priority").value = task.priority.toLowerCase();
+            document.getElementById("edit-task-status").value = task.status.toLowerCase().replace(' ', '_');
 
             // Konwersja dat do formatu YYYY-MM-DD (wymaganego przez input type="date")
-            const duedate = new Date(data.task.dueDate).toISOString().split('T')[0];
+            const duedate = task.dueDate;
 
             document.getElementById("edit-task-due-date").value = duedate;
-            document.getElementById("edit-task-assigned-user-id").value = data.task.assigned_user_id;
+            document.getElementById("edit-task-assigned-user-id").value = task.assigned_user_id;
 
             // Otwórz okno edycji
             let editWindow = document.querySelector("#edit-task");

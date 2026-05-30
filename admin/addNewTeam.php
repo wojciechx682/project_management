@@ -2,6 +2,8 @@
     require_once "../start-session.php";
     require_role("Admin");
 
+    header('Content-Type: application/json; charset=UTF-8');
+
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         $response = ["success" => false];
@@ -15,15 +17,12 @@
 
             if ($teamName !== $_POST["team_name"] || strlen($teamName) > 255 ||
                 $pmId != $_POST["user_id"] || !$pmId) {
-                $response["error"] = "An error occurred. Please provide valid team name or valid Project Manager";
-                echo json_encode($response);
-                exit();
+                json_error("An error occurred. Please provide valid team name or valid Project Manager");
             }
 
             $teamNameExists = query("SELECT team.name FROM team WHERE team.name = ? LIMIT 1","checkIfTeamNameExists", [$teamName]);
             if ($teamNameExists) {
-                echo json_encode(["success" => false, "message" => "Team name already exists"]);
-                exit();
+                json_error("Team name already exists");
             }
 
 
@@ -42,8 +41,7 @@
                 $insertTeamUser = query("INSERT INTO team_user (team_id, user_id) VALUES (?, ?)",null, $teamUserData);
 
                 if (!$insertTeamUser) {
-                    echo json_encode(["success" => false, "message" => "Failed to link PM to team"]);
-                    exit();
+                    json_error("Failed to link PM to team");
                 }
 
                 // Pobranie informacji o nowym zespole (np. liczby członków)
@@ -53,20 +51,21 @@
                     $membersCount = 0;
                 }
 
-                echo json_encode([
-                    "success" => true,
-                    "id" => $teamId,
-                    "team_name" => $teamName,
-                    "created_at" => date("j F Y, H:i"),
-                    "members_count" => $membersCount
-                ]);
+                json_success([
+                    "team" => [
+                        "id" => $teamId,
+                        "team_name" => $teamName,
+                        "created_at" => date("j F Y, H:i"),
+                        "members_count" => $membersCount,
+                    ],
+                ], "Team added successfully");
             } else {
-                echo json_encode(["success" => false, "message" => "Failed to insert team"]);
-                exit();
+                json_error("Failed to insert team");
             }
 
         } else {
-            echo json_encode(["success" => false, "message" => "Team name is required"]);
-            exit();
+            json_error("Team name is required");
         }
+    } else {
+        json_error("Invalid request method", 405);
     }

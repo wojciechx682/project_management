@@ -10,9 +10,10 @@ function toggleUserWindow() {
         .then(data => {
             const select = document.getElementById("user-id");
             select.innerHTML = ""; // wyczyść listę
+            const users = data.data && data.data.users ? data.data.users : data.users;
 
-            if (data.success && data.users.length > 0) {
-                data.users.forEach(user => {
+            if (data.success && users.length > 0) {
+                users.forEach(user => {
                     const option = document.createElement("option");
                     option.value = user.id;
                     option.textContent = `${user.first_name} ${user.last_name} (${user.email})`;
@@ -73,17 +74,18 @@ document.getElementById("add-user-form").addEventListener("submit", function (ev
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                resultDiv.innerHTML = "<span class='success'>User added successfully!</span>";
+                const user = data.data && data.data.user ? data.data.user : data.user;
+                resultDiv.innerHTML = `<span class='success'>${data.message || 'User added successfully!'}</span>`;
 
                 const newUserHTML = `
                     <div class="team-member team-member-content">
-                        <div class="team-member-id">${data.user.id}</div>
-                        <div class="team-member-first-name">${data.user.first_name}</div>
-                        <div class="team-member-last-name">${data.user.last_name}</div>
-                        <div class="team-member-email">${data.user.email}</div>
-                        <div class="team-member-role">${data.user.role}</div>
-                        <div class="team-member-created-at">${data.user.created_at}</div>
-                        <div class="team-member-updated-at">${data.user.updated_at}</div>
+                        <div class="team-member-id">${user.id}</div>
+                        <div class="team-member-first-name">${user.first_name}</div>
+                        <div class="team-member-last-name">${user.last_name}</div>
+                        <div class="team-member-email">${user.email}</div>
+                        <div class="team-member-role">${user.role}</div>
+                        <div class="team-member-created-at">${user.created_at}</div>
+                        <div class="team-member-updated-at">${user.updated_at}</div>
                         <div class="team-member-manage">
                             <div class="team-member-action-button">
                                 Manage <i class="icon-down-open"></i>

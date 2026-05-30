@@ -9,10 +9,11 @@ function toggleEditTaskWindowUser(taskId) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
+            const task = data.data && data.data.task ? data.data.task : data.task;
             // Wypełnij formularz danymi projektu
-            document.getElementById("edit-task-id").value = data.task.id;
-            document.getElementById("task-title").textContent = data.task.title;
-            document.getElementById("current-status").textContent = data.task.status;
+            document.getElementById("edit-task-id").value = task.id;
+            document.getElementById("task-title").textContent = task.title;
+            document.getElementById("current-status").textContent = task.status;
 
             // Otwórz okno edycji
             let editWindow = document.querySelector("#change-status");

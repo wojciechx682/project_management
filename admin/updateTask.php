@@ -3,6 +3,8 @@
 
     require_role("Admin");
 
+    header('Content-Type: application/json; charset=UTF-8');
+
     if($_SERVER['REQUEST_METHOD'] === "POST") {
 
         $response = ["success" => false];
@@ -27,15 +29,11 @@
             $assignedUserId = filter_var($_POST["assigned_user_id"], FILTER_VALIDATE_INT);
 
             if(!in_array($priority, $validPriorities)) {
-                $response["message"] = "Invalid priority";
-                    echo json_encode($response);
-                        exit();
+                json_error("Invalid priority");
             }
 
             if(!in_array($status, $validStatuses)) {
-                $response["message"] = "Invalid status";
-                    echo json_encode($response);
-                        exit();
+                json_error("Invalid status");
             }
 
             switch($priority) {
@@ -70,14 +68,13 @@
                     }
                 }
                 // end notification
-                $response["success"] = true;
-                $response["message"] = "Task updated successfully";
+                json_success([], "Task updated successfully");
             } else {
-                $response["message"] = "Failed to update task";
+                json_error("Failed to update task");
             }
         } else {
-            $response["message"] = "All fields are required";
+            json_error("All fields are required");
         }
-
-        echo json_encode($response);
+    } else {
+        json_error("Invalid request method", 405);
     }

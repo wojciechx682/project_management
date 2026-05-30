@@ -98,7 +98,7 @@ document.getElementById("add-comment-form").addEventListener("submit", function 
             // console.log("Server response:", data);
 
             if (data.success) {
-                resultDiv.innerHTML = "<span class='success'>Comment added successfully</span>";
+                resultDiv.innerHTML = `<span class='success'>${data.message || "Comment added successfully"}</span>`;
 
                 // Zamknij okno po sukcesie
                 closeAddCommentWindow();
