@@ -1,7 +1,7 @@
 <div id="main">
     <div id="profile-container">
         <form id="profile-form" action="../update-profile.php" method="post">
-            <label for="first_name">First Name</label>
+            <label for="firstName">First Name</label>
             <input type="text" id="firstName" name="firstName"
                    value="<?= htmlspecialchars($_SESSION['first_name']) ?>" required>
 

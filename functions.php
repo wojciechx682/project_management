@@ -14,7 +14,7 @@
 
             session_regenerate_id(true); // ochrona przed session fixation
 
-            $_SESSION["logged-in"] = true; // tej wartości nigdzie w projekcie nie sprawdzamy
+            $_SESSION["logged_in"] = true; // tej wartości nigdzie w projekcie nie sprawdzamy
             $_SESSION["id"] = $row["id"];
             $_SESSION["first_name"] = $row["first_name"];
             $_SESSION["last_name"] = $row["last_name"];

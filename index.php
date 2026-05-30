@@ -1,6 +1,28 @@
 
 <?php require_once "start-session.php"; ?>
 
+<?php
+
+    if (isset($_SESSION["logged_in"])) {
+        switch ($_SESSION["role"]) {
+            case "Admin":
+                header("Location: admin/admin.php");
+                exit();                    
+            case "Project Manager":
+                header("Location: manager/manager.php");
+                exit();                    
+            case "Team Member":
+                header("Location: user/user.php");
+                exit();                   
+            default:
+                $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned.</span>';
+                header("Location: index.php");
+                exit();                    
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
