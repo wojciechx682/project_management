@@ -1,11 +1,7 @@
 <?php
 
     require_once "../start-session.php";
-    if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Team Member") {
-        $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
-        header("Location: ../index.php");
-        exit();
-    }
+    require_role("Team Member");
 ?>
 
 <?php

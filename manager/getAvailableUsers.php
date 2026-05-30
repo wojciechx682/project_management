@@ -1,11 +1,7 @@
 <?php
     require_once "../start-session.php";
 
-    if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Project Manager") {
-        $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
-        header("Location: ../index.php");
-        exit();
-    }
+    require_role("Project Manager");
 
     $teamId = filter_var($_SESSION["selected_team_id"], FILTER_VALIDATE_INT);
 

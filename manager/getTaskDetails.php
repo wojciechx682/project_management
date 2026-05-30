@@ -1,10 +1,6 @@
 <?php
     require_once "../start-session.php";
-    if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "Project Manager") {
-        $_SESSION["invalid_credentials"] = '<span class="error">Invalid role assigned</span>';
-            header("Location: ../index.php");
-                exit();
-    }
+    require_role("Project Manager");
     if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET["taskId"])) {
         // Walidacja ID zadania
         $taskId = filter_var($_GET["taskId"], FILTER_VALIDATE_INT);
