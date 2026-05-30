@@ -541,7 +541,7 @@
     }
 
 function require_login() {
-    if (!isset($_SESSION["id"])) {
+    if (!isset($_SESSION["logged_in"])) {
         header("Location: /project_management/index.php");
         exit();
     }
